@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+node_modules/
+
+# Image-curation working files (re-creatable with tools/curate_images.py)
+tools/cache/cand/
+tools/cache/sheets/
+tools/*.log
+
+# Runtime data of the server (study groups)
+server/data/
+*.tmp

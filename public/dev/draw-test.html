@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drawing Engine Test</title><link rel="stylesheet" href="/css/app.css">
+<style>.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lbl{color:#fff;font-weight:900;margin:6px 0}</style></head>
+<body><div class="app">
+<div class="two">
+ <div><div class="lbl">Người vẽ (local)</div>
+  <div class="canvas-wrap" id="wrapA"><canvas class="board" id="a"></canvas><div class="brush-cursor" id="cur" hidden></div></div>
+  <div class="toolbar" id="tb"></div></div>
+ <div><div class="lbl">Người đoán (replay qua event stream)</div>
+  <div class="canvas-wrap" id="wrapB"><canvas class="board" id="b"></canvas></div>
+  <pre id="log" style="color:#fff;font-size:11px;max-height:200px;overflow:auto"></pre></div>
+</div></div>
+<script type="module">
+import { DrawingEngine } from '/js/drawing/engine.js';
+import { Toolbar } from '/js/drawing/toolbar.js';
+const A = new DrawingEngine({ canvas: document.getElementById('a'), wrap: document.getElementById('wrapA'), cursor: document.getElementById('cur') });
+const B = new DrawingEngine({ canvas: document.getElementById('b'), wrap: document.getElementById('wrapB') });
+const tb = new Toolbar(document.getElementById('tb'), A);
+A.setEnabled(true); tb.setEnabled(true);
+const events = [];
+A.on('event', ev => { const j = JSON.parse(JSON.stringify(ev)); events.push(j); B.applyRemote(j);
+  const l = document.getElementById('log'); l.textContent = (ev.k + ' ' + (ev.op ? ev.op.t + (ev.op.kind ? ':' + ev.op.kind : '') : '') + '\n' + l.textContent).slice(0, 3000); });
+window.T = { A, B, tb, events };
+</script></body></html>

@@ -1,0 +1,125 @@
+# Inklingo
+
+*Ink* (mực vẽ) + *lingo* (ngôn ngữ) – vẽ, đoán và nhớ từ vựng TOEIC. Trước đây dự án có tên tạm “Scribble Words”.
+
+Game web vẽ & đoán từ kết hợp lộ trình học **5 từ vựng TOEIC mỗi ngày theo chủ đề công sở** (trình độ B1–B2,
+dành cho người chơi đã đạt TOEIC 450+).
+Phát triển tiếp từ bản demo `scribble_words_v2.html` (bản gốc giữ tại `docs/scribble_words_v2_original.html`).
+
+## Chạy game
+
+Yêu cầu: Node.js ≥ 18 (không cần cài thêm thư viện nào).
+
+```bash
+npm start
+```
+
+Mở http://localhost:8787. Bạn bè trong cùng mạng LAN mở `http://<IP-máy-bạn>:8787` rồi nhập mã phòng
+(hoặc mở link mời `…/#/join/MÃPHÒNG`). Đổi cổng: `PORT=9000 npm start`.
+
+Kiểm thử tự động (luật chơi + server WebSocket thật):
+
+```bash
+npm test
+```
+
+Kiểm thử engine vẽ trong trình duyệt: mở `http://localhost:8787/dev/draw-test.html`, chạy trong console
+`(await import('/dev/engine-tests.js')).run(T)`.
+
+## Giao diện
+
+- Phong cách “giấy & mực” (lấy cảm hứng từ doodlingam.com, không dùng lại logo, hình hay nội dung của họ): nền giấy kem
+  `#f4eddc`, thẻ `#fbf7ec`, chữ nâu mực `#3b2a1e`, một màu nhấn đỏ đất `#bc4b24` và xanh rêu `#1c3a28`; tiêu đề font
+  Fraunces (chữ nghiêng làm điểm nhấn), nội dung Source Sans 3 (Google Fonts); viền mảnh, bóng mềm, nút bo tròn.
+  Toàn bộ màu nằm trong biến CSS ở đầu `public/css/app.css`.
+- Không dùng emoji trong giao diện: mọi biểu tượng là icon SVG dạng nét tự vẽ (`public/js/ui/icons.js`), hiển thị giống
+  nhau trên mọi hệ điều hành. Ảnh đại diện là vòng tròn màu với chữ cái đầu của tên (hồ sơ cũ dùng emoji được tự chuyển
+  sang màu).
+- Bố cục dashboard: **thanh bên** (Trang chủ · Học hôm nay · Chủ đề · Ôn tập · Nhóm · Thống kê | Cài đặt · Trợ giúp)
+  và **thanh trên** (tìm kiếm ⌘K/Ctrl K theo từ tiếng Anh, nghĩa tiếng Việt không dấu hoặc chủ đề – từ chưa học bị khóa;
+  số ngày học liên tiếp; menu hồ sơ để đổi hồ sơ). Tablet: thanh bên chỉ còn icon; điện thoại: thanh tab ở đáy.
+  Trong phòng chơi thanh bên ẩn để bảng vẽ rộng hơn.
+- Trang chủ: khối chào với 3 thẻ ảnh thật của từ hôm nay, nút “Bắt đầu học hôm nay” và “Chơi nhanh”; hàng chủ đề cuộn
+  ngang; “Học nhanh” (Tạo phòng, Vào phòng, Học từ mới, Ôn tập); cột phải: tiến độ (vòng % chủ đề, số chủ đề, từ đã học,
+  đang ôn, ngày liên tiếp) và danh sách 5 từ hôm nay có nút nghe và ô đánh dấu đã học.
+- Trang **Thống kê** (tiến độ từng chủ đề, điểm kiểm tra, từ hay quên) và **Trợ giúp** (luật chơi ngắn + phím tắt).
+- Không làm các phần của bản thiết kế chưa có cơ chế thật: cấp/XP, chuông thông báo, “Gợi ý chủ đề” (thay bằng “Chơi
+  nhanh”); hình minh họa vẽ tay được thay bằng ảnh chụp thật của từ (GDD §12).
+- Flashcard: chuyển từ bằng phím ← →; kết quả đúng/sai trong bài kiểm tra và ôn tập có màu và icon rõ ràng.
+
+## Nhóm học
+
+Một nhóm (tối đa 12 người) học chung lộ trình chủ đề, có bảng xếp hạng và mini-game cuối chủ đề.
+
+- **Tạo / vào nhóm:** tab **Nhóm** → đặt tên nhóm, hoặc nhập mã 6 ký tự / mở link `#/group/join/MÃ`. Không cần tài
+  khoản: mỗi hồ sơ giữ một mã bí mật trên máy (server chỉ lưu bản băm). **Mã khôi phục** dùng để tiếp tục trên máy khác.
+  Trưởng nhóm mời được người khác ra; trưởng nhóm rời thì người vào sớm nhất thay.
+- **Cùng nhịp:** server phát cho cả nhóm cùng 5 từ mỗi ngày (Thứ Hai–Thứ Sáu, theo múi giờ của người tạo nhóm);
+  cuối tuần ôn tập. Hồ sơ trong nhóm dùng lịch này cho mọi màn hình (Học hôm nay, Ôn tập, từ trong phòng vẽ).
+- **Bảng xếp hạng (Tuần này / Tổng):** học đủ 5 từ trong ngày +10 (+2 mỗi ngày liên tiếp, tối đa +10); ôn đúng +1/thẻ
+  (tối đa 20/ngày); ván vẽ mở từ trang nhóm: điểm ván ÷ 10 (tối đa 30/ngày); mini-game: điểm × 0,15 (tối đa 300).
+  Kèm tỷ lệ nhớ bài và nhãn "Cần ôn".
+- **Mini-game “Đấu trường chủ đề”** (mở khi đã phát hết từ của chủ đề, mở trong 48 giờ, mỗi người chơi 1 lần, cùng
+  bộ câu hỏi): 4 vòng phủ toàn bộ từ của chủ đề – Nhìn ảnh (chọn từ), Nghe & gõ, Điền câu (kiểu TOEIC Part 5), Nghĩa →
+  gõ từ. Đúng +50, nhanh thêm tối đa +50. Chơi **cùng nhau** (phòng chờ, từ 2 người, chung đồng hồ, thấy ai đã trả lời)
+  hoặc **một mình** bất cứ lúc nào trong 48 giờ; đồng hồ không dừng khi thoát ra, tải lại trang thì chơi tiếp.
+- **Kết thúc:** khi mọi người đã chơi hoặc hết 48 giờ → bảng kết quả, “Từ cả nhóm hay quên”, cả nhóm sang chủ đề mới.
+  Ai dưới 80 % (hoặc vắng) có nhãn “Cần ôn” và phải ôn bù các từ sai (Ôn tập → các từ chưa nhớ).
+- **Chống gian lận:** server giữ đáp án, tính giờ và chấm điểm; câu hỏi không chứa đáp án, ảnh câu hỏi phát qua
+  `/api/qimg/…` để giấu tên tệp. Giới hạn: vòng Nghe phải gửi chữ (đã làm rối) để trình duyệt đọc, người cố ý mở công cụ
+  dev vẫn có thể giải mã; điểm học/ôn hằng ngày do máy người chơi báo về (có giới hạn mỗi ngày).
+- Dữ liệu nhóm: `server/data/groups.json` (đổi bằng biến `GROUPS_FILE`). Kiểm thử lịch học: chạy với `SW_DEV=1` để
+  server nhận “ngày giả lập” từ Cài đặt (cấu hình `scribble-words-dev` trong `.claude/launch.json`, cổng 8788).
+
+## Cấu trúc
+
+```
+server/server.js         HTTP tĩnh + phòng chơi realtime (WebSocket /ws), server quyết định lượt, giờ, đáp án, điểm
+server/ws.js             WebSocket RFC 6455 tự viết (không phụ thuộc thư viện)
+server/groups.js         nhóm học: lịch chung, điểm, mini-game (lưu file JSON)
+public/js/shared/        game-core.js – luật chơi dùng chung cho server và chế độ cùng thiết bị; quiz-core.js – câu hỏi & lượt chơi mini-game
+public/js/drawing/       engine.js (bản vẽ vector + raster), flood.js, toolbar.js, colorpicker.js
+public/js/game/          room-view.js (sảnh, gameplay, kết quả), assistant.js, ghost.js, quiz-view.js (mini-game nhóm)
+public/js/vocab/         data.js (từ vựng, ảnh + ghi công + ảnh dự phòng), progress.js (lộ trình theo hồ sơ)
+public/js/screens/       Home, Daily, Topics/Quiz, Review, Play, Group, Settings/Credits
+public/js/net/           online.js (WebSocket), sessions.js, groups.js (API nhóm, đồng bộ lịch, báo điểm)
+public/js/ui/            dom.js (helper DOM, hộp thoại), icons.js (bộ icon SVG tự vẽ + avatar màu/chữ cái đầu)
+public/js/store/         drawings.js – lưu tranh mỗi lượt (IndexedDB) làm thẻ ôn tập
+public/data/vocab.json   dữ liệu từ vựng đã build (chỉ gồm từ có ảnh thật đã xác minh)
+public/img/w/            ảnh minh họa đã tải về (cache cục bộ) – nguồn Wikimedia Commons
+content/*.json           nội dung 12 chủ đề (nghĩa, IPA, ví dụ, ý tưởng vẽ, các bước, mẫu ghost)
+tools/                   pipeline tuyển chọn ảnh thật + build dữ liệu
+tests/                   test Node (node:test)
+docs/COMPARISON.md       bảng đối chiếu Scribble It! ↔ Inklingo
+```
+
+## Quy trình ảnh minh họa (GDD §12)
+
+1. `python3 tools/curate_images.py candidates` – lấy ứng viên từ ảnh đầu bài Wikipedia và tìm kiếm Wikimedia Commons;
+   tự động loại: không phải JPEG ảnh chụp, < 600 px, giấy phép ngoài CC0/PD/CC BY/CC BY-SA, danh mục AI-generated /
+   tranh vẽ / minh họa / hoạt hình, mô tả có nhắc tới AI.
+2. `python3 tools/sheet_rows.py <topic>` / `tools/sheet_words.py` – tạo contact sheet để **duyệt bằng mắt**. Toàn bộ
+   240 từ TOEIC đã được duyệt; bộ lọc tự động bỏ sót khá nhiều tranh sơn dầu, tranh khắc, tượng, poster, ảnh Muybridge…
+   (API chỉ trả một phần danh mục khi tìm theo lô) nên bước duyệt thủ công là bắt buộc.
+   Từ khó tìm ảnh: `python3 tools/curate_images.py more <từ> "truy vấn" "Category:…"`. Với từ mà chính chủ đề bị bộ lọc
+   chặn (vd. **poster**), `WORD_ALLOW` trong `curate_images.py` nới đúng từ khóa đó cho riêng từ ấy.
+3. Ghi lựa chọn vào `tools/image_choices.json` (ảnh chính + ảnh dự phòng).
+4. `python3 tools/curate_images.py finalize` – tải ảnh 640 px về `public/img/w/`, ghi `public/data/images.json`
+   (URL nguồn, tác giả, giấy phép, link giấy phép).
+5. `node tools/build_vocab.mjs` – build `vocab.json`; **từ nào chưa có ảnh thật đã xác minh sẽ không được đưa vào game**.
+
+Ảnh lỗi → thử bản gốc trên Wikimedia → ảnh dự phòng đã xác minh của cùng từ → ảnh bìa (ảnh thật) của chủ đề.
+Service worker cache ảnh (cache-first). Danh sách tác giả/giấy phép: màn hình **Cài đặt → Nguồn ảnh & giấy phép**.
+
+## Trạng thái dữ liệu
+
+- 12 chủ đề TOEIC × 20 từ (B1–B2, vẫn vẽ được): Office & Workplace · Airport & Travel · Hotels & Restaurants ·
+  Shopping & Delivery · Housing & Maintenance · Health & Medical · Professions · Meetings & Presentations ·
+  Manufacturing & Logistics · Banking & Finance · Marketing & Media · Workplace Concepts.
+- 238/240 từ có ảnh chụp thật đã duyệt bằng mắt (ảnh chính + ảnh dự phòng cho nhiều từ).
+- Bị loại theo §12.6 vì chưa tìm được ảnh chụp thật đúng nghĩa, rõ nguồn và giấy phép trên Wikimedia Commons
+  (kết quả chỉ có tranh vẽ, ảnh người đọc sách/phòng họp chung chung, ảnh người nổi tiếng):
+  **agenda** (Meetings & Presentations), **catalogue** (Marketing & Media).
+  Bổ sung bằng cách thêm ảnh vào `tools/image_choices.json` rồi chạy lại bước 4–5.
+- Bộ từ cơ bản cũ (12 chủ đề đời sống) lưu tại `docs/old-content/`. Tiến độ lưu dưới khóa mới `sw:v4`, nên tiến độ của bộ từ cũ
+  không được chuyển sang.

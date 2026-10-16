@@ -1,0 +1,14 @@
+{
+  "name": "scribble-words",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Drawing & guessing game for learning English vocabulary by topic (5 words a day).",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

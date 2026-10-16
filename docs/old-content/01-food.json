@@ -1,0 +1,180 @@
+{
+  "id": "food", "title": "Food & Drinks", "vi": "Đồ ăn & Thức uống", "icon": "🍎",
+  "words": [
+    {"id": "apple", "en": "apple", "vi": "quả táo", "ipa": "/ˈæp.əl/", "pos": "n",
+     "ex": ["I eat an apple every morning.", "Mỗi sáng tôi ăn một quả táo."],
+     "explain": "Loại quả tròn, vỏ đỏ hoặc xanh, ăn giòn và ngọt.",
+     "ideas": [
+      {"scene": "Một quả táo có cuống và một chiếc lá", "elements": ["thân quả tròn", "cuống", "chiếc lá"], "steps": ["Vẽ hình tròn hơi lõm ở đỉnh", "Thêm cuống ngắn ở chỗ lõm", "Vẽ một chiếc lá cạnh cuống", "Tô đỏ thân quả, tô xanh chiếc lá"]},
+      {"scene": "Quả táo bị cắn một miếng", "elements": ["quả táo", "vết cắn hình răng cưa", "ruột trắng"], "steps": ["Vẽ quả táo tròn", "Xóa một mảng bên cạnh thành vết cắn lượn sóng", "Tô đỏ phần vỏ, để trắng phần ruột"]}
+     ]},
+    {"id": "banana", "en": "banana", "vi": "quả chuối", "ipa": "/bəˈnæn.ə/", "pos": "n",
+     "ex": ["Monkeys love bananas.", "Khỉ rất thích chuối."],
+     "explain": "Quả dài, cong, vỏ vàng khi chín, ruột mềm và ngọt.",
+     "ideas": [
+      {"scene": "Một quả chuối cong như trăng lưỡi liềm", "elements": ["thân cong", "cuống", "đầu nhọn"], "steps": ["Vẽ hai đường cong song song như mặt trăng khuyết", "Nối hai đầu lại", "Thêm cuống nhỏ ở một đầu", "Tô vàng, chấm nâu ở hai đầu"]},
+      {"scene": "Một nải chuối", "elements": ["3–4 quả chuối", "cuống chung"], "steps": ["Vẽ một cuống ngắn", "Vẽ 3–4 quả chuối cong cùng chụm vào cuống", "Tô vàng"]}
+     ]},
+    {"id": "orange", "en": "orange", "vi": "quả cam", "ipa": "/ˈɔːr.ɪndʒ/", "pos": "n",
+     "ex": ["This orange is very juicy.", "Quả cam này rất mọng nước."],
+     "explain": "Quả tròn, vỏ màu cam có lỗ nhỏ li ti, ruột chia múi.",
+     "ideas": [
+      {"scene": "Quả cam cắt đôi thấy các múi", "elements": ["hình tròn", "các múi hình tam giác", "vỏ viền"], "steps": ["Vẽ một hình tròn", "Vẽ vòng tròn nhỏ hơn bên trong làm vỏ", "Chia bên trong thành các múi như bánh xe", "Tô cam"]},
+      {"scene": "Quả cam nguyên có lá", "elements": ["quả tròn", "chấm nhỏ trên vỏ", "chiếc lá"], "steps": ["Vẽ hình tròn", "Chấm vài chấm nhỏ trên vỏ", "Thêm chiếc lá xanh ở đỉnh", "Tô màu cam"]}
+     ]},
+    {"id": "bread", "en": "bread", "vi": "bánh mì", "ipa": "/bred/", "pos": "n",
+     "ex": ["We buy fresh bread from the bakery.", "Chúng tôi mua bánh mì tươi ở tiệm bánh."],
+     "explain": "Thực phẩm làm từ bột mì nướng, có ổ dài hoặc lát vuông.",
+     "ideas": [
+      {"scene": "Ổ bánh mì dài có các đường rạch", "elements": ["ổ dài bầu dục", "3–4 đường rạch chéo"], "steps": ["Vẽ hình bầu dục dài", "Vẽ 3–4 đường chéo trên mặt bánh", "Tô màu nâu vàng"]},
+      {"scene": "Một lát bánh mì sandwich", "elements": ["lát vuông có đỉnh bo tròn", "viền vỏ nâu"], "steps": ["Vẽ hình vuông, đỉnh phồng thành hai bướu", "Vẽ viền bên trong làm vỏ", "Tô nâu viền, vàng nhạt bên trong"]}
+     ]},
+    {"id": "egg", "en": "egg", "vi": "quả trứng", "ipa": "/eɡ/", "pos": "n",
+     "ex": ["She fried an egg for breakfast.", "Cô ấy rán một quả trứng cho bữa sáng."],
+     "explain": "Do gà, vịt đẻ ra; vỏ cứng, bên trong có lòng trắng và lòng đỏ.",
+     "ideas": [
+      {"scene": "Trứng ốp la", "elements": ["lòng trắng hình mây", "lòng đỏ tròn ở giữa"], "steps": ["Vẽ một hình lượn sóng như đám mây", "Vẽ hình tròn ở giữa", "Tô vàng lòng đỏ, để trắng xung quanh"]},
+      {"scene": "Quả trứng nguyên bên cạnh con gà mái", "elements": ["hình bầu dục", "con gà đơn giản"], "steps": ["Vẽ hình bầu dục, đầu trên hơi nhỏ", "Vẽ con gà nhỏ bên cạnh", "Tô màu be nhạt cho trứng"]}
+     ]},
+    {"id": "milk", "en": "milk", "vi": "sữa", "ipa": "/mɪlk/", "pos": "n",
+     "ex": ["Children drink milk every day.", "Trẻ em uống sữa mỗi ngày."],
+     "explain": "Chất lỏng màu trắng, lấy từ bò, dùng để uống.",
+     "ideas": [
+      {"scene": "Hộp sữa giấy có hình con bò", "elements": ["hộp chữ nhật nóc nhọn", "đốm đen trắng"], "steps": ["Vẽ hình chữ nhật đứng", "Thêm nóc hình tam giác", "Vẽ đốm như da bò lên hộp"]},
+      {"scene": "Ly sữa trắng đầy", "elements": ["ly cao", "mặt sữa", "vài giọt bắn"], "steps": ["Vẽ chiếc ly hình thang", "Vẽ đường mặt sữa gần miệng ly", "Để trắng phần sữa, tô viền xám"]}
+     ]},
+    {"id": "cheese", "en": "cheese", "vi": "phô mai", "ipa": "/tʃiːz/", "pos": "n",
+     "ex": ["Mice like cheese.", "Chuột thích phô mai."],
+     "explain": "Thực phẩm làm từ sữa, thường màu vàng, có thể có lỗ.",
+     "ideas": [
+      {"scene": "Miếng phô mai tam giác có lỗ", "elements": ["khối tam giác", "các lỗ tròn"], "steps": ["Vẽ hình tam giác dẹt", "Thêm mặt bên để có khối", "Vẽ vài lỗ tròn", "Tô vàng"]},
+      {"scene": "Chú chuột đứng cạnh miếng phô mai", "elements": ["chuột", "miếng phô mai"], "steps": ["Vẽ miếng phô mai tam giác", "Vẽ chuột: thân tròn, tai tròn, đuôi dài", "Tô vàng phô mai, xám chuột"]}
+     ]},
+    {"id": "rice", "en": "rice", "vi": "cơm / gạo", "ipa": "/raɪs/", "pos": "n",
+     "ex": ["Vietnamese people eat rice every day.", "Người Việt ăn cơm hằng ngày."],
+     "explain": "Hạt gạo nấu chín thành cơm, món ăn chính ở châu Á.",
+     "ideas": [
+      {"scene": "Bát cơm đầy với đôi đũa", "elements": ["bát", "cơm nhô lên", "đôi đũa"], "steps": ["Vẽ nửa hình tròn làm bát", "Vẽ đường lượn tròn trên miệng bát làm cơm", "Vẽ hai que dài gác lên bát"]},
+      {"scene": "Cánh đồng lúa với bông lúa", "elements": ["bông lúa cong", "hạt lúa"], "steps": ["Vẽ vài thân cây mảnh", "Vẽ bông lúa cong xuống với hạt nhỏ", "Tô vàng"]}
+     ]},
+    {"id": "coffee", "en": "coffee", "vi": "cà phê", "ipa": "/ˈkɑː.fi/", "pos": "n",
+     "ex": ["My father drinks coffee in the morning.", "Bố tôi uống cà phê vào buổi sáng."],
+     "explain": "Đồ uống màu nâu đen, pha từ hạt cà phê, thường uống nóng.",
+     "ideas": [
+      {"scene": "Tách cà phê bốc khói", "elements": ["tách có quai", "đĩa lót", "làn khói uốn lượn"], "steps": ["Vẽ tách hình chữ U có quai", "Vẽ đĩa bầu dục bên dưới", "Vẽ 2–3 đường khói lượn sóng", "Tô nâu mặt cà phê"]},
+      {"scene": "Hạt cà phê bên cạnh cốc", "elements": ["hạt bầu dục có rãnh", "cốc"], "steps": ["Vẽ vài hạt bầu dục có đường cong ở giữa", "Vẽ cốc bên cạnh", "Tô nâu đậm"]}
+     ]},
+    {"id": "carrot", "en": "carrot", "vi": "cà rốt", "ipa": "/ˈker.ət/", "pos": "n",
+     "ex": ["Rabbits eat carrots.", "Thỏ ăn cà rốt."],
+     "explain": "Củ dài màu cam, đầu có lá xanh.",
+     "ideas": [
+      {"scene": "Củ cà rốt có lá xanh", "elements": ["củ hình tam giác dài", "vạch ngang", "lá"], "steps": ["Vẽ tam giác dài, đầu nhọn chĩa xuống", "Thêm vài vạch ngang ngắn", "Vẽ chùm lá ở đầu to", "Tô cam củ, xanh lá"]},
+      {"scene": "Con thỏ đang gặm cà rốt", "elements": ["thỏ tai dài", "cà rốt"], "steps": ["Vẽ đầu thỏ tròn với hai tai dài", "Vẽ củ cà rốt ở miệng thỏ", "Tô cam cà rốt"]}
+     ]},
+    {"id": "tomato", "en": "tomato", "vi": "cà chua", "ipa": "/təˈmeɪ.t̬oʊ/", "pos": "n",
+     "ex": ["Put some tomato in the salad.", "Cho ít cà chua vào món salad."],
+     "explain": "Quả tròn màu đỏ, mọng nước, dùng nấu ăn hoặc làm salad.",
+     "ideas": [
+      {"scene": "Quả cà chua có cuống hình ngôi sao", "elements": ["quả tròn dẹt", "cuống xanh hình sao"], "steps": ["Vẽ hình tròn hơi dẹt", "Vẽ cuống xanh có 5 cánh nhỏ trên đỉnh", "Tô đỏ"]},
+      {"scene": "Lát cà chua cắt ngang", "elements": ["hình tròn", "các khoang hạt"], "steps": ["Vẽ hình tròn", "Vẽ 3–4 khoang hình giọt nước bên trong", "Chấm hạt nhỏ", "Tô đỏ"]}
+     ]},
+    {"id": "potato", "en": "potato", "vi": "khoai tây", "ipa": "/pəˈteɪ.t̬oʊ/", "pos": "n",
+     "ex": ["French fries are made from potatoes.", "Khoai tây chiên được làm từ khoai tây."],
+     "explain": "Củ màu nâu vàng, hình bầu dục, mọc dưới đất.",
+     "ideas": [
+      {"scene": "Củ khoai tây sần sùi", "elements": ["hình bầu dục méo", "chấm mắt khoai"], "steps": ["Vẽ hình bầu dục hơi méo", "Chấm vài chấm nhỏ trên vỏ", "Tô nâu nhạt"]},
+      {"scene": "Gói khoai tây chiên", "elements": ["hộp đỏ", "que khoai vàng"], "steps": ["Vẽ hộp hình thang", "Vẽ nhiều que dài nhô lên", "Tô đỏ hộp, vàng que khoai"]}
+     ]},
+    {"id": "watermelon", "en": "watermelon", "vi": "dưa hấu", "ipa": "/ˈwɑː.t̬ɚˌmel.ən/", "pos": "n",
+     "ex": ["Watermelon is sweet in summer.", "Dưa hấu ngọt vào mùa hè."],
+     "explain": "Quả to, vỏ xanh có sọc, ruột đỏ với hạt đen.",
+     "ideas": [
+      {"scene": "Miếng dưa hấu hình tam giác", "elements": ["miếng tam giác", "vỏ xanh", "hạt đen"], "steps": ["Vẽ hình quạt/tam giác cong ở đáy", "Vẽ dải vỏ dọc đáy", "Chấm hạt đen", "Tô đỏ ruột, xanh vỏ"]},
+      {"scene": "Quả dưa nguyên có sọc", "elements": ["hình bầu dục to", "sọc xanh đậm"], "steps": ["Vẽ hình bầu dục lớn", "Vẽ các sọc ngoằn ngoèo dọc theo quả", "Tô hai sắc xanh"]}
+     ]},
+    {"id": "grapes", "en": "grapes", "alt": ["grape"], "vi": "quả nho", "ipa": "/ɡreɪps/", "pos": "n",
+     "ex": ["These grapes are purple and sweet.", "Chùm nho này màu tím và ngọt."],
+     "explain": "Quả nhỏ tròn mọc thành chùm, màu tím hoặc xanh.",
+     "ideas": [
+      {"scene": "Chùm nho hình tam giác ngược", "elements": ["nhiều quả tròn nhỏ", "cuống", "lá"], "steps": ["Vẽ các hình tròn xếp thành tam giác ngược", "Thêm cuống ở đỉnh", "Vẽ một chiếc lá", "Tô tím"]},
+      {"scene": "Giàn nho có nhiều chùm treo", "elements": ["thanh ngang", "các chùm nho"], "steps": ["Vẽ thanh gỗ ngang", "Treo 2–3 chùm nho nhỏ", "Tô tím và xanh"]}
+     ]},
+    {"id": "strawberry", "en": "strawberry", "vi": "dâu tây", "ipa": "/ˈstrɑː.ber.i/", "pos": "n",
+     "ex": ["I like strawberry ice cream.", "Tôi thích kem dâu."],
+     "explain": "Quả nhỏ màu đỏ hình trái tim, có hạt li ti bên ngoài.",
+     "ideas": [
+      {"scene": "Quả dâu có lá xanh", "elements": ["hình trái tim ngược", "chấm hạt", "lá xanh"], "steps": ["Vẽ hình như trái tim tròn đầu", "Vẽ lá xanh hình sao trên đỉnh", "Chấm các hạt nhỏ", "Tô đỏ"]},
+      {"scene": "Giỏ dâu tây", "elements": ["giỏ", "nhiều quả dâu"], "steps": ["Vẽ giỏ hình thang có quai", "Vẽ các quả dâu nhô lên", "Tô đỏ dâu"]}
+     ]},
+    {"id": "pizza", "en": "pizza", "vi": "bánh pizza", "ipa": "/ˈpiːt.sə/", "pos": "n",
+     "ex": ["Let's order a pizza tonight.", "Tối nay mình gọi pizza nhé."],
+     "explain": "Bánh tròn dẹt nướng, phủ sốt cà chua, phô mai và nhân.",
+     "ideas": [
+      {"scene": "Miếng pizza tam giác", "elements": ["tam giác", "viền bánh", "lát xúc xích tròn"], "steps": ["Vẽ hình tam giác", "Vẽ viền dày ở cạnh trên", "Thêm vài hình tròn làm nhân", "Tô vàng và đỏ"]},
+      {"scene": "Chiếc pizza tròn cắt thành phần", "elements": ["hình tròn", "đường cắt", "nhân"], "steps": ["Vẽ hình tròn lớn", "Vẽ đường chéo chia 8 phần", "Chấm nhân tròn đỏ"]}
+     ]},
+    {"id": "cake", "en": "cake", "vi": "bánh ngọt / bánh kem", "ipa": "/keɪk/", "pos": "n",
+     "ex": ["Mom made a cake for my birthday.", "Mẹ làm bánh kem cho sinh nhật tôi."],
+     "explain": "Bánh ngọt nướng, phủ kem, thường có trong tiệc sinh nhật.",
+     "ideas": [
+      {"scene": "Bánh sinh nhật có nến", "elements": ["khối trụ", "lớp kem chảy", "nến và ngọn lửa"], "steps": ["Vẽ hình chữ nhật có đáy và nắp bầu dục", "Vẽ kem chảy lượn sóng ở mép trên", "Cắm 3 cây nến có lửa", "Tô hồng"]},
+      {"scene": "Miếng bánh tam giác có quả dâu", "elements": ["miếng tam giác", "các lớp", "quả dâu trên đỉnh"], "steps": ["Vẽ khối tam giác", "Vẽ các lớp ngang", "Vẽ quả dâu trên đỉnh"]}
+     ]},
+    {"id": "ice-cream", "en": "ice cream", "alt": ["icecream"], "vi": "kem (lạnh)", "ipa": "/ˈaɪs ˌkriːm/", "pos": "n",
+     "ex": ["Ice cream melts quickly in the sun.", "Kem tan rất nhanh dưới nắng."],
+     "explain": "Món tráng miệng lạnh, ngọt, thường đựng trong ốc quế.",
+     "ideas": [
+      {"scene": "Cây kem ốc quế", "elements": ["ốc quế hình tam giác", "viên kem tròn", "kẻ ô"], "steps": ["Vẽ tam giác ngược làm ốc quế", "Kẻ ô chéo lên ốc quế", "Vẽ 1–2 viên kem tròn bên trên", "Tô nâu vàng và hồng"]},
+      {"scene": "Que kem đang tan chảy", "elements": ["thanh kem chữ nhật bo tròn", "que gỗ", "giọt chảy"], "steps": ["Vẽ chữ nhật bo đầu", "Thêm que gỗ ở dưới", "Vẽ vài giọt chảy xuống"]}
+     ]},
+    {"id": "noodles", "en": "noodles", "alt": ["noodle"], "vi": "mì / phở / bún", "ipa": "/ˈnuː.dəlz/", "pos": "n",
+     "ex": ["I eat noodles for breakfast.", "Tôi ăn mì vào bữa sáng."],
+     "explain": "Sợi dài làm từ bột, thường ăn với nước dùng.",
+     "ideas": [
+      {"scene": "Bát mì có đũa gắp sợi mì", "elements": ["bát", "sợi mì lượn sóng", "đôi đũa"], "steps": ["Vẽ bát nửa hình tròn", "Vẽ nhiều đường lượn sóng trong bát", "Vẽ đũa gắp vài sợi mì lên cao"]},
+      {"scene": "Gói mì ăn liền", "elements": ["gói chữ nhật", "vắt mì xoăn"], "steps": ["Vẽ hình chữ nhật có răng cưa hai đầu", "Vẽ vắt mì xoăn ở giữa"]}
+     ]},
+    {"id": "tea", "en": "tea", "vi": "trà", "ipa": "/tiː/", "pos": "n",
+     "ex": ["Would you like a cup of tea?", "Bạn có muốn một tách trà không?"],
+     "explain": "Đồ uống pha từ lá trà, thường uống nóng.",
+     "ideas": [
+      {"scene": "Ấm trà và chén trà", "elements": ["ấm tròn có vòi", "chén nhỏ", "khói"], "steps": ["Vẽ ấm tròn có nắp và vòi", "Vẽ chén nhỏ bên cạnh", "Vẽ làn khói", "Tô xanh nhạt nước trà"]},
+      {"scene": "Túi trà nhúng trong cốc", "elements": ["cốc", "dây", "nhãn vuông"], "steps": ["Vẽ cốc có quai", "Vẽ sợi dây vắt qua miệng cốc", "Vẽ nhãn vuông nhỏ treo ngoài"]}
+     ]},
+    {"id": "juice", "en": "juice", "vi": "nước ép", "ipa": "/dʒuːs/", "pos": "n",
+     "ex": ["She drinks orange juice.", "Cô ấy uống nước cam ép."],
+     "explain": "Nước ép từ trái cây, ví dụ nước cam, nước táo.",
+     "ideas": [
+      {"scene": "Ly nước cam có ống hút", "elements": ["ly", "ống hút", "lát cam ở miệng ly"], "steps": ["Vẽ ly cao", "Vẽ ống hút chéo", "Gắn lát cam tròn ở miệng ly", "Tô cam"]},
+      {"scene": "Hộp nước ép có ống hút", "elements": ["hộp chữ nhật", "ống hút", "hình quả"], "steps": ["Vẽ hộp chữ nhật", "Cắm ống hút trên nóc", "Vẽ hình quả táo lên hộp"]}
+     ]},
+    {"id": "sandwich", "en": "sandwich", "vi": "bánh mì kẹp", "ipa": "/ˈsæn.wɪtʃ/", "pos": "n",
+     "ex": ["He made a ham sandwich for lunch.", "Anh ấy làm bánh mì kẹp thịt nguội cho bữa trưa."],
+     "explain": "Hai lát bánh mì kẹp nhân như thịt, rau, phô mai.",
+     "ideas": [
+      {"scene": "Bánh sandwich tam giác nhiều lớp", "elements": ["2 lát bánh tam giác", "lớp rau xanh", "lớp thịt"], "steps": ["Vẽ tam giác làm lát trên", "Vẽ các lớp mỏng lượn sóng bên dưới", "Vẽ lát dưới", "Tô xanh rau, hồng thịt"]},
+      {"scene": "Hộp cơm trưa có bánh kẹp", "elements": ["hộp", "bánh kẹp"], "steps": ["Vẽ hộp chữ nhật mở nắp", "Vẽ bánh kẹp bên trong"]}
+     ]},
+    {"id": "soup", "en": "soup", "vi": "món súp / canh", "ipa": "/suːp/", "pos": "n",
+     "ex": ["Hot soup is good on a cold day.", "Súp nóng rất ngon vào ngày lạnh."],
+     "explain": "Món ăn dạng nước, nấu từ rau, thịt, ăn bằng thìa.",
+     "ideas": [
+      {"scene": "Bát súp bốc khói có thìa", "elements": ["bát", "mặt súp", "thìa", "khói"], "steps": ["Vẽ bát nửa hình tròn", "Vẽ mặt súp bầu dục", "Vẽ cái thìa trong bát", "Vẽ khói bốc lên"]},
+      {"scene": "Nồi súp trên bếp", "elements": ["nồi có quai", "ngọn lửa", "muôi"], "steps": ["Vẽ nồi chữ nhật bo góc", "Vẽ ngọn lửa bên dưới", "Vẽ cái muôi nhô ra"]}
+     ]},
+    {"id": "pineapple", "en": "pineapple", "vi": "quả dứa (thơm)", "ipa": "/ˈpaɪnˌæp.əl/", "pos": "n",
+     "ex": ["Pineapple is a tropical fruit.", "Dứa là một loại trái cây nhiệt đới."],
+     "explain": "Quả to, vỏ có mắt sần, trên đầu có chùm lá nhọn.",
+     "ideas": [
+      {"scene": "Quả dứa có chùm lá", "elements": ["thân bầu dục", "ô chéo", "chùm lá nhọn"], "steps": ["Vẽ hình bầu dục đứng", "Kẻ các đường chéo tạo ô", "Vẽ chùm lá nhọn trên đỉnh", "Tô vàng, lá xanh"]},
+      {"scene": "Lát dứa tròn", "elements": ["vòng tròn", "lõi", "tia"], "steps": ["Vẽ hình tròn có lỗ ở giữa", "Vẽ các tia từ lõi ra ngoài", "Tô vàng"]}
+     ]},
+    {"id": "corn", "en": "corn", "alt": ["maize"], "vi": "ngô (bắp)", "ipa": "/kɔːrn/", "pos": "n",
+     "ex": ["We had grilled corn at the market.", "Chúng tôi ăn ngô nướng ở chợ."],
+     "explain": "Bắp dài có nhiều hạt vàng xếp hàng, bọc trong lá.",
+     "ideas": [
+      {"scene": "Bắp ngô bóc vỏ một nửa", "elements": ["bắp dài", "hạt ô vuông", "lá bọc hai bên"], "steps": ["Vẽ hình bầu dục dài", "Kẻ lưới ô nhỏ làm hạt", "Vẽ 2 chiếc lá ôm hai bên", "Tô vàng hạt, xanh lá"]},
+      {"scene": "Bỏng ngô (popcorn) trong hộp", "elements": ["hộp sọc", "hạt bỏng như đám mây"], "steps": ["Vẽ hộp hình thang có sọc", "Vẽ nhiều cụm tròn nhô lên"]}
+     ]}
+  ]
+}
