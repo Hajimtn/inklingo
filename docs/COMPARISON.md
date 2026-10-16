@@ -59,7 +59,7 @@ Ký hiệu: ✅ đã xác minh từ nguồn công khai · ❔ không xác minh �
 | Combo | ❔ | +10 điểm/lần liên tiếp (tối đa +50) | 🆕 GDD §3.3 |
 | Bảng xếp hạng cuối trận | ✅ | ✅ bục 1-2-3 + danh sách | |
 | Vote kick / report | ✅ (1.0.9, 1.4.0.0) | Không làm | Không có trong GDD |
-| Thư viện tranh / tranh được bình chọn | ✅ Scribble Library, best-rated popup (0.12) | Lưu tranh mỗi lượt thành thẻ ôn tập | 🆕 GDD §8 |
+| Thư viện tranh / tranh được bình chọn | ✅ Scribble Library, best-rated popup (0.12) | Lưu tranh mỗi lượt, xem lại ở trang Thống kê | 🆕 GDD §8 |
 | Chế độ Guess It! / Rate It! / đội | ✅ | Không làm | Ngoài phạm vi GDD |
 | Đổi màu giao diện | ✅ (1.5.2.0) | Không làm | Ngoài phạm vi GDD |
 
@@ -68,7 +68,7 @@ Ký hiệu: ✅ đã xác minh từ nguồn công khai · ❔ không xác minh �
 - Lộ trình 12 chủ đề từ vựng TOEIC (B1–B2, chủ đề công sở), 5 từ/ngày (Thứ Hai–Thứ Sáu), cuối tuần ôn tập, kiểm tra cuối chủ đề ≥ 80% mới mở chủ đề sau.
 - Flashcard: từ, nghĩa tiếng Việt, phiên âm IPA, phát âm (Web Speech API), ảnh chụp thật có ghi công, câu ví dụ, ý tưởng vẽ.
 - Drawing Assistant 4 cấp + Idea Shuffle + Ghost Sketch (chỉ người vẽ thấy, lớp overlay riêng, không gửi đi, không lưu).
-- Ôn tập bằng tranh của chính người chơi, ưu tiên từ hay sai, thống kê tỷ lệ ghi nhớ theo hồ sơ.
+- Ôn tập Word Recall: tự gõ lại từ qua 3 thử thách (nghe và viết, nhớ nghĩa, điền vào câu), lịch ôn giãn cách ngày 2 → 4 → 8 → 15 → 30, thống kê tỷ lệ nhớ theo dạng và sau ≥ 7 ngày.
 - Chế độ chuyền máy (giữ lại từ demo v2) chạy cùng luật với server.
 - Nhóm học: lịch 5 từ/ngày chung cho cả nhóm, bảng xếp hạng tuần/tổng, mini-game cuối chủ đề không vẽ (4 vòng:
   ảnh, nghe, điền câu Part 5, nghĩa → từ), chơi cùng nhau hoặc một mình trong 48 giờ, ôn bù cho người dưới 80 %.

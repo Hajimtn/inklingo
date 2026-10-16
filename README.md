@@ -55,6 +55,22 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   nhanh”); hình minh họa vẽ tay được thay bằng ảnh chụp thật của từ (GDD §12).
 - Flashcard: chuyển từ bằng phím ← →; kết quả đúng/sai trong bài kiểm tra và ôn tập có màu và icon rõ ràng.
 
+## Ôn tập: Word Recall
+
+Ôn bằng cách **tự nhớ lại và gõ từ** (không trắc nghiệm), mỗi phiên tối đa 10 từ, 2–4 phút.
+
+- **3 thử thách luân phiên** cho mỗi từ: *Nghe và viết* (chỉ có âm thanh + số chữ cái) · *Nhớ nghĩa* (nghĩa và giải thích
+  tiếng Việt → gõ từ) · *Điền vào câu* (câu ví dụ có chỗ trống, gõ đúng dạng từ trong câu; từ không có câu phù hợp chỉ dùng 2
+  dạng đầu).
+- **Ôn giãn cách:** từ học hôm nay được kiểm tra lần đầu vào **ngày hôm sau** (không chấm khi vừa nhìn thấy từ). Đúng → lịch
+  ngày 2 → 4 → 8 → 15 → 30 (sau đó 60 ngày/lần); sai → ôn lại ngày mai và lùi 2 bậc, đồng thời được hỏi lại một lần cuối phiên
+  (lần hỏi lại không tính). Từ sai trong bài kiểm tra chủ đề luôn đến hạn; nhớ đúng là gỡ khỏi danh sách cần ôn.
+- **Không lộ đáp án trước khi trả lời:** không có ảnh hay chữ tiếng Anh trên màn câu hỏi; ô trả lời chặn dán/kéo thả, tắt tự
+  sửa chính tả. Ảnh thật, IPA và câu ví dụ chỉ hiện sau khi trả lời.
+- Không có từ đến hạn → **Luyện thêm** (từ yếu nhất), không tính điểm và không đổi lịch.
+- Màn chính: số từ đến hạn, **Lịch nhớ** (số từ ở mỗi bậc), **Tỷ lệ nhớ** theo từng dạng và sau ≥ 7 ngày, **Tuần này**
+  (trong nhóm: xếp hạng số từ nhớ đúng trong tuần). Tranh vẽ đã lưu chuyển sang trang Thống kê.
+
 ## Nhóm học
 
 Một nhóm (tối đa 12 người) học chung lộ trình chủ đề, có bảng xếp hạng và mini-game cuối chủ đề.
@@ -64,9 +80,9 @@ Một nhóm (tối đa 12 người) học chung lộ trình chủ đề, có b�
   Trưởng nhóm mời được người khác ra; trưởng nhóm rời thì người vào sớm nhất thay.
 - **Cùng nhịp:** server phát cho cả nhóm cùng 5 từ mỗi ngày (Thứ Hai–Thứ Sáu, theo múi giờ của người tạo nhóm);
   cuối tuần ôn tập. Hồ sơ trong nhóm dùng lịch này cho mọi màn hình (Học hôm nay, Ôn tập, từ trong phòng vẽ).
-- **Bảng xếp hạng (Tuần này / Tổng):** học đủ 5 từ trong ngày +10 (+2 mỗi ngày liên tiếp, tối đa +10); ôn đúng +1/thẻ
-  (tối đa 20/ngày); ván vẽ mở từ trang nhóm: điểm ván ÷ 10 (tối đa 30/ngày); mini-game: điểm × 0,15 (tối đa 300).
-  Kèm tỷ lệ nhớ bài và nhãn "Cần ôn".
+- **Bảng xếp hạng (Tuần này / Tổng):** học đủ 5 từ trong ngày +10 (+2 mỗi ngày liên tiếp, tối đa +10); Word Recall nhớ đúng +1/từ
+  (chỉ từ đến hạn, tối đa 20/ngày; luyện thêm không tính); ván vẽ mở từ trang nhóm: điểm ván ÷ 10 (tối đa 30/ngày); mini-game: điểm × 0,15 (tối đa 300).
+  Kèm tỷ lệ nhớ bài và nhãn "Cần ôn". Màn Word Recall có thêm xếp hạng tuần theo số từ nhớ đúng.
 - **Mini-game “Đấu trường chủ đề”** (mở khi đã phát hết từ của chủ đề, mở trong 48 giờ, mỗi người chơi 1 lần, cùng
   bộ câu hỏi): 4 vòng phủ toàn bộ từ của chủ đề – Nhìn ảnh (chọn từ), Nghe & gõ, Điền câu (kiểu TOEIC Part 5), Nghĩa →
   gõ từ. Đúng +50, nhanh thêm tối đa +50. Chơi **cùng nhau** (phòng chờ, từ 2 người, chung đồng hồ, thấy ai đã trả lời)
@@ -92,7 +108,7 @@ public/js/vocab/         data.js (từ vựng, ảnh + ghi công + ảnh dự ph
 public/js/screens/       Home, Daily, Topics/Quiz, Review, Play, Group, Settings/Credits
 public/js/net/           online.js (WebSocket), sessions.js, groups.js (API nhóm, đồng bộ lịch, báo điểm)
 public/js/ui/            dom.js (helper DOM, hộp thoại), icons.js (bộ icon SVG tự vẽ + avatar màu/chữ cái đầu)
-public/js/store/         drawings.js – lưu tranh mỗi lượt (IndexedDB) làm thẻ ôn tập
+public/js/store/         drawings.js – lưu tranh mỗi lượt (IndexedDB), xem ở trang Thống kê
 public/data/vocab.json   dữ liệu từ vựng đã build (chỉ gồm từ có ảnh thật đã xác minh)
 public/img/w/            ảnh minh họa đã tải về (cache cục bộ) – nguồn Wikimedia Commons
 content/*.json           nội dung 12 chủ đề (nghĩa, IPA, ví dụ, ý tưởng vẽ, các bước, mẫu ghost)

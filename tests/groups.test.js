@@ -118,6 +118,9 @@ test('leaderboard: learning days with streak, capped review points, weekly key',
   assert.equal(m.total, 36 + POINTS.reviewCap, 'review points are capped per day');
   c.store.report(c.g, m, { kind: 'recall', source: 'guess', ok: 5, bad: 0 }, '2026-10-14');
   assert.equal(m.total, 56, 'guesses count for recall only');
+  const me = c.store.view(c.g, a, '2026-10-14').members.find((x) => x.id === a);
+  assert.equal(me.recalledWeek, 30, 'Word Recall ranking counts delayed recalls, not drawing guesses');
+  assert.equal(c.store.view(c.g, a, '2026-10-19').members.find((x) => x.id === a).recalledWeek, 0, 'the ranking restarts each week');
   assert.equal(m.recall.ok, 35);
   c.store.report(c.g, m, { kind: 'match', points: 900 }, '2026-10-14');
   assert.equal(m.total, 56 + POINTS.matchCap);

@@ -34,8 +34,8 @@ function blankProfile(name, avatar) {
     tests: {}, // topicId -> [{date, score, total, correct, missed}]
     passed: {}, // topicId -> date
     needReview: [], // missed in the last failed topic test
-    stats: {}, // wordId -> {seen, ok, bad, last, box}
-    history: [], // {t, w, k: guess|draw|review|test|learn, ok}
+    stats: {}, // wordId -> {seen, ok, bad, last, step, due, lastDay, nextType} (Word Recall schedule)
+    history: [], // {t, w, k: guess|draw|recall|practice|test|learn, ok, c?: challenge type, gap?: days}
     group: null, // {code, memberId, secret, name} when the profile belongs to a study group
     groupMirror: null, // last synced {phase, topicIdx, delivered, topicSize, syncedAt}
     groupOutbox: [], // progress reports not sent yet
@@ -235,8 +235,8 @@ export function studyStreak(p = active()) {
   return n;
 }
 
-/** Learned words that are not mastered yet (spaced-review box below 3). */
-export const inReview = (p = active()) => learnedWords(p).filter((w) => (p.stats[w.id]?.box || 0) < 3).length;
+/** Learned words that have not passed the day-30 Word Recall check yet. */
+export const inReview = (p = active()) => learnedWords(p).filter((w) => recallStep(w.id, p) < MASTERED_STEP).length;
 
 export function weekWords(p = active()) {
   // Words introduced in the last 7 days (for the weekend review screen).
@@ -253,11 +253,14 @@ export function learnedWords(p = active()) {
 
 function log(p, wordId, kind, ok) {
   p.history.push({ t: Date.now(), w: wordId, k: kind, ok: !!ok });
+  trimHistory(p);
+}
+function trimHistory(p) {
   if (p.history.length > HISTORY_MAX) p.history.splice(0, p.history.length - HISTORY_MAX);
 }
 
 function stat(p, wordId) {
-  return (p.stats[wordId] ||= { seen: 0, ok: 0, bad: 0, last: 0, box: 0 });
+  return (p.stats[wordId] ||= { seen: 0, ok: 0, bad: 0, last: 0, step: 0 });
 }
 
 /** Result of recalling a word (guessing in a match, review card, test question). */
@@ -266,13 +269,8 @@ export function recordRecall(wordId, ok, kind, p = active()) {
   const s = stat(p, wordId);
   s.seen++;
   s.last = Date.now();
-  if (ok) {
-    s.ok++;
-    s.box = Math.min(5, s.box + 1);
-  } else {
-    s.bad++;
-    s.box = Math.max(0, s.box - 2);
-  }
+  if (ok) s.ok++;
+  else s.bad++;
   let cleared = null;
   if (ok && kind === 'review') {
     const i = p.needReview.indexOf(wordId);
@@ -344,7 +342,10 @@ export function applyGroupState(p, st) {
   }
   p.needReview = (st.my?.needReview || []).filter((id) => word(id));
   for (const h of st.history || []) p.passed[h.topicId] ||= today();
-  p.groupMirror = { phase: st.phase, topicIdx: st.topicIdx, delivered: st.delivered, topicSize: st.topicSize, name: st.name, syncedAt: Date.now() };
+  p.groupMirror = {
+    phase: st.phase, topicIdx: st.topicIdx, delivered: st.delivered, topicSize: st.topicSize, name: st.name, syncedAt: Date.now(),
+    recallBoard: (st.members || []).map((m) => ({ id: m.id, name: m.name, avatar: m.avatar, n: m.recalledWeek || 0, me: m.id === st.me })),
+  };
   if (p.group) p.group.name = st.name;
   save();
 }
@@ -358,23 +359,129 @@ export function recordDrawn(wordId, p = active()) {
   save();
 }
 
-/** Review queue: missed test words first, then words guessed wrong most often / weakest box. */
-export function reviewQueue(limit = 10, p = active(), onlyNeeded = false) {
-  const learned = learnedWords(p);
+// ------------------------------------------------------------- Word Recall (spaced, delayed recall)
+//
+// A word is first checked the day after it was learned (never the same day: recognising a word you
+// have just seen says little about memory). Each correct check pushes the next one further out –
+// day 2 -> 4 -> 8 -> 15 -> 30, then every 60 days; a miss brings the word back tomorrow, two steps lower.
+
+export const RECALL_GAPS = [1, 2, 4, 7, 15, 60]; // days to the next check once a word reaches step k
+export const MASTERED_STEP = 5; // passed the day-30 check
+export const RECALL_TYPES = ['listen', 'meaning', 'context'];
+export const SESSION_MAX = 10;
+
+export const recallStep = (wordId, p = active()) => p.stats[wordId]?.step || 0;
+
+export function dueDate(wordId, p = active()) {
+  const s = p.stats[wordId];
+  if (s?.due) return s.due;
+  return p.introduced[wordId] ? addDays(p.introduced[wordId], 1) : null;
+}
+
+export function isDue(wordId, p = active(), day = today()) {
+  if (p.needReview.includes(wordId)) return true;
+  const d = dueDate(wordId, p);
+  return !!d && d <= day;
+}
+
+/** Words to check today: missed test words first, then the most overdue, then the least known. */
+export function dueWords(p = active(), onlyNeeded = false) {
+  const day = today();
   const need = new Set(p.needReview);
-  const now = Date.now();
-  const score = (w) => {
-    const s = p.stats[w.id] || { ok: 0, bad: 0, box: 0, last: 0 };
-    const errRate = (s.bad + 1) / (s.ok + s.bad + 2);
-    const ageDays = s.last ? (now - s.last) / 864e5 : 30;
-    return (need.has(w.id) ? 100 : 0) + errRate * 10 + (5 - s.box) * 2 + Math.min(10, ageDays);
+  const pool = learnedWords(p).filter((w) => (onlyNeeded ? need.has(w.id) : isDue(w.id, p, day)));
+  return pool.sort((a, b) => need.has(b.id) - need.has(a.id) || cmp(dueDate(a.id, p), dueDate(b.id, p)) || recallStep(a.id, p) - recallStep(b.id, p));
+}
+const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/** The next day something becomes due (when nothing is due today). */
+export function nextDue(p = active()) {
+  const day = today();
+  return learnedWords(p).map((w) => dueDate(w.id, p)).filter((d) => d && d > day).sort()[0] || null;
+}
+
+/** Extra practice when nothing is due: weakest words first. Practice never moves the schedule. */
+export function practiceWords(limit = SESSION_MAX, p = active()) {
+  const score = (w) => recallStep(w.id, p) * 2 - (wordRetention(w.id, p) ?? 0.5) + Math.random();
+  return learnedWords(p).sort((a, b) => score(a) - score(b)).slice(0, limit);
+}
+
+/** Challenge type for a word: the three types take turns, so every word is heard, recalled and used. */
+export function nextChallenge(wordId, available, p = active()) {
+  const s = p.stats[wordId];
+  let i = s?.nextType ?? [...wordId].reduce((a, c) => a + c.charCodeAt(0), 0) % RECALL_TYPES.length;
+  for (let k = 0; k < RECALL_TYPES.length; k++, i++) {
+    const t = RECALL_TYPES[i % RECALL_TYPES.length];
+    if (available.includes(t)) return t;
+  }
+  return available[0];
+}
+
+const daysBetween = (a, b) => Math.round((parse(b) - parse(a)) / 864e5);
+
+/**
+ * One Word Recall answer. `counted` is false for extra practice and for the retry of a missed word
+ * in the same session: those are logged but do not move the schedule or score group points.
+ */
+export function recordWordRecall(wordId, type, ok, counted, p = active()) {
+  if (!p || !word(wordId)) return;
+  const s = stat(p, wordId);
+  const day = today();
+  const since = s.lastDay || p.introduced[wordId];
+  s.nextType = (RECALL_TYPES.indexOf(type) + 1) % RECALL_TYPES.length;
+  if (!counted) {
+    p.history.push({ t: Date.now(), w: wordId, k: 'practice', ok: !!ok, c: type });
+    trimHistory(p);
+    save();
+    return;
+  }
+  s.seen++;
+  s.last = Date.now();
+  s.lastDay = day;
+  if (ok) {
+    s.ok++;
+    s.step = Math.min(MASTERED_STEP, (s.step || 0) + 1);
+    s.due = addDays(day, RECALL_GAPS[s.step]);
+  } else {
+    s.bad++;
+    s.step = Math.max(0, (s.step || 0) - 2);
+    s.due = addDays(day, RECALL_GAPS[0]);
+  }
+  let cleared = null;
+  const i = p.needReview.indexOf(wordId);
+  if (ok && i !== -1) {
+    p.needReview.splice(i, 1);
+    cleared = [wordId];
+  }
+  p.history.push({ t: Date.now(), w: wordId, k: 'recall', ok: !!ok, c: type, gap: since ? daysBetween(since, day) : 0 });
+  trimHistory(p);
+  save();
+  if (p.group) hooks.recall?.(p, { ok, source: 'review', cleared });
+}
+
+/** Accuracy of delayed recalls per challenge type, after a 7+ day gap, and words recalled this week. */
+export function recallStats(p = active()) {
+  const rows = p.history.filter((x) => x.k === 'recall');
+  const rate = (list) => (list.length ? { ok: list.filter((x) => x.ok).length, n: list.length } : null);
+  const day = today();
+  const monday = addDays(day, -((weekday(day) + 6) % 7));
+  const weekStart = parse(monday).getTime();
+  const week = new Set(rows.filter((x) => x.ok && x.t >= weekStart).map((x) => x.w)).size;
+  return {
+    byType: Object.fromEntries(RECALL_TYPES.map((t) => [t, rate(rows.filter((x) => x.c === t))])),
+    late: rate(rows.filter((x) => x.gap >= 7)),
+    week,
   };
-  const pool = onlyNeeded ? learned.filter((w) => need.has(w.id)) : learned;
-  return pool.sort((a, b) => score(b) - score(a)).slice(0, limit);
+}
+
+/** How many learned words sit at each step of the recall ladder. */
+export function ladder(p = active()) {
+  const out = Array(MASTERED_STEP + 1).fill(0);
+  for (const w of learnedWords(p)) out[recallStep(w.id, p)]++;
+  return out;
 }
 
 export function retention(p = active()) {
-  const rec = p.history.filter((h) => h.k === 'guess' || h.k === 'review' || h.k === 'test');
+  const rec = p.history.filter((h) => h.k === 'guess' || h.k === 'review' || h.k === 'recall' || h.k === 'test');
   if (!rec.length) return null;
   return rec.filter((h) => h.ok).length / rec.length;
 }
@@ -417,7 +524,7 @@ export function matchWordIds(p = active()) {
   const batch = todayBatch(p).words.map((w) => w.id);
   const t = currentTopic(p);
   const topicLearned = introducedIn(t, p).map((w) => w.id).filter((id) => !batch.includes(id));
-  const review = reviewQueue(15, p).map((w) => w.id).filter((id) => !batch.includes(id) && !topicLearned.includes(id));
+  const review = [...dueWords(p), ...practiceWords(15, p)].slice(0, 15).map((w) => w.id).filter((id) => !batch.includes(id) && !topicLearned.includes(id));
   const ids = [...batch, ...shuffle(topicLearned), ...review];
   if (ids.length) return ids;
   return t.words.slice(0, WORDS_PER_DAY).map((w) => w.id);

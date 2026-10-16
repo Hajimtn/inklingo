@@ -1,9 +1,9 @@
 // Statistics (per profile, from the local learning history) and a short help page.
 
-import { h, clear } from '../ui/dom.js';
+import { h, clear, confirmDialog, toast } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
-import { topics, topicById, photo, topicIcon } from '../vocab/data.js';
-import { listDrawings } from '../store/drawings.js';
+import { topics, topicById, photo, topicIcon, word } from '../vocab/data.js';
+import { listDrawings, deleteDrawing } from '../store/drawings.js';
 import * as P from '../vocab/progress.js';
 
 const STATUS = {
@@ -18,7 +18,9 @@ const STATUS = {
 export async function renderStats(root) {
   const prof = P.active();
   const ret = P.retention();
-  const drawings = (await listDrawings()).length;
+  // Drawings of words that are no longer in the word list (e.g. the old beginner set) are not shown.
+  const saved = (await listDrawings()).filter((d) => word(d.wordId));
+  const drawings = saved.length;
   const tile = (cls, ic, value, label) => h('div.kpi.' + cls, h('span.kpi-ic', icon(ic, { size: 22 })), h('div', h('b', value), h('small', label)));
 
   const topicRows = topics().map((t, i) => {
@@ -54,7 +56,20 @@ export async function renderStats(root) {
             : h('div.side-empty', icon('info', { size: 22 }), h('span', 'Chưa có dữ liệu – hãy ôn tập vài lượt'))),
         h('section.card.side-card', h('div.section-head', h('h2', 'Bài kiểm tra')),
           tests.length ? h('ul.plain-list', tests.map((x) => h('li', h('span', topicById(x.id)?.title || x.id), h('span.small.muted', x.date), h('b' + (x.score >= P.PASS_RATE ? '.ok' : '.bad'), Math.round(x.score * 100) + '%'))))
-            : h('div.side-empty', icon('test', { size: 22 }), h('span', 'Chưa làm bài kiểm tra nào'))))));
+            : h('div.side-empty', icon('test', { size: 22 }), h('span', 'Chưa làm bài kiểm tra nào'))))),
+    saved.length ? gallery(saved, () => renderStats(root)) : null);
+}
+
+function gallery(drawings, refresh) {
+  return h('section.card.side-card.stats-gallery', h('div.section-head', h('h2', 'Tranh đã lưu'), h('span.small.muted', drawings.length)),
+    h('div.gallery', drawings.slice(0, 40).map((d) => {
+      const w = word(d.wordId);
+      return h('figure', h('img', { src: d.dataUrl, alt: w.en }),
+        h('figcaption', h('span', w.en),
+          h('button', { type: 'button', title: 'Xóa tranh', 'aria-label': 'Xóa tranh', class: 'icon-plain', onclick: async () => {
+            if (await confirmDialog('Xóa tranh này?', 'Tranh sẽ bị xóa khỏi máy này.', 'Xóa', true)) { await deleteDrawing(d.id); toast('Đã xóa tranh'); refresh(); }
+          } }, icon('trash', { size: 16 }))));
+    })));
 }
 
 export function renderHelp(root) {

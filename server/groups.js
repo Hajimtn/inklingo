@@ -24,7 +24,7 @@ export const POINTS = {
   learnDay: 10, // all of the day's words opened
   streakStep: 2, // + per consecutive study day (max 5 steps)
   streakMax: 5,
-  reviewCap: 20, // 1 point per correct review card, per day
+  reviewCap: 20, // 1 point per word recalled correctly in Word Recall (checked the day after learning or later), per day
   matchCap: 30, // drawing-match points / 10, per day
   quizScale: 0.15, // quiz score (max 100 per question) * 0.15 -> 300 for a 20-question quiz
 };
@@ -270,6 +270,9 @@ export class GroupStore {
         const pts = Math.min(ok, POINTS.reviewCap - d.review);
         d.review += Math.max(0, pts);
         this.addPoints(m, pts, day);
+        // Weekly Word Recall ranking: words recalled correctly after a delay.
+        const wk = weekKey(day);
+        (m.recalled ||= {})[wk] = (m.recalled[wk] || 0) + ok;
       }
       if (Array.isArray(body.cleared)) {
         const cleared = new Set(body.cleared.map(String));
@@ -446,7 +449,7 @@ export class GroupStore {
       id: m.id, name: m.name, avatar: m.avatar, owner: m.id === g.ownerId,
       // A streak is alive while the member studied today or on the group's previous study day.
       learnedToday: !!m.learned[day], streak: m.streak.last === day || (m.streak.last && m.streak.last === this.lastBatchDayBefore(g, day)) ? m.streak.count : 0,
-      total: m.total, week: m.weeks[wk] || 0,
+      total: m.total, week: m.weeks[wk] || 0, recalledWeek: m.recalled?.[wk] || 0,
       recall: m.recall.ok + m.recall.bad ? m.recall.ok / (m.recall.ok + m.recall.bad) : null,
       needReview: m.needReview.length,
       online: this.now() - m.lastSeen < 90_000,

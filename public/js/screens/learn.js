@@ -110,7 +110,7 @@ export function renderHome(root, { serverOk }) {
       tile('q-red', 'pencil', 'Tạo phòng', 'Chơi với bạn bè', '#/play/create'),
       tile('q-blue', 'login', 'Vào phòng', 'Nhập mã phòng', '#/play/join', !serverOk),
       tile('q-green', 'cards', 'Học từ mới', 'Tiếp tục chủ đề', '#/daily'),
-      tile('q-yellow', 'shuffle', 'Ôn tập', 'Luyện lại từ đã học', '#/review')));
+      tile('q-yellow', 'repeat', 'Ôn tập', P.dueWords().length ? `${P.dueWords().length} từ đến hạn` : 'Word Recall', '#/review')));
 
   // ---- right column: progress + today's words
   const doneTopics = Math.min(prof.topicIdx, list.length);
