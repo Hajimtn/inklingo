@@ -107,7 +107,7 @@ docs/COMPARISON.md       bảng đối chiếu Scribble It! ↔ Inklingo
    tự động loại: không phải JPEG ảnh chụp, < 600 px, giấy phép ngoài CC0/PD/CC BY/CC BY-SA, danh mục AI-generated /
    tranh vẽ / minh họa / hoạt hình, mô tả có nhắc tới AI.
 2. `python3 tools/sheet_rows.py <topic>` / `tools/sheet_words.py` – tạo contact sheet để **duyệt bằng mắt**. Toàn bộ
-   240 từ TOEIC đã được duyệt; bộ lọc tự động bỏ sót khá nhiều tranh sơn dầu, tranh khắc, tượng, poster, ảnh Muybridge…
+   504 từ TOEIC đã được duyệt; bộ lọc tự động bỏ sót khá nhiều tranh sơn dầu, tranh khắc, tượng, poster, ảnh Muybridge…
    (API chỉ trả một phần danh mục khi tìm theo lô) nên bước duyệt thủ công là bắt buộc.
    Từ khó tìm ảnh: `python3 tools/curate_images.py more <từ> "truy vấn" "Category:…"`. Với từ mà chính chủ đề bị bộ lọc
    chặn (vd. **poster**), `WORD_ALLOW` trong `curate_images.py` nới đúng từ khóa đó cho riêng từ ấy.
@@ -121,13 +121,19 @@ Service worker cache ảnh (cache-first). Danh sách tác giả/giấy phép: m�
 
 ## Trạng thái dữ liệu
 
-- 12 chủ đề TOEIC × 20 từ (B1–B2, vẫn vẽ được): Office & Workplace · Airport & Travel · Hotels & Restaurants ·
-  Shopping & Delivery · Housing & Maintenance · Health & Medical · Professions · Meetings & Presentations ·
-  Manufacturing & Logistics · Banking & Finance · Marketing & Media · Workplace Concepts.
-- 238/240 từ có ảnh chụp thật đã duyệt bằng mắt (ảnh chính + ảnh dự phòng cho nhiều từ).
+- 12 chủ đề TOEIC × 42 từ trong `content/` (B1–B2, ưu tiên đồ vật/cảnh vẽ được): Office & Workplace · Airport & Travel ·
+  Hotels & Restaurants · Shopping & Delivery · Housing & Maintenance · Health & Medical · Professions ·
+  Meetings & Presentations · Manufacturing & Logistics · Banking & Finance · Marketing & Media · Workplace Concepts.
+  20 từ gốc + 22 từ thông dụng bổ sung mỗi chủ đề (soạn ở `tools/new_words/*.txt`, thêm bằng `python3 tools/add_words.py`).
+- 486/504 từ có ảnh chụp thật đã duyệt bằng mắt (ảnh chính + ảnh dự phòng cho nhiều từ); mỗi chủ đề 38–42 từ trong game.
 - Bị loại theo §12.6 vì chưa tìm được ảnh chụp thật đúng nghĩa, rõ nguồn và giấy phép trên Wikimedia Commons
-  (kết quả chỉ có tranh vẽ, ảnh người đọc sách/phòng họp chung chung, ảnh người nổi tiếng):
-  **agenda** (Meetings & Presentations), **catalogue** (Marketing & Media).
+  (kết quả chỉ có tranh vẽ, biểu đồ đồ họa, ảnh chân dung/người nổi tiếng, ảnh sai nghĩa):
+  Office: **envelope**, **rubber-stamp** · Health: **bathroom-scale** · Professions: **gardener**, **lawyer** ·
+  Meetings: **agenda**, **round-table**, **bar-chart**, **nameplate** · Finance: **utility-bill**, **salary**,
+  **financial-advisor** · Media: **catalogue**, **live-stream** · Concepts: **celebration**, **mentor**, **leadership**,
+  **internship**.
   Bổ sung bằng cách thêm ảnh vào `tools/image_choices.json` rồi chạy lại bước 4–5.
+- Từ mới được nối vào cuối mỗi chủ đề: người đang học một chủ đề sẽ nhận tiếp các từ mới trước bài kiểm tra; chủ đề đã qua
+  giữ nguyên trạng thái "đã qua" và không phát lại từ mới của nó.
 - Bộ từ cơ bản cũ (12 chủ đề đời sống) lưu tại `docs/old-content/`. Tiến độ lưu dưới khóa mới `sw:v4`, nên tiến độ của bộ từ cũ
   không được chuyển sang.

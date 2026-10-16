@@ -191,10 +191,13 @@ test('study group over HTTP + mini-game over WebSocket: shared words, no answer 
   const b = await api('join', { code: a.code, member: { name: 'Bình' }, date: '2026-10-12' });
   assert.deepEqual(b.state.todayBatch, a.state.todayBatch, 'same words for both members');
   assert.equal((await api('state', { code: a.code, memberId: a.id, secret: 'nope' })).status, 403);
-  // Learn the whole first topic (weekdays only).
-  let st;
-  for (const day of ['2026-10-13', '2026-10-14', '2026-10-15', '2026-10-16']) {
+  // Learn the whole first topic (weekdays only, 5 words a day).
+  let st = a.state;
+  for (let d = Date.UTC(2026, 9, 13), n = 0; st.phase !== 'quiz-ready' && n < 30; d += 864e5) {
+    if ([0, 6].includes(new Date(d).getUTCDay())) continue;
+    const day = new Date(d).toISOString().slice(0, 10);
     st = (await api('report', { code: a.code, memberId: a.id, secret: a.secret, date: day, reports: [{ kind: 'learned' }] })).state;
+    n++;
   }
   assert.equal(st.phase, 'quiz-ready');
   assert.ok(st.members.find((m) => m.id === a.id).total > 0);
