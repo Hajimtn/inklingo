@@ -12,6 +12,9 @@ const PORT = 18000 + Math.floor(Math.random() * 1000);
 const vocab = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/vocab.json'), 'utf8'));
 const words = vocab.topics.flatMap((t) => t.words);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// The WebSocket clients below use the global WebSocket of Node 22+. On older Node versions those
+// tests are skipped (the server itself does not need it), so a build never fails for that reason.
+const WS = typeof WebSocket === 'function' ? {} : { skip: 'no global WebSocket in this Node version (needs Node 22+)' };
 
 let server;
 test.before(async () => {
@@ -59,7 +62,7 @@ class Client {
   close() { this.ws.close(); }
 }
 
-test('full online turn over WebSocket: secrecy, realtime drawing, scoring', async () => {
+test('full online turn over WebSocket: secrecy, realtime drawing, scoring', WS, async () => {
   const [a, b, c] = await Promise.all([new Client('Alice').open(), new Client('Bob').open(), new Client('Cara').open()]);
   a.send({ type: 'create', wordIds: words.slice(0, 3).map((w) => w.id), settings: { rounds: 1, drawTime: 60 } });
   const welcome = await a.wait((m) => m.type === 'welcome');
@@ -122,7 +125,7 @@ test('full online turn over WebSocket: secrecy, realtime drawing, scoring', asyn
   for (const x of [a, b, c, d]) x.close();
 });
 
-test('reconnect with the same id keeps the seat; wrong token is rejected', async () => {
+test('reconnect with the same id keeps the seat; wrong token is rejected', WS, async () => {
   const a = await new Client('Host').open();
   const b = await new Client('Guest').open();
   a.send({ type: 'create', wordIds: [words[0].id] });
@@ -152,7 +155,7 @@ test('reconnect with the same id keeps the seat; wrong token is rejected', async
   b2.close();
 });
 
-test('quick play puts players into the same public room; unknown code errors', async () => {
+test('quick play puts players into the same public room; unknown code errors', WS, async () => {
   const a = await new Client('Q1').open();
   const b = await new Client('Q2').open();
   a.send({ type: 'quick', wordIds: [words[0].id] });
@@ -182,7 +185,7 @@ const api = async (action, body) => {
   return { status: r.status, ...(await r.json()) };
 };
 
-test('study group over HTTP + mini-game over WebSocket: shared words, no answer leaks', async () => {
+test('study group over HTTP + mini-game over WebSocket: shared words, no answer leaks', WS, async () => {
   const a = await api('create', { name: 'Nhóm test', member: { name: 'An', avatar: 'c1' }, tz: 420, date: '2026-10-12' });
   assert.equal(a.status, 200);
   const b = await api('join', { code: a.code, member: { name: 'Bình' }, date: '2026-10-12' });

@@ -8,7 +8,7 @@ Phát triển tiếp từ bản demo `scribble_words_v2.html` (bản gốc giữ
 
 ## Chạy game
 
-Yêu cầu: Node.js ≥ 22 (không cần cài thêm thư viện nào).
+Yêu cầu: Node.js ≥ 20, nên dùng 22 (không cần cài thêm thư viện nào; test WebSocket cần Node 22, bản cũ hơn sẽ bỏ qua các test đó).
 
 ```bash
 npm start
