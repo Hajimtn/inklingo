@@ -38,7 +38,9 @@ for (const file of fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'))
       skipped.push(w.id);
       continue;
     }
-    words.push({ ...w, alt: w.alt || [], images: imgs });
+    // Hand-drawn line-art template for Ghost Sketch (public/data/ghosts/<id>.svg), when there is one.
+    const sketch = fs.existsSync(path.join(ROOT, 'public/data/ghosts', w.id + '.svg'));
+    words.push({ ...w, alt: w.alt || [], images: imgs, ...(sketch ? { sketch: true } : {}) });
   }
   topics.push({ id: t.id, title: t.title, vi: t.vi, icon: t.icon, cover: words[0]?.images[0]?.file || null, words });
 }

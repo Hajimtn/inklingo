@@ -1,7 +1,7 @@
 // Unit tests for the shared game rules (run: npm test)
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GameRoom, normalizeAnswer, maskWord, guesserPoints, drawerPoints, comboBonus, PRE_MS, REVEAL_MS, DRAWER_GRACE_MS } from '../public/js/shared/game-core.js';
+import { GameRoom, normalizeAnswer, maskWord, hintCount, guesserPoints, drawerPoints, comboBonus, PRE_MS, REVEAL_MS, DRAWER_GRACE_MS } from '../public/js/shared/game-core.js';
 
 function fakeClock() {
   let now = 1_000_000;
@@ -128,6 +128,34 @@ test('combo bonus for consecutive correct guesses', () => {
   }
   assert.deepEqual(streaks, [1, 1, 2, 2]);
   assert.equal(room.state, 'ended');
+});
+
+test('letter hints: one more letter at 50/70/85% of the time while nobody has guessed', () => {
+  assert.equal(maskWord('filing cabinet', [0, 7]), 'f_____ c______');
+  assert.equal(hintCount('bus'), 0);
+  assert.equal(hintCount('stapler'), 2);
+  assert.equal(hintCount('filing cabinet'), 3);
+  const clock = fakeClock();
+  const inbox = new Map();
+  const words = new Map([['stapler', { id: 'stapler', en: 'stapler', answers: ['stapler'] }], ['bus', { id: 'bus', en: 'bus', answers: ['bus'] }]]);
+  const room = new GameRoom({ code: 'H', dictionary: words, wordIds: ['stapler'], settings: { rounds: 1, drawTime: 60 }, send: (pid, m) => { if (!inbox.has(pid)) inbox.set(pid, []); inbox.get(pid).push(m); }, now: clock.now, timers: clock.timers });
+  for (const id of ['p1', 'p2', 'p3']) room.join(id, { name: id });
+  room.start('p1');
+  const guesser = ['p1', 'p2', 'p3'].find((id) => id !== room.turn.drawerId);
+  const mask = () => inbox.get(guesser).filter((m) => m.type === 'turn').at(-1).turn.mask;
+  clock.advance(PRE_MS);
+  assert.equal(mask(), '_______');
+  clock.advance(29_000);
+  assert.equal(mask(), '_______', 'no hint before half time');
+  clock.advance(1_000);
+  assert.equal(mask().replace(/_/g, '').length, 1);
+  assert.ok([...mask()].every((c, i) => c === '_' || c === 'stapler'[i]), 'the hint is a real letter in its place');
+  clock.advance(12_000);
+  assert.equal(mask().replace(/_/g, '').length, 2);
+  room.handle(guesser, { type: 'guess', text: 'stapler' });
+  const before = inbox.get(guesser).length;
+  clock.advance(9_000); // 85%: someone has guessed, and the word only allows 2 hints anyway
+  assert.equal(inbox.get(guesser).filter((m, i) => i >= before && m.type === 'turn').length, 0);
 });
 
 test('timer ends the turn and reveal auto-advances', () => {

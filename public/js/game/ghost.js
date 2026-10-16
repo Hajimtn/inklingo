@@ -1,7 +1,8 @@
 // Ghost Sketch: a faint tracing guide drawn on a separate overlay canvas that only the drawer
 // sees. It is never part of the drawing document, never sent over the network and never saved.
 //
-// Two sources (no AI involved):
+// Sources (no AI involved):
+//  * "sketch":  a clean line-art template drawn by hand for the word (public/data/ghosts/<id>.svg)
 //  * "outline": edges extracted with a Sobel filter from the word's licensed reference photo
 //  * "layout":  simple stick-figure templates hand-designed in code (person, two people, faces…)
 
@@ -13,6 +14,29 @@ export function clearGhost(canvas) {
   canvas.width = DOC_W;
   canvas.height = DOC_H;
   canvas.getContext('2d').clearRect(0, 0, DOC_W, DOC_H);
+}
+
+const sketchCache = new Map();
+
+/** Hand-drawn line-art template (1600×1000 SVG), recoloured to the ghost ink. Resolves false on failure. */
+export async function drawSketch(canvas, wordId) {
+  clearGhost(canvas);
+  let url = sketchCache.get(wordId);
+  if (!url) {
+    try {
+      const res = await fetch(`data/ghosts/${encodeURIComponent(wordId)}.svg`);
+      if (!res.ok) return false;
+      const svg = (await res.text()).replace(/stroke="#[0-9a-fA-F]{3,6}"/g, `stroke="${INK}"`);
+      url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+      sketchCache.set(wordId, url);
+    } catch {
+      return false;
+    }
+  }
+  const img = await loadImage(url);
+  if (!img) return false;
+  canvas.getContext('2d').drawImage(img, 0, 0, DOC_W, DOC_H);
+  return true;
 }
 
 /** Edge outline of the photo, fitted (contain) into the document. Resolves false on failure. */

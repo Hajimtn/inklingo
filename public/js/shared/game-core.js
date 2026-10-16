@@ -21,8 +21,17 @@ export function normalizeAnswer(s) {
   return String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 }
 
-export function maskWord(word) {
-  return word.replace(/[A-Za-z]/g, '_');
+export function maskWord(word, revealed = []) {
+  const show = new Set(revealed);
+  return [...word].map((c, i) => (/[A-Za-z]/.test(c) && !show.has(i) ? '_' : c)).join('');
+}
+
+// Letter hints for guessers: when nobody has guessed after these fractions of the drawing time,
+// one more letter of the word is shown. Never more than a third of the letters (none for short words).
+export const HINT_AT = [0.5, 0.7, 0.85];
+export function hintCount(word) {
+  const n = (word.match(/[A-Za-z]/g) || []).length;
+  return Math.min(HINT_AT.length, n <= 3 ? 0 : Math.floor(n / 3));
 }
 
 export function guesserPoints(remainingFraction) {
@@ -137,7 +146,7 @@ export class GameRoom {
     const w = this.dict.get(t.wordId);
     const out = {
       index: t.index, drawerId: t.drawerId, phase: t.phase, round: this.round, rounds: this.settings.rounds,
-      mask: maskWord(w.en), drawTime: this.settings.drawTime, endAt: t.endAt, startAt: t.startAt, now: this.now(),
+      mask: maskWord(w.en, t.revealed), drawTime: this.settings.drawTime, endAt: t.endAt, startAt: t.startAt, now: this.now(),
       assist: t.assist,
     };
     if (t.phase === 'reveal') Object.assign(out, t.result);
@@ -345,6 +354,7 @@ export class GameRoom {
     this.turn = {
       index: ++this.turnCount, drawerId, wordId: this._pickWord(), phase: 'pre',
       startAt: 0, endAt: 0, guessed: new Map(), base: new Map(), tries: new Map(), events: [], assist: 0, result: null,
+      revealed: [], hintTimers: [],
     };
     this.broadcast({ type: 'turn', turn: this.publicTurn() });
     this._sendSecret();
@@ -366,6 +376,23 @@ export class GameRoom {
     t.endAt = t.startAt + this.settings.drawTime * 1000;
     this.broadcast({ type: 'turn', turn: this.publicTurn() });
     this._after(this.settings.drawTime * 1000, () => this._endTurn('time'));
+    const w = this.dict.get(t.wordId);
+    t.hintTimers = HINT_AT.slice(0, hintCount(w.en)).map((f) => this.timers.set(() => this._hint(t), f * this.settings.drawTime * 1000));
+  }
+
+  _hint(t) {
+    if (this.turn !== t || t.phase !== 'draw' || t.guessed.size) return; // someone already got it: no hint
+    const w = this.dict.get(t.wordId);
+    const hidden = [...w.en].map((c, i) => (/[A-Za-z]/.test(c) && !t.revealed.includes(i) ? i : -1)).filter((i) => i >= 0);
+    if (hidden.length <= 1) return;
+    t.revealed.push(hidden[Math.floor(Math.random() * hidden.length)]);
+    this.broadcast({ type: 'turn', turn: this.publicTurn() });
+    this.broadcast({ type: 'system', text: 'Gợi ý: hiện thêm 1 chữ cái' }, t.drawerId);
+  }
+
+  _clearHints() {
+    for (const id of this.turn?.hintTimers || []) this.timers.clear(id);
+    if (this.turn) this.turn.hintTimers = [];
   }
 
   _rateLimited(p) {
@@ -463,6 +490,7 @@ export class GameRoom {
     const t = this.turn;
     if (!t || t.phase === 'reveal') return;
     this._clearTimer();
+    this._clearHints();
     const drawer = this.players.get(t.drawerId);
     const deltas = {};
     for (const [id, pts] of t.guessed) deltas[id] = pts;
@@ -492,6 +520,7 @@ export class GameRoom {
 
   _endGame(note) {
     this._clearTimer();
+    this._clearHints();
     if (this.turn && this.turn.phase !== 'reveal') {
       // Reveal the word of an interrupted turn so it can still be learned.
       const w = this.dict.get(this.turn.wordId);

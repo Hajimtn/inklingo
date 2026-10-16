@@ -6,7 +6,7 @@ import { h, clear } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
 import { ASSIST_MULT } from '../shared/game-core.js';
 import { photo, credit } from '../vocab/data.js';
-import { drawOutline, drawLayout, clearGhost } from './ghost.js';
+import { drawSketch, drawOutline, drawLayout, clearGhost } from './ghost.js';
 
 const LEVELS = [
   { n: 1, short: 'Nghĩa', label: 'Nghĩa', title: 'Cấp 1 – Nghĩa & ảnh tham khảo' },
@@ -39,7 +39,7 @@ export class Assistant {
     this.idea = 0;
     this.photoIdx = 0;
     this.ghostOn = false;
-    this.ghostMode = 'outline';
+    this.ghostMode = w?.sketch ? 'sketch' : 'outline';
     this.hideGhost();
     this.render();
   }
@@ -96,7 +96,8 @@ export class Assistant {
     this.ghost.style.opacity = this.ghostOpacity;
     const idea = this.word.ideas[this.idea];
     let ok = false;
-    if (this.ghostMode === 'layout' && idea.ghost) ok = drawLayout(this.ghost, idea.ghost);
+    if (this.ghostMode === 'sketch' && this.word.sketch) ok = await drawSketch(this.ghost, this.word.id);
+    if (!ok && this.ghostMode === 'layout' && idea.ghost) ok = drawLayout(this.ghost, idea.ghost);
     if (!ok) {
       this.ghostMode = 'outline';
       const im = this.word.images[this.photoIdx] || this.word.images[0];
@@ -138,6 +139,7 @@ export class Assistant {
       h('button.btn.small', { type: 'button', onclick: () => this.shuffle(), title: 'Chuyển sang cách minh họa khác' }, icon('shuffle', { size: 16 }), 'Đổi ý tưởng')));
     if (this.level >= 5) {
       const modeSel = h('select.input', { style: { width: 'auto', padding: '3px 6px' }, 'aria-label': 'Kiểu Ghost Sketch', onchange: (e) => { this.ghostMode = e.target.value; this.showGhost(); } },
+        this.word.sketch ? h('option', { value: 'sketch', selected: this.ghostMode === 'sketch' }, 'Hình mẫu nét') : null,
         h('option', { value: 'outline', selected: this.ghostMode === 'outline' }, 'Đường viền từ ảnh thật'),
         idea.ghost ? h('option', { value: 'layout', selected: this.ghostMode === 'layout' }, 'Bố cục mẫu (người que)') : null);
       r.append(h('div.ghost-ctl',
