@@ -1,8 +1,8 @@
 {
-  "name": "scribble-words",
+  "name": "inklingo",
   "version": "3.0.0",
   "private": true,
-  "description": "Drawing & guessing game for learning English vocabulary by topic (5 words a day).",
+  "description": "Inklingo – draw, guess and remember TOEIC vocabulary (5 words a day, study groups, realtime drawing rooms).",
   "type": "module",
   "scripts": {
     "start": "node server/server.js",

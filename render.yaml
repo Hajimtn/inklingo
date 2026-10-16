@@ -1,0 +1,25 @@
+# Render Blueprint: one always-on Node web service (WebSocket rooms live in memory, so a
+# single instance) with a persistent disk for the study-group data file.
+services:
+  - type: web
+    name: inklingo
+    runtime: node
+    plan: starter
+    region: singapore
+    branch: main
+    autoDeploy: true
+    buildCommand: npm test
+    startCommand: node server/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: GROUPS_FILE
+        value: /var/data/groups.json
+    disk:
+      name: inklingo-data
+      mountPath: /var/data
+      sizeGB: 1
+    domains:
+      - inklingo.io.vn
+      - www.inklingo.io.vn

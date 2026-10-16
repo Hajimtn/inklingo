@@ -26,6 +26,14 @@ npm test
 Kiểm thử engine vẽ trong trình duyệt: mở `http://localhost:8787/dev/draw-test.html`, chạy trong console
 `(await import('/dev/engine-tests.js')).run(T)`.
 
+## Deploy (Render)
+
+`render.yaml` mô tả dịch vụ: Node 20, gói Starter (chạy liên tục), vùng Singapore, ổ đĩa 1 GB gắn tại `/var/data`
+cho file nhóm học (`GROUPS_FILE=/var/data/groups.json`), kiểm tra sức khỏe `/api/health`, build bằng `npm test` (deploy
+dừng nếu test lỗi), tự deploy khi push lên `main`, tên miền `inklingo.io.vn` và `www.inklingo.io.vn`.
+Server chỉ chạy **1 instance** (phòng chơi realtime nằm trong bộ nhớ). DNS ở Tenten: bản ghi A cho `@` trỏ về IP Render
+cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
+
 ## Giao diện
 
 - Phong cách “giấy & mực” (lấy cảm hứng từ doodlingam.com, không dùng lại logo, hình hay nội dung của họ): nền giấy kem
