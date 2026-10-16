@@ -8,7 +8,7 @@ Phát triển tiếp từ bản demo `scribble_words_v2.html` (bản gốc giữ
 
 ## Chạy game
 
-Yêu cầu: Node.js ≥ 18 (không cần cài thêm thư viện nào).
+Yêu cầu: Node.js ≥ 22 (không cần cài thêm thư viện nào).
 
 ```bash
 npm start
@@ -28,7 +28,7 @@ Kiểm thử engine vẽ trong trình duyệt: mở `http://localhost:8787/dev/d
 
 ## Deploy (Render)
 
-`render.yaml` mô tả dịch vụ: Node 20, gói Starter (chạy liên tục), vùng Singapore, ổ đĩa 1 GB gắn tại `/var/data`
+`render.yaml` mô tả dịch vụ: Node 22 (test tích hợp dùng `WebSocket` có sẵn từ Node 22), gói Starter (chạy liên tục), vùng Singapore, ổ đĩa 1 GB gắn tại `/var/data`
 cho file nhóm học (`GROUPS_FILE=/var/data/groups.json`), kiểm tra sức khỏe `/api/health`, build bằng `npm test` (deploy
 dừng nếu test lỗi), tự deploy khi push lên `main`, tên miền `inklingo.io.vn` và `www.inklingo.io.vn`.
 Server chỉ chạy **1 instance** (phòng chơi realtime nằm trong bộ nhớ). DNS ở Tenten: bản ghi A cho `@` trỏ về IP Render

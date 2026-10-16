@@ -13,7 +13,7 @@ services:
     healthCheckPath: /api/health
     envVars:
       - key: NODE_VERSION
-        value: "20"
+        value: "22" # the integration tests (build step) use the global WebSocket of Node 22+
       - key: GROUPS_FILE
         value: /var/data/groups.json
     disk:
