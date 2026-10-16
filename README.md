@@ -67,6 +67,13 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   (lần hỏi lại không tính). Từ sai trong bài kiểm tra chủ đề luôn đến hạn; nhớ đúng là gỡ khỏi danh sách cần ôn.
 - **Không lộ đáp án trước khi trả lời:** không có ảnh hay chữ tiếng Anh trên màn câu hỏi; ô trả lời chặn dán/kéo thả, tắt tự
   sửa chính tả. Ảnh thật, IPA và câu ví dụ chỉ hiện sau khi trả lời.
+- **Nói đáp án** (dạng *Nhớ nghĩa* và *Điền vào câu*; *Nghe và viết* chỉ gõ vì kiểm tra chính tả): nút **Nói** dùng bộ nhận
+  dạng giọng nói có sẵn của trình duyệt (Web Speech API – Chrome, Edge, Safari; Firefox không có nên nút bị ẩn; Chrome gửi
+  âm thanh lên dịch vụ nhận dạng của Google). Đúng nếu 1 trong 3 phương án máy nghe được là đáp án; được nói 2 lần, lần 1 sai
+  chỉ báo "máy nghe thành …" (chưa lộ đáp án). Kết quả: **% phát âm** = độ giống từng chữ cái giữa câu máy nghe và đáp án ×
+  độ tin cậy của máy (Safari không báo độ tin cậy), kèm **ô từng chữ**: xanh = đúng, đỏ = sai (ghi chữ máy nghe thành) hoặc
+  thiếu, và số chữ thừa. Đây là so khớp chữ cái, không phải chấm từng âm như ELSA. Sau khi trả lời có nút **Luyện phát âm**
+  (không tính điểm). Logic chấm: `public/js/shared/speech-match.js` (có unit test).
 - Không có từ đến hạn → **Luyện thêm** (từ yếu nhất), không tính điểm và không đổi lịch.
 - Màn chính: số từ đến hạn, **Lịch nhớ** (số từ ở mỗi bậc), **Tỷ lệ nhớ** theo từng dạng và sau ≥ 7 ngày, **Tuần này**
   (trong nhóm: xếp hạng số từ nhớ đúng trong tuần). Tranh vẽ đã lưu chuyển sang trang Thống kê.
@@ -108,6 +115,7 @@ public/js/vocab/         data.js (từ vựng, ảnh + ghi công + ảnh dự ph
 public/js/screens/       Home, Daily, Topics/Quiz, Review, Play, Group, Settings/Credits
 public/js/net/           online.js (WebSocket), sessions.js, groups.js (API nhóm, đồng bộ lịch, báo điểm)
 public/js/ui/            dom.js (helper DOM, hộp thoại), icons.js (bộ icon SVG tự vẽ + avatar màu/chữ cái đầu)
+public/js/ui/speech.js   nhận dạng giọng nói của trình duyệt (Word Recall)
 public/js/store/         drawings.js – lưu tranh mỗi lượt (IndexedDB), xem ở trang Thống kê
 public/data/vocab.json   dữ liệu từ vựng đã build (chỉ gồm từ có ảnh thật đã xác minh)
 public/img/w/            ảnh minh họa đã tải về (cache cục bộ) – nguồn Wikimedia Commons

@@ -421,15 +421,16 @@ const daysBetween = (a, b) => Math.round((parse(b) - parse(a)) / 864e5);
 /**
  * One Word Recall answer. `counted` is false for extra practice and for the retry of a missed word
  * in the same session: those are logged but do not move the schedule or score group points.
+ * `via` is 'type' or 'voice'; a spoken answer also logs its pronunciation score (0–100).
  */
-export function recordWordRecall(wordId, type, ok, counted, p = active()) {
+export function recordWordRecall(wordId, type, ok, counted, { via = 'type', score } = {}, p = active()) {
   if (!p || !word(wordId)) return;
   const s = stat(p, wordId);
   const day = today();
   const since = s.lastDay || p.introduced[wordId];
   s.nextType = (RECALL_TYPES.indexOf(type) + 1) % RECALL_TYPES.length;
   if (!counted) {
-    p.history.push({ t: Date.now(), w: wordId, k: 'practice', ok: !!ok, c: type });
+    p.history.push({ t: Date.now(), w: wordId, k: 'practice', ok: !!ok, c: type, via, ...(score != null ? { s: score } : {}) });
     trimHistory(p);
     save();
     return;
@@ -452,7 +453,7 @@ export function recordWordRecall(wordId, type, ok, counted, p = active()) {
     p.needReview.splice(i, 1);
     cleared = [wordId];
   }
-  p.history.push({ t: Date.now(), w: wordId, k: 'recall', ok: !!ok, c: type, gap: since ? daysBetween(since, day) : 0 });
+  p.history.push({ t: Date.now(), w: wordId, k: 'recall', ok: !!ok, c: type, via, gap: since ? daysBetween(since, day) : 0, ...(score != null ? { s: score } : {}) });
   trimHistory(p);
   save();
   if (p.group) hooks.recall?.(p, { ok, source: 'review', cleared });

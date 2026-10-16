@@ -9,6 +9,8 @@ import { speakBtn } from './learn.js';
 import { photoFigure } from '../vocab/data.js';
 import { normalizeAnswer } from '../shared/game-core.js';
 import { wordForms } from '../shared/quiz-core.js';
+import { judgeSpeech } from '../shared/speech-match.js';
+import { canRecognize, listenOnce, stopListening, speechError } from '../ui/speech.js';
 import * as P from '../vocab/progress.js';
 
 const TYPES = {
@@ -96,7 +98,8 @@ function play(root, mode, words, counted) {
     if (k >= queue.length) return summary();
     const item = queue[k];
     const { w, type, ctx } = item;
-    const answers = [...(type === 'context' && ctx ? [ctx.form] : []), w.en, ...w.alt].map(normalizeAnswer);
+    const accepted = [...(type === 'context' && ctx ? [ctx.form] : []), w.en, ...w.alt];
+    const answers = accepted.map(normalizeAnswer);
     const inp = h('input.answer-input', {
       type: 'text', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: false, enterkeyhint: 'done',
       placeholder: 'Gõ từ tiếng Anh…', 'aria-label': 'Đáp án',
@@ -122,33 +125,73 @@ function play(root, mode, words, counted) {
     }
 
     const feedback = h('div');
-    const nextBtn = h('button.btn.primary', { hidden: true, onclick: () => { k++; next(); } });
+    const nextBtn = h('button.btn.primary', { hidden: true, onclick: () => { stopListening(); k++; next(); } });
     const submit = h('button.btn.primary', { type: 'submit' }, 'Kiểm tra');
-    const form = h('form.stack', { onsubmit: (e) => {
-      e.preventDefault();
-      if (inp.disabled || !inp.value.trim()) return;
-      const ok = answers.includes(normalizeAnswer(inp.value));
+    const status = h('div.wr-mic-status', { 'aria-live': 'polite' });
+    let finished = false;
+
+    /** Final answer (typed or spoken): grade, schedule, reveal the word. */
+    const finish = (ok, spoken) => {
+      finished = true;
+      stopListening();
+      if (spoken) inp.value = spoken.heard;
       inp.disabled = true;
       submit.hidden = true;
+      if (mic) mic.hidden = true;
+      status.replaceChildren();
       inp.classList.add(ok ? 'right' : 'wrong');
-      P.recordWordRecall(w.id, type, ok, item.counted);
-      if (!item.retry) results.push({ w, ok, counted: item.counted });
+      P.recordWordRecall(w.id, type, ok, item.counted, { via: spoken ? 'voice' : 'type', score: spoken?.score });
+      if (!item.retry) results.push({ w, ok, counted: item.counted, voice: spoken?.score ?? null });
       if (!ok && !item.retry) queue.push({ ...item, counted: false, retry: true });
       const due = P.dueDate(w.id);
       feedback.replaceChildren(h('div.wr-reveal',
         h('div.notice.result' + (ok ? '.good' : '.bad'), icon(ok ? 'checkCircle' : 'xCircle', { size: 22 }),
           h('span', h('b', ok ? 'Chính xác' : 'Chưa đúng'), item.counted && due ? h('small.muted', ` · lần tới ${shortDate(due)}`) : item.retry ? h('small.muted', ' · ôn lại') : null)),
+        spoken ? pronunciation(spoken) : null,
         h('div.wr-answer',
           photoFigure(w, { short: true }),
           h('div.stack',
             h('div.row.word-head', h('div.word-big', { lang: 'en' }, type === 'context' && ctx ? ctx.form : w.en), speakBtn(w.en)),
             h('div.ipa', w.ipa), type === 'meaning' ? null : h('div.meaning', w.vi),
-            h('div.example', h('div', { lang: 'en' }, w.ex[0]), h('div.vi', w.ex[1]))))));
-      if (type !== 'listen') say();
+            h('div.example', h('div', { lang: 'en' }, w.ex[0]), h('div.vi', w.ex[1])),
+            canRecognize() ? practice(w) : null))));
+      if (type !== 'listen' && !spoken) say();
       nextBtn.replaceChildren(...(k === queue.length - 1 ? ['Kết thúc'] : ['Tiếp', icon('next', { size: 18 })]));
       nextBtn.hidden = false;
       nextBtn.focus();
-    } }, inp, submit);
+    };
+
+    const form = h('form.stack', { onsubmit: (e) => {
+      e.preventDefault();
+      if (inp.disabled || !inp.value.trim()) return;
+      finish(answers.includes(normalizeAnswer(inp.value)), null);
+    } }, inp, h('div.row.center.wr-actions', submit));
+
+    // Spoken answer (not for "listen & write": that one checks spelling). Two tries, then it counts as wrong.
+    let mic = null;
+    if (canRecognize() && type !== 'listen') {
+      let tries = 0;
+      mic = h('button.btn.wr-mic', { type: 'button', 'aria-label': 'Nói đáp án', onclick: async () => {
+        if (finished || mic.classList.contains('on')) return stopListening();
+        mic.classList.add('on');
+        status.replaceChildren(h('span.muted', 'Đang nghe…'));
+        try {
+          const alts = await listenOnce();
+          if (finished) return;
+          const r = judgeSpeech(alts, accepted);
+          tries++;
+          if (r.ok || tries >= 2) return finish(r.ok, r);
+          // Do not show the letter check yet: it would reveal the answer.
+          status.replaceChildren(h('span', 'Máy nghe thành ', h('b', { lang: 'en' }, `“${r.heard}”`), ' – nói lại hoặc gõ'));
+        } catch (err) {
+          if (!finished) status.replaceChildren(h('span.muted', speechError(err.code)));
+        } finally {
+          mic.classList.remove('on');
+        }
+      } }, icon('mic', { size: 20 }), 'Nói');
+      form.querySelector('.wr-actions').prepend(mic);
+      form.append(status);
+    }
 
     const n = Math.min(k + 1, firstCount);
     clear(card).append(
@@ -177,6 +220,35 @@ function play(root, mode, words, counted) {
   };
 
   next();
+}
+
+/** Pronunciation result: score, what the recogniser heard, and a per-letter check against the answer. */
+function pronunciation(r) {
+  const cls = r.score >= 85 ? 'good' : r.score >= 60 ? 'mid' : 'bad';
+  return h('div.wr-pron',
+    h('div.wr-pron-score.' + cls, h('b', r.score + '%'), h('small', 'phát âm')),
+    h('div.stack',
+      h('div.wr-letters', r.align.cells.map((c) => (c.sep ? h('span.sep') : h('span.' + (c.ok ? 'ok' : 'bad'), { title: c.ok ? '' : c.heard ? `nghe thành “${c.heard}”` : 'thiếu' },
+        h('b', c.ch), h('small', c.ok ? '' : c.heard || '–'))))),
+      h('small.muted', 'Máy nghe: ', h('b', { lang: 'en' }, r.heard || '–'), r.align.extra ? ` · thừa ${r.align.extra} chữ` : '')));
+}
+
+/** "Say it" practice after answering: not graded, does not change the schedule. */
+function practice(w) {
+  const out = h('div');
+  const btn = h('button.btn.small.wr-mic', { type: 'button', onclick: async () => {
+    if (btn.classList.contains('on')) return stopListening();
+    btn.classList.add('on');
+    out.replaceChildren(h('span.muted.small', 'Đang nghe…'));
+    try {
+      out.replaceChildren(pronunciation(judgeSpeech(await listenOnce(), [w.en, ...w.alt])));
+    } catch (err) {
+      out.replaceChildren(h('span.muted.small', speechError(err.code)));
+    } finally {
+      btn.classList.remove('on');
+    }
+  } }, icon('mic', { size: 16 }), 'Luyện phát âm');
+  return h('div.stack.wr-practice', btn, out);
 }
 
 let toastShown = 0;

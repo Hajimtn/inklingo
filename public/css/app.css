@@ -425,6 +425,27 @@ b.ok { color: var(--good); } b.bad { color: var(--bad); }
 .wr-sum .ico.bad { color: var(--bad); }
 .wr-nopaste { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); box-shadow: var(--sh-2); }
 .stats-gallery { margin-top: 22px; }
+.wr-actions { gap: 10px; }
+.btn.wr-mic { gap: 8px; }
+.btn.wr-mic.on { background: var(--accent); color: #fbf3e4; border-color: var(--accent); animation: wr-pulse 1.1s ease-in-out infinite; }
+@keyframes wr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(201, 79, 36, .35); } 50% { box-shadow: 0 0 0 8px rgba(201, 79, 36, 0); } }
+.wr-mic-status { text-align: center; min-height: 22px; font-size: 15px; }
+.wr-pron { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); }
+.wr-pron-score { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-content: center; text-align: center; border: 4px solid currentColor; }
+.wr-pron-score b { font-size: 22px; line-height: 1; color: var(--ink); }
+.wr-pron-score small { font-size: 11px; color: var(--muted); }
+.wr-pron-score.good { color: var(--good); }
+.wr-pron-score.mid { color: #c9922a; }
+.wr-pron-score.bad { color: var(--bad); }
+.wr-letters { display: flex; flex-wrap: wrap; gap: 4px; }
+.wr-letters > span { display: flex; flex-direction: column; align-items: center; min-width: 26px; padding: 4px 3px 2px; border-radius: 8px; }
+.wr-letters > span b { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 20px; line-height: 1.1; }
+.wr-letters > span small { font-size: 12px; min-height: 15px; line-height: 15px; }
+.wr-letters > span.ok { background: var(--good-soft); color: #1f4a30; }
+.wr-letters > span.bad { background: var(--bad-soft); color: #6e2219; }
+.wr-letters > span.sep { min-width: 10px; padding: 0; }
+.wr-practice { align-items: flex-start; margin-top: 4px; }
+
 @media (max-width: 960px) {
   .wr-home { grid-template-columns: minmax(0, 1fr); }
   .wr-answer { grid-template-columns: minmax(0, 1fr); }
