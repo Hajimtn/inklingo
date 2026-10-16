@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M500 860 L560 160 H800 L780 860 Z"/>
+  <path d="M800 160 L1060 200 L1100 860 H780"/>
+  <text x="580" y="300" font-family="Arial" font-size="72" font-weight="700" fill="#222" stroke="none">MENU</text>
+  <path d="M580 400 H750 M575 460 H720 M570 520 H750 M565 580 H700 M560 640 H740"/>
+  <path d="M840 320 H1050 M842 380 H1000 M845 440 H1060 M848 500 H1010 M850 560 H1060"/>
+</svg>

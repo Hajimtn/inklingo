@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="360" y="400" width="880" height="480" rx="14"/>
+  <path d="M360 400 L340 260 L1200 160 L1220 300 Z" transform="rotate(0)"/>
+  <path d="M440 390 L500 250 M600 370 L660 230 M760 350 L820 210 M920 330 L980 190 M1080 310 L1140 175" stroke-width="16"/>
+  <path d="M360 520 H1240 M360 640 H1240 M360 760 H1240 M800 520 V880"/>
+  <text x="400" y="610" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">SCENE 12</text>
+  <text x="840" y="610" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">TAKE 3</text>
+</svg>

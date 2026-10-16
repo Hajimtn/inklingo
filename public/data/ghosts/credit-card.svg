@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="240" y="240" width="1120" height="680" rx="50"/>
+  <rect x="340" y="380" width="180" height="140" rx="16"/>
+  <path d="M340 450 H520 M430 380 V520 M380 380 V420 M480 380 V420 M380 520 V480 M480 520 V480"/>
+  <path d="M620 420 C 650 440 650 480 620 500 M660 400 C 710 430 710 490 660 520 M700 380 C 770 420 770 500 700 540"/>
+  <text x="340" y="680" font-family="Arial" font-size="70" fill="#222" stroke="none">4321  8765  1098  7654</text>
+  <text x="340" y="800" font-family="Arial" font-size="44" fill="#222" stroke="none">JOHN SMITH   09/29</text>
+  <circle cx="1160" cy="790" r="70"/>
+  <circle cx="1240" cy="790" r="70"/>
+</svg>

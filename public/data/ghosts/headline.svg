@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="300" y="80" width="1000" height="840" rx="10"/>
+  <text x="360" y="200" font-family="Georgia" font-size="60" font-weight="700" fill="#222" stroke="none">THE DAILY NEWS</text>
+  <path d="M340 230 H1260 M340 240 H1260"/>
+  <text x="360" y="380" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">BIG NEWS!</text>
+  <ellipse cx="660" cy="345" rx="340" ry="90"/>
+  <path d="M360 480 V860 M620 480 V860 M880 480 V860" stroke-width="0"/>
+  <path d="M360 500 H600 M360 550 H600 M360 600 H600 M360 650 H580 M360 700 H600 M360 750 H600 M360 800 H560"/>
+  <path d="M640 500 H880 M640 550 H880 M640 600 H860 M640 650 H880 M640 700 H880 M640 750 H840 M640 800 H880"/>
+  <rect x="920" y="500" width="320" height="200" rx="6"/>
+  <path d="M920 750 H1240 M920 800 H1200"/>
+</svg>

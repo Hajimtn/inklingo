@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="800" cy="620" rx="380" ry="150"/>
+  <ellipse cx="800" cy="620" rx="280" ry="100"/>
+  <path d="M620 640 L800 260 L980 640 Z"/>
+  <path d="M800 260 L760 640 M800 260 L850 560"/>
+  <path d="M300 400 V860 M260 400 V520 C 260 560 340 560 340 520 V400 M300 400 V520"/>
+  <path d="M1300 400 C 1340 430 1350 560 1300 600 V860"/>
+</svg>

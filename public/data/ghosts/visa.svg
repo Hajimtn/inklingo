@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="380" y="120" width="840" height="760" rx="16"/>
+  <path d="M440 220 H1160 M440 300 H1000 M440 760 H1160 M440 820 H900"/>
+  <g transform="rotate(-10 800 520)">
+  <rect x="520" y="380" width="560" height="300" rx="20"/>
+  <rect x="545" y="405" width="510" height="250" rx="12"/>
+  <text x="640" y="530" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">VISA</text>
+  <path d="M600 600 H1000"/>
+  </g>
+</svg>

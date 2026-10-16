@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(450 430)">
+  <path d="M0 260 V190 C 0 170 20 158 40 156 L150 148 L250 60 C 266 46 284 40 306 40 H480 C 506 40 524 48 540 64 L620 148 L720 164 C 742 168 750 182 750 200 V260 Z"/>
+  <path d="M270 140 L320 80 H420 V140 Z M450 80 H500 L560 140 H450 Z"/>
+  <path d="M435 140 V260"/>
+  <circle cx="160" cy="270" r="62"/>
+  <circle cx="160" cy="270" r="26"/>
+  <circle cx="600" cy="270" r="62"/>
+  <circle cx="600" cy="270" r="26"/>
+  <rect x="300" y="-30" width="160" height="70" rx="10"/>
+  <text x="318" y="20" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">TAXI</text>
+  <path d="M30 210 H70 M700 200 H740"/>
+  <path d="M60 200 H700" stroke-dasharray="30 18"/>
+  </g>
+</svg>

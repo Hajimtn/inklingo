@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M160 880 V140 M560 880 V140 M1040 880 V140 M1440 880 V140"/>
+  <path d="M160 320 H560 M160 520 H560 M160 720 H560 M1040 320 H1440 M1040 520 H1440 M1040 720 H1440"/>
+  <rect x="190" y="200" width="160" height="120" rx="6"/>
+  <rect x="370" y="220" width="160" height="100" rx="6"/>
+  <rect x="190" y="400" width="140" height="120" rx="6"/>
+  <rect x="350" y="380" width="180" height="140" rx="6"/>
+  <rect x="190" y="600" width="170" height="120" rx="6"/>
+  <rect x="380" y="620" width="150" height="100" rx="6"/>
+  <rect x="1070" y="200" width="160" height="120" rx="6"/>
+  <rect x="1250" y="220" width="160" height="100" rx="6"/>
+  <rect x="1070" y="400" width="140" height="120" rx="6"/>
+  <rect x="1230" y="380" width="180" height="140" rx="6"/>
+  <rect x="1070" y="600" width="170" height="120" rx="6"/>
+  <rect x="1260" y="620" width="150" height="100" rx="6"/>
+  <path d="M560 880 L700 600 M1040 880 L900 600 M700 600 H900"/>
+  <path d="M800 880 V820 M800 760 V720 M800 680 V650" stroke-width="7"/>
+</svg>

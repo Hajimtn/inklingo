@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M120 860 V140 L800 60 L1480 140 V860"/>
+  <path d="M120 380 H1480 M120 620 H1480 M120 860 H1480"/>
+  <path d="M120 350 H1480 M120 590 H1480"/>
+  <path d="M200 350 V380 M300 350 V380 M400 350 V380 M500 350 V380 M1100 350 V380 M1200 350 V380 M1300 350 V380 M1400 350 V380 M200 590 V620 M300 590 V620 M400 590 V620 M1100 590 V620 M1200 590 V620 M1300 590 V620 M1400 590 V620"/>
+  <rect x="180" y="180" width="320" height="170" rx="6"/>
+  <path d="M180 230 H500 M300 350 V260 H380 V350"/>
+  <rect x="1100" y="180" width="320" height="170" rx="6"/>
+  <path d="M1100 230 H1420 M1220 350 V260 H1300 V350"/>
+  <rect x="180" y="420" width="320" height="170" rx="6"/>
+  <path d="M180 470 H500 M300 590 V500 H380 V590"/>
+  <rect x="1100" y="420" width="320" height="170" rx="6"/>
+  <path d="M1100 470 H1420 M1220 590 V500 H1300 V590"/>
+  <rect x="180" y="660" width="320" height="200" rx="6"/>
+  <path d="M180 710 H500 M300 860 V740 H380 V860"/>
+  <rect x="1100" y="660" width="320" height="200" rx="6"/>
+  <path d="M1100 710 H1420 M1220 860 V740 H1300 V860"/>
+  <path d="M600 860 L1000 620 M660 860 L1060 620 M600 820 L1000 580"/>
+  <path d="M600 620 L1000 380 M660 620 L1060 380 M600 580 L1000 340"/>
+</svg>

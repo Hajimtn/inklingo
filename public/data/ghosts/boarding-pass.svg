@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="240" y="280" width="1120" height="440" rx="30"/>
+  <path d="M1040 300 V700" stroke-dasharray="20 18"/>
+  <path d="M240 380 H1040"/>
+  <path d="M300 330 L330 330 L360 300 L375 300 L362 330 L400 330 L410 318 L420 318 L415 340 L420 362 L410 362 L400 350 L362 350 L375 380"/>
+  <text x="460" y="350" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">BOARDING PASS</text>
+  <text x="300" y="470" font-family="Arial" font-size="34" fill="#222" stroke="none">GATE</text>
+  <text x="300" y="530" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">B12</text>
+  <text x="560" y="470" font-family="Arial" font-size="34" fill="#222" stroke="none">SEAT</text>
+  <text x="560" y="530" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">24A</text>
+  <path d="M300 620 H700 M300 670 H600"/>
+  <path d="M1090 440 V660 M1115 440 V660 M1150 440 V660 M1170 440 V660 M1205 440 V660 M1240 440 V660 M1260 440 V660 M1295 440 V660"/>
+  <path d="M1090 360 H1300"/>
+</svg>

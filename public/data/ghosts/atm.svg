@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="440" y="100" width="720" height="800" rx="20"/>
+  <rect x="520" y="170" width="400" height="260" rx="12"/>
+  <path d="M560 230 H800 M560 290 H760 M560 350 H820"/>
+  <rect x="960" y="200" width="140" height="30" rx="10"/>
+  <path d="M960 260 H1100"/>
+  <rect x="540" y="490" width="70" height="50" rx="8"/>
+  <rect x="630" y="490" width="70" height="50" rx="8"/>
+  <rect x="720" y="490" width="70" height="50" rx="8"/>
+  <rect x="540" y="560" width="70" height="50" rx="8"/>
+  <rect x="630" y="560" width="70" height="50" rx="8"/>
+  <rect x="720" y="560" width="70" height="50" rx="8"/>
+  <rect x="540" y="630" width="70" height="50" rx="8"/>
+  <rect x="630" y="630" width="70" height="50" rx="8"/>
+  <rect x="720" y="630" width="70" height="50" rx="8"/>
+  <rect x="840" y="490" width="80" height="50" rx="8"/>
+  <rect x="840" y="560" width="80" height="50" rx="8"/>
+  <path d="M560 760 H1040"/>
+  <path d="M640 760 L620 860 H980 L960 760"/>
+  <path d="M660 800 H940 M660 830 H940"/>
+</svg>

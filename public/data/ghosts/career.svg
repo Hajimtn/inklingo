@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M300 880 H560 V720 H820 V560 H1080 V400 H1340 V880" stroke-width="0"/>
+  <path d="M200 880 H520 V720 H840 V560 H1160 V400 H1480"/>
+  <text x="230" y="860" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">Intern</text>
+  <text x="560" y="700" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">Staff</text>
+  <text x="860" y="540" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">Manager</text>
+  <text x="1200" y="380" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">Director</text>
+  <circle cx="960" cy="380" r="50"/>
+  <path d="M950 430 L930 500 L900 560 M930 500 L980 560 M940 450 L880 420 M940 450 L1000 410"/>
+  <path d="M1300 300 L1320 260 L1340 300 L1380 305 L1350 330 L1360 370 L1320 350 L1280 370 L1290 330 L1260 305 Z"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="480" cy="500" r="220"/>
+  <text x="400" y="590" font-family="Arial" font-size="260" font-weight="700" fill="#222" stroke="none">$</text>
+  <circle cx="1120" cy="500" r="220"/>
+  <text x="1030" y="590" font-family="Arial" font-size="260" font-weight="700" fill="#222" stroke="none">€</text>
+  <path d="M560 240 C 680 140 920 140 1040 240"/>
+  <path d="M990 220 L1040 240 L1030 190"/>
+  <path d="M1040 760 C 920 860 680 860 560 760"/>
+  <path d="M610 780 L560 760 L570 810"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M300 160 V420"/>
+  <rect x="210" y="80" width="180" height="140" rx="20"/>
+  <text x="250" y="190" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">M</text>
+  <path d="M440 440 H1160"/>
+  <path d="M440 440 L560 880 M1160 440 L1040 880"/>
+  <path d="M462 520 H1138 M484 600 H1116 M506 680 H1094 M528 760 H1072 M550 840 H1050"/>
+  <path d="M400 440 V340 L520 780 M1200 440 V340 L1080 780"/>
+  <path d="M400 340 L440 340 M1200 340 L1160 340"/>
+  <path d="M430 470 V370 M470 610 V510 M1170 470 V370 M1130 610 V510"/>
+  <path d="M120 440 H440 M1160 440 H1480"/>
+</svg>

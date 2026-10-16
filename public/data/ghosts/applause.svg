@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M560 700 L460 420 C 450 390 470 370 500 380 L560 520 L540 320 C 538 290 570 280 590 300 L640 500 L660 290 C 662 260 700 260 704 290 L700 500 L760 330 C 770 300 810 310 806 340 L760 560 C 740 660 700 720 640 740 Z"/>
+  <path d="M1040 700 L1140 420 C 1150 390 1130 370 1100 380 L1040 520 L1060 320 C 1062 290 1030 280 1010 300 L960 500 L940 290 C 938 260 900 260 896 290 L900 500 L840 330 C 830 300 790 310 794 340 L840 560 C 860 660 900 720 960 740 Z"/>
+  <path d="M800 260 V180 M700 280 L660 210 M900 280 L940 210"/>
+  <text x="660" y="140" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">CLAP</text>
+  <path d="M560 740 L520 880 M1040 740 L1080 880"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M560 300 V800 C 560 850 600 880 650 880 H950 C 1000 880 1040 850 1040 800 V300"/>
+  <path d="M540 260 H1060 V300 H540 Z"/>
+  <rect x="620" y="520" width="360" height="160" rx="14"/>
+  <text x="680" y="630" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">TIPS</text>
+  <path d="M640 300 L620 140 L800 120 L820 300"/>
+  <path d="M660 180 L780 168"/>
+  <path d="M840 300 L900 130 L1060 180 L1000 300"/>
+  <path d="M920 190 L1020 222"/>
+  <ellipse cx="700" cy="790" rx="60" ry="22"/>
+  <ellipse cx="880" cy="800" rx="60" ry="22"/>
+</svg>

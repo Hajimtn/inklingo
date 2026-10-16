@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M360 340 H1240 V860 H360 Z"/>
+  <path d="M360 340 L480 240 H1360 L1240 340 M1360 240 V760 L1240 860"/>
+  <path d="M360 470 H1240 M360 600 H520 M1080 600 H1240 M360 730 H1240"/>
+  <path d="M360 340 L560 470 M1240 340 L1040 470 M360 860 L560 730 M1240 860 L1040 730"/>
+  <rect x="520" y="500" width="560" height="200" rx="10"/>
+  <text x="560" y="625" font-family="Arial" font-size="100" font-weight="700" fill="#222" stroke="none">FRAGILE</text>
+</svg>

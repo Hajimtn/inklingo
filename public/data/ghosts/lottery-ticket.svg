@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="300" y="200" width="1000" height="600" rx="24"/>
+  <path d="M300 320 H1300"/>
+  <text x="360" y="290" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">LOTTERY</text>
+  <circle cx="440" cy="460" r="60"/>
+  <circle cx="600" cy="460" r="60"/>
+  <circle cx="760" cy="460" r="60"/>
+  <circle cx="920" cy="460" r="60"/>
+  <circle cx="1080" cy="460" r="60"/>
+  <text x="410" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">07</text>
+  <text x="570" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">13</text>
+  <text x="730" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">22</text>
+  <text x="890" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">35</text>
+  <text x="1050" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">41</text>
+  <path d="M380 620 V720 M410 620 V720 M450 620 V720 M480 620 V720 M520 620 V720 M560 620 V720 M590 620 V720 M630 620 V720"/>
+  <path d="M800 660 H1200"/>
+  <path d="M1200 220 L1220 180 L1240 220 L1280 230 L1240 250 L1220 290 L1200 250 L1160 230 Z"/>
+</svg>

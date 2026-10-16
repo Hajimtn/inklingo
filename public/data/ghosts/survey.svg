@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="400" y="80" width="800" height="840" rx="16"/>
+  <text x="480" y="200" font-family="Arial" font-size="72" font-weight="700" fill="#222" stroke="none">SURVEY</text>
+  <rect x="480" y="280" width="50" height="50" rx="6"/>
+  <path d="M490 300 L505 320 L530 280"/>
+  <path d="M570 305 H1060"/>
+  <rect x="480" y="380" width="50" height="50" rx="6"/>
+  <path d="M570 405 H1000"/>
+  <rect x="480" y="480" width="50" height="50" rx="6"/>
+  <path d="M490 500 L505 520 L530 480"/>
+  <path d="M570 505 H1040"/>
+  <circle cx="540" cy="700" r="60"/>
+  <circle cx="800" cy="700" r="60"/>
+  <circle cx="1060" cy="700" r="60"/>
+  <path d="M515 690 L520 690 M560 690 L565 690 M510 715 C 525 740 555 740 570 715" stroke-width="12"/>
+  <path d="M775 690 L780 690 M820 690 L825 690 M775 725 H825" stroke-width="12"/>
+  <path d="M1035 690 L1040 690 M1080 690 L1085 690 M1030 735 C 1045 710 1075 710 1090 735" stroke-width="12"/>
+</svg>

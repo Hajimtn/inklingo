@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="140" y="200" width="560" height="560" rx="10"/>
+  <rect x="900" y="200" width="560" height="560" rx="10"/>
+  <path d="M740 480 H860 M820 440 L860 480 L820 520"/>
+  <path d="M300 220 L340 320 L300 380 L360 460 L320 540"/>
+  <path d="M500 760 V700 L560 650 L620 700 V760"/>
+  <path d="M200 640 L260 620 L240 680"/>
+  <path d="M1000 300 H1200 V440 H1000 Z M1100 300 V440"/>
+  <path d="M1260 760 V600 H1420 V760 M1260 660 H1420"/>
+  <path d="M980 760 V640 C 980 620 1000 610 1020 610 H1180 C 1200 610 1220 620 1220 640 V760"/>
+  <path d="M1320 300 L1340 260 L1360 300 M1290 330 L1320 300 L1300 280"/>
+  <text x="300" y="160" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">BEFORE</text>
+  <text x="1080" y="160" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">AFTER</text>
+</svg>

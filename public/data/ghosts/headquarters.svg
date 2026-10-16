@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M640 880 V160 H960 V880"/>
+  <text x="715" y="290" font-family="Arial" font-size="120" font-weight="700" fill="#222" stroke="none">HQ</text>
+  <path d="M700 360 H900 M700 440 H900 M700 520 H900 M700 600 H900 M700 680 H900 M700 760 H900"/>
+  <path d="M200 880 V620 H400 V880 M1200 880 V620 H1400 V880"/>
+  <path d="M260 680 H340 M260 760 H340 M1260 680 H1340 M1260 760 H1340"/>
+  <path d="M400 700 C 500 640 560 560 640 520 M1200 700 C 1100 640 1040 560 960 520" stroke-dasharray="20 16"/>
+  <path d="M140 880 H1460"/>
+</svg>

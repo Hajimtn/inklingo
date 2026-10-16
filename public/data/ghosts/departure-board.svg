@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="220" y="160" width="1160" height="680" rx="20"/>
+  <rect x="250" y="190" width="1100" height="620" rx="8"/>
+  <text x="290" y="260" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">DEPARTURES</text>
+  <path d="M250 290 H1350 M250 390 H1350 M250 490 H1350 M250 590 H1350 M250 690 H1350"/>
+  <text x="290" y="360" font-family="Arial" font-size="44" fill="#222" stroke="none">08:15  TOKYO</text>
+  <text x="1010" y="360" font-family="Arial" font-size="44" fill="#222" stroke="none">ON TIME</text>
+  <text x="290" y="460" font-family="Arial" font-size="44" fill="#222" stroke="none">09:40  PARIS</text>
+  <text x="1010" y="460" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">DELAYED</text>
+  <text x="290" y="560" font-family="Arial" font-size="44" fill="#222" stroke="none">10:05  SEOUL</text>
+  <text x="1010" y="560" font-family="Arial" font-size="44" fill="#222" stroke="none">BOARDING</text>
+  <text x="290" y="660" font-family="Arial" font-size="44" fill="#222" stroke="none">11:30  SYDNEY</text>
+  <text x="1010" y="660" font-family="Arial" font-size="44" fill="#222" stroke="none">ON TIME</text>
+  <path d="M500 840 V900 M1100 840 V900"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="200" y="140" width="1200" height="720" rx="16"/>
+  <path d="M200 260 H1400 M400 140 V860 M600 140 V860 M800 140 V860 M1000 140 V860 M1200 140 V860"/>
+  <text x="425" y="225" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">MON</text>
+  <text x="630" y="225" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">TUE</text>
+  <text x="820" y="225" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">WED</text>
+  <text x="1030" y="225" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">THU</text>
+  <text x="1240" y="225" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">FRI</text>
+  <path d="M200 420 H1400 M200 580 H1400 M200 740 H1400" stroke-dasharray="10 14"/>
+  <text x="230" y="360" font-family="Arial" font-size="44" fill="#222" stroke="none">9:00</text>
+  <text x="230" y="520" font-family="Arial" font-size="44" fill="#222" stroke="none">11:00</text>
+  <text x="230" y="680" font-family="Arial" font-size="44" fill="#222" stroke="none">14:00</text>
+  <rect x="420" y="290" width="160" height="110" rx="12"/>
+  <rect x="820" y="290" width="160" height="250" rx="12"/>
+  <rect x="620" y="600" width="160" height="120" rx="12"/>
+  <rect x="1220" y="440" width="160" height="120" rx="12"/>
+  <rect x="1020" y="760" width="160" height="80" rx="12"/>
+</svg>

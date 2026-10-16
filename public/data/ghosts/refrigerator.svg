@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="520" y="100" width="560" height="800" rx="30"/>
+  <path d="M520 400 H1080"/>
+  <path d="M600 200 V330 M600 480 V640"/>
+  <path d="M940 160 L1000 220 L940 280 L880 220 Z"/>
+  <circle cx="980" cy="520" r="36"/>
+  <rect x="860" y="600" width="90" height="70" rx="6" transform="rotate(10 905 635)"/>
+  <path d="M560 900 V930 M1040 900 V930"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="220" y="160" width="1160" height="680" rx="20"/>
+  <path d="M220 300 H1380 M220 500 H1380 M220 680 H1380"/>
+  <text x="280" y="250" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">EXCHANGE RATE</text>
+  <text x="280" y="430" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">USD</text>
+  <text x="700" y="430" font-family="Arial" font-size="90" fill="#222" stroke="none">25,400</text>
+  <text x="280" y="620" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">EUR</text>
+  <text x="700" y="620" font-family="Arial" font-size="90" fill="#222" stroke="none">27,300</text>
+  <path d="M1220 440 V350 M1180 390 L1220 350 L1260 390 M1220 560 V650 M1180 610 L1220 650 L1260 610"/>
+  <text x="280" y="790" font-family="Arial" font-size="56" fill="#222" stroke="none">JPY        170</text>
+</svg>

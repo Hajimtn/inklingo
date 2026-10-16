@@ -26,7 +26,7 @@ export async function drawSketch(canvas, wordId) {
     try {
       const res = await fetch(`data/ghosts/${encodeURIComponent(wordId)}.svg`);
       if (!res.ok) return false;
-      const svg = (await res.text()).replace(/stroke="#[0-9a-fA-F]{3,6}"/g, `stroke="${INK}"`);
+      const svg = (await res.text()).replace(/(stroke|fill)="#[0-9a-fA-F]{3,6}"/g, `$1="${INK}"`);
       url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
       sketchCache.set(wordId, url);
     } catch {

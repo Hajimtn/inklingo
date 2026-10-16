@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="300" y="120" width="560" height="110" rx="10"/>
+  <text x="340" y="200" font-family="Arial" font-size="64" font-weight="700" fill="#222" stroke="none">CHECK-IN</text>
+  <path d="M260 520 H900 V880 H260 Z"/>
+  <path d="M240 500 H920 V520 H240 Z"/>
+  <circle cx="580" cy="330" r="70"/>
+  <path d="M450 500 C 460 420 510 400 580 400 C 650 400 700 420 710 500"/>
+  <rect x="940" y="740" width="320" height="140" rx="10"/>
+  <rect x="980" y="760" width="90" height="40" rx="6"/>
+  <rect x="960" y="500" width="280" height="240" rx="26"/>
+  <path d="M1050 500 V460 H1150 V500"/>
+  <path d="M1040 520 V720 M1160 520 V720"/>
+  <circle cx="1360" cy="380" r="64"/>
+  <path d="M1260 880 V560 C 1260 490 1300 460 1360 460 C 1420 460 1460 490 1460 560 V880"/>
+  <path d="M1270 560 L1200 640 L1240 650"/>
+</svg>

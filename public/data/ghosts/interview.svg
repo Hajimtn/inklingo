@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M480 560 H1120 V600 H480 Z"/>
+  <path d="M520 600 V860 M1080 600 V860"/>
+  <path d="M720 560 L740 470 H860 L880 560 M760 500 H840 M760 530 H820"/>
+  <circle cx="300" cy="380" r="64"/>
+  <path d="M200 760 V560 C 200 480 240 450 300 450 C 360 450 400 480 400 560 V760"/>
+  <path d="M180 760 H440 V880"/>
+  <circle cx="1220" cy="360" r="60"/>
+  <path d="M1130 560 C 1130 470 1170 440 1220 440 C 1270 440 1310 470 1310 560"/>
+  <circle cx="1380" cy="380" r="56"/>
+  <path d="M1300 560 C 1300 480 1340 450 1380 450 C 1420 450 1460 480 1460 560"/>
+  <text x="770" y="440" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">CV</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M300 220 L780 260 L800 820 L320 780 Z"/>
+  <path d="M1300 220 L820 260 L800 820 L1280 780 Z"/>
+  <text x="360" y="340" font-family="Arial" font-size="64" font-weight="700" fill="#222" stroke="none" transform="rotate(4 360 340)">NEWS</text>
+  <path d="M360 400 L740 430 M360 460 L540 475 M360 520 L540 535 M360 580 L540 595 M360 640 L740 670 M360 700 L740 730"/>
+  <rect x="580" y="460" width="160" height="150" rx="6" transform="rotate(4 660 535)"/>
+  <path d="M860 300 L1240 270 M860 380 L1240 350 M860 440 L1040 425 M860 500 L1040 485 M860 560 L1240 530 M860 620 L1240 590 M860 680 L1240 650"/>
+  <path d="M500 820 L460 900 M1100 790 L1140 880"/>
+  <path d="M440 800 C 460 760 500 760 520 790 M1080 770 C 1100 730 1140 730 1160 760"/>
+</svg>

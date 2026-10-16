@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="560" cy="320" r="76"/>
+  <path d="M470 260 H650 L630 200 H490 Z"/>
+  <path d="M440 260 H680"/>
+  <path d="M400 880 V570 C 400 470 460 420 560 420 C 660 420 720 470 720 570 V880"/>
+  <rect x="440" y="560" width="240" height="70" rx="8"/>
+  <text x="452" y="610" font-family="Arial" font-size="40" font-weight="700" fill="#222" stroke="none">SECURITY</text>
+  <rect x="880" y="200" width="260" height="190" rx="10"/>
+  <rect x="1180" y="200" width="260" height="190" rx="10"/>
+  <rect x="880" y="430" width="260" height="190" rx="10"/>
+  <rect x="1180" y="430" width="260" height="190" rx="10"/>
+  <path d="M940 340 L1000 280 L1060 340 M1240 340 C 1260 300 1300 300 1320 340 M960 560 H1060 M1240 580 L1300 520 L1380 580"/>
+  <path d="M840 680 H1480 V880"/>
+</svg>

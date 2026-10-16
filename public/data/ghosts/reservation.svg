@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M200 520 H1400 L1300 600 H300 Z"/>
+  <path d="M300 600 C 300 700 320 760 340 800 M1300 600 C 1300 700 1280 760 1260 800"/>
+  <path d="M340 800 H1260"/>
+  <path d="M440 800 V880 M1160 800 V880"/>
+  <path d="M600 540 L680 330 H920 L1000 540"/>
+  <path d="M680 330 L700 540 M920 330 L900 540"/>
+  <text x="710" y="460" font-family="Arial" font-size="42" font-weight="700" fill="#222" stroke="none">RESERVED</text>
+  <ellipse cx="400" cy="555" rx="90" ry="20"/>
+  <ellipse cx="1200" cy="555" rx="90" ry="20"/>
+  <path d="M1120 300 V480 M1100 480 H1140 M1090 300 C 1090 360 1150 360 1150 300 Z"/>
+</svg>

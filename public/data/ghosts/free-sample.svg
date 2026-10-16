@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M300 560 H1300 V600 H300 Z"/>
+  <path d="M340 600 V880 M1260 600 V880"/>
+  <path d="M440 560 L460 460 H560 L580 560 Z M640 560 L660 460 H760 L780 560 Z M840 560 L860 460 H960 L980 560 Z M1040 560 L1060 460 H1160 L1180 560 Z"/>
+  <path d="M510 460 V360 M710 460 V360 M910 460 V360 M1110 460 V360"/>
+  <rect x="580" y="120" width="440" height="160" rx="16"/>
+  <text x="650" y="230" font-family="Arial" font-size="96" font-weight="700" fill="#222" stroke="none">FREE</text>
+  <path d="M800 280 V360"/>
+</svg>

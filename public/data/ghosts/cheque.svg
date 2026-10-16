@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="200" y="240" width="1200" height="540" rx="14"/>
+  <text x="260" y="330" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">BANK</text>
+  <text x="1080" y="330" font-family="Arial" font-size="40" fill="#222" stroke="none">DATE ______</text>
+  <text x="260" y="460" font-family="Arial" font-size="50" fill="#222" stroke="none">PAY TO</text>
+  <path d="M480 460 H1000"/>
+  <rect x="1060" y="400" width="280" height="90" rx="8"/>
+  <text x="1090" y="465" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">$500</text>
+  <path d="M260 560 H1000"/>
+  <path d="M900 690 C 940 640 980 660 1000 680 C 1020 640 1060 640 1100 680 C 1140 700 1180 670 1220 660"/>
+  <path d="M860 710 H1300"/>
+  <path d="M260 710 H700" stroke-dasharray="12 12"/>
+</svg>

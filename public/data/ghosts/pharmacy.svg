@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M200 880 V320 H1400 V880"/>
+  <rect x="300" y="160" width="1000" height="160" rx="14"/>
+  <text x="560" y="275" font-family="Arial" font-size="100" font-weight="700" fill="#222" stroke="none">PHARMACY</text>
+  <path d="M350 200 H400 V170 H440 V200 H490 V240 H440 V270 H400 V240 H350 Z" transform="translate(-20 10)"/>
+  <path d="M300 420 H660 V720 H300 Z"/>
+  <path d="M300 520 H660 M300 620 H660"/>
+  <path d="M340 520 V460 H380 V520 M420 520 V470 H460 V520 M500 520 V450 H540 V520 M340 620 V570 H380 V620 M440 620 V560 H480 V620 M540 620 V570 H580 V620"/>
+  <path d="M800 880 V420 H1300 V880 M1050 420 V880"/>
+  <path d="M1020 640 H1040 M1060 640 H1080"/>
+  <path d="M120 880 H1480"/>
+</svg>

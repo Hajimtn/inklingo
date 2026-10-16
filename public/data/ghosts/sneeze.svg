@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="600" cy="460" r="260"/>
+  <path d="M500 400 L560 420 L500 440 M700 400 L640 420 L700 440"/>
+  <path d="M440 360 L540 380 M760 360 L660 380"/>
+  <path d="M760 520 L880 460 L960 500 L940 640 L860 680 L760 640 Z"/>
+  <path d="M880 460 L900 560 L860 680"/>
+  <text x="1000" y="380" font-family="Arial" font-size="120" font-weight="700" fill="#222" stroke="none">ACHOO!</text>
+  <path d="M1000 460 L1100 500 M1000 560 L1120 560 M1000 640 L1100 620"/>
+</svg>

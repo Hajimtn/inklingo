@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="360" y="140" width="880" height="720" rx="16"/>
+  <text x="440" y="260" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">PAYSLIP</text>
+  <path d="M440 320 H1160 M440 320 V660 M1160 320 V660 M440 660 H1160 M800 320 V660 M440 400 H1160 M440 480 H1160 M440 560 H1160"/>
+  <path d="M480 360 H700 M480 440 H660 M480 520 H720 M480 600 H680 M860 360 H1000 M860 440 H1060 M860 520 H980 M860 600 H1040"/>
+  <text x="440" y="780" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">NET PAY</text>
+  <path d="M800 770 H1140"/>
+  <path d="M360 200 H1240" stroke-dasharray="12 14" stroke-width="0"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="260" y="120" width="1080" height="440" rx="10"/>
+  <rect x="300" y="160" width="1000" height="360" rx="6"/>
+  <text x="400" y="380" font-family="Arial" font-size="130" font-weight="700" fill="#222" stroke="none">BIG SALE</text>
+  <path d="M500 560 V880 M1100 560 V880"/>
+  <path d="M240 580 H1360"/>
+  <path d="M100 880 L500 700 M1500 880 L1100 700" stroke-width="0"/>
+  <path d="M60 880 H1540"/>
+  <path d="M200 830 H400 M700 830 H900 M1200 830 H1400" stroke-dasharray="1 0"/>
+</svg>

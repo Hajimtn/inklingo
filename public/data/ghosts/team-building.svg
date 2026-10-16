@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M80 600 H1520"/>
+  <circle cx="260" cy="380" r="56"/>
+  <path d="M270 440 L330 580 L280 740 L200 880 M330 580 L400 880 M290 500 L380 600"/>
+  <circle cx="460" cy="380" r="56"/>
+  <path d="M470 440 L530 580 L480 740 L400 880 M530 580 L600 880 M490 500 L580 600"/>
+  <circle cx="1140" cy="380" r="56"/>
+  <path d="M1130 440 L1070 580 L1120 740 L1200 880 M1070 580 L1000 880 M1110 500 L1020 600"/>
+  <circle cx="1340" cy="380" r="56"/>
+  <path d="M1330 440 L1270 580 L1320 740 L1400 880 M1270 580 L1200 880 M1310 500 L1220 600"/>
+  <path d="M800 560 V640"/>
+  <path d="M760 880 H840"/>
+  <path d="M800 640 V880" stroke-dasharray="20 16"/>
+</svg>

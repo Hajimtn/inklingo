@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="360" cy="380" r="74"/>
+  <path d="M220 880 V640 C 220 540 270 490 360 490 C 450 490 500 540 500 640 V880"/>
+  <path d="M480 520 L560 460"/>
+  <path d="M520 360 L900 200 V640 L520 480 Z"/>
+  <ellipse cx="900" cy="420" rx="60" ry="220"/>
+  <path d="M600 500 L620 620 H680 L660 520"/>
+  <path d="M1000 300 C 1040 360 1040 480 1000 540 M1080 240 C 1140 340 1140 500 1080 600 M1160 180 C 1240 320 1240 520 1160 660"/>
+  <text x="1200" y="300" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">HEY!</text>
+</svg>

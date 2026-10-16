@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="260" y="100" width="640" height="800" rx="16"/>
+  <text x="320" y="220" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">TAX FORM</text>
+  <path d="M320 300 H840 M320 380 H760 M320 460 H840 M320 540 H700 M320 620 H840"/>
+  <rect x="320" y="700" width="40" height="40" rx="4"/>
+  <rect x="320" y="780" width="40" height="40" rx="4"/>
+  <path d="M400 720 H720 M400 800 H680"/>
+  <rect x="980" y="440" width="320" height="440" rx="24"/>
+  <rect x="1020" y="480" width="240" height="90" rx="8"/>
+  <path d="M1030 620 H1080 M1110 620 H1160 M1190 620 H1240 M1030 690 H1080 M1110 690 H1160 M1190 690 H1240 M1030 760 H1080 M1110 760 H1160 M1190 760 H1240 M1030 830 H1080 M1110 830 H1240"/>
+  <rect x="980" y="120" width="320" height="260" rx="14"/>
+  <path d="M980 190 H1300 M1060 90 V150 M1220 90 V150"/>
+  <text x="1080" y="330" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">15</text>
+</svg>

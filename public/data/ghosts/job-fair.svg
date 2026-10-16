@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="460" y="80" width="680" height="140" rx="16"/>
+  <text x="500" y="180" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">WE'RE HIRING</text>
+  <path d="M160 880 V420 H700 V880"/>
+  <path d="M200 640 H660 V700 H200 Z"/>
+  <path d="M200 380 H660 V420 H200 Z"/>
+  <path d="M900 880 V420 H1440 V880"/>
+  <path d="M940 640 H1400 V700 H940 Z"/>
+  <path d="M940 380 H1400 V420 H940 Z"/>
+  <circle cx="430" cy="540" r="50"/>
+  <path d="M360 640 C 360 600 390 590 430 590 C 470 590 500 600 500 640"/>
+  <circle cx="1170" cy="540" r="50"/>
+  <path d="M1100 640 C 1100 600 1130 590 1170 590 C 1210 590 1240 600 1240 640"/>
+  <circle cx="800" cy="620" r="56"/>
+  <path d="M710 880 V760 C 710 700 750 680 800 680 C 850 680 890 700 890 760 V880"/>
+</svg>

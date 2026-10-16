@@ -1,0 +1,479 @@
+=== atm
+<rect x="440" y="100" width="720" height="800" rx="20"/>
+<rect x="520" y="170" width="400" height="260" rx="12"/>
+<path d="M560 230 H800 M560 290 H760 M560 350 H820"/>
+<rect x="960" y="200" width="140" height="30" rx="10"/>
+<path d="M960 260 H1100"/>
+<rect x="540" y="490" width="70" height="50" rx="8"/>
+<rect x="630" y="490" width="70" height="50" rx="8"/>
+<rect x="720" y="490" width="70" height="50" rx="8"/>
+<rect x="540" y="560" width="70" height="50" rx="8"/>
+<rect x="630" y="560" width="70" height="50" rx="8"/>
+<rect x="720" y="560" width="70" height="50" rx="8"/>
+<rect x="540" y="630" width="70" height="50" rx="8"/>
+<rect x="630" y="630" width="70" height="50" rx="8"/>
+<rect x="720" y="630" width="70" height="50" rx="8"/>
+<rect x="840" y="490" width="80" height="50" rx="8"/>
+<rect x="840" y="560" width="80" height="50" rx="8"/>
+<path d="M560 760 H1040"/>
+<path d="M640 760 L620 860 H980 L960 760"/>
+<path d="M660 800 H940 M660 830 H940"/>
+
+=== banknote
+<rect x="200" y="260" width="1200" height="520" rx="16"/>
+<rect x="250" y="310" width="1100" height="420" rx="10"/>
+<ellipse cx="800" cy="520" rx="160" ry="180"/>
+<circle cx="800" cy="470" r="60"/>
+<path d="M700 640 C 720 570 880 570 900 640"/>
+<text x="290" y="400" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">100</text>
+<text x="1170" y="700" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">100</text>
+<path d="M1060 380 H1300 M1060 430 H1240 M300 640 H540 M300 690 H480"/>
+
+=== coin
+<ellipse cx="560" cy="800" rx="260" ry="70"/>
+<path d="M300 800 V740 M820 800 V740"/>
+<ellipse cx="560" cy="740" rx="260" ry="70"/>
+<path d="M300 740 V680 M820 740 V680"/>
+<ellipse cx="560" cy="680" rx="260" ry="70"/>
+<path d="M300 680 V620 M820 680 V620"/>
+<ellipse cx="560" cy="620" rx="260" ry="70"/>
+<ellipse cx="560" cy="620" rx="200" ry="50"/>
+<ellipse cx="1120" cy="500" rx="80" ry="300"/>
+<path d="M1120 200 C 1210 200 1250 330 1250 500 C 1250 670 1210 800 1120 800"/>
+<path d="M1120 820 H1320"/>
+
+=== piggy-bank
+<ellipse cx="760" cy="560" rx="440" ry="280"/>
+<path d="M1180 480 C 1260 470 1300 520 1300 580 C 1300 640 1260 680 1180 670"/>
+<ellipse cx="1240" cy="580" rx="30" ry="40"/>
+<path d="M1000 330 L1020 230 L1100 330"/>
+<circle cx="1060" cy="460" r="14"/>
+<path d="M440 800 V900 H540 V830 M940 820 V900 H1040 V790"/>
+<path d="M320 520 C 260 500 250 440 280 420"/>
+<path d="M660 300 H860"/>
+<ellipse cx="760" cy="180" rx="60" ry="60"/>
+<path d="M760 140 V220"/>
+<path d="M760 250 V280" stroke-dasharray="10 10"/>
+
+=== vault
+<circle cx="800" cy="500" r="360"/>
+<circle cx="800" cy="500" r="300"/>
+<circle cx="800" cy="500" r="80"/>
+<path d="M800 420 V240 M800 580 V760 M720 500 H540 M880 500 H1060 M743 443 L615 315 M857 557 L985 685 M857 443 L985 315 M743 557 L615 685"/>
+<circle cx="800" cy="230" r="24"/>
+<circle cx="800" cy="770" r="24"/>
+<circle cx="530" cy="500" r="24"/>
+<circle cx="1070" cy="500" r="24"/>
+<rect x="1160" y="420" width="60" height="160" rx="10"/>
+
+=== cheque
+<rect x="200" y="240" width="1200" height="540" rx="14"/>
+<text x="260" y="330" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">BANK</text>
+<text x="1080" y="330" font-family="Arial" font-size="40" fill="#222" stroke="none">DATE ______</text>
+<text x="260" y="460" font-family="Arial" font-size="50" fill="#222" stroke="none">PAY TO</text>
+<path d="M480 460 H1000"/>
+<rect x="1060" y="400" width="280" height="90" rx="8"/>
+<text x="1090" y="465" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">$500</text>
+<path d="M260 560 H1000"/>
+<path d="M900 690 C 940 640 980 660 1000 680 C 1020 640 1060 640 1100 680 C 1140 700 1180 670 1220 660"/>
+<path d="M860 710 H1300"/>
+<path d="M260 710 H700" stroke-dasharray="12 12"/>
+
+=== credit-card
+<rect x="240" y="240" width="1120" height="680" rx="50"/>
+<rect x="340" y="380" width="180" height="140" rx="16"/>
+<path d="M340 450 H520 M430 380 V520 M380 380 V420 M480 380 V420 M380 520 V480 M480 520 V480"/>
+<path d="M620 420 C 650 440 650 480 620 500 M660 400 C 710 430 710 490 660 520 M700 380 C 770 420 770 500 700 540"/>
+<text x="340" y="680" font-family="Arial" font-size="70" fill="#222" stroke="none">4321  8765  1098  7654</text>
+<text x="340" y="800" font-family="Arial" font-size="44" fill="#222" stroke="none">JOHN SMITH   09/29</text>
+<circle cx="1160" cy="790" r="70"/>
+<circle cx="1240" cy="790" r="70"/>
+
+=== invoice
+<rect x="380" y="80" width="840" height="840" rx="16"/>
+<text x="460" y="200" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">INVOICE</text>
+<path d="M460 250 H700 M460 290 H660"/>
+<path d="M440 360 H1160 V700 H440 Z M440 440 H1160 M440 520 H1160 M440 600 H1160 M900 360 V700"/>
+<path d="M480 480 H760 M480 560 H720 M480 640 H800 M960 480 H1100 M960 560 H1100 M960 640 H1100"/>
+<text x="460" y="800" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">TOTAL DUE</text>
+<path d="M900 790 H1140"/>
+
+=== currency-exchange
+<circle cx="480" cy="500" r="220"/>
+<text x="400" y="590" font-family="Arial" font-size="260" font-weight="700" fill="#222" stroke="none">$</text>
+<circle cx="1120" cy="500" r="220"/>
+<text x="1030" y="590" font-family="Arial" font-size="260" font-weight="700" fill="#222" stroke="none">€</text>
+<path d="M560 240 C 680 140 920 140 1040 240"/>
+<path d="M990 220 L1040 240 L1030 190"/>
+<path d="M1040 760 C 920 860 680 860 560 760"/>
+<path d="M610 780 L560 760 L570 810"/>
+
+=== stock-market
+<rect x="200" y="120" width="1200" height="680" rx="20"/>
+<path d="M280 720 V200 M280 720 H1320"/>
+<path d="M280 600 L420 520 L520 580 L660 420 L760 480 L900 320 L1000 380 L1140 240 L1260 200"/>
+<path d="M1220 190 L1270 195 L1255 240"/>
+<path d="M280 340 H1320 M280 460 H1320 M280 580 H1320" stroke-dasharray="10 16"/>
+<path d="M740 800 V860 M600 860 H1000"/>
+<path d="M1100 600 V680 M1080 660 L1100 690 L1120 660 M1200 540 V620 M1180 560 L1200 530 L1220 560"/>
+
+=== accountant
+<circle cx="480" cy="300" r="76"/>
+<circle cx="450" cy="300" r="24"/>
+<circle cx="512" cy="300" r="24"/>
+<path d="M340 640 C 345 470 395 400 480 400 C 565 400 615 470 620 640"/>
+<path d="M200 640 H1400 V880 H200 Z"/>
+<rect x="660" y="480" width="260" height="160" rx="14"/>
+<rect x="690" y="500" width="200" height="40" rx="6"/>
+<path d="M700 570 H740 M770 570 H810 M840 570 H880 M700 610 H740 M770 610 H810 M840 610 H880"/>
+<path d="M600 540 L680 560"/>
+<path d="M1000 640 V560 H1200 V640 M1010 560 V500 H1190 V560 M1020 500 V440 H1180 V500"/>
+<path d="M920 480 L960 200 L1000 200 L980 480" stroke-width="0"/>
+<path d="M900 470 C 940 380 920 280 980 200"/>
+
+=== bank-teller
+<path d="M100 480 H1500"/>
+<path d="M200 480 V880 M1400 480 V880"/>
+<path d="M300 100 H1300 V480"/>
+<path d="M300 100 V480"/>
+<path d="M800 100 V480" stroke-width="0"/>
+<path d="M360 160 L460 120 M360 240 L560 140"/>
+<path d="M640 480 V430 H960 V480"/>
+<circle cx="560" cy="250" r="64"/>
+<path d="M440 480 C 445 380 490 340 560 340 C 630 340 675 380 680 480"/>
+<path d="M660 420 L780 450"/>
+<path d="M780 430 L900 440 L896 470 L776 460 Z"/>
+<circle cx="1120" cy="560" r="64"/>
+<path d="M1000 880 V740 C 1000 670 1050 640 1120 640 C 1190 640 1240 670 1240 740 V880"/>
+<path d="M1020 700 L920 500"/>
+
+=== savings
+<path d="M240 520 V800 C 240 830 260 850 290 850 H450 C 480 850 500 830 500 800 V520"/>
+<path d="M230 480 H510 V520 H230 Z"/>
+<ellipse cx="370" cy="810" rx="90" ry="20"/>
+<path d="M620 420 V800 C 620 830 640 850 670 850 H830 C 860 850 880 830 880 800 V420"/>
+<path d="M610 380 H890 V420 H610 Z"/>
+<ellipse cx="750" cy="810" rx="90" ry="20"/>
+<ellipse cx="750" cy="760" rx="90" ry="20"/>
+<ellipse cx="750" cy="710" rx="90" ry="20"/>
+<path d="M1000 320 V800 C 1000 830 1020 850 1050 850 H1210 C 1240 850 1260 830 1260 800 V320"/>
+<path d="M990 280 H1270 V320 H990 Z"/>
+<ellipse cx="1130" cy="810" rx="90" ry="20"/>
+<ellipse cx="1130" cy="760" rx="90" ry="20"/>
+<ellipse cx="1130" cy="710" rx="90" ry="20"/>
+<ellipse cx="1130" cy="660" rx="90" ry="20"/>
+<ellipse cx="1130" cy="610" rx="90" ry="20"/>
+<path d="M1130 590 V420"/>
+<path d="M1130 480 C 1080 440 1060 400 1080 360 C 1120 380 1140 420 1130 480 Z M1130 440 C 1180 400 1210 370 1200 330 C 1160 340 1130 380 1130 440 Z"/>
+
+=== investment
+<ellipse cx="800" cy="840" rx="260" ry="50"/>
+<path d="M540 840 V780 M1060 840 V780"/>
+<ellipse cx="800" cy="780" rx="260" ry="50"/>
+<path d="M540 780 V720 M1060 780 V720"/>
+<ellipse cx="800" cy="720" rx="260" ry="50"/>
+<path d="M800 720 V280"/>
+<path d="M800 560 C 700 540 620 480 600 400 L700 380 C 760 420 790 480 800 560 Z"/>
+<path d="M800 480 C 900 460 980 400 1000 320 L900 300 C 840 340 810 400 800 480 Z"/>
+<path d="M800 300 C 760 260 740 200 760 150 L820 160 C 830 200 820 260 800 300 Z"/>
+<path d="M630 420 L700 400 M920 330 L970 320" stroke-width="5"/>
+
+=== budget
+<circle cx="680" cy="500" r="320"/>
+<path d="M680 500 V180 M680 500 L1000 500 M680 500 L460 730 M680 500 L410 330"/>
+<text x="740" y="380" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">HOME</text>
+<text x="720" y="660" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">FOOD</text>
+<text x="420" y="560" font-family="Arial" font-size="44" font-weight="700" fill="#222" stroke="none">TRAVEL</text>
+<text x="440" y="320" font-family="Arial" font-size="40" font-weight="700" fill="#222" stroke="none">SAVE</text>
+<rect x="1120" y="300" width="80" height="80" rx="8"/>
+<rect x="1120" y="440" width="80" height="80" rx="8"/>
+<rect x="1120" y="580" width="80" height="80" rx="8"/>
+<path d="M1240 340 H1400 M1240 480 H1380 M1240 620 H1400"/>
+
+=== loan
+<path d="M140 400 L420 220 L700 400 Z"/>
+<path d="M180 400 V700 H660 V400"/>
+<path d="M260 440 V660 M360 440 V660 M480 440 V660 M580 440 V660"/>
+<path d="M140 700 H700"/>
+<text x="330" y="370" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">BANK</text>
+<path d="M780 340 H1120 M1070 300 L1120 340 L1070 380"/>
+<path d="M1180 360 C 1160 300 1220 270 1260 290 C 1300 270 1360 300 1340 360 C 1400 420 1400 520 1340 560 H1180 C 1120 520 1120 420 1180 360 Z"/>
+<text x="1215" y="490" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">$</text>
+<path d="M1120 700 H780 M830 660 L780 700 L830 740"/>
+<text x="880" y="820" font-family="Arial" font-size="70" font-weight="700" fill="#222" stroke="none">+ 5%</text>
+
+=== debt
+<circle cx="440" cy="300" r="70"/>
+<path d="M380 380 C 340 460 320 560 330 660 L280 880 M330 660 L420 880"/>
+<path d="M380 380 L460 460 L520 640 M440 380 C 480 440 520 520 560 600"/>
+<path d="M400 840 C 500 840 560 800 620 780"/>
+<path d="M620 780 L680 760 M700 760 L760 750 M780 748 L840 746 M860 746 L920 748"/>
+<circle cx="1100" cy="700" r="180"/>
+<text x="1040" y="770" font-family="Arial" font-size="180" font-weight="700" fill="#222" stroke="none">$</text>
+<path d="M940 760 L920 750"/>
+<path d="M260 900 H1340"/>
+
+=== wealth
+<path d="M340 500 H1260 V860 H340 Z"/>
+<path d="M340 500 C 340 340 1260 340 1260 500"/>
+<path d="M340 620 H1260 M640 500 V860 M960 500 V860" stroke-width="0"/>
+<rect x="740" y="600" width="120" height="120" rx="12"/>
+<path d="M800 650 V680"/>
+<path d="M440 500 C 460 420 560 400 600 440 C 660 380 760 380 800 430 C 860 380 980 390 1020 440 C 1080 400 1160 430 1160 500"/>
+<circle cx="520" cy="460" r="40"/>
+<circle cx="680" cy="430" r="40"/>
+<circle cx="900" cy="440" r="40"/>
+<path d="M1040 340 L1080 300 L1160 300 L1200 340 L1120 440 Z M1040 340 H1200 M1080 300 L1100 340 L1120 440 M1160 300 L1140 340 L1120 440"/>
+<path d="M1260 280 L1300 240 M1280 340 L1340 330"/>
+
+=== tax
+<rect x="260" y="100" width="640" height="800" rx="16"/>
+<text x="320" y="220" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">TAX FORM</text>
+<path d="M320 300 H840 M320 380 H760 M320 460 H840 M320 540 H700 M320 620 H840"/>
+<rect x="320" y="700" width="40" height="40" rx="4"/>
+<rect x="320" y="780" width="40" height="40" rx="4"/>
+<path d="M400 720 H720 M400 800 H680"/>
+<rect x="980" y="440" width="320" height="440" rx="24"/>
+<rect x="1020" y="480" width="240" height="90" rx="8"/>
+<path d="M1030 620 H1080 M1110 620 H1160 M1190 620 H1240 M1030 690 H1080 M1110 690 H1160 M1190 690 H1240 M1030 760 H1080 M1110 760 H1160 M1190 760 H1240 M1030 830 H1080 M1110 830 H1240"/>
+<rect x="980" y="120" width="320" height="260" rx="14"/>
+<path d="M980 190 H1300 M1060 90 V150 M1220 90 V150"/>
+<text x="1080" y="330" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">15</text>
+
+=== donation
+<path d="M440 360 H1160 V860 H440 Z"/>
+<path d="M440 360 L540 280 H1260 L1160 360 M1260 280 V780 L1160 860"/>
+<path d="M700 320 H1000"/>
+<path d="M800 760 C 640 660 580 580 600 520 C 620 460 700 450 740 480 C 770 500 790 530 800 560 C 810 530 830 500 860 480 C 900 450 980 460 1000 520 C 1020 580 960 660 800 760 Z"/>
+<path d="M760 120 L700 300 L760 310 L860 140"/>
+<path d="M720 160 L860 180" stroke-width="0"/>
+<path d="M900 80 C 860 100 820 140 800 200"/>
+
+=== bank
+<path d="M180 380 L800 140 L1420 380 Z"/>
+<text x="680" y="330" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">BANK</text>
+<path d="M220 380 H1380 V430 H220 Z"/>
+<path d="M300 430 V780 M380 430 V780 M560 430 V780 M640 430 V780 M960 430 V780 M1040 430 V780 M1220 430 V780 M1300 430 V780"/>
+<path d="M220 780 H1380 V830 H220 Z M160 830 H1440 V880 H160 Z"/>
+<path d="M740 780 V580 H860 V780"/>
+
+=== safe
+<rect x="420" y="160" width="760" height="680" rx="30"/>
+<rect x="480" y="220" width="640" height="560" rx="16"/>
+<circle cx="760" cy="500" r="140"/>
+<circle cx="760" cy="500" r="40"/>
+<path d="M760 360 V380 M900 500 H880 M760 640 V620 M620 500 H640 M860 400 L846 414 M660 400 L674 414 M860 600 L846 586 M660 600 L674 586"/>
+<path d="M1000 420 V580 M980 420 H1020 M980 580 H1020"/>
+<path d="M480 840 V880 H560 V840 M1040 840 V880 H1120 V840"/>
+
+=== gold-bar
+<path d="M340 760 L480 560 H1120 L1260 760 Z"/>
+<path d="M480 560 L520 500 H1080 L1120 560"/>
+<path d="M340 760 V800 H1260 V760"/>
+<path d="M620 640 H980 V700 H620 Z"/>
+<path d="M560 420 L460 360 L560 320 L600 220 L640 320 L740 360 L640 400 L600 500 Z" transform="translate(-60 -60) scale(1)" stroke-width="0"/>
+<path d="M1160 380 L1180 320 L1200 380 L1260 400 L1200 420 L1180 480 L1160 420 L1100 400 Z"/>
+<path d="M420 460 L436 420 L452 460 L492 476 L452 492 L436 532 L420 492 L380 476 Z"/>
+
+=== cash
+<path d="M300 460 H1300 V780 H300 Z"/>
+<path d="M320 420 H1320 V740"/>
+<path d="M340 380 H1340 V700"/>
+<ellipse cx="800" cy="620" rx="120" ry="110"/>
+<text x="760" y="660" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">$</text>
+<path d="M620 460 V780 M980 460 V780"/>
+<path d="M620 460 C 700 400 900 400 980 460" stroke-width="0"/>
+<path d="M360 520 H520 M1080 720 H1240"/>
+
+=== coin-purse
+<path d="M480 460 C 380 600 400 840 800 860 C 1200 840 1220 600 1120 460"/>
+<path d="M480 460 C 480 300 1120 300 1120 460 Z"/>
+<path d="M500 470 C 510 340 1090 340 1100 470"/>
+<circle cx="770" cy="290" r="30"/>
+<circle cx="830" cy="290" r="30"/>
+<path d="M760 318 L780 345 M840 318 L820 345"/>
+<path d="M560 600 C 640 640 960 640 1040 600" stroke-dasharray="12 16"/>
+<ellipse cx="1320" cy="800" rx="90" ry="34"/>
+<ellipse cx="1320" cy="760" rx="90" ry="34"/>
+
+=== contactless-payment
+<rect x="540" y="300" width="460" height="580" rx="40"/>
+<rect x="600" y="360" width="340" height="180" rx="12"/>
+<rect x="620" y="600" width="80" height="50" rx="8"/>
+<rect x="730" y="600" width="80" height="50" rx="8"/>
+<rect x="840" y="600" width="80" height="50" rx="8"/>
+<rect x="620" y="680" width="80" height="50" rx="8"/>
+<rect x="730" y="680" width="80" height="50" rx="8"/>
+<rect x="840" y="680" width="80" height="50" rx="8"/>
+<rect x="720" y="780" width="100" height="50" rx="8"/>
+<g transform="rotate(-18 1120 240)"><rect x="960" y="140" width="340" height="210" rx="20"/><rect x="1000" y="190" width="70" height="56" rx="8"/></g>
+<path d="M860 230 C 830 250 830 290 860 310 M820 200 C 770 240 770 300 820 340 M780 170 C 710 230 710 310 780 370"/>
+
+=== mobile-banking
+<rect x="560" y="80" width="480" height="840" rx="50"/>
+<rect x="590" y="160" width="420" height="660" rx="12"/>
+<path d="M740 120 H860"/>
+<circle cx="800" cy="870" r="24"/>
+<path d="M660 360 L800 280 L940 360 Z M680 360 H920 V380 H680 Z M700 380 V480 M760 380 V480 M840 380 V480 M900 380 V480 M670 480 H930"/>
+<rect x="640" y="560" width="320" height="80" rx="16"/>
+<rect x="640" y="670" width="150" height="100" rx="12"/>
+<rect x="810" y="670" width="150" height="100" rx="12"/>
+
+=== qr-code
+<rect x="340" y="140" width="720" height="720" rx="20"/>
+<rect x="400" y="200" width="200" height="200" rx="10"/>
+<rect x="450" y="250" width="100" height="100" rx="6"/>
+<rect x="800" y="200" width="200" height="200" rx="10"/>
+<rect x="850" y="250" width="100" height="100" rx="6"/>
+<rect x="400" y="600" width="200" height="200" rx="10"/>
+<rect x="450" y="650" width="100" height="100" rx="6"/>
+<path d="M660 200 H720 V260 H660 Z M660 320 H740 V400 H660 Z M820 460 H900 V540 H820 Z M660 460 H740 V560 H660 Z M940 460 H1000 V520 H940 Z M400 460 H480 V540 H400 Z M520 460 H600 V520 H520 Z M680 620 H760 V700 H680 Z M800 600 H880 V660 H800 Z M920 600 H1000 V700 H920 Z M800 720 H900 V800 H800 Z M680 740 H740 V800 H680 Z M940 760 H1000 V800 H940 Z"/>
+<path d="M1100 380 L1340 280 V760 L1100 660" stroke-width="0"/>
+
+=== bank-statement
+<rect x="380" y="80" width="840" height="840" rx="16"/>
+<text x="440" y="190" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">STATEMENT</text>
+<path d="M440 240 H760"/>
+<path d="M440 320 H1160 M440 400 H1160 M440 480 H1160 M440 560 H1160 M440 640 H1160 M440 720 H1160"/>
+<path d="M480 360 H760 M480 440 H700 M480 520 H780 M480 600 H720 M480 680 H760"/>
+<text x="960" y="375" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">+500</text>
+<text x="970" y="455" font-family="Arial" font-size="50" fill="#222" stroke="none">-120</text>
+<text x="970" y="535" font-family="Arial" font-size="50" fill="#222" stroke="none">-45</text>
+<text x="960" y="615" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">+200</text>
+<text x="970" y="695" font-family="Arial" font-size="50" fill="#222" stroke="none">-80</text>
+<text x="440" y="830" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">BALANCE   $455</text>
+
+=== payslip
+<rect x="360" y="140" width="880" height="720" rx="16"/>
+<text x="440" y="260" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">PAYSLIP</text>
+<path d="M440 320 H1160 M440 320 V660 M1160 320 V660 M440 660 H1160 M800 320 V660 M440 400 H1160 M440 480 H1160 M440 560 H1160"/>
+<path d="M480 360 H700 M480 440 H660 M480 520 H720 M480 600 H680 M860 360 H1000 M860 440 H1060 M860 520 H980 M860 600 H1040"/>
+<text x="440" y="780" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">NET PAY</text>
+<path d="M800 770 H1140"/>
+<path d="M360 200 H1240" stroke-dasharray="12 14" stroke-width="0"/>
+
+=== ledger
+<path d="M800 260 C 700 200 400 180 220 220 V820 C 400 780 700 800 800 860 C 900 800 1200 780 1380 820 V220 C 1200 180 900 200 800 260 Z"/>
+<path d="M800 260 V860"/>
+<path d="M280 320 C 450 290 650 300 760 340 M280 420 C 450 390 650 400 760 440 M280 520 C 450 490 650 500 760 540 M280 620 C 450 590 650 600 760 640 M280 720 C 450 690 650 700 760 740"/>
+<path d="M840 340 C 950 300 1150 290 1320 320 M840 440 C 950 400 1150 390 1320 420 M840 540 C 950 500 1150 490 1320 520 M840 640 C 950 600 1150 590 1320 620 M840 740 C 950 700 1150 690 1320 720"/>
+<path d="M600 300 V790 M1000 300 V790 M1160 290 V790" stroke-width="5"/>
+
+=== abacus
+<rect x="300" y="160" width="1000" height="680" rx="20"/>
+<path d="M340 300 H1260 M340 440 H1260 M340 580 H1260 M340 720 H1260"/>
+<path d="M300 160 V840 M1300 160 V840" stroke-width="20"/>
+<ellipse cx="420" cy="300" rx="44" ry="34"/>
+<ellipse cx="510" cy="300" rx="44" ry="34"/>
+<ellipse cx="900" cy="300" rx="44" ry="34"/>
+<ellipse cx="990" cy="300" rx="44" ry="34"/>
+<ellipse cx="1080" cy="300" rx="44" ry="34"/>
+<ellipse cx="420" cy="440" rx="44" ry="34"/>
+<ellipse cx="800" cy="440" rx="44" ry="34"/>
+<ellipse cx="890" cy="440" rx="44" ry="34"/>
+<ellipse cx="980" cy="440" rx="44" ry="34"/>
+<ellipse cx="420" cy="580" rx="44" ry="34"/>
+<ellipse cx="510" cy="580" rx="44" ry="34"/>
+<ellipse cx="600" cy="580" rx="44" ry="34"/>
+<ellipse cx="1100" cy="580" rx="44" ry="34"/>
+<ellipse cx="420" cy="720" rx="44" ry="34"/>
+<ellipse cx="900" cy="720" rx="44" ry="34"/>
+<ellipse cx="990" cy="720" rx="44" ry="34"/>
+<ellipse cx="1080" cy="720" rx="44" ry="34"/>
+<ellipse cx="1170" cy="720" rx="44" ry="34"/>
+
+=== mortgage
+<rect x="300" y="300" width="760" height="600" rx="16"/>
+<text x="360" y="410" font-family="Arial" font-size="64" font-weight="700" fill="#222" stroke="none">HOME LOAN</text>
+<path d="M360 480 H1000 M360 550 H960 M360 620 H1000 M360 690 H900"/>
+<path d="M640 830 C 680 790 720 800 740 820 C 760 790 800 790 840 820"/>
+<path d="M1000 300 L1180 140 L1360 300 V520 H1000 Z" stroke-width="0"/>
+<path d="M980 260 L1180 100 L1380 260"/>
+<path d="M1020 240 V440 H1340 V240"/>
+<path d="M1140 440 V340 H1220 V440"/>
+<circle cx="1180" cy="620" r="60"/>
+<circle cx="1180" cy="620" r="24"/>
+<path d="M1180 680 V860 M1180 760 H1230 M1180 820 H1220"/>
+
+=== insurance
+<path d="M300 440 C 340 220 600 140 800 140 C 1000 140 1260 220 1300 440 C 1240 400 1160 400 1100 440 C 1040 400 960 400 900 440 C 840 400 760 400 700 440 C 640 400 560 400 500 440 C 440 400 360 400 300 440 Z"/>
+<path d="M800 140 V100"/>
+<path d="M800 440 V820 C 800 880 720 880 720 820"/>
+<path d="M560 860 V640 L800 500" stroke-width="0"/>
+<path d="M880 660 L1100 500 L1320 660 V860 H880 Z" transform="translate(-260 0)"/>
+<path d="M800 860 V760 H880 V860" transform="translate(-140 0)" stroke-width="0"/>
+<path d="M200 300 L180 340 M240 220 L220 260 M1360 260 L1340 300 M1400 340 L1380 380 M120 420 L100 460 M1440 420 L1420 460"/>
+
+=== exchange-rate
+<rect x="220" y="160" width="1160" height="680" rx="20"/>
+<path d="M220 300 H1380 M220 500 H1380 M220 680 H1380"/>
+<text x="280" y="250" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">EXCHANGE RATE</text>
+<text x="280" y="430" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">USD</text>
+<text x="700" y="430" font-family="Arial" font-size="90" fill="#222" stroke="none">25,400</text>
+<text x="280" y="620" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">EUR</text>
+<text x="700" y="620" font-family="Arial" font-size="90" fill="#222" stroke="none">27,300</text>
+<path d="M1220 440 V350 M1180 390 L1220 350 L1260 390 M1220 560 V650 M1180 610 L1220 650 L1260 610"/>
+<text x="280" y="790" font-family="Arial" font-size="56" fill="#222" stroke="none">JPY        170</text>
+
+=== safe-deposit-box
+<rect x="200" y="140" width="1200" height="720" rx="10"/>
+<path d="M200 320 H1400 M200 500 H1400 M200 680 H1400 M440 140 V860 M680 140 V860 M920 140 V860 M1160 140 V860"/>
+<circle cx="320" cy="230" r="14"/>
+<circle cx="560" cy="230" r="14"/>
+<circle cx="800" cy="230" r="14"/>
+<circle cx="1040" cy="230" r="14"/>
+<circle cx="1280" cy="230" r="14"/>
+<circle cx="320" cy="410" r="14"/>
+<circle cx="560" cy="410" r="14"/>
+<circle cx="1040" cy="410" r="14"/>
+<circle cx="1280" cy="410" r="14"/>
+<circle cx="320" cy="590" r="14"/>
+<circle cx="560" cy="590" r="14"/>
+<circle cx="800" cy="590" r="14"/>
+<circle cx="1040" cy="590" r="14"/>
+<circle cx="1280" cy="590" r="14"/>
+<path d="M680 320 L560 360 V540 L680 500" stroke-width="0"/>
+<path d="M920 500 L1000 540 V720 L920 680" stroke-width="0"/>
+<rect x="720" y="380" width="160" height="70" rx="10"/>
+<text x="700" y="290" font-family="Arial" font-size="44" fill="#222" stroke="none">103</text>
+
+=== stockbroker
+<rect x="560" y="120" width="400" height="280" rx="12"/>
+<rect x="1000" y="120" width="400" height="280" rx="12"/>
+<path d="M600 340 L700 260 L780 300 L900 180 M1040 200 L1140 300 L1240 240 L1360 340"/>
+<path d="M760 400 V460 M1200 400 V460"/>
+<circle cx="380" cy="380" r="76"/>
+<path d="M240 880 V640 C 240 540 290 490 380 490 C 470 490 520 540 520 640 V880"/>
+<path d="M300 360 C 280 330 290 290 320 300 L340 360 C 340 420 320 440 300 430 Z"/>
+<path d="M300 430 L260 520"/>
+<path d="M480 560 L640 640"/>
+<path d="M200 640 H1440 V680 H200 Z"/>
+
+=== pawnshop
+<path d="M400 100 H1200"/>
+<path d="M800 100 V280"/>
+<path d="M800 280 L540 400 M800 280 L800 420 M800 280 L1060 400"/>
+<circle cx="540" cy="500" r="100"/>
+<circle cx="800" cy="520" r="100"/>
+<circle cx="1060" cy="500" r="100"/>
+<path d="M200 880 V700 H1400 V880"/>
+<rect x="300" y="740" width="300" height="140" rx="6"/>
+<path d="M900 880 V740 H1100 V880"/>
+
+=== lottery-ticket
+<rect x="300" y="200" width="1000" height="600" rx="24"/>
+<path d="M300 320 H1300"/>
+<text x="360" y="290" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">LOTTERY</text>
+<circle cx="440" cy="460" r="60"/>
+<circle cx="600" cy="460" r="60"/>
+<circle cx="760" cy="460" r="60"/>
+<circle cx="920" cy="460" r="60"/>
+<circle cx="1080" cy="460" r="60"/>
+<text x="410" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">07</text>
+<text x="570" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">13</text>
+<text x="730" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">22</text>
+<text x="890" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">35</text>
+<text x="1050" y="480" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">41</text>
+<path d="M380 620 V720 M410 620 V720 M450 620 V720 M480 620 V720 M520 620 V720 M560 620 V720 M590 620 V720 M630 620 V720"/>
+<path d="M800 660 H1200"/>
+<path d="M1200 220 L1220 180 L1240 220 L1280 230 L1240 250 L1220 290 L1200 250 L1160 230 Z"/>

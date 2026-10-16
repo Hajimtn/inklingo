@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M200 660 H1400 V700 H200 Z"/>
+  <path d="M260 700 V880 M1340 700 V880"/>
+  <path d="M500 640 L560 300 H1000 L940 640 Z"/>
+  <text x="580" y="380" font-family="Arial" font-size="52" font-weight="700" fill="#222" stroke="none" transform="rotate(0)">RESIGNATION</text>
+  <path d="M590 440 H960 M580 500 H950 M570 560 H880"/>
+  <path d="M760 610 C 790 580 820 600 840 590 C 860 580 880 600 900 595"/>
+  <rect x="1100" y="560" width="200" height="100" rx="10"/>
+  <path d="M1150 560 V530 H1250 V560"/>
+  <path d="M300 660 V600 H420 V660 M320 600 V560 H400 V600"/>
+</svg>

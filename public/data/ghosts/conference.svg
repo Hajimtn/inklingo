@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M160 140 H1440 V260 H160 Z"/>
+  <text x="300" y="225" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">CONFERENCE 2026</text>
+  <path d="M300 440 H1300 V480 H300 Z"/>
+  <path d="M340 480 V600 M1260 480 V600"/>
+  <circle cx="560" cy="360" r="40"/>
+  <circle cx="800" cy="360" r="40"/>
+  <circle cx="1040" cy="360" r="40"/>
+  <path d="M500 440 C 500 400 620 400 620 440 M740 440 C 740 400 860 400 860 440 M980 440 C 980 400 1100 400 1100 440"/>
+  <circle cx="360" cy="740" r="56"/>
+  <circle cx="600" cy="740" r="56"/>
+  <circle cx="840" cy="740" r="56"/>
+  <circle cx="1080" cy="740" r="56"/>
+  <circle cx="1320" cy="740" r="56"/>
+  <path d="M270 900 C 280 820 310 800 360 800 C 410 800 440 820 450 900 M510 900 C 520 820 550 800 600 800 C 650 800 680 820 690 900 M750 900 C 760 820 790 800 840 800 C 890 800 920 820 930 900 M990 900 C 1000 820 1030 800 1080 800 C 1130 800 1160 820 1170 900 M1230 900 C 1240 820 1270 800 1320 800 C 1370 800 1400 820 1410 900"/>
+</svg>

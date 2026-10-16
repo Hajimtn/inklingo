@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="800" cy="540" r="320"/>
+  <circle cx="800" cy="540" r="270"/>
+  <rect x="740" y="130" width="120" height="90" rx="14"/>
+  <path d="M780 220 V260 M820 220 V260"/>
+  <path d="M1060 260 L1120 200 L1160 240 L1100 300"/>
+  <text x="560" y="600" font-family="Arial" font-size="170" font-weight="700" fill="#222" stroke="none">05:00</text>
+</svg>

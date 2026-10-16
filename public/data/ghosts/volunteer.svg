@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="560" cy="280" r="74"/>
+  <path d="M420 880 V550 C 420 450 470 400 560 400 C 650 400 700 450 700 550 V880"/>
+  <text x="430" y="560" font-family="Arial" font-size="40" font-weight="700" fill="#222" stroke="none">VOLUNTEER</text>
+  <path d="M690 520 L840 540"/>
+  <path d="M820 480 H1080 V680 H820 Z"/>
+  <path d="M820 540 H1080 M950 480 V680"/>
+  <path d="M900 480 C 900 440 1000 440 1000 480"/>
+  <circle cx="1240" cy="340" r="64"/>
+  <path d="M1120 880 V600 C 1120 510 1160 460 1240 460 C 1320 460 1360 510 1360 600 V880"/>
+  <path d="M1130 560 L1080 580"/>
+</svg>

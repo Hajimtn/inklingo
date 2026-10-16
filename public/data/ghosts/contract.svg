@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="380" y="80" width="840" height="840" rx="16"/>
+  <text x="560" y="210" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">CONTRACT</text>
+  <path d="M460 300 H1140 M460 360 H1100 M460 420 H1140 M460 480 H1060 M460 540 H1120"/>
+  <path d="M460 760 H720 M880 760 H1140"/>
+  <path d="M480 740 C 520 680 560 700 580 730 C 600 700 640 690 680 720"/>
+  <path d="M900 740 C 940 690 980 700 1000 720 C 1020 680 1080 690 1120 720"/>
+  <circle cx="1040" cy="640" r="70"/>
+  <circle cx="1040" cy="640" r="50"/>
+</svg>

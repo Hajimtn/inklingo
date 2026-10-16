@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M180 380 L800 140 L1420 380 Z"/>
+  <text x="680" y="330" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">BANK</text>
+  <path d="M220 380 H1380 V430 H220 Z"/>
+  <path d="M300 430 V780 M380 430 V780 M560 430 V780 M640 430 V780 M960 430 V780 M1040 430 V780 M1220 430 V780 M1300 430 V780"/>
+  <path d="M220 780 H1380 V830 H220 Z M160 830 H1440 V880 H160 Z"/>
+  <path d="M740 780 V580 H860 V780"/>
+</svg>

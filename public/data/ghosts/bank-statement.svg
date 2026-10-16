@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="380" y="80" width="840" height="840" rx="16"/>
+  <text x="440" y="190" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">STATEMENT</text>
+  <path d="M440 240 H760"/>
+  <path d="M440 320 H1160 M440 400 H1160 M440 480 H1160 M440 560 H1160 M440 640 H1160 M440 720 H1160"/>
+  <path d="M480 360 H760 M480 440 H700 M480 520 H780 M480 600 H720 M480 680 H760"/>
+  <text x="960" y="375" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">+500</text>
+  <text x="970" y="455" font-family="Arial" font-size="50" fill="#222" stroke="none">-120</text>
+  <text x="970" y="535" font-family="Arial" font-size="50" fill="#222" stroke="none">-45</text>
+  <text x="960" y="615" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">+200</text>
+  <text x="970" y="695" font-family="Arial" font-size="50" fill="#222" stroke="none">-80</text>
+  <text x="440" y="830" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">BALANCE   $455</text>
+</svg>

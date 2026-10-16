@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M560 100 H1040 V860 L1000 820 L960 860 L920 820 L880 860 L840 820 L800 860 L760 820 L720 860 L680 820 L640 860 L600 820 L560 860 Z"/>
+  <path d="M640 180 H960 M680 230 H920"/>
+  <path d="M620 320 H800 M880 320 H980 M620 390 H760 M880 390 H980 M620 460 H820 M880 460 H980 M620 530 H740 M880 530 H980"/>
+  <path d="M600 600 H1000" stroke-dasharray="16 14"/>
+  <text x="620" y="690" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">TOTAL</text>
+  <path d="M860 670 H980"/>
+  <path d="M640 760 H960" stroke-dasharray="6 10"/>
+</svg>

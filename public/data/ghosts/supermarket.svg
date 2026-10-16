@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M160 860 V320 H1440 V860"/>
+  <rect x="360" y="170" width="880" height="150" rx="14"/>
+  <text x="420" y="275" font-family="Arial" font-size="88" font-weight="700" fill="#222" stroke="none">SUPERMARKET</text>
+  <path d="M220 400 H560 V640 H220 Z M1040 400 H1380 V640 H1040 Z"/>
+  <path d="M220 520 H560 M1040 520 H1380"/>
+  <path d="M640 860 V400 H960 V860 M800 400 V860"/>
+  <path d="M760 600 H780 M820 600 H840"/>
+  <path d="M120 860 H1480"/>
+  <path d="M200 700 H260 L300 820 H460"/>
+  <path d="M270 730 H480 L450 800 H295"/>
+  <circle cx="320" cy="845" r="16"/>
+  <circle cx="440" cy="845" r="16"/>
+  <path d="M1100 700 H1160 L1200 820 H1360"/>
+  <path d="M1170 730 H1380 L1350 800 H1195"/>
+  <circle cx="1220" cy="845" r="16"/>
+  <circle cx="1340" cy="845" r="16"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="560" y="120" width="480" height="760" rx="40"/>
+  <rect x="610" y="180" width="380" height="150" rx="12"/>
+  <path d="M900 230 V280 M860 230 H880 V255 H860 V280 H880"/>
+  <rect x="610" y="380" width="80" height="70" rx="14"/>
+  <rect x="710" y="380" width="80" height="70" rx="14"/>
+  <rect x="810" y="380" width="80" height="70" rx="14"/>
+  <rect x="910" y="380" width="80" height="70" rx="14"/>
+  <rect x="610" y="480" width="80" height="70" rx="14"/>
+  <rect x="710" y="480" width="80" height="70" rx="14"/>
+  <rect x="810" y="480" width="80" height="70" rx="14"/>
+  <rect x="910" y="480" width="80" height="70" rx="14"/>
+  <rect x="610" y="580" width="80" height="70" rx="14"/>
+  <rect x="710" y="580" width="80" height="70" rx="14"/>
+  <rect x="810" y="580" width="80" height="70" rx="14"/>
+  <rect x="910" y="580" width="80" height="170" rx="14"/>
+  <rect x="610" y="680" width="180" height="70" rx="14"/>
+  <rect x="810" y="680" width="80" height="70" rx="14"/>
+  <path d="M930 615 H970 M950 595 V635"/>
+</svg>

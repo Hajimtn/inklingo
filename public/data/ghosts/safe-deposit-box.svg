@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="200" y="140" width="1200" height="720" rx="10"/>
+  <path d="M200 320 H1400 M200 500 H1400 M200 680 H1400 M440 140 V860 M680 140 V860 M920 140 V860 M1160 140 V860"/>
+  <circle cx="320" cy="230" r="14"/>
+  <circle cx="560" cy="230" r="14"/>
+  <circle cx="800" cy="230" r="14"/>
+  <circle cx="1040" cy="230" r="14"/>
+  <circle cx="1280" cy="230" r="14"/>
+  <circle cx="320" cy="410" r="14"/>
+  <circle cx="560" cy="410" r="14"/>
+  <circle cx="1040" cy="410" r="14"/>
+  <circle cx="1280" cy="410" r="14"/>
+  <circle cx="320" cy="590" r="14"/>
+  <circle cx="560" cy="590" r="14"/>
+  <circle cx="800" cy="590" r="14"/>
+  <circle cx="1040" cy="590" r="14"/>
+  <circle cx="1280" cy="590" r="14"/>
+  <path d="M680 320 L560 360 V540 L680 500" stroke-width="0"/>
+  <path d="M920 500 L1000 540 V720 L920 680" stroke-width="0"/>
+  <rect x="720" y="380" width="160" height="70" rx="10"/>
+  <text x="700" y="290" font-family="Arial" font-size="44" fill="#222" stroke="none">103</text>
+</svg>

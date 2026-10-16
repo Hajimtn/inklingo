@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M280 260 H1000 L1040 300 H240 Z"/>
+  <path d="M300 300 V860 M960 300 V860"/>
+  <rect x="330" y="320" width="600" height="380" rx="8"/>
+  <path d="M380 700 V640 H880 V700 M420 700 V780 M840 700 V780"/>
+  <path d="M1220 860 V340"/>
+  <circle cx="1220" cy="250" r="110"/>
+  <text x="1150" y="275" font-family="Arial" font-size="72" font-weight="700" fill="#222" stroke="none">BUS</text>
+  <path d="M200 860 H1400"/>
+</svg>

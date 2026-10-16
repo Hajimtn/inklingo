@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M140 400 L420 220 L700 400 Z"/>
+  <path d="M180 400 V700 H660 V400"/>
+  <path d="M260 440 V660 M360 440 V660 M480 440 V660 M580 440 V660"/>
+  <path d="M140 700 H700"/>
+  <text x="330" y="370" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">BANK</text>
+  <path d="M780 340 H1120 M1070 300 L1120 340 L1070 380"/>
+  <path d="M1180 360 C 1160 300 1220 270 1260 290 C 1300 270 1360 300 1340 360 C 1400 420 1400 520 1340 560 H1180 C 1120 520 1120 420 1180 360 Z"/>
+  <text x="1215" y="490" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">$</text>
+  <path d="M1120 700 H780 M830 660 L780 700 L830 740"/>
+  <text x="880" y="820" font-family="Arial" font-size="70" font-weight="700" fill="#222" stroke="none">+ 5%</text>
+</svg>

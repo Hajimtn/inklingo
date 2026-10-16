@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M380 140 H1220 V860 H380 Z"/>
+  <path d="M340 120 L440 160 M1180 160 L1260 120 M340 880 L440 840 M1180 840 L1260 880" stroke-width="22"/>
+  <text x="520" y="290" font-family="Arial" font-size="100" font-weight="700" fill="#222" stroke="none">CONCERT</text>
+  <path d="M620 720 V420 L860 380 V660"/>
+  <ellipse cx="580" cy="720" rx="60" ry="44"/>
+  <ellipse cx="820" cy="660" rx="60" ry="44"/>
+  <path d="M620 470 L860 430"/>
+  <path d="M960 500 H1140 M960 580 H1100 M960 660 H1140"/>
+  <text x="560" y="820" font-family="Arial" font-size="52" fill="#222" stroke="none">SAT 20:00</text>
+</svg>

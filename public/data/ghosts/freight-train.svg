@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M80 760 H1520"/>
+  <path d="M80 800 H1520 M120 760 V800 M240 760 V800 M360 760 V800 M480 760 V800 M600 760 V800 M720 760 V800 M840 760 V800 M960 760 V800 M1080 760 V800 M1200 760 V800 M1320 760 V800 M1440 760 V800" stroke-width="7"/>
+  <path d="M1080 720 V420 H1300 V320 H1420 V720 Z"/>
+  <path d="M1300 420 H1420 M1320 340 H1400 V400 H1320 Z"/>
+  <path d="M1120 420 V340 H1180 V420"/>
+  <circle cx="1160" cy="730" r="34"/>
+  <circle cx="1340" cy="730" r="34"/>
+  <rect x="580" y="460" width="460" height="260" rx="8"/>
+  <path d="M660 460 V720 M740 460 V720 M820 460 V720 M900 460 V720 M980 460 V720"/>
+  <circle cx="660" cy="730" r="30"/>
+  <circle cx="960" cy="730" r="30"/>
+  <rect x="100" y="460" width="440" height="260" rx="8"/>
+  <path d="M100 540 H540 M100 620 H540"/>
+  <circle cx="180" cy="730" r="30"/>
+  <circle cx="460" cy="730" r="30"/>
+  <path d="M540 680 H580 M1040 680 H1080"/>
+  <path d="M1150 330 C 1110 280 1170 250 1140 200"/>
+</svg>

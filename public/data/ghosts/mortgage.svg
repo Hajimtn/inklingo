@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="300" y="300" width="760" height="600" rx="16"/>
+  <text x="360" y="410" font-family="Arial" font-size="64" font-weight="700" fill="#222" stroke="none">HOME LOAN</text>
+  <path d="M360 480 H1000 M360 550 H960 M360 620 H1000 M360 690 H900"/>
+  <path d="M640 830 C 680 790 720 800 740 820 C 760 790 800 790 840 820"/>
+  <path d="M1000 300 L1180 140 L1360 300 V520 H1000 Z" stroke-width="0"/>
+  <path d="M980 260 L1180 100 L1380 260"/>
+  <path d="M1020 240 V440 H1340 V240"/>
+  <path d="M1140 440 V340 H1220 V440"/>
+  <circle cx="1180" cy="620" r="60"/>
+  <circle cx="1180" cy="620" r="24"/>
+  <path d="M1180 680 V860 M1180 760 H1230 M1180 820 H1220"/>
+</svg>

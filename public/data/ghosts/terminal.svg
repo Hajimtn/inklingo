@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M180 780 V420 C 500 300 1100 300 1420 420 V780 Z"/>
+  <path d="M180 500 H1420"/>
+  <path d="M300 500 V780 M440 500 V780 M580 500 V780 M720 500 V780 M860 500 V780 M1000 500 V780 M1140 500 V780 M1280 500 V780"/>
+  <path d="M180 640 H1420"/>
+  <text x="740" y="460" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">T2</text>
+  <path d="M120 780 H1480"/>
+  <path d="M380 900 C 600 880 900 870 1200 880 C 1240 882 1250 900 1230 910 L 1200 920 H 420 C 380 920 370 905 380 900 Z"/>
+  <path d="M700 880 L760 830 H820 L800 880 M760 920 L820 960 H860 L830 920"/>
+  <path d="M1180 880 L1220 840 H1250 L1240 880"/>
+</svg>

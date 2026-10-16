@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="1060" y="120" width="320" height="200" rx="16"/>
+  <text x="1130" y="265" font-family="Arial" font-size="130" font-weight="700" fill="#222" stroke="none">A12</text>
+  <path d="M140 880 V700 H1100 V880"/>
+  <path d="M160 700 V560 C 160 540 175 530 195 530 H365 C 385 530 400 540 400 560 V700"/>
+  <path d="M420 700 V560 C 420 540 435 530 455 530 H625 C 645 530 660 540 660 560 V700"/>
+  <path d="M680 700 V560 C 680 540 695 530 715 530 H885 C 905 530 920 540 920 560 V700"/>
+  <path d="M140 760 H1100"/>
+  <circle cx="540" cy="420" r="56"/>
+  <path d="M460 700 V560 C 460 510 490 490 540 490 C 590 490 620 510 620 560"/>
+  <path d="M1220 320 V880"/>
+  <path d="M1180 880 H1260"/>
+</svg>

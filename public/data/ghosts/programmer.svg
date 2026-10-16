@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="600" y="160" width="760" height="480" rx="20"/>
+  <rect x="632" y="192" width="696" height="416" rx="8"/>
+  <text x="670" y="270" font-family="Courier New" font-size="44" fill="#222" stroke="none">&lt;div&gt; if (x) {</text>
+  <text x="710" y="340" font-family="Courier New" font-size="44" fill="#222" stroke="none">run(); }</text>
+  <text x="670" y="410" font-family="Courier New" font-size="44" fill="#222" stroke="none">for i in data:</text>
+  <text x="710" y="480" font-family="Courier New" font-size="44" fill="#222" stroke="none">print(i)</text>
+  <path d="M940 640 V720 H1020 V640 M860 720 H1100"/>
+  <circle cx="340" cy="360" r="74"/>
+  <path d="M200 880 V620 C 200 520 250 470 340 470 C 430 470 480 520 480 620 V880"/>
+  <path d="M470 700 L640 780"/>
+  <path d="M560 780 H1300 L1260 840 H600 Z"/>
+</svg>

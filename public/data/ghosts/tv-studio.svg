@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M300 80 H1300"/>
+  <path d="M500 80 V160 M1100 80 V160"/>
+  <path d="M440 160 H560 L540 230 H460 Z M1040 160 H1160 L1140 230 H1060 Z"/>
+  <rect x="640" y="120" width="320" height="100" rx="14"/>
+  <text x="680" y="195" font-family="Arial" font-size="70" font-weight="700" fill="#222" stroke="none">ON AIR</text>
+  <path d="M500 560 H1100 L1060 760 H540 Z"/>
+  <circle cx="800" cy="400" r="70"/>
+  <path d="M680 560 C 685 480 730 450 800 450 C 870 450 915 480 920 560"/>
+  <path d="M200 600 H420 V760 H200 Z"/>
+  <path d="M420 640 L480 620 V740 L420 720"/>
+  <path d="M310 760 V880 M310 820 L230 880 M310 820 L390 880"/>
+</svg>

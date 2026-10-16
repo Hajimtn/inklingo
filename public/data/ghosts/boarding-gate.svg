@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M800 120 H1340 V300 H800 Z"/>
+  <text x="840" y="245" font-family="Arial" font-size="96" font-weight="700" fill="#222" stroke="none">GATE 12</text>
+  <path d="M1070 300 V420"/>
+  <path d="M200 880 V700 M200 700 H1100 M1100 700 V880"/>
+  <path d="M220 700 V560 C 220 540 235 530 255 530 H385 C 405 530 420 540 420 560 V700"/>
+  <path d="M440 700 V560 C 440 540 455 530 475 530 H605 C 625 530 640 540 640 560 V700"/>
+  <path d="M660 700 V560 C 660 540 675 530 695 530 H825 C 845 530 860 540 860 560 V700"/>
+  <path d="M880 700 V560 C 880 540 895 530 915 530 H1045 C 1065 530 1080 540 1080 560 V700"/>
+  <path d="M200 760 H1100"/>
+  <path d="M1200 880 V460 H1500"/>
+  <path d="M1200 600 H1500"/>
+</svg>

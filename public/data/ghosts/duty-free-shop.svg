@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="240" y="140" width="1120" height="160" rx="12"/>
+  <text x="490" y="255" font-family="Arial" font-size="100" font-weight="700" fill="#222" stroke="none">DUTY FREE</text>
+  <path d="M240 300 L300 380 L360 300 L420 380 L480 300 L540 380 L600 300 L660 380 L720 300 L780 380 L840 300 L900 380 L960 300 L1020 380 L1080 300 L1140 380 L1200 300 L1260 380 L1320 300 L1360 360"/>
+  <path d="M260 380 V860 H1340 V380"/>
+  <rect x="320" y="440" width="560" height="360" rx="8"/>
+  <path d="M320 620 H880"/>
+  <path d="M380 620 V520 L400 490 V460 H420 V490 L440 520 V620 M500 620 V500 H560 V620 M620 620 V530 C 620 500 680 500 680 530 V620 M740 620 V480 L760 460 L780 480 V620"/>
+  <path d="M400 800 V700 H460 V800 M520 800 V680 C 520 650 580 650 580 680 V800 M660 800 V720 H760 V800"/>
+  <path d="M960 860 V440 H1280 V860"/>
+  <circle cx="1000" cy="660" r="12"/>
+</svg>

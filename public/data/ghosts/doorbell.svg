@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M200 120 H700 V880 H200 Z"/>
+  <path d="M240 160 H660 V880"/>
+  <circle cx="620" cy="520" r="18"/>
+  <rect x="820" y="400" width="140" height="240" rx="24"/>
+  <circle cx="890" cy="520" r="40"/>
+  <path d="M1300 600 C 1200 590 1100 560 940 530 C 910 524 900 504 920 494 C 940 484 1000 494 1060 500 L1200 470 C 1240 460 1280 470 1300 490"/>
+  <path d="M1300 600 C 1340 610 1400 600 1440 580"/>
+  <text x="900" y="300" font-family="Arial" font-size="90" font-weight="700" fill="#222" stroke="none">DING DONG</text>
+  <path d="M800 360 L760 330 M980 360 L1020 330"/>
+</svg>

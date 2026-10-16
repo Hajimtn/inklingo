@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="380" y="80" width="840" height="840" rx="16"/>
+  <text x="460" y="200" font-family="Arial" font-size="80" font-weight="700" fill="#222" stroke="none">INVOICE</text>
+  <path d="M460 250 H700 M460 290 H660"/>
+  <path d="M440 360 H1160 V700 H440 Z M440 440 H1160 M440 520 H1160 M440 600 H1160 M900 360 V700"/>
+  <path d="M480 480 H760 M480 560 H720 M480 640 H800 M960 480 H1100 M960 560 H1100 M960 640 H1100"/>
+  <text x="460" y="800" font-family="Arial" font-size="56" font-weight="700" fill="#222" stroke="none">TOTAL DUE</text>
+  <path d="M900 790 H1140"/>
+</svg>

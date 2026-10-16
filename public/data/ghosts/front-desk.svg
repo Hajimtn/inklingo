@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="460" y="90" width="680" height="120" rx="12"/>
+  <text x="510" y="175" font-family="Arial" font-size="72" font-weight="700" fill="#222" stroke="none">RECEPTION</text>
+  <path d="M300 280 H1300 V470 H300 Z"/>
+  <path d="M380 280 V470 M480 280 V470 M580 280 V470 M300 375 H600"/>
+  <circle cx="430" cy="340" r="10"/>
+  <circle cx="530" cy="340" r="10"/>
+  <circle cx="430" cy="430" r="10"/>
+  <path d="M220 560 H1380 V600 H220 Z"/>
+  <path d="M260 600 V880 H1340 V600"/>
+  <path d="M260 740 H1340"/>
+  <path d="M880 560 C 880 490 1000 490 1000 560 Z"/>
+  <path d="M940 490 V475"/>
+  <circle cx="940" cy="468" r="10"/>
+  <path d="M860 560 H1020"/>
+  <rect x="1100" y="500" width="160" height="60" rx="6"/>
+</svg>

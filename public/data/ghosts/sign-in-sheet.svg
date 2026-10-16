@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="440" y="120" width="720" height="780" rx="30"/>
+  <path d="M660 160 V120 C 660 90 680 80 700 80 H900 C 920 80 940 90 940 120 V160 Z"/>
+  <rect x="480" y="200" width="640" height="660" rx="8"/>
+  <path d="M480 300 H1120 M800 200 V860"/>
+  <text x="560" y="275" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">NAME</text>
+  <text x="860" y="275" font-family="Arial" font-size="50" font-weight="700" fill="#222" stroke="none">SIGN</text>
+  <path d="M480 400 H1120 M480 500 H1120 M480 600 H1120 M480 700 H1120 M480 800 H1120"/>
+  <path d="M520 360 H740 M520 460 H700 M520 560 H760"/>
+  <path d="M840 370 C 870 330 900 360 920 340 C 940 320 980 370 1060 350 M840 470 C 880 430 920 470 950 440 C 980 420 1020 460 1060 450 M840 570 C 870 530 920 560 960 540 C 1000 520 1040 560 1080 550"/>
+</svg>

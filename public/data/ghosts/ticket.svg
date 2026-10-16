@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M260 300 H1340 V440 A60 60 0 0 0 1340 560 V700 H260 V560 A60 60 0 0 0 260 440 Z"/>
+  <path d="M1060 300 V700" stroke-dasharray="20 18"/>
+  <text x="360" y="470" font-family="Arial" font-size="100" font-weight="700" fill="#222" stroke="none">TICKET</text>
+  <path d="M360 560 H900 M360 620 H760"/>
+  <path d="M1200 420 L1225 480 L1290 485 L1240 525 L1258 590 L1200 555 L1142 590 L1160 525 L1110 485 L1175 480 Z"/>
+</svg>

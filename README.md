@@ -55,6 +55,17 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   nhanh”); hình minh họa vẽ tay được thay bằng ảnh chụp thật của từ (GDD §12).
 - Flashcard: chuyển từ bằng phím ← →; kết quả đúng/sai trong bài kiểm tra và ôn tập có màu và icon rõ ràng.
 
+## Vẽ & đoán: gợi ý
+
+- **Gợi ý chữ cái cho người đoán:** khi chưa ai đoán đúng ở 50 %, 70 % và 85 % thời gian vẽ, server mở thêm 1 chữ cái của từ
+  (ô chữ hiện đúng chữ ở đúng vị trí, chat báo "Gợi ý: hiện thêm 1 chữ cái"). Tối đa 1/3 số chữ cái, từ ≤ 3 chữ cái không có
+  gợi ý, và không bao giờ mở hết từ. Có người đoán đúng rồi thì dừng gợi ý.
+- **Ghost Sketch (trợ lý vẽ cấp 5):** mặc định là **hình mẫu nét** vẽ tay riêng cho từng từ (nét viền sạch, ít chi tiết), hiện
+  mờ dưới canvas chỉ người vẽ thấy. Vẫn chọn được "Đường viền từ ảnh thật" (lọc cạnh từ ảnh) hoặc bố cục người que.
+  486/486 từ có mẫu nét: nguồn ở `tools/ghost_src/<chủ đề>.txt` (`=== <id>` + thân SVG 1600×1000), build bằng
+  `python3 tools/ghosts.py build` ra `public/data/ghosts/<id>.svg`; `python3 tools/ghosts.py sheet <chủ đề>` dựng bảng duyệt,
+  `missing` liệt kê từ thiếu mẫu. Mẫu do Inklingo tự vẽ bằng mã, không dùng AI hay tài sản của trò chơi khác.
+
 ## Ôn tập: Word Recall
 
 Ôn bằng cách **tự nhớ lại và gõ từ** (không trắc nghiệm), mỗi phiên tối đa 10 từ, 2–4 phút.
@@ -116,6 +127,7 @@ public/js/screens/       Home, Daily, Topics/Quiz, Review, Play, Group, Settings
 public/js/net/           online.js (WebSocket), sessions.js, groups.js (API nhóm, đồng bộ lịch, báo điểm)
 public/js/ui/            dom.js (helper DOM, hộp thoại), icons.js (bộ icon SVG tự vẽ + avatar màu/chữ cái đầu)
 public/js/ui/speech.js   nhận dạng giọng nói của trình duyệt (Word Recall)
+public/data/ghosts/      hình mẫu nét Ghost Sketch (build từ tools/ghost_src/)
 public/js/store/         drawings.js – lưu tranh mỗi lượt (IndexedDB), xem ở trang Thống kê
 public/data/vocab.json   dữ liệu từ vựng đã build (chỉ gồm từ có ảnh thật đã xác minh)
 public/img/w/            ảnh minh họa đã tải về (cache cục bộ) – nguồn Wikimedia Commons

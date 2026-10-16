@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M200 880 V160 M1400 880 V160"/>
+  <path d="M160 880 H240 M1360 880 H1440"/>
+  <path d="M200 260 C 600 300 1000 300 1400 260 V500 C 1000 540 600 540 200 500 Z"/>
+  <text x="350" y="440" font-family="Arial" font-size="110" font-weight="700" fill="#222" stroke="none">GRAND OPENING</text>
+  <circle cx="200" cy="150" r="20"/>
+  <circle cx="1400" cy="150" r="20"/>
+  <path d="M300 620 L340 580 M500 640 L520 590 M1100 620 L1080 580 M1300 640 L1270 600"/>
+</svg>

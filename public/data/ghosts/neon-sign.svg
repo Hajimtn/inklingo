@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="240" y="260" width="1120" height="480" rx="60"/>
+  <rect x="280" y="300" width="1040" height="400" rx="40"/>
+  <text x="440" y="590" font-family="Arial" font-size="230" font-weight="700" fill="none" stroke="#222" stroke-width="9">OPEN</text>
+  <path d="M600 260 L560 120 M1000 260 L1040 120 M520 120 H1080"/>
+  <path d="M200 300 L140 260 M200 700 L140 740 M1400 300 L1460 260 M1400 700 L1460 740"/>
+</svg>
