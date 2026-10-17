@@ -17,6 +17,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'p
 const GROUPS_FILE = process.env.GROUPS_FILE || path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'data', 'groups.json');
 const AVATAR_DIR = process.env.AVATAR_DIR || path.join(path.dirname(GROUPS_FILE), 'avatars');
 const PORT = Number(process.env.PORT) || 8787;
+// Which build is running (Render sets RENDER_GIT_COMMIT): shown by /api/health.
+const VERSION = (process.env.RENDER_GIT_COMMIT || 'dev').slice(0, 7);
+const STARTED_AT = new Date().toISOString();
 const RECONNECT_GRACE_MS = 60_000;
 const EMPTY_ROOM_TTL_MS = 120_000;
 
@@ -399,7 +402,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
   if (url.pathname === '/api/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify({ ok: true, rooms: rooms.size, words: dictionary.size }));
+    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }).end(JSON.stringify({ ok: true, rooms: rooms.size, words: dictionary.size, version: VERSION, startedAt: STARTED_AT }));
     return;
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {
