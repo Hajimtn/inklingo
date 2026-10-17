@@ -4,6 +4,7 @@
 import * as P from '../vocab/progress.js';
 import { toast } from '../ui/dom.js';
 
+import { tr, tServer } from '../i18n.js';
 const cache = new Map(); // profileId -> last group state
 
 export const link = (p = P.active()) => p?.group || null;
@@ -23,10 +24,10 @@ async function api(action, body) {
   try {
     res = await fetch('api/group/' + action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   } catch {
-    throw new ApiError('Không kết nối được server', 0);
+    throw new ApiError(tr('Không kết nối được server'), 0);
   }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new ApiError(data.error || 'Lỗi máy chủ', res.status);
+  if (!res.ok) throw new ApiError(data.error ? tServer(data.error) : tr('Lỗi máy chủ'), res.status);
   return data;
 }
 
@@ -41,7 +42,7 @@ function dropLink(p, e) {
   if (e.status === 403 || e.status === 404) {
     P.setGroupLink(p, null);
     cache.delete(p.id);
-    toast('Bạn không còn trong nhóm', 'bad');
+    toast(tr('Bạn không còn trong nhóm'), 'bad');
   }
 }
 
@@ -62,7 +63,7 @@ export const recoveryCode = (p = P.active()) => (p.group ? `${p.group.code}.${p.
 
 export async function restore(text, p = P.active()) {
   const [code, memberId, secret] = String(text || '').trim().split('.');
-  if (!code || !memberId || !secret) throw new ApiError('Mã khôi phục không hợp lệ', 400);
+  if (!code || !memberId || !secret) throw new ApiError(tr('Mã khôi phục không hợp lệ'), 400);
   const r = await api('state', { code, memberId, secret, date: P.today() });
   P.setGroupLink(p, { code: r.state.code, memberId, secret, name: r.state.name });
   return applied(p, r.state);

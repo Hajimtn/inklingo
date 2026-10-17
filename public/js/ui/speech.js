@@ -1,19 +1,21 @@
 // Speech input via the browser's own recogniser (Web Speech API: Chrome, Edge, Safari; not Firefox).
 // Chrome sends the audio to its speech service; nothing is stored by Inklingo.
 
+import { tr } from '../i18n.js';
+
 const Recognition = () => (typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null);
 
 export const canRecognize = () => !!Recognition();
 
 const MESSAGES = {
-  'not-allowed': 'Hãy cho phép dùng micro trong trình duyệt',
-  'service-not-allowed': 'Trình duyệt không cho dùng nhận dạng giọng nói',
-  'audio-capture': 'Không tìm thấy micro',
-  'no-speech': 'Không nghe thấy gì – thử lại',
-  network: 'Cần kết nối mạng để nhận dạng giọng nói',
+  'not-allowed': tr('Hãy cho phép dùng micro trong trình duyệt'),
+  'service-not-allowed': tr('Trình duyệt không cho dùng nhận dạng giọng nói'),
+  'audio-capture': tr('Không tìm thấy micro'),
+  'no-speech': tr('Không nghe thấy gì – thử lại'),
+  network: tr('Cần kết nối mạng để nhận dạng giọng nói'),
   aborted: '',
 };
-export const speechError = (code) => MESSAGES[code] ?? 'Không nhận dạng được – thử lại';
+export const speechError = (code) => MESSAGES[code] ?? tr('Không nhận dạng được – thử lại');
 
 let current = null;
 

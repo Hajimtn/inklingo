@@ -5,38 +5,39 @@ import { icon } from '../ui/icons.js';
 import { photo, photoFigure, topics, topicIcon, word } from '../vocab/data.js';
 import * as P from '../vocab/progress.js';
 
-const POS = { n: 'danh từ', v: 'động từ', adj: 'tính từ', adv: 'trạng từ' };
+import { tr } from '../i18n.js';
+const POS = { n: tr('danh từ'), v: tr('động từ'), adj: tr('tính từ'), adv: tr('trạng từ') };
 const POS_SHORT = { n: 'n', v: 'v', adj: 'adj', adv: 'adv' };
-const OFFLINE = 'Cần chạy server (npm start) để chơi online';
+const OFFLINE = tr('Cần chạy server (npm start) để chơi online');
 
-export const speakBtn = (text, label = 'Nghe phát âm', cls = '') =>
+export const speakBtn = (text, label = tr('Nghe phát âm'), cls = '') =>
   h('button.btn.icon-btn.speak-btn' + cls, { type: 'button', onclick: (e) => { e.stopPropagation(); speak(text); }, title: label, 'aria-label': `${label}: ${text}` }, icon('volume', { size: 20 }));
 
 /** Where "continue" leads today, depending on the schedule. */
 function nextStep(batch, t, prof) {
   const firstNew = batch.words.find((w) => !prof.viewed[w.id]);
-  if (firstNew) return { href: '#/daily/' + firstNew.id, label: 'Tiếp tục học' };
-  if (batch.words.length) return { href: '#/review', label: 'Ôn tập' };
+  if (firstNew) return { href: '#/daily/' + firstNew.id, label: tr('Tiếp tục học') };
+  if (batch.words.length) return { href: '#/review', label: tr('Ôn tập') };
   return {
-    test: { href: '#/quiz/' + t.id, label: 'Làm bài kiểm tra' },
-    'group-quiz': { href: '#/group', label: 'Mini-game nhóm' },
-    'group-sync': { href: '#/group', label: 'Đến trang nhóm' },
-    'review-needed': { href: '#/review/need', label: 'Ôn từ chưa nhớ' },
-  }[batch.reason] || { href: '#/review', label: 'Ôn tập' };
+    test: { href: '#/quiz/' + t.id, label: tr('Làm bài kiểm tra') },
+    'group-quiz': { href: '#/group', label: tr('Mini-game nhóm') },
+    'group-sync': { href: '#/group', label: tr('Đến trang nhóm') },
+    'review-needed': { href: '#/review/need', label: tr('Ôn từ chưa nhớ') },
+  }[batch.reason] || { href: '#/review', label: tr('Ôn tập') };
 }
 
 const REASON = {
-  weekend: 'Cuối tuần – ngày ôn tập',
-  test: 'Đã học hết chủ đề',
-  'review-needed': 'Cần ôn lại từ chưa nhớ',
-  done: 'Đã hoàn thành lộ trình',
-  'group-quiz': 'Hết chủ đề – mini-game nhóm',
-  'group-sync': 'Đang chờ lịch học của nhóm',
+  weekend: tr('Cuối tuần – ngày ôn tập'),
+  test: tr('Đã học hết chủ đề'),
+  'review-needed': tr('Cần ôn lại từ chưa nhớ'),
+  done: tr('Đã hoàn thành lộ trình'),
+  'group-quiz': tr('Hết chủ đề – mini-game nhóm'),
+  'group-sync': tr('Đang chờ lịch học của nhóm'),
 };
 
 /** One row of a word list: photo, word, meaning, speaker, learned checkbox. */
 function wordRow(w, prof, { href, onChange, active } = {}) {
-  const box = h('input.check-box', { type: 'checkbox', checked: !!prof.viewed[w.id], 'aria-label': `Đã học ${w.en}`, title: 'Đã học',
+  const box = h('input.check-box', { type: 'checkbox', checked: !!prof.viewed[w.id], 'aria-label': tr('Đã học {w}', { w: w.en }), title: tr('Đã học'),
     onclick: (e) => e.stopPropagation(),
     onchange: (e) => { (e.target.checked ? P.markViewed : P.unmarkViewed)(w.id); onChange?.(); } });
   return h('li.vrow' + (active ? '.active' : ''), { onclick: () => href && (location.hash = href), tabindex: href ? 0 : null, onkeydown: (e) => e.key === 'Enter' && href && (location.hash = href) },
@@ -82,11 +83,11 @@ export function renderHome(root, { serverOk }) {
   const hero = h('section.card.hero',
     h('div.hero-text',
       h('div.eyebrow', 'TOEIC B1 – B2'),
-      h('h1', 'Vẽ, đoán và', h('br'), h('em', 'nhớ từ.')),
-      h('p.hero-sub', 'Học từ vựng qua hình ảnh, vẽ tay và trò chơi.'),
+      h('h1', tr('Vẽ, đoán và'), h('br'), h('em', tr('nhớ từ.'))),
+      h('p.hero-sub', tr('Học từ vựng qua hình ảnh, vẽ tay và trò chơi.')),
       h('div.hero-actions',
-        h('a.btn.primary.big', { href: step.href }, icon('play', { size: 20 }), batch.words.length ? 'Bắt đầu học hôm nay' : step.label, icon('arrowRight', { size: 18 })),
-        h('a.btn.big' + (serverOk ? '' : '.disabled'), { href: serverOk ? '#/play/quick' : null, 'aria-disabled': serverOk ? null : 'true', title: serverOk ? 'Ghép phòng công khai' : OFFLINE }, icon('users', { size: 20 }), 'Chơi nhanh'))),
+        h('a.btn.primary.big', { href: step.href }, icon('play', { size: 20 }), batch.words.length ? tr('Bắt đầu học hôm nay') : step.label, icon('arrowRight', { size: 18 })),
+        h('a.btn.big' + (serverOk ? '' : '.disabled'), { href: serverOk ? '#/play/quick' : null, 'aria-disabled': serverOk ? null : 'true', title: serverOk ? tr('Ghép phòng công khai') : OFFLINE }, icon('users', { size: 20 }), tr('Chơi nhanh')))),
     art);
 
   // ---- topics row (current topic first)
@@ -98,32 +99,32 @@ export function renderHome(root, { serverOk }) {
       h('div.tcard-body', h('b', x.title), h('small', `${n}/${x.words.length}`), h('div.bar', h('i', { style: { width: (n / x.words.length) * 100 + '%' } }))));
   };
   const topicsRow = h('section.dash-section.topics-sec',
-    h('div.section-head', h('h2', 'Chủ đề'), h('a.link-more', { href: '#/topics' }, 'Xem tất cả', icon('arrowRight', { size: 16 }))),
+    h('div.section-head', h('h2', tr('Chủ đề')), h('a.link-more', { href: '#/topics' }, tr('Xem tất cả'), icon('arrowRight', { size: 16 }))),
     h('div.topic-row', [t, ...list.filter((x) => x !== t)].map(topicCard)));
 
   // ---- quick actions
   const tile = (cls, ic, title, sub, href, disabled) => h('a.qtile.' + cls + (disabled ? '.disabled' : ''), { href: disabled ? null : href, 'aria-disabled': disabled ? 'true' : null, title: disabled ? OFFLINE : null },
     h('span.qtile-ic', icon(ic, { size: 24 })), h('span.qtile-text', h('b', title), h('small', sub)));
   const quick = h('section.dash-section.quick-sec',
-    h('div.section-head', h('h2', 'Học nhanh')),
+    h('div.section-head', h('h2', tr('Học nhanh'))),
     h('div.quick-grid',
-      tile('q-red', 'pencil', 'Tạo phòng', 'Chơi với bạn bè', '#/play/create'),
-      tile('q-blue', 'login', 'Vào phòng', 'Nhập mã phòng', '#/play/join', !serverOk),
-      tile('q-green', 'cards', 'Học từ mới', 'Tiếp tục chủ đề', '#/daily'),
-      tile('q-yellow', 'repeat', 'Ôn tập', P.dueWords().length ? `${P.dueWords().length} từ đến hạn` : 'Word Recall', '#/review')));
+      tile('q-red', 'pencil', tr('Tạo phòng'), tr('Chơi với bạn bè'), '#/play/create'),
+      tile('q-blue', 'login', tr('Vào phòng'), tr('Nhập mã phòng'), '#/play/join', !serverOk),
+      tile('q-green', 'cards', tr('Học từ mới'), tr('Tiếp tục chủ đề'), '#/daily'),
+      tile('q-yellow', 'repeat', tr('Ôn tập'), P.dueWords().length ? tr('{n} từ đến hạn', { n: P.dueWords().length }) : 'Word Recall', '#/review')));
 
   // ---- right column: progress + today's words
   const doneTopics = Math.min(prof.topicIdx, list.length);
   const overall = (doneTopics + (P.allTopicsDone(prof) ? 0 : introduced / t.words.length)) / list.length;
   const mini = (cls, ic, n, label) => h('div.mini-stat.' + cls, icon(ic, { size: 20 }), h('div', h('b', n), h('small', label)));
   const progress = h('section.card.side-card.progress-card',
-    h('div.section-head', h('h2', 'Tiến độ học tập'), h('a.btn.small', { href: '#/stats' }, 'Xem chi tiết', icon('arrowRight', { size: 14 }))),
+    h('div.section-head', h('h2', tr('Tiến độ học tập')), h('a.btn.small', { href: '#/stats' }, tr('Xem chi tiết'), icon('arrowRight', { size: 14 }))),
     h('div.progress-main', ring(introduced / t.words.length),
-      h('div.progress-info', h('div', h('b', `${Math.min(prof.topicIdx + 1, list.length)} / ${list.length}`), ' chủ đề'), h('div.bar', h('i', { style: { width: overall * 100 + '%' } })), h('small.muted', t.title))),
+      h('div.progress-info', h('div', h('b', `${Math.min(prof.topicIdx + 1, list.length)} / ${list.length}`), tr(' chủ đề')), h('div.bar', h('i', { style: { width: overall * 100 + '%' } })), h('small.muted', t.title))),
     h('div.mini-stats',
-      mini('m-red', 'cards', P.learnedWords().length, 'từ đã học'),
-      mini('m-blue', 'repeat', P.inReview(prof), 'đang ôn'),
-      mini('m-orange', 'flame', P.studyStreak(prof), 'ngày liên tiếp')));
+      mini('m-red', 'cards', P.learnedWords().length, tr('từ đã học')),
+      mini('m-blue', 'repeat', P.inReview(prof), tr('đang ôn')),
+      mini('m-orange', 'flame', P.studyStreak(prof), tr('ngày liên tiếp'))));
 
   const listEl = h('ul.vlist');
   const btnBox = h('div');
@@ -134,7 +135,7 @@ export function renderHome(root, { serverOk }) {
   listEl.append(...batch.words.map((w) => wordRow(w, prof, { href: '#/daily/' + w.id, onChange: refreshBtn })));
   refreshBtn();
   const vocab = h('section.card.side-card.vocab-card',
-    h('div.section-head', h('h2', 'Từ vựng hôm nay'), h('span.small.muted', `${introduced}/${t.words.length} từ`)),
+    h('div.section-head', h('h2', tr('Từ vựng hôm nay')), h('span.small.muted', tr('{c}/{n} từ', { c: introduced, n: t.words.length }))),
     batch.words.length ? listEl : h('div.side-empty', icon('info', { size: 22 }), h('span', REASON[batch.reason] || '')),
     btnBox);
 
@@ -147,18 +148,18 @@ function flashcard(w, { index, total, prev, next, lastAction } = {}) {
   let imgIdx = 0;
   const fig = h('div', photoFigure(w));
   return h('div.flashcard',
-    h('div', fig, w.images.length > 1 ? h('button.btn.small', { style: { marginTop: '8px' }, onclick: () => { imgIdx = (imgIdx + 1) % w.images.length; clear(fig).append(photoFigure(w, { index: imgIdx })); } }, icon('image', { size: 16 }), `Ảnh khác (${w.images.length})`) : null),
+    h('div', fig, w.images.length > 1 ? h('button.btn.small', { style: { marginTop: '8px' }, onclick: () => { imgIdx = (imgIdx + 1) % w.images.length; clear(fig).append(photoFigure(w, { index: imgIdx })); } }, icon('image', { size: 16 }), tr('Ảnh khác ({n})', { n: w.images.length })) : null),
     h('div.stack.word-info',
       h('div.row.between', h('span.tag.blue', POS[w.pos] || w.pos), total ? h('span.small.muted', `${index + 1}/${total}`) : null),
       h('div.row.word-head', h('div.word-big', { lang: 'en' }, w.en), speakBtn(w.en)),
       h('div.ipa', w.ipa),
       h('div.meaning', w.vi),
       h('div.muted', w.explain),
-      h('div.example', h('div.row.between', { style: { flexWrap: 'nowrap', alignItems: 'flex-start' } }, h('div', { lang: 'en' }, w.ex[0]), speakBtn(w.ex[0], 'Nghe câu ví dụ', '.small')), h('div.vi', w.ex[1])),
-      h('div', h('b.with-ic', icon('pencil', { size: 16 }), 'Gợi ý vẽ'), h('ul.ideas-list', w.ideas.map((idea) => h('li', idea.scene)))),
+      h('div.example', h('div.row.between', { style: { flexWrap: 'nowrap', alignItems: 'flex-start' } }, h('div', { lang: 'en' }, w.ex[0]), speakBtn(w.ex[0], tr('Nghe câu ví dụ'), '.small')), h('div.vi', w.ex[1])),
+      h('div', h('b.with-ic', icon('pencil', { size: 16 }), tr('Gợi ý vẽ')), h('ul.ideas-list', w.ideas.map((idea) => h('li', idea.scene)))),
       prev || next || lastAction ? h('div.row.nav-row',
-        prev ? h('button.btn', { onclick: prev }, icon('back', { size: 18 }), 'Trước') : h('span'),
-        next ? h('button.btn.primary', { onclick: next }, 'Từ tiếp theo', icon('next', { size: 18 })) : lastAction || null) : null));
+        prev ? h('button.btn', { onclick: prev }, icon('back', { size: 18 }), tr('Trước')) : h('span'),
+        next ? h('button.btn.primary', { onclick: next }, tr('Từ tiếp theo'), icon('next', { size: 18 })) : lastAction || null) : null));
 }
 
 export function renderDaily(root, focusId) {
@@ -166,15 +167,15 @@ export function renderDaily(root, focusId) {
   const batch = P.todayBatch();
   const t = P.currentTopic();
   let words = batch.words;
-  let title = 'Học hôm nay';
+  let title = tr('Học hôm nay');
   if (!words.length) {
     // Weekend / test day: show this week's words for review instead.
     words = P.weekWords().slice(-10);
-    title = batch.reason === 'weekend' ? 'Ôn từ trong tuần' : 'Từ gần đây';
+    title = batch.reason === 'weekend' ? tr('Ôn từ trong tuần') : tr('Từ gần đây');
   }
   const head = h('div.page-head', h('h1.page-title', title), h('span.tag.blue', topicIcon(t, 14), t.title));
   if (!words.length) {
-    clear(root).append(head, h('div.card.empty', icon('calendar', { size: 40 }), h('h2', 'Chưa có từ nào'), h('p.muted', REASON[batch.reason] || ''), h('a.btn.primary', { href: '#/' }, 'Về trang chủ')));
+    clear(root).append(head, h('div.card.empty', icon('calendar', { size: 40 }), h('h2', tr('Chưa có từ nào')), h('p.muted', REASON[batch.reason] || ''), h('a.btn.primary', { href: '#/' }, tr('Về trang chủ'))));
     return;
   }
   let current = Math.max(0, words.findIndex((w) => w.id === focusId));
@@ -197,7 +198,7 @@ export function renderDaily(root, focusId) {
       index: i, total: words.length,
       prev: i > 0 ? () => show(i - 1) : null,
       next: i < words.length - 1 ? () => show(i + 1) : null,
-      lastAction: h('a.btn.green', { href: '#/play/create' }, icon('play', { size: 18 }), 'Vào chơi'),
+      lastAction: h('a.btn.green', { href: '#/play/create' }, icon('play', { size: 18 }), tr('Vào chơi')),
     }));
   };
   const onKey = (e) => {
@@ -207,7 +208,7 @@ export function renderDaily(root, focusId) {
     else if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
   };
   document.addEventListener('keydown', onKey);
-  clear(root).append(head, h('div.daily', h('section.card.side-card.daily-list', h('div.section-head', h('h2', 'Danh sách'), count), listEl), card));
+  clear(root).append(head, h('div.daily', h('section.card.side-card.daily-list', h('div.section-head', h('h2', tr('Danh sách')), count), listEl), card));
   show(current);
 }
 
@@ -215,9 +216,9 @@ export function renderDaily(root, focusId) {
 export function renderWord(root, id) {
   const w = word(id);
   const prof = P.active();
-  const back = h('a.back-link', { href: '#/', onclick: (e) => { e.preventDefault(); history.length > 1 ? history.back() : (location.hash = '#/'); } }, icon('back', { size: 16 }), 'Quay lại');
+  const back = h('a.back-link', { href: '#/', onclick: (e) => { e.preventDefault(); history.length > 1 ? history.back() : (location.hash = '#/'); } }, icon('back', { size: 16 }), tr('Quay lại'));
   if (!w || !prof.introduced[w.id]) {
-    clear(root).append(back, h('div.card.empty', icon('lock', { size: 40 }), h('h2', 'Chưa học từ này'), h('a.btn.primary', { href: '#/daily' }, 'Học hôm nay')));
+    clear(root).append(back, h('div.card.empty', icon('lock', { size: 40 }), h('h2', tr('Chưa học từ này')), h('a.btn.primary', { href: '#/daily' }, tr('Học hôm nay'))));
     return;
   }
   P.markViewed(w.id);
@@ -232,7 +233,7 @@ export async function preMatchPreview() {
   if (!words.length || words.every((w) => prof.viewed[w.id])) return true;
   const body = h('div.stack',
     h('div.today-mini', words.map((w) => h('button.mini-word', { type: 'button', onclick: () => speak(w.en) }, photo(w), h('span', { lang: 'en' }, w.en), h('small', `${w.ipa}`), h('small', w.vi)))));
-  const ok = await dialog({ title: '5 từ mới hôm nay', body, className: 'wide', buttons: [{ label: 'Học kỹ hơn', value: 'learn' }, { label: 'Vào phòng', value: true, primary: true }] });
+  const ok = await dialog({ title: tr('5 từ mới hôm nay'), body, className: 'wide', buttons: [{ label: tr('Học kỹ hơn'), value: 'learn' }, { label: tr('Vào phòng'), value: true, primary: true }] });
   if (ok === 'learn') {
     location.hash = '#/daily';
     return false;

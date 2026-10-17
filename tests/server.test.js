@@ -2,6 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -169,6 +170,24 @@ test('quick play puts players into the same public room; unknown code errors', W
   assert.match(err.text, /Không tìm thấy phòng/);
   a.close();
   b.close();
+});
+
+test('drawn avatars: PNG upload by content hash, served back, bad input refused', async () => {
+  // 1×1 PNG
+  const png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+  const post = (pic) => fetch(`http://localhost:${PORT}/api/avatar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pic }) });
+  const r = await post(png);
+  assert.equal(r.status, 200);
+  const { key } = await r.json();
+  assert.match(key, /^p[0-9a-f]{16}$/);
+  const expected = 'p' + crypto.createHash('sha256').update(Buffer.from(png.split(',')[1], 'base64')).digest('hex').slice(0, 16);
+  assert.equal(key, expected, 'key = hash of the PNG bytes (the browser computes the same)');
+  const img = await fetch(`http://localhost:${PORT}/api/avatar/${key}`);
+  assert.equal(img.status, 200);
+  assert.equal(img.headers.get('content-type'), 'image/png');
+  assert.equal((await post('data:image/jpeg;base64,AAAA')).status, 400);
+  assert.equal((await post('data:image/png;base64,' + Buffer.from('not a png').toString('base64'))).status, 400);
+  assert.equal((await fetch(`http://localhost:${PORT}/api/avatar/p0000000000000000`)).status, 404);
 });
 
 test('static files and health endpoint', async () => {

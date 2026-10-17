@@ -3,13 +3,14 @@
 import { h } from '../ui/dom.js';
 import { icon, hasIcon } from '../ui/icons.js';
 
+import { tr } from '../i18n.js';
 let vocab = null;
 const byId = new Map();
 
 export async function loadVocab() {
   if (vocab) return vocab;
   const res = await fetch('data/vocab.json', { cache: 'no-cache' });
-  if (!res.ok) throw new Error('Không tải được dữ liệu từ vựng');
+  if (!res.ok) throw new Error(tr('Không tải được dữ liệu từ vựng'));
   vocab = await res.json();
   vocab.topics.forEach((t, ti) => {
     t.index = ti;
@@ -55,7 +56,7 @@ export function photo(w, { index = 0, className = '', alt } = {}) {
   const cover = t && t.words[0] && t.words[0] !== w ? t.words[0].images[0] : null;
   if (cover) chain.push({ src: cover.file, meta: cover, isFallback: true });
   let k = 0;
-  const img = h('img', { alt: alt ?? `Ảnh minh họa: ${w.en}`, loading: 'lazy', decoding: 'async', class: className, draggable: false });
+  const img = h('img', { alt: alt ?? tr('Ảnh minh họa: {w}', { w: w.en }), loading: 'lazy', decoding: 'async', class: className, draggable: false });
   const apply = () => {
     const c = chain[k];
     img.src = c.src;
@@ -79,7 +80,7 @@ export function creditText(im) {
 export function credit(im, { short = false } = {}) {
   if (!im) return h('div.photo-credit');
   return h('div.photo-credit',
-    'Ảnh thật: ', h('a', { href: im.page, target: '_blank', rel: 'noopener' }, short ? 'Wikimedia Commons' : im.title),
+    tr('Ảnh thật: '), h('a', { href: im.page, target: '_blank', rel: 'noopener' }, short ? 'Wikimedia Commons' : im.title),
     ` – ${im.author} · `,
     im.licenseUrl ? h('a', { href: im.licenseUrl, target: '_blank', rel: 'noopener' }, im.license) : im.license);
 }

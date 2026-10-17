@@ -8,12 +8,13 @@ import { ASSIST_MULT } from '../shared/game-core.js';
 import { photo, credit } from '../vocab/data.js';
 import { drawSketch, drawOutline, drawLayout, clearGhost } from './ghost.js';
 
+import { tr } from '../i18n.js';
 const LEVELS = [
-  { n: 1, short: 'Nghĩa', label: 'Nghĩa', title: 'Cấp 1 – Nghĩa & ảnh tham khảo' },
-  { n: 2, short: 'Cảnh', label: 'Tình huống', title: 'Cấp 2 – Gợi ý tình huống để vẽ' },
-  { n: 3, short: 'Chi tiết', label: 'Thành phần', title: 'Cấp 3 – Các thành phần cần vẽ' },
-  { n: 4, short: 'Từng bước', label: 'Từng bước', title: 'Cấp 4 – Hướng dẫn vẽ từng bước' },
-  { n: 5, short: 'Ghost', label: 'Ghost', title: 'Ghost Sketch – hình mẫu mờ để đồ theo' },
+  { n: 1, short: tr('Nghĩa'), label: tr('Nghĩa'), title: tr('Cấp 1 – Nghĩa & ảnh tham khảo') },
+  { n: 2, short: tr('Cảnh'), label: tr('Tình huống'), title: tr('Cấp 2 – Gợi ý tình huống để vẽ') },
+  { n: 3, short: tr('Chi tiết'), label: tr('Thành phần'), title: tr('Cấp 3 – Các thành phần cần vẽ') },
+  { n: 4, short: tr('Từng bước'), label: tr('Từng bước'), title: tr('Cấp 4 – Hướng dẫn vẽ từng bước') },
+  { n: 5, short: 'Ghost', label: 'Ghost', title: tr('Ghost Sketch – hình mẫu mờ để đồ theo') },
 ];
 
 const pct = (lv) => Math.round(ASSIST_MULT[lv] * 100) + '%';
@@ -113,14 +114,14 @@ export class Assistant {
   render() {
     const r = clear(this.root);
     const w = this.word;
-    r.append(h('div.row.between', h('h3.with-ic', icon('bulb', { size: 16 }), 'Trợ lý vẽ'), w && !this.locked ? h('span.assist-mult', { title: 'Điểm tối đa của người vẽ trong lượt này' }, pct(this.level)) : null));
+    r.append(h('div.row.between', h('h3.with-ic', icon('bulb', { size: 16 }), tr('Trợ lý vẽ')), w && !this.locked ? h('span.assist-mult', { title: tr('Điểm tối đa của người vẽ trong lượt này') }, pct(this.level)) : null));
     if (!w || this.locked) {
-      r.append(h('div.assist-body.muted.with-ic', icon('lock', { size: 16 }), 'Chỉ người vẽ xem được'));
+      r.append(h('div.assist-body.muted.with-ic', icon('lock', { size: 16 }), tr('Chỉ người vẽ xem được')));
       return;
     }
     r.append(h('div.assist-levels', LEVELS.map((L) => h('button', {
       type: 'button', class: (L.n <= this.level ? 'used' : '') + (L.n === this.level ? ' on' : ''),
-      title: `${L.title} (điểm tối đa ${pct(Math.max(this.level, L.n))})`, 'aria-label': L.title, onclick: () => this.request(L.n),
+      title: tr('{title} (điểm tối đa {pct})', { title: L.title, pct: pct(Math.max(this.level, L.n)) }), 'aria-label': L.title, onclick: () => this.request(L.n),
     }, h('b', L.n), h('small', L.short)))));
     const idea = w.ideas[this.idea];
     const body = h('div.assist-body');
@@ -129,23 +130,23 @@ export class Assistant {
       const cap = credit(w.images[this.photoIdx], { short: true });
       img.addEventListener('load', () => cap.replaceWith(credit(img._meta, { short: true })));
       body.append(h('div.lvl', LEVELS[0].title), h('div', h('b', w.en), ' — ', w.vi), h('div.muted', w.explain), img, cap);
-      if (w.images.length > 1) body.append(h('button.btn.small', { type: 'button', onclick: () => { this.photoIdx = (this.photoIdx + 1) % w.images.length; if (this.ghostOn && this.ghostMode === 'outline') this.showGhost(); this.render(); } }, `Ảnh khác (${this.photoIdx + 1}/${w.images.length})`));
+      if (w.images.length > 1) body.append(h('button.btn.small', { type: 'button', onclick: () => { this.photoIdx = (this.photoIdx + 1) % w.images.length; if (this.ghostOn && this.ghostMode === 'outline') this.showGhost(); this.render(); } }, tr('Ảnh khác ({i}/{n})', { i: this.photoIdx + 1, n: w.images.length })));
     }
-    if (this.level >= 2) body.append(h('div.lvl', `${LEVELS[1].title} · ý tưởng ${this.idea + 1}/${w.ideas.length}`), h('div', idea.scene));
+    if (this.level >= 2) body.append(h('div.lvl', tr('{title} · ý tưởng {i}/{n}', { title: LEVELS[1].title, i: this.idea + 1, n: w.ideas.length })), h('div', idea.scene));
     if (this.level >= 3) body.append(h('div.lvl', LEVELS[2].title), h('ul', idea.elements.map((e) => h('li', e))));
     if (this.level >= 4) body.append(h('div.lvl', LEVELS[3].title), h('ol', idea.steps.map((s) => h('li', s))));
     if (this.level > 0) r.append(body);
     r.append(h('div.row', { style: { marginTop: '8px' } },
-      h('button.btn.small', { type: 'button', onclick: () => this.shuffle(), title: 'Chuyển sang cách minh họa khác' }, icon('shuffle', { size: 16 }), 'Đổi ý tưởng')));
+      h('button.btn.small', { type: 'button', onclick: () => this.shuffle(), title: tr('Chuyển sang cách minh họa khác') }, icon('shuffle', { size: 16 }), tr('Đổi ý tưởng'))));
     if (this.level >= 5) {
-      const modeSel = h('select.input', { style: { width: 'auto', padding: '3px 6px' }, 'aria-label': 'Kiểu Ghost Sketch', onchange: (e) => { this.ghostMode = e.target.value; this.showGhost(); } },
-        this.word.sketch ? h('option', { value: 'sketch', selected: this.ghostMode === 'sketch' }, 'Hình mẫu nét') : null,
-        h('option', { value: 'outline', selected: this.ghostMode === 'outline' }, 'Đường viền từ ảnh thật'),
-        idea.ghost ? h('option', { value: 'layout', selected: this.ghostMode === 'layout' }, 'Bố cục mẫu (người que)') : null);
+      const modeSel = h('select.input', { style: { width: 'auto', padding: '3px 6px' }, 'aria-label': tr('Kiểu Ghost Sketch'), onchange: (e) => { this.ghostMode = e.target.value; this.showGhost(); } },
+        this.word.sketch ? h('option', { value: 'sketch', selected: this.ghostMode === 'sketch' }, tr('Hình mẫu nét')) : null,
+        h('option', { value: 'outline', selected: this.ghostMode === 'outline' }, tr('Đường viền từ ảnh thật')),
+        idea.ghost ? h('option', { value: 'layout', selected: this.ghostMode === 'layout' }, tr('Bố cục mẫu (người que)')) : null);
       r.append(h('div.ghost-ctl',
-        h('label', h('input', { type: 'checkbox', checked: this.ghostOn, onchange: (e) => (e.target.checked ? this.showGhost() : (this.hideGhost(), this.render())) }), ' Hiện Ghost'),
+        h('label', h('input', { type: 'checkbox', checked: this.ghostOn, onchange: (e) => (e.target.checked ? this.showGhost() : (this.hideGhost(), this.render())) }), tr(' Hiện Ghost')),
         modeSel,
-        h('input', { type: 'range', min: 10, max: 70, value: Math.round(this.ghostOpacity * 100), 'aria-label': 'Độ mờ Ghost', style: { width: '80px' },
+        h('input', { type: 'range', min: 10, max: 70, value: Math.round(this.ghostOpacity * 100), 'aria-label': tr('Độ mờ Ghost'), style: { width: '80px' },
           oninput: (e) => { this.ghostOpacity = e.target.value / 100; if (this.ghost) this.ghost.style.opacity = this.ghostOpacity; } })));
     }
   }

@@ -3,6 +3,7 @@
 import { h, $$, confirmDialog, toast } from '../ui/dom.js';
 import { ColorTriangle } from './colorpicker.js';
 
+import { tr } from '../i18n.js';
 const I = (d, extra = '') => `<svg viewBox="0 0 24 24" aria-hidden="true" ${extra}><path d="${d}"/></svg>`;
 export const ICONS = {
   brush: I('M3 21c3 0 5-1.5 5-4 0-1.3-1-2.3-2.3-2.3S3 16 3 21zm5.4-5.7 2.3 2.3L21 7.3a1.6 1.6 0 0 0-2.3-2.3z'),
@@ -20,7 +21,7 @@ export const ICONS = {
 };
 
 export const TOOL_LABELS = {
-  brush: 'Bút vẽ', eraser: 'Tẩy', fill: 'Đổ màu', picker: 'Hút màu', line: 'Đường thẳng', rect: 'Hình chữ nhật', ellipse: 'Hình elip',
+  brush: tr('Bút vẽ'), eraser: tr('Tẩy'), fill: tr('Đổ màu'), picker: tr('Hút màu'), line: tr('Đường thẳng'), rect: tr('Hình chữ nhật'), ellipse: tr('Hình elip'),
 };
 
 // An original 24-colour palette (greyscale + hues in two lightness steps).
@@ -41,7 +42,7 @@ export class Toolbar {
     this.onSave = onSave;
     this.enabled = false;
     this.build();
-    engine.on('pick', (c) => { this.setColor(c); this.setTool(this.prevTool || 'brush'); toast('Đã hút màu ' + c); });
+    engine.on('pick', (c) => { this.setColor(c); this.setTool(this.prevTool || 'brush'); toast(tr('Đã hút màu ') + c); });
     engine.on('size', (s) => this.syncSize(s));
     engine.on('history', ({ canUndo, canRedo }) => {
       this.btnUndo.disabled = !this.enabled || !canUndo;
@@ -64,31 +65,31 @@ export class Toolbar {
     const act = (name, title, fn) => h('button.tool', { type: 'button', title, 'aria-label': title, html: ICONS[name], onclick: fn });
 
     this.btnFilled = h('button.tool.toggle', {
-      type: 'button', title: 'Hình tô kín (U)', 'aria-label': 'Hình tô kín', 'aria-pressed': 'false', html: ICONS.filled,
+      type: 'button', title: tr('Hình tô kín (U)'), 'aria-label': tr('Hình tô kín'), 'aria-pressed': 'false', html: ICONS.filled,
       onclick: () => this.setFilled(!this.engine.state.fillShapes),
     });
-    this.btnUndo = act('undo', 'Hoàn tác (Ctrl+Z)', () => this.engine.undo());
-    this.btnRedo = act('redo', 'Làm lại (Ctrl+Y)', () => this.engine.redo());
-    this.btnClear = act('clear', 'Xóa bảng (Delete)', () => this.askClear());
-    this.btnSave = act('save', 'Lưu tranh PNG (Ctrl+S)', () => this.save());
+    this.btnUndo = act('undo', tr('Hoàn tác (Ctrl+Z)'), () => this.engine.undo());
+    this.btnRedo = act('redo', tr('Làm lại (Ctrl+Y)'), () => this.engine.redo());
+    this.btnClear = act('clear', tr('Xóa bảng (Delete)'), () => this.askClear());
+    this.btnSave = act('save', tr('Lưu tranh PNG (Ctrl+S)'), () => this.save());
 
-    this.current = h('button.current-color', { type: 'button', title: 'Bánh xe màu tùy chỉnh', 'aria-label': 'Mở bánh xe màu', onclick: () => this.togglePicker() });
+    this.current = h('button.current-color', { type: 'button', title: tr('Bánh xe màu tùy chỉnh'), 'aria-label': tr('Mở bánh xe màu'), onclick: () => this.togglePicker() });
     this.swatches = h('div.swatches', PALETTE.map((c) => h('button.swatch', {
-      type: 'button', title: c, 'aria-label': 'Màu ' + c, 'data-color': c, style: { background: c }, onclick: () => this.setColor(c),
+      type: 'button', title: c, 'aria-label': tr('Màu ') + c, 'data-color': c, style: { background: c }, onclick: () => this.setColor(c),
     })));
 
     const canvas = h('canvas.tri');
-    this.hexInput = h('input.hex', { type: 'text', maxLength: 7, spellcheck: false, 'aria-label': 'Mã màu',
+    this.hexInput = h('input.hex', { type: 'text', maxLength: 7, spellcheck: false, 'aria-label': tr('Mã màu'),
       onchange: (e) => { const v = e.target.value.trim(); if (/^#?[0-9a-f]{6}$/i.test(v)) this.setColor(v[0] === '#' ? v : '#' + v); } });
     this.popover = h('div.picker-pop', { hidden: true }, canvas, h('div.row', h('span.small', 'HEX'), this.hexInput));
     this.triangle = new ColorTriangle(canvas, (hex) => this.setColor(hex, true));
 
-    this.sizeRange = h('input', { type: 'range', min: 2, max: 80, value: 8, 'aria-label': 'Cỡ nét', oninput: (e) => this.setSize(+e.target.value) });
+    this.sizeRange = h('input', { type: 'range', min: 2, max: 80, value: 8, 'aria-label': tr('Cỡ nét'), oninput: (e) => this.setSize(+e.target.value) });
     this.sizeLabel = h('b.val');
     this.sizeDots = h('div.size-dots', SIZE_PRESETS.map((s) => h('button.size-dot', {
-      type: 'button', title: s + 'px', 'aria-label': 'Cỡ ' + s, 'data-size': s, onclick: () => this.setSize(s),
+      type: 'button', title: s + 'px', 'aria-label': tr('Cỡ ') + s, 'data-size': s, onclick: () => this.setSize(s),
     }, h('i', { style: { width: Math.min(22, 3 + s / 2.2) + 'px', height: Math.min(22, 3 + s / 2.2) + 'px' } }))));
-    this.alphaRange = h('input', { type: 'range', min: 5, max: 100, value: 100, 'aria-label': 'Độ trong suốt', oninput: (e) => this.setAlpha(+e.target.value / 100) });
+    this.alphaRange = h('input', { type: 'range', min: 5, max: 100, value: 100, 'aria-label': tr('Độ trong suốt'), oninput: (e) => this.setAlpha(+e.target.value / 100) });
     this.alphaLabel = h('b.val');
     this.status = h('div.tool-status', { 'aria-live': 'polite' });
 
@@ -101,7 +102,7 @@ export class Toolbar {
       h('div.tb-row',
         h('div.color-area', h('div.current-wrap', this.current, this.popover), this.swatches),
         h('div.sliders',
-          h('div.ctrl', h('span', 'Cỡ'), this.sizeDots, this.sizeRange, this.sizeLabel),
+          h('div.ctrl', h('span', tr('Cỡ')), this.sizeDots, this.sizeRange, this.sizeLabel),
           h('div.ctrl', h('span', 'Opacity'), this.alphaRange, this.alphaLabel))));
 
     if (this.statusHost) {
@@ -175,7 +176,7 @@ export class Toolbar {
     const parts = [TOOL_LABELS[st.tool]];
     if (['brush', 'eraser', 'line', 'rect', 'ellipse'].includes(st.tool)) parts.push(st.size + 'px');
     if (st.tool !== 'eraser' && st.tool !== 'picker') parts.push(Math.round(st.alpha * 100) + '%');
-    if ((st.tool === 'rect' || st.tool === 'ellipse') && st.fillShapes) parts.push('tô kín');
+    if ((st.tool === 'rect' || st.tool === 'ellipse') && st.fillShapes) parts.push(tr('tô kín'));
     this.status.replaceChildren(h('i.dot', { style: { background: st.tool === 'eraser' ? '#fff' : st.color } }), parts.join(' · '));
     if (this.alphaLabel) this.alphaLabel.textContent = Math.round(st.alpha * 100) + '%';
   }
@@ -187,7 +188,7 @@ export class Toolbar {
 
   async askClear() {
     if (!this.enabled || !this.engine.canUndo) return;
-    if (await confirmDialog('Xóa bảng vẽ?', 'Có thể hoàn tác bằng Ctrl+Z.', 'Xóa', true)) this.engine.clear();
+    if (await confirmDialog(tr('Xóa bảng vẽ?'), tr('Có thể hoàn tác bằng Ctrl+Z.'), tr('Xóa'), true)) this.engine.clear();
   }
 
   save() {

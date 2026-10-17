@@ -56,6 +56,8 @@ const SHAPES = {
   ghost: [P('M5.5 20.5V11a6.5 6.5 0 0 1 13 0v9.5l-2.2-1.6-2.1 1.6-2.2-1.6-2.2 1.6-2.1-1.6z'), C(9.5, 11, 0.8), C(14.5, 11, 0.8)],
   palette: [P('M12 3.5a8.5 8.5 0 1 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-1-.8-1.4-.8-2.3 0-1 .8-1.6 1.8-1.6h1.9a3.8 3.8 0 0 0 3.8-3.8c0-4.3-3.8-7.6-8.5-7.6z'), C(7.5, 12, 1), C(9.5, 7.8, 1), C(14.5, 7.8, 1)],
   user: [C(12, 8, 4), P('M4 20.5a8 8 0 0 1 16 0')],
+  sun: [C(12, 12, 4), P('M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8')],
+  moon: [P('M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z')],
   info: [C(12, 12, 9), L(12, 11, 12, 16.5), C(12, 7.8, 0.6)],
   clock: [C(12, 12, 8.5), P('M12 7.5V12l3 2')],
   flame: [P('M12 21c-3.9 0-6.5-2.6-6.5-6.2 0-3.4 2.4-5.4 3.6-8.3.9 1.6 1.8 2.4 2.9 2.9C12.6 6.6 13.5 4.6 15 3c.6 3.7 3.5 6.3 3.5 11.2 0 3.9-2.6 6.8-6.5 6.8z')],
@@ -135,7 +137,13 @@ export function initials(name) {
   return (parts.length > 1 ? parts[0][0] + last[0] : parts[0][0]).toUpperCase();
 }
 
-/** <span class="avatar"> with a coloured disc and the player's initials. */
+// Drawn avatars use the key "p" + 16 hex (content hash). This device's own drawings are known
+// locally (works offline); everyone else's come from the server, cached by the browser.
+const localPics = new Map();
+export const registerAvatarPic = (key, dataUrl) => (dataUrl ? localPics.set(key, dataUrl) : localPics.delete(key));
+export const isDrawnAvatar = (key) => /^p[0-9a-f]{16}$/.test(String(key || ''));
+
+/** <span class="avatar"> with a coloured disc and the player's initials, or the player's drawing. */
 export function avatar(name, key, size = 36) {
   const el = document.createElement('span');
   el.className = 'avatar';
@@ -144,5 +152,14 @@ export function avatar(name, key, size = 36) {
   el.style.fontSize = Math.round(size * 0.4) + 'px';
   el.setAttribute('aria-hidden', 'true');
   el.textContent = initials(name);
+  if (isDrawnAvatar(key)) {
+    const img = document.createElement('img');
+    img.alt = '';
+    img.decoding = 'async';
+    img.onload = () => el.replaceChildren(img);
+    img.onerror = () => img.remove(); // offline / not uploaded yet: keep the initials
+    img.src = localPics.get(key) || 'api/avatar/' + key;
+    el.classList.add('drawn');
+  }
   return el;
 }

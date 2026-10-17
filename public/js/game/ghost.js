@@ -8,6 +8,7 @@
 
 import { DOC_W, DOC_H } from '../drawing/engine.js';
 
+import { tr } from '../i18n.js';
 const INK = '#3a4a66';
 
 export function clearGhost(canvas) {
@@ -178,8 +179,8 @@ export const LAYOUTS = {
     c.stroke();
     c.setLineDash([]);
     c.font = 'bold 54px Nunito, sans-serif';
-    c.fillText('TRƯỚC', 300, 130);
-    c.fillText('SAU', 1140, 130);
+    c.fillText(tr('TRƯỚC'), 300, 130);
+    c.fillText(tr('SAU'), 1140, 130);
   },
   face: (c, mood = 'happy') => {
     const x = 800, y = 500, r = 360;

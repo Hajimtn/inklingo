@@ -11,25 +11,31 @@ import { mountSearch } from './ui/search.js';
 import { renderTopics, renderQuiz } from './screens/topics.js';
 import { renderReview } from './screens/review.js';
 import { renderSettings, renderCredits } from './screens/settings.js';
+import { renderAccount } from './screens/account.js';
+import { uploadAvatar } from './ui/avatar-draw.js';
+import { isDrawnAvatar } from './ui/icons.js';
+import * as prefs from './ui/prefs.js';
 import { renderCreate, renderJoin, startQuick, startGroupRoom, joinCode, leaveCurrentRoom } from './screens/play.js';
 import { renderGroup, stopGroupPolling } from './screens/group.js';
 import { renderGroupQuiz, leaveGroupQuiz } from './game/quiz-view.js';
 import * as G from './net/groups.js';
 
+import { tr } from './i18n.js';
 const view = $('#view');
 let serverOk = false;
 
 const NAV = [
-  ['', 'home', 'Trang chủ'],
-  ['daily', 'calendar', 'Học hôm nay', 'Hôm nay'],
-  ['topics', 'map', 'Chủ đề'],
-  ['review', 'repeat', 'Ôn tập'],
-  ['group', 'users', 'Nhóm'],
-  ['stats', 'chart', 'Thống kê'],
+  ['', 'home', tr('Trang chủ')],
+  ['daily', 'calendar', tr('Học hôm nay'), tr('Hôm nay')],
+  ['topics', 'map', tr('Chủ đề')],
+  ['review', 'repeat', tr('Ôn tập')],
+  ['group', 'users', tr('Nhóm')],
+  ['stats', 'chart', tr('Thống kê')],
 ];
 const NAV2 = [
-  ['settings', 'settings', 'Cài đặt'],
-  ['help', 'help', 'Trợ giúp'],
+  ['account', 'user', tr('Tài khoản')],
+  ['settings', 'settings', tr('Cài đặt')],
+  ['help', 'help', tr('Trợ giúp')],
 ];
 const TABS = ['', 'daily', 'topics', 'review', 'group']; // phone tab bar; the rest is in the profile menu
 // Sub-pages highlight their parent entry.
@@ -39,7 +45,7 @@ function header() {
   const p = P.active();
   const streak = P.studyStreak(p);
   const menu = h('div.menu-pop', { hidden: true, role: 'menu' });
-  const btn = h('button.profile-btn', { type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false', title: serverOk ? 'Online' : 'Offline – chỉ chơi cùng một máy' },
+  const btn = h('button.profile-btn', { type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false', title: serverOk ? 'Online' : tr('Offline – chỉ chơi cùng một máy') },
     h('span.av-wrap', avatar(p.name, p.avatar, 34), h('span.net-dot.' + (serverOk ? 'on' : 'off'))), h('span.profile-name', p.name), icon('chevronDown', { size: 16 }));
   const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); document.removeEventListener('click', outside, true); };
   const outside = (e) => { if (!menu.contains(e.target) && !btn.contains(e.target)) close(); };
@@ -51,14 +57,14 @@ function header() {
         if (x.id !== p.id) { P.switchProfile(x.id); header(); route(); }
       } }, avatar(x.name, x.avatar, 24), h('span', x.name), x.id === p.id ? icon('check', { size: 16 }) : null)),
       h('hr'),
-      ...[['stats', 'chart', 'Thống kê'], ...NAV2].map(([r, ic, label]) => h('a.menu-item', { href: '#/' + r, role: 'menuitem', onclick: close }, icon(ic, { size: 18 }), h('span', label))),
-      h('div.menu-status', h('span.net-dot.' + (serverOk ? 'on' : 'off')), serverOk ? 'Đã kết nối server' : 'Offline – chỉ chơi cùng một máy'));
+      ...[['stats', 'chart', tr('Thống kê')], ...NAV2].map(([r, ic, label]) => h('a.menu-item', { href: '#/' + r, role: 'menuitem', onclick: close }, icon(ic, { size: 18 }), h('span', label))),
+      h('div.menu-status', h('span.net-dot.' + (serverOk ? 'on' : 'off')), serverOk ? tr('Đã kết nối server') : tr('Offline – chỉ chơi cùng một máy')));
     menu.hidden = false;
     btn.setAttribute('aria-expanded', 'true');
     setTimeout(() => document.addEventListener('click', outside, true));
   });
   clear($('#header-right')).append(
-    h('span.streak' + (streak ? '' : '.zero'), { title: 'Số ngày học liên tiếp' }, icon('flame', { size: 20 }), h('b', streak), h('span.streak-label', ' ngày liên tiếp')),
+    h('span.streak' + (streak ? '' : '.zero'), { title: tr('Số ngày học liên tiếp') }, icon('flame', { size: 20 }), h('b', streak), h('span.streak-label', tr(' ngày liên tiếp'))),
     h('div.profile-wrap', btn, menu));
   renderNav();
 }
@@ -99,8 +105,10 @@ async function route() {
       return renderQuiz(view, arg);
     case 'review':
       return renderReview(view, arg);
+    case 'account':
+      return renderAccount(view, header);
     case 'settings':
-      return renderSettings(view, header);
+      return renderSettings(view, () => { header(); route(); });
     case 'credits':
       return renderCredits(view);
     case 'stats':
@@ -127,14 +135,29 @@ async function route() {
   }
 }
 
+/** Text that is written in index.html (title, sidebar footer, landmark labels). */
+function translateStatic() {
+  document.title = tr('Inklingo – Vẽ, đoán và nhớ từ TOEIC');
+  document.querySelectorAll('[data-i18n-label]').forEach((el) => {
+    el.dataset.i18nSrc ||= el.getAttribute('aria-label');
+    el.setAttribute('aria-label', tr(el.dataset.i18nSrc));
+  });
+  const foot = $('#side-foot');
+  if (foot) clear(foot).append(tr('Không liên kết với Detach Entertainment · Ảnh: Wikimedia Commons –') + ' ', h('a', { href: '#/credits' }, tr('giấy phép')));
+}
+
 async function boot() {
+  prefs.apply();
+  translateStatic();
   try {
     await loadVocab();
   } catch (e) {
-    clear(view).append(h('div.card', h('h2', 'Không tải được dữ liệu'), h('p', String(e.message || e)), h('p.small.muted', 'Hãy chạy server bằng “npm start” và mở http://localhost:8787')));
+    clear(view).append(h('div.card', h('h2', tr('Không tải được dữ liệu')), h('p', String(e.message || e)), h('p.small.muted', tr('Hãy chạy server bằng “npm start” và mở http://localhost:8787'))));
     return;
   }
   serverOk = location.protocol.startsWith('http') && (await serverAvailable());
+  // A drawn avatar saved while offline is uploaded once the server is reachable.
+  if (serverOk) for (const p of P.profiles()) if (isDrawnAvatar(p.avatar) && p.pic) uploadAvatar(p.pic);
   G.installHooks();
   mountSearch($('#search'));
   header();
@@ -147,7 +170,7 @@ async function boot() {
 
 window.addEventListener('unhandledrejection', (e) => {
   console.error(e.reason);
-  toast('Có lỗi xảy ra: ' + (e.reason?.message || e.reason), 'bad');
+  toast(tr('Có lỗi xảy ra: ') + (e.reason?.message || e.reason), 'bad');
 });
 
 boot();

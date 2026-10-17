@@ -141,7 +141,7 @@ export class GroupStore {
   cleanProfile(p = {}) {
     const name = String(p.name || '').trim().slice(0, 18);
     if (!name) throw new GroupError('Hãy nhập tên');
-    return { name, avatar: /^c\d{1,2}$/.test(p.avatar) ? p.avatar : 'c7' };
+    return { name, avatar: /^(c\d{1,2}|p[0-9a-f]{16})$/.test(p.avatar) ? p.avatar : 'c7' };
   }
 
   addMember(g, profile) {

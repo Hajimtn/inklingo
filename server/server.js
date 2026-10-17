@@ -11,9 +11,11 @@ import { fileURLToPath } from 'node:url';
 import { upgrade } from './ws.js';
 import { GameRoom } from '../public/js/shared/game-core.js';
 import { GroupStore, GroupError } from './groups.js';
+import { AvatarStore, AVATAR_KEY_RE } from './avatars.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const GROUPS_FILE = process.env.GROUPS_FILE || path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'data', 'groups.json');
+const AVATAR_DIR = process.env.AVATAR_DIR || path.join(path.dirname(GROUPS_FILE), 'avatars');
 const PORT = Number(process.env.PORT) || 8787;
 const RECONNECT_GRACE_MS = 60_000;
 const EMPTY_ROOM_TTL_MS = 120_000;
@@ -30,6 +32,8 @@ function loadDictionary() {
 }
 let dictionary = loadDictionary();
 console.log(`[vocab] ${dictionary.size} words loaded`);
+
+const avatars = new AvatarStore(AVATAR_DIR);
 
 // ---------------------------------------------------------------- study groups
 
@@ -301,7 +305,7 @@ function onMessage(conn, raw) {
   const pid = conn.pid;
   if (!pid) return;
   if (msg.type === 'gq') return onGroupQuiz(pid, msg);
-  const profile = { name: String(msg.name || '').trim().slice(0, 18) || 'Player', avatar: String(msg.avatar || 'c7').slice(0, 8) };
+  const profile = { name: String(msg.name || '').trim().slice(0, 18) || 'Player', avatar: AVATAR_KEY_RE.test(msg.avatar) ? msg.avatar : 'c7' };
 
   switch (msg.type) {
     case 'create': {
@@ -376,6 +380,16 @@ const server = http.createServer(async (req, res) => {
     }
     return;
   }
+  if (url.pathname === '/api/avatar' && req.method === 'POST') {
+    try {
+      const body = await readJson(req, 40_000);
+      json(res, 200, { key: avatars.save(body.pic, req.socket.remoteAddress) });
+    } catch (e) {
+      json(res, e.status || 400, { error: e.message || 'Ảnh không hợp lệ' });
+    }
+    return;
+  }
+  if (url.pathname.startsWith('/api/avatar/')) return avatars.serve(res, url.pathname.slice('/api/avatar/'.length));
   if (url.pathname.startsWith('/api/qimg/')) return serveQuizImage(res, url.pathname.slice('/api/qimg/'.length).split('/'));
   if (url.pathname.startsWith('/api/room/')) {
     const code = url.pathname.split('/').pop().toUpperCase();

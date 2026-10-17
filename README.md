@@ -55,6 +55,22 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   nhanh”); hình minh họa vẽ tay được thay bằng ảnh chụp thật của từ (GDD §12).
 - Flashcard: chuyển từ bằng phím ← →; kết quả đúng/sai trong bài kiểm tra và ôn tập có màu và icon rõ ràng.
 
+## Tài khoản & Cài đặt
+
+- **Tài khoản** (`#/account`, của hồ sơ đang dùng): tên hiển thị; ảnh đại diện là **màu + chữ cái đầu** hoặc **tự vẽ**
+  (khung vẽ tròn: bút, tẩy, đổ nền, hoàn tác; lưu PNG 128 px); các hồ sơ trên máy (đổi, tạo, xóa); nhóm học (mở trang nhóm,
+  mã khôi phục, rời nhóm); xóa tiến độ.
+  Ảnh tự vẽ có mã `p` + 16 hex (SHA-256 của PNG) và đi qua phòng chơi/nhóm như mã màu `c0…c11`; server lưu ảnh ở
+  `POST /api/avatar` → `GET /api/avatar/<mã>` (thư mục `AVATAR_DIR`, mặc định cạnh `GROUPS_FILE`, tối đa 24 KB/ảnh, chỉ PNG,
+  30 lần/giờ/IP). Khi offline ảnh vẫn hiện trên máy mình và được tải lên lại khi mở app có mạng.
+- **Cài đặt** (`#/settings`, của thiết bị, lưu ở `localStorage` `sw:prefs`): giao diện **Sáng / Tối / Theo hệ thống**, cỡ chữ
+  Nhỏ/Vừa/Lớn (không đổi kích thước phòng vẽ), giảm hiệu ứng chuyển động; **ngôn ngữ giao diện Tiếng Việt / English**;
+  giọng đọc (chọn giọng tiếng Anh của trình duyệt, tốc độ, tự đọc từ khi hiện đáp án); nguồn ảnh; ngày giả lập (kiểm thử).
+- **Ngôn ngữ:** chữ giao diện viết bằng tiếng Việt trong `tr('…')` (`public/js/i18n.js`), bản tiếng Anh ở
+  `public/js/i18n/en.js` (giá trị có thể là `[số ít, số nhiều]`); câu server gửi về được dịch bằng `tServer()`. Đổi ngôn ngữ
+  tải lại trang (giữ nguyên tiến độ và trang đang mở). Nghĩa/giải thích từ vựng vẫn bằng tiếng Việt. Kiểm tra thiếu bản dịch:
+  `python3 tools/i18n_keys.py` (test `tests/i18n.test.js` cũng kiểm tra).
+
 ## Vẽ & đoán: gợi ý
 
 - **Gợi ý chữ cái cho người đoán:** khi chưa ai đoán đúng ở 50 %, 70 % và 85 % thời gian vẽ, server mở thêm 1 chữ cái của từ

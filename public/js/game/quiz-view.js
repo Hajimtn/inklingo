@@ -4,7 +4,7 @@
 //   #/gquiz/solo   play alone now
 //   #/gquiz/live   wait in the live lobby and play together
 
-import { h, clear, toast, speak } from '../ui/dom.js';
+import { h, clear, toast, speak, autoSpeak } from '../ui/dom.js';
 import { icon, avatar } from '../ui/icons.js';
 import { topicById, word } from '../vocab/data.js';
 import { ROUNDS, decodeSay } from '../shared/quiz-core.js';
@@ -12,6 +12,7 @@ import * as online from '../net/online.js';
 import * as P from '../vocab/progress.js';
 import * as G from '../net/groups.js';
 
+import { tr, tServer } from '../i18n.js';
 const ROUND_ICON = { photo: 'image', listen: 'volume', gap: 'test', meaning: 'book' };
 let active = null;
 
@@ -27,7 +28,7 @@ export async function renderGroupQuiz(root, mode) {
     location.hash = '#/group';
     return;
   }
-  clear(root).append(h('div.card.empty', h('h2', 'Đang kết nối…')));
+  clear(root).append(h('div.card.empty', h('h2', tr('Đang kết nối…'))));
   const st = G.lastState(p) || (await G.syncQuick(p));
   active = new QuizView(root, p, st, mode);
 }
@@ -61,7 +62,7 @@ class QuizView {
   shell(...kids) {
     const t = this.st?.quiz ? topicById(this.st.quiz.topicId) : null;
     clear(this.root).append(
-      h('a.back-link', { href: '#/group' }, icon('back', { size: 16 }), 'Nhóm'),
+      h('a.back-link', { href: '#/group' }, icon('back', { size: 16 }), tr('Nhóm')),
       h('section.card.quiz-stage.stack', t ? h('div.small.muted.quiz-topic', t.title) : null, ...kids));
   }
 
@@ -78,7 +79,7 @@ class QuizView {
       case 'gq-reveal': return this.reveal(m);
       case 'gq-done': return this.done(m);
       case 'gq-error':
-        toast(m.text, 'bad');
+        toast(tServer(m.text), 'bad');
         if (m.fatal) location.hash = '#/group';
     }
   }
@@ -87,7 +88,7 @@ class QuizView {
 
   idle(m) {
     if (!m.eligible) {
-      this.shell(h('h2', 'Bạn đã chơi rồi'), h('a.btn.primary', { href: '#/group' }, 'Về nhóm'));
+      this.shell(h('h2', tr('Bạn đã chơi rồi')), h('a.btn.primary', { href: '#/group' }, tr('Về nhóm')));
       return;
     }
     if (this.mode === 'live' || m.inLobby) {
@@ -97,12 +98,12 @@ class QuizView {
     }
     const q = this.st?.quiz;
     this.shell(
-      h('h2', 'Đấu trường chủ đề'),
-      h('div.round-chips', ROUNDS.map((r) => h('span.chip', icon(ROUND_ICON[r.type], { size: 16 }), r.label))),
-      h('div.small.muted', `${q ? q.total + ' câu · ' : ''}chỉ chơi 1 lần · đồng hồ không dừng`),
+      h('h2', tr('Đấu trường chủ đề')),
+      h('div.round-chips', ROUNDS.map((r) => h('span.chip', icon(ROUND_ICON[r.type], { size: 16 }), tr(r.label)))),
+      h('div.small.muted', (q ? tr('{n} câu', { n: q.total }) + ' · ' : '') + tr('chỉ chơi 1 lần · đồng hồ không dừng')),
       h('div.row',
-        h('button.btn.green.big', { onclick: (e) => { e.target.disabled = true; this.send('solo'); } }, icon('play', { size: 20 }), 'Bắt đầu'),
-        h('a.btn.big', { href: '#/gquiz/live', onclick: () => (this.mode = 'live') }, icon('users', { size: 20 }), 'Chơi cùng nhau')));
+        h('button.btn.green.big', { onclick: (e) => { e.target.disabled = true; this.send('solo'); } }, icon('play', { size: 20 }), tr('Bắt đầu')),
+        h('a.btn.big', { href: '#/gquiz/live', onclick: () => (this.mode = 'live') }, icon('users', { size: 20 }), tr('Chơi cùng nhau'))));
   }
 
   lobby(ids) {
@@ -110,12 +111,12 @@ class QuizView {
     this.inLobby = true;
     const me = this.p.group.memberId;
     if (!ids.includes(me)) ids = [...ids, me];
-    const startBtn = h('button.btn.green.big', { disabled: ids.length < 2, onclick: (e) => { e.target.disabled = true; this.send('live'); } }, icon('play', { size: 20 }), ids.length < 2 ? 'Chờ thêm người…' : 'Bắt đầu');
+    const startBtn = h('button.btn.green.big', { disabled: ids.length < 2, onclick: (e) => { e.target.disabled = true; this.send('live'); } }, icon('play', { size: 20 }), ids.length < 2 ? tr('Chờ thêm người…') : tr('Bắt đầu'));
     this.shell(
-      h('h2', 'Phòng chờ'),
-      h('div.lobby-players', ids.map((id) => h('div.lobby-player', avatar(this.member(id).name, this.member(id).avatar, 48), h('div.nm', id === me ? 'Bạn' : this.member(id).name)))),
+      h('h2', tr('Phòng chờ')),
+      h('div.lobby-players', ids.map((id) => h('div.lobby-player', avatar(this.member(id).name, this.member(id).avatar, 48), h('div.nm', id === me ? tr('Bạn') : this.member(id).name)))),
       h('div.row', startBtn,
-        h('button.btn', { onclick: () => { this.send('unlobby'); this.inLobby = false; location.hash = '#/group'; } }, 'Rời phòng chờ')));
+        h('button.btn', { onclick: () => { this.send('unlobby'); this.inLobby = false; location.hash = '#/group'; } }, tr('Rời phòng chờ'))));
   }
 
   countdown(m) {
@@ -123,7 +124,7 @@ class QuizView {
     this.deadline = m.endsAt;
     this.timerEl = h('div.big-score');
     this.timerKind = 'count';
-    this.shell(h('div.small.muted', `${m.total} câu`), h('h2', 'Chuẩn bị!'), this.timerEl,
+    this.shell(h('div.small.muted', tr('{n} câu', { n: m.total })), h('h2', tr('Chuẩn bị!')), this.timerEl,
       m.members ? h('div.answered-row', m.members.map((id) => avatar(this.member(id).name, this.member(id).avatar, 32))) : null);
     this.updateTimer();
   }
@@ -141,8 +142,8 @@ class QuizView {
     this.timerEl = h('div.q-timer', h('i'));
     this.answeredRow = m.live ? h('div.answered-row') : null;
     const head = h('div.q-head',
-      h('span.tag.blue.with-ic', icon(ROUND_ICON[q.type], { size: 14 }), `Vòng ${q.round + 1} · ${q.roundLabel}`),
-      h('span.small.muted', `Câu ${q.index + 1}/${q.total}`));
+      h('span.tag.blue.with-ic', icon(ROUND_ICON[q.type], { size: 14 }), tr('Vòng {i} · {label}', { i: q.round + 1, label: tr(q.roundLabel) })),
+      h('span.small.muted', tr('Câu {i}/{n}', { i: q.index + 1, n: q.total })));
     const body = h('div.q-body');
     this.status = h('div.q-status.small.muted');
     const choose = (opt, btn, all) => {
@@ -151,7 +152,7 @@ class QuizView {
       all.forEach((b) => (b.disabled = true));
       btn.classList.add('chosen');
       this.send('answer', { index: q.index, value: opt });
-      this.status.textContent = 'Đã gửi';
+      this.status.textContent = tr('Đã gửi');
     };
     const options = () => {
       const btns = q.options.map((o) => h('button.btn', { type: 'button', lang: 'en', disabled: this.sent }, o));
@@ -159,7 +160,7 @@ class QuizView {
       return h('div.options', btns);
     };
     const typed = (placeholder) => {
-      const inp = h('input.answer-input', { type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, placeholder, 'aria-label': 'Đáp án', disabled: this.sent, lang: 'en' });
+      const inp = h('input.answer-input', { type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, placeholder, 'aria-label': tr('Đáp án'), disabled: this.sent, lang: 'en' });
       const form = h('form.stack', { onsubmit: (e) => {
         e.preventDefault();
         if (this.sent || !inp.value.trim()) return;
@@ -167,30 +168,30 @@ class QuizView {
         inp.disabled = true;
         form.querySelector('button').disabled = true;
         this.send('answer', { index: q.index, value: inp.value });
-        this.status.textContent = 'Đã gửi';
-      } }, inp, h('button.btn.primary', { type: 'submit', disabled: this.sent }, 'Gửi'));
+        this.status.textContent = tr('Đã gửi');
+      } }, inp, h('button.btn.primary', { type: 'submit', disabled: this.sent }, tr('Gửi')));
       setTimeout(() => inp.focus(), 30);
       return form;
     };
     if (q.type === 'photo') {
-      body.append(h('div.photo-frame.q-photo', h('img', { src: q.img, alt: 'Ảnh câu hỏi', draggable: false })), options());
+      body.append(h('div.photo-frame.q-photo', h('img', { src: q.img, alt: tr('Ảnh câu hỏi'), draggable: false })), options());
     } else if (q.type === 'listen') {
       const say = () => speak(decodeSay(q.say));
-      body.append(h('div.q-listen', h('button.btn.icon-btn.speak-btn.big-speak', { type: 'button', onclick: say, 'aria-label': 'Nghe lại', title: 'Nghe lại' }, icon('volume', { size: 30 })), h('div.letter-hint', q.mask)), typed('Gõ từ bạn nghe được'));
+      body.append(h('div.q-listen', h('button.btn.icon-btn.speak-btn.big-speak', { type: 'button', onclick: say, 'aria-label': tr('Nghe lại'), title: tr('Nghe lại') }, icon('volume', { size: 30 })), h('div.letter-hint', q.mask)), typed(tr('Gõ từ bạn nghe được')));
       setTimeout(say, 250);
     } else if (q.type === 'gap') {
       body.append(h('p.q-sentence', { lang: 'en' }, q.sentence), options());
     } else {
-      body.append(h('div.q-meaning', h('div.meaning', q.vi), h('div.letter-hint', q.mask)), typed('Từ tiếng Anh'));
+      body.append(h('div.q-meaning', h('div.meaning', q.vi), h('div.letter-hint', q.mask)), typed(tr('Từ tiếng Anh')));
     }
-    if (this.sent) this.status.textContent = 'Đã gửi';
+    if (this.sent) this.status.textContent = tr('Đã gửi');
     this.shell(head, this.timerEl, body, this.status, this.answeredRow);
     if (m.answered && this.answeredRow) this.answered({ index: q.index, answered: m.answered });
     this.updateTimer();
   }
 
   acked(index) {
-    if (this.q?.index === index) this.status.textContent = this.live ? 'Đã gửi – chờ mọi người' : 'Đã gửi';
+    if (this.q?.index === index) this.status.textContent = this.live ? tr('Đã gửi – chờ mọi người') : tr('Đã gửi');
   }
 
   answered({ index, answered }) {
@@ -205,19 +206,19 @@ class QuizView {
     this.deadline = m.endsAt;
     const w = word(m.answer.wordId);
     const me = this.p.group.memberId;
-    if (w) setTimeout(() => speak(w.en), 150);
+    if (w) setTimeout(() => autoSpeak(w.en), 150);
     this.shell(
-      h('div.q-head', h('span.small.muted', `Câu ${m.index + 1}/${m.total}`), h('span.tag.yellow', `${m.score} điểm`)),
+      h('div.q-head', h('span.small.muted', tr('Câu {i}/{n}', { i: m.index + 1, n: m.total })), h('span.tag.yellow', tr('{n} điểm', { n: m.score }))),
       h('div.notice.result' + (m.you.ok ? '.good' : '.bad'), icon(m.you.ok ? 'checkCircle' : 'xCircle', { size: 22 }),
-        h('span', h('b', m.you.ok ? `Đúng! +${m.you.points}` : 'Chưa đúng'), m.you.given && !m.you.ok ? ` · bạn trả lời: ${m.you.given}` : '')),
+        h('span', h('b', m.you.ok ? tr('Đúng! +{n}', { n: m.you.points }) : tr('Chưa đúng')), m.you.given && !m.you.ok ? ' · ' + tr('bạn trả lời: {a}', { a: m.you.given }) : '')),
       h('div.reveal-word', h('div.word-big', { lang: 'en' }, m.answer.en), w ? h('div', h('span.ipa', w.ipa), ' · ', h('span.meaning', { style: { margin: 0 } }, w.vi)) : null),
       m.answer.sentence ? h('p.q-sentence', { lang: 'en' }, m.answer.sentence) : null,
       m.others ? h('ol.leaderboard.compact', [...m.others].sort((a, b) => b.score - a.score).map((o, i) => h('li' + (o.id === me ? '.me' : ''),
         h('span.lb-rank', i + 1), avatar(this.member(o.id).name, this.member(o.id).avatar, 28),
-        h('span.lb-name', h('b', o.id === me ? 'Bạn' : this.member(o.id).name)),
+        h('span.lb-name', h('b', o.id === me ? tr('Bạn') : this.member(o.id).name)),
         o.ok ? icon('check', { size: 16, className: 'ok' }) : icon('close', { size: 16, className: 'bad' }),
         h('span.lb-pts', o.score)))) : null,
-      m.live ? h('div.small.muted', 'Câu tiếp theo sắp bắt đầu…') : h('button.btn.primary', { onclick: (e) => { e.target.disabled = true; this.send('skip'); } }, 'Câu tiếp', icon('next', { size: 18 })));
+      m.live ? h('div.small.muted', tr('Câu tiếp theo sắp bắt đầu…')) : h('button.btn.primary', { onclick: (e) => { e.target.disabled = true; this.send('skip'); } }, tr('Câu tiếp'), icon('next', { size: 18 })));
   }
 
   done(m) {
@@ -226,12 +227,12 @@ class QuizView {
     const passed = pct >= 0.8;
     const missed = m.missed.map(word).filter(Boolean);
     this.shell(
-      h('h2', 'Hoàn thành!'),
+      h('h2', tr('Hoàn thành!')),
       h('div.big-score', m.score),
-      h('p', { style: { textAlign: 'center', margin: 0 } }, `${m.correct}/${m.total} câu đúng · ${Math.round(pct * 100)}%`),
-      h('div.notice.result' + (passed ? '.good' : '.bad'), icon(passed ? 'star' : 'info', { size: 22 }), h('span', passed ? 'Đạt' : 'Chưa đạt 80% – ôn lại các từ sai sau khi cả nhóm chơi xong')),
+      h('p', { style: { textAlign: 'center', margin: 0 } }, tr('{c}/{n} câu đúng · {p}%', { c: m.correct, n: m.total, p: Math.round(pct * 100) })),
+      h('div.notice.result' + (passed ? '.good' : '.bad'), icon(passed ? 'star' : 'info', { size: 22 }), h('span', passed ? tr('Đạt') : tr('Chưa đạt 80% – ôn lại các từ sai sau khi cả nhóm chơi xong'))),
       missed.length ? h('div.chips', missed.map((w) => h('span.chip.word-chip', { title: w.vi }, w.en))) : null,
-      h('a.btn.primary', { href: '#/group' }, 'Về nhóm'));
+      h('a.btn.primary', { href: '#/group' }, tr('Về nhóm')));
     G.sync(this.p).catch(() => {});
   }
 

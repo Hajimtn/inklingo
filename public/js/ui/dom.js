@@ -1,5 +1,8 @@
 // Tiny DOM helpers shared by every screen.
 
+import * as prefs from './prefs.js';
+
+import { tr } from '../i18n.js';
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -74,12 +77,18 @@ export function dialog({ title, body, buttons = [{ label: 'OK', value: true, pri
   });
 }
 
-export const confirmDialog = (title, body, okLabel = 'Đồng ý', danger = false) =>
-  dialog({ title, body, buttons: [{ label: 'Hủy', value: false }, { label: okLabel, value: true, primary: !danger, danger }] }).then(Boolean);
+export const confirmDialog = (title, body, okLabel = tr('Đồng ý'), danger = false) =>
+  dialog({ title, body, buttons: [{ label: tr('Hủy'), value: false }, { label: okLabel, value: true, primary: !danger, danger }] }).then(Boolean);
 
 export function fmtTime(sec) {
   sec = Math.max(0, Math.ceil(sec));
   return String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
+}
+
+/** English voices this browser offers (for the voice setting). */
+export function englishVoices() {
+  if (!('speechSynthesis' in window)) return [];
+  return speechSynthesis.getVoices().filter((v) => /^en([-_]|$)/i.test(v.lang));
 }
 
 export function speak(text, rate) {
@@ -87,9 +96,10 @@ export function speak(text, rate) {
   try {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    u.rate = rate || Number(localStorage.getItem('sw:ttsRate')) || 0.85;
-    const voice = speechSynthesis.getVoices().find((v) => /^en(-|_)US/i.test(v.lang)) || speechSynthesis.getVoices().find((v) => /^en/i.test(v.lang));
+    const voices = englishVoices();
+    const voice = voices.find((v) => v.voiceURI === prefs.get('voice')) || voices.find((v) => /^en[-_]US/i.test(v.lang)) || voices[0];
+    u.lang = voice?.lang || 'en-US';
+    u.rate = rate || prefs.get('rate') || 0.85;
     if (voice) u.voice = voice;
     speechSynthesis.speak(u);
     return true;
@@ -97,6 +107,9 @@ export function speak(text, rate) {
     return false;
   }
 }
+
+/** Pronounce a word automatically (after an answer is revealed) unless the player turned it off. */
+export const autoSpeak = (text) => (prefs.get('autoSpeak') ? speak(text) : false);
 
 export function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);

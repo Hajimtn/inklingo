@@ -10,8 +10,9 @@
 //    the group its daily words; the topic test is the group mini-game) – see net/groups.js
 
 import { topics, word } from './data.js';
-import { AVATAR_KEYS } from '../ui/icons.js';
+import { AVATAR_KEYS, registerAvatarPic, isDrawnAvatar } from '../ui/icons.js';
 
+import { tr } from '../i18n.js';
 const KEY = 'sw:v4'; // v4: TOEIC 450+ word list (v3 beginner progress is not carried over)
 export const WORDS_PER_DAY = 5;
 export const PASS_RATE = 0.8;
@@ -24,8 +25,9 @@ let state = load();
 function blankProfile(name, avatar) {
   return {
     id: 'p' + Math.random().toString(36).slice(2, 10),
-    name: name || 'Người chơi',
-    avatar: avatar || AVATARS[Math.floor(Math.random() * AVATARS.length)],
+    name: name || tr('Người chơi'),
+    avatar: avatar || AVATARS[Math.floor(Math.random() * AVATARS.length)], // colour key, or "p…" for a drawn avatar
+    pic: null, // the drawn avatar (PNG data URL) when avatar is a "p…" key
     createdAt: new Date().toISOString(),
     topicIdx: 0,
     introduced: {}, // wordId -> date first delivered
@@ -51,14 +53,15 @@ function load() {
   }
   if (!s || !s.profiles) s = { profiles: {}, active: null, settings: {} };
   if (!Object.keys(s.profiles).length) {
-    const p = blankProfile('Người chơi 1');
+    const p = blankProfile(tr('Người chơi 1'));
     s.profiles[p.id] = p;
     s.active = p.id;
   }
   if (!s.profiles[s.active]) s.active = Object.keys(s.profiles)[0];
   // Earlier builds stored an emoji as the avatar: map it to a colour key.
   Object.values(s.profiles).forEach((p, i) => {
-    if (!AVATARS.includes(p.avatar)) p.avatar = AVATARS[i % AVATARS.length];
+    if (!AVATARS.includes(p.avatar) && !(isDrawnAvatar(p.avatar) && p.pic)) p.avatar = AVATARS[i % AVATARS.length];
+    if (p.pic) registerAvatarPic(p.avatar, p.pic);
     p.group ||= null;
     p.groupMirror ||= null;
     p.groupOutbox ||= [];
@@ -106,10 +109,19 @@ export function updateProfile(id, patch) {
   save();
 }
 
+/** Colour avatar ("c3") or a drawn one (key "p…" + its PNG data URL). */
+export function setAvatar(id, key, pic = null) {
+  const p = state.profiles[id];
+  p.avatar = key;
+  p.pic = pic;
+  if (pic) registerAvatarPic(key, pic);
+  save();
+}
+
 export function deleteProfile(id) {
   delete state.profiles[id];
   if (!Object.keys(state.profiles).length) {
-    const p = blankProfile('Người chơi 1');
+    const p = blankProfile(tr('Người chơi 1'));
     state.profiles[p.id] = p;
   }
   if (!state.profiles[state.active]) state.active = Object.keys(state.profiles)[0];
@@ -122,6 +134,7 @@ export function resetProgress(id) {
   fresh.id = p.id;
   fresh.createdAt = p.createdAt;
   fresh.group = p.group; // stays in the group; the next sync restores the group schedule
+  fresh.pic = p.pic;
   state.profiles[id] = fresh;
   save();
 }
@@ -143,7 +156,7 @@ export function weekday(ds = today()) {
   return parse(ds).getDay(); // 0 Sun .. 6 Sat
 }
 export const isWeekend = (ds = today()) => weekday(ds) === 0 || weekday(ds) === 6;
-export const DAY_NAMES = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+export const DAY_NAMES = [tr('Chủ nhật'), tr('Thứ Hai'), tr('Thứ Ba'), tr('Thứ Tư'), tr('Thứ Năm'), tr('Thứ Sáu'), tr('Thứ Bảy')];
 export function addDays(ds, n) {
   const d = parse(ds);
   d.setDate(d.getDate() + n);

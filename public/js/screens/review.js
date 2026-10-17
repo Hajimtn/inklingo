@@ -3,7 +3,7 @@
 // no English text) until the player has answered, and pasting is blocked. The schedule lives in
 // vocab/progress.js (day 2 -> 4 -> 8 -> 15 -> 30).
 
-import { h, clear, speak } from '../ui/dom.js';
+import { h, clear, speak, autoSpeak } from '../ui/dom.js';
 import { icon, avatar } from '../ui/icons.js';
 import { speakBtn } from './learn.js';
 import { photoFigure } from '../vocab/data.js';
@@ -13,12 +13,13 @@ import { judgeSpeech } from '../shared/speech-match.js';
 import { canRecognize, listenOnce, stopListening, speechError } from '../ui/speech.js';
 import * as P from '../vocab/progress.js';
 
+import { tr } from '../i18n.js';
 const TYPES = {
-  listen: { label: 'Nghe và viết', ic: 'volume' },
-  meaning: { label: 'Nhớ nghĩa', ic: 'book' },
-  context: { label: 'Điền vào câu', ic: 'test' },
+  listen: { label: tr('Nghe và viết'), ic: 'volume' },
+  meaning: { label: tr('Nhớ nghĩa'), ic: 'book' },
+  context: { label: tr('Điền vào câu'), ic: 'test' },
 };
-const LADDER = ['Ngày 2', 'Ngày 4', 'Ngày 8', 'Ngày 15', 'Ngày 30', 'Đã thuộc'];
+const LADDER = [tr('Ngày 2'), tr('Ngày 4'), tr('Ngày 8'), tr('Ngày 15'), tr('Ngày 30'), tr('Đã thuộc')];
 
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const mask = (s) => [...s].map((c) => (/[\s-]/.test(c) ? c : '_')).join(' ');
@@ -36,45 +37,45 @@ export function renderReview(root, mode) {
   const onlyNeeded = mode === 'need';
   const due = P.dueWords(prof, onlyNeeded);
   const learned = P.learnedWords(prof).length;
-  const head = h('div.page-head', h('h1.page-title', 'Word Recall'), P.isWeekend() ? h('span.tag.yellow', 'Ngày ôn tập') : null);
+  const head = h('div.page-head', h('h1.page-title', 'Word Recall'), P.isWeekend() ? h('span.tag.yellow', tr('Ngày ôn tập')) : null);
 
   const start = (words, counted) => play(root, mode, words.slice(0, P.SESSION_MAX), counted);
   const hero = h('section.card.wr-hero');
   if (!learned) {
-    hero.append(h('div.wr-count', h('b', '0'), h('span', 'từ để ôn')),
-      h('a.btn.primary.big', { href: '#/daily' }, icon('calendar', { size: 20 }), 'Học từ hôm nay'));
+    hero.append(h('div.wr-count', h('b', '0'), h('span', tr('từ để ôn'))),
+      h('a.btn.primary.big', { href: '#/daily' }, icon('calendar', { size: 20 }), tr('Học từ hôm nay')));
   } else if (due.length) {
     hero.append(
-      h('div.wr-count', h('b', due.length), h('span', onlyNeeded ? 'từ cần ôn để làm lại bài kiểm tra' : 'từ đến hạn hôm nay')),
+      h('div.wr-count', h('b', due.length), h('span', onlyNeeded ? tr('từ cần ôn để làm lại bài kiểm tra') : tr('từ đến hạn hôm nay'))),
       typeChips(),
-      h('button.btn.primary.big', { onclick: () => start(due, true) }, icon('play', { size: 20 }), due.length > P.SESSION_MAX ? `Bắt đầu ${P.SESSION_MAX} từ` : 'Bắt đầu'));
+      h('button.btn.primary.big', { onclick: () => start(due, true) }, icon('play', { size: 20 }), due.length > P.SESSION_MAX ? tr('Bắt đầu {n} từ', { n: P.SESSION_MAX }) : tr('Bắt đầu')));
   } else {
     const next = P.nextDue(prof);
     hero.append(
-      h('div.wr-count.done', icon('checkCircle', { size: 30 }), h('span', 'Không có từ đến hạn')),
-      next ? h('p.muted.wr-next', icon('clock', { size: 16 }), `Lần tới: ${shortDate(next)}`) : null,
+      h('div.wr-count.done', icon('checkCircle', { size: 30 }), h('span', tr('Không có từ đến hạn'))),
+      next ? h('p.muted.wr-next', icon('clock', { size: 16 }), tr('Lần tới: {d}', { d: shortDate(next) })) : null,
       typeChips(),
-      h('button.btn.big', { onclick: () => start(P.practiceWords(P.SESSION_MAX, prof), false) }, icon('repeat', { size: 20 }), 'Luyện thêm'),
-      h('small.muted', 'Luyện thêm không tính điểm'));
+      h('button.btn.big', { onclick: () => start(P.practiceWords(P.SESSION_MAX, prof), false) }, icon('repeat', { size: 20 }), tr('Luyện thêm')),
+      h('small.muted', tr('Luyện thêm không tính điểm')));
   }
 
   const lad = P.ladder(prof);
   const max = Math.max(1, ...lad);
-  const ladderCard = h('section.card.side-card', h('div.section-head', h('h2', 'Lịch nhớ')),
+  const ladderCard = h('section.card.side-card', h('div.section-head', h('h2', tr('Lịch nhớ'))),
     h('ol.wr-ladder', LADDER.map((label, i) => h('li' + (i === LADDER.length - 1 ? '.last' : ''),
       h('span', label), h('div.bar', h('i', { style: { width: (lad[i] / max) * 100 + '%' } })), h('b', lad[i])))));
 
   const rs = P.recallStats(prof);
-  const rateCard = h('section.card.side-card', h('div.section-head', h('h2', 'Tỷ lệ nhớ')),
+  const rateCard = h('section.card.side-card', h('div.section-head', h('h2', tr('Tỷ lệ nhớ'))),
     h('div.wr-rates',
       Object.entries(TYPES).map(([t, d]) => h('div', icon(d.ic, { size: 18 }), h('b', pct(rs.byType[t])), h('small', d.label))),
-      h('div.late', icon('clock', { size: 18 }), h('b', pct(rs.late)), h('small', 'Sau ≥ 7 ngày'))));
+      h('div.late', icon('clock', { size: 18 }), h('b', pct(rs.late)), h('small', tr('Sau ≥ 7 ngày')))));
 
   const board = prof.group && prof.groupMirror?.recallBoard;
-  const weekCard = h('section.card.side-card', h('div.section-head', h('h2', 'Tuần này'), h('span.small.muted', 'từ nhớ đúng')),
+  const weekCard = h('section.card.side-card', h('div.section-head', h('h2', tr('Tuần này')), h('span.small.muted', tr('từ nhớ đúng'))),
     board && board.length > 1
       ? h('ol.wr-board', [...board].sort((a, b) => b.n - a.n).map((m, i) => h('li' + (m.me ? '.me' : ''), h('span.rank', i + 1), avatar(m.name, m.avatar, 30), h('span.name', m.name), h('b', m.n))))
-      : h('div.wr-week', h('b', board ? board.find((m) => m.me)?.n ?? rs.week : rs.week), h('span', 'từ')));
+      : h('div.wr-week', h('b', board ? board.find((m) => m.me)?.n ?? rs.week : rs.week), h('span', tr('từ'))));
 
   clear(root).append(head, h('div.wr-home', hero, h('div.stack', ladderCard, rateCard, weekCard)));
 }
@@ -92,7 +93,7 @@ function play(root, mode, words, counted) {
   const results = [];
   let k = 0;
   const card = h('section.card.wr-play');
-  clear(root).append(h('div.page-head', h('h1.page-title', 'Word Recall'), counted ? null : h('span.tag', 'Luyện thêm')), card);
+  clear(root).append(h('div.page-head', h('h1.page-title', 'Word Recall'), counted ? null : h('span.tag', tr('Luyện thêm'))), card);
 
   const next = () => {
     if (k >= queue.length) return summary();
@@ -102,7 +103,7 @@ function play(root, mode, words, counted) {
     const answers = accepted.map(normalizeAnswer);
     const inp = h('input.answer-input', {
       type: 'text', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: false, enterkeyhint: 'done',
-      placeholder: 'Gõ từ tiếng Anh…', 'aria-label': 'Đáp án',
+      placeholder: tr('Gõ từ tiếng Anh…'), 'aria-label': tr('Đáp án'),
     });
     // Recall means typing it yourself: no paste, no drag-and-drop.
     const block = (e) => { e.preventDefault(); toastOnce(card); };
@@ -114,8 +115,8 @@ function play(root, mode, words, counted) {
     let prompt;
     if (type === 'listen') {
       prompt = h('div.wr-prompt',
-        h('div.row.center', h('button.btn.wr-audio', { type: 'button', onclick: () => say(), 'aria-label': 'Nghe lại' }, icon('volume', { size: 30 })),
-          h('button.btn.small', { type: 'button', onclick: () => say(0.55) }, 'Nghe chậm')),
+        h('div.row.center', h('button.btn.wr-audio', { type: 'button', onclick: () => say(), 'aria-label': tr('Nghe lại') }, icon('volume', { size: 30 })),
+          h('button.btn.small', { type: 'button', onclick: () => say(0.55) }, tr('Nghe chậm'))),
         h('div.letter-hint', mask(w.en)), h('small.muted', w.pos));
       setTimeout(() => say(), 250);
     } else if (type === 'meaning') {
@@ -126,7 +127,7 @@ function play(root, mode, words, counted) {
 
     const feedback = h('div');
     const nextBtn = h('button.btn.primary', { hidden: true, onclick: () => { stopListening(); k++; next(); } });
-    const submit = h('button.btn.primary', { type: 'submit' }, 'Kiểm tra');
+    const submit = h('button.btn.primary', { type: 'submit' }, tr('Kiểm tra'));
     const status = h('div.wr-mic-status', { 'aria-live': 'polite' });
     let finished = false;
 
@@ -146,7 +147,7 @@ function play(root, mode, words, counted) {
       const due = P.dueDate(w.id);
       feedback.replaceChildren(h('div.wr-reveal',
         h('div.notice.result' + (ok ? '.good' : '.bad'), icon(ok ? 'checkCircle' : 'xCircle', { size: 22 }),
-          h('span', h('b', ok ? 'Chính xác' : 'Chưa đúng'), item.counted && due ? h('small.muted', ` · lần tới ${shortDate(due)}`) : item.retry ? h('small.muted', ' · ôn lại') : null)),
+          h('span', h('b', ok ? tr('Chính xác') : tr('Chưa đúng')), item.counted && due ? h('small.muted', ' · ' + tr('lần tới {d}', { d: shortDate(due) })) : item.retry ? h('small.muted', tr(' · ôn lại')) : null)),
         spoken ? pronunciation(spoken) : null,
         h('div.wr-answer',
           photoFigure(w, { short: true }),
@@ -155,8 +156,8 @@ function play(root, mode, words, counted) {
             h('div.ipa', w.ipa), type === 'meaning' ? null : h('div.meaning', w.vi),
             h('div.example', h('div', { lang: 'en' }, w.ex[0]), h('div.vi', w.ex[1])),
             canRecognize() ? practice(w) : null))));
-      if (type !== 'listen' && !spoken) say();
-      nextBtn.replaceChildren(...(k === queue.length - 1 ? ['Kết thúc'] : ['Tiếp', icon('next', { size: 18 })]));
+      if (type !== 'listen' && !spoken) autoSpeak(w.en);
+      nextBtn.replaceChildren(...(k === queue.length - 1 ? [tr('Kết thúc')] : [tr('Tiếp'), icon('next', { size: 18 })]));
       nextBtn.hidden = false;
       nextBtn.focus();
     };
@@ -171,10 +172,10 @@ function play(root, mode, words, counted) {
     let mic = null;
     if (canRecognize() && type !== 'listen') {
       let tries = 0;
-      mic = h('button.btn.wr-mic', { type: 'button', 'aria-label': 'Nói đáp án', onclick: async () => {
+      mic = h('button.btn.wr-mic', { type: 'button', 'aria-label': tr('Nói đáp án'), onclick: async () => {
         if (finished || mic.classList.contains('on')) return stopListening();
         mic.classList.add('on');
-        status.replaceChildren(h('span.muted', 'Đang nghe…'));
+        status.replaceChildren(h('span.muted', tr('Đang nghe…')));
         try {
           const alts = await listenOnce();
           if (finished) return;
@@ -182,20 +183,20 @@ function play(root, mode, words, counted) {
           tries++;
           if (r.ok || tries >= 2) return finish(r.ok, r);
           // Do not show the letter check yet: it would reveal the answer.
-          status.replaceChildren(h('span', 'Máy nghe thành ', h('b', { lang: 'en' }, `“${r.heard}”`), ' – nói lại hoặc gõ'));
+          status.replaceChildren(h('span', tr('Máy nghe thành '), h('b', { lang: 'en' }, `“${r.heard}”`), tr(' – nói lại hoặc gõ')));
         } catch (err) {
           if (!finished) status.replaceChildren(h('span.muted', speechError(err.code)));
         } finally {
           mic.classList.remove('on');
         }
-      } }, icon('mic', { size: 20 }), 'Nói');
+      } }, icon('mic', { size: 20 }), tr('Nói'));
       form.querySelector('.wr-actions').prepend(mic);
       form.append(status);
     }
 
     const n = Math.min(k + 1, firstCount);
     clear(card).append(
-      h('div.row.between', h('span.wr-type', icon(TYPES[type].ic, { size: 18 }), TYPES[type].label), h('b', item.retry ? 'Ôn lại' : `${n}/${firstCount}`)),
+      h('div.row.between', h('span.wr-type', icon(TYPES[type].ic, { size: 18 }), TYPES[type].label), h('b', item.retry ? tr('Ôn lại') : `${n}/${firstCount}`)),
       h('div.wr-steps', queue.slice(0, firstCount).map((_, i) => h('i' + (i < k ? '.done' : i === k ? '.now' : '')))),
       prompt, form, feedback, h('div.row', { style: { justifyContent: 'flex-end' } }, nextBtn));
     inp.focus();
@@ -205,7 +206,7 @@ function play(root, mode, words, counted) {
     const ok = results.filter((r) => r.ok).length;
     const more = P.dueWords(P.active(), mode === 'need').length;
     clear(card).append(
-      h('div.big-score', `${ok}/${results.length}`), h('p.center.muted', 'nhớ đúng'),
+      h('div.big-score', `${ok}/${results.length}`), h('p.center.muted', tr('nhớ đúng')),
       h('ul.vlist.wr-sum', results.map((r) => {
         const d = r.counted ? P.dueDate(r.w.id) : null;
         return h('li.vrow', { tabindex: 0, onclick: () => speak(r.w.en) },
@@ -214,8 +215,8 @@ function play(root, mode, words, counted) {
           d ? h('span.small.muted', shortDate(d)) : null);
       })),
       h('div.row.center',
-        more ? h('button.btn.primary', { onclick: () => play(root, mode, P.dueWords(P.active(), mode === 'need').slice(0, P.SESSION_MAX), true) }, icon('repeat', { size: 18 }), `Ôn tiếp ${Math.min(more, P.SESSION_MAX)} từ`)
-          : mode === 'need' && !P.active().needReview.length ? h('a.btn.primary', { href: '#/topics' }, icon('test', { size: 18 }), 'Làm lại bài kiểm tra') : null,
+        more ? h('button.btn.primary', { onclick: () => play(root, mode, P.dueWords(P.active(), mode === 'need').slice(0, P.SESSION_MAX), true) }, icon('repeat', { size: 18 }), tr('Ôn tiếp {n} từ', { n: Math.min(more, P.SESSION_MAX) }))
+          : mode === 'need' && !P.active().needReview.length ? h('a.btn.primary', { href: '#/topics' }, icon('test', { size: 18 }), tr('Làm lại bài kiểm tra')) : null,
         h('button.btn', { onclick: () => (location.hash === '#/review' ? renderReview(root) : (location.hash = '#/review')) }, 'Xong')));
   };
 
@@ -226,11 +227,11 @@ function play(root, mode, words, counted) {
 function pronunciation(r) {
   const cls = r.score >= 85 ? 'good' : r.score >= 60 ? 'mid' : 'bad';
   return h('div.wr-pron',
-    h('div.wr-pron-score.' + cls, h('b', r.score + '%'), h('small', 'phát âm')),
+    h('div.wr-pron-score.' + cls, h('b', r.score + '%'), h('small', tr('phát âm'))),
     h('div.stack',
-      h('div.wr-letters', r.align.cells.map((c) => (c.sep ? h('span.sep') : h('span.' + (c.ok ? 'ok' : 'bad'), { title: c.ok ? '' : c.heard ? `nghe thành “${c.heard}”` : 'thiếu' },
+      h('div.wr-letters', r.align.cells.map((c) => (c.sep ? h('span.sep') : h('span.' + (c.ok ? 'ok' : 'bad'), { title: c.ok ? '' : c.heard ? tr('nghe thành “{x}”', { x: c.heard }) : tr('thiếu') },
         h('b', c.ch), h('small', c.ok ? '' : c.heard || '–'))))),
-      h('small.muted', 'Máy nghe: ', h('b', { lang: 'en' }, r.heard || '–'), r.align.extra ? ` · thừa ${r.align.extra} chữ` : '')));
+      h('small.muted', tr('Máy nghe: '), h('b', { lang: 'en' }, r.heard || '–'), r.align.extra ? ' · ' + tr('thừa {n} chữ', { n: r.align.extra }) : '')));
 }
 
 /** "Say it" practice after answering: not graded, does not change the schedule. */
@@ -239,7 +240,7 @@ function practice(w) {
   const btn = h('button.btn.small.wr-mic', { type: 'button', onclick: async () => {
     if (btn.classList.contains('on')) return stopListening();
     btn.classList.add('on');
-    out.replaceChildren(h('span.muted.small', 'Đang nghe…'));
+    out.replaceChildren(h('span.muted.small', tr('Đang nghe…')));
     try {
       out.replaceChildren(pronunciation(judgeSpeech(await listenOnce(), [w.en, ...w.alt])));
     } catch (err) {
@@ -247,7 +248,7 @@ function practice(w) {
     } finally {
       btn.classList.remove('on');
     }
-  } }, icon('mic', { size: 16 }), 'Luyện phát âm');
+  } }, icon('mic', { size: 16 }), tr('Luyện phát âm'));
   return h('div.stack.wr-practice', btn, out);
 }
 
@@ -255,7 +256,7 @@ let toastShown = 0;
 function toastOnce(card) {
   if (Date.now() - toastShown < 4000) return;
   toastShown = Date.now();
-  const n = h('div.notice.wr-nopaste', icon('info', { size: 16 }), 'Hãy tự gõ từ');
+  const n = h('div.notice.wr-nopaste', icon('info', { size: 16 }), tr('Hãy tự gõ từ'));
   card.append(n);
   setTimeout(() => n.remove(), 2500);
 }
