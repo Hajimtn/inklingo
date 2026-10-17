@@ -31,6 +31,7 @@ Kiểm thử engine vẽ trong trình duyệt: mở `http://localhost:8787/dev/d
 `render.yaml` mô tả dịch vụ: Node 22 (test tích hợp dùng `WebSocket` có sẵn từ Node 22), gói Starter (chạy liên tục), vùng Singapore, ổ đĩa 1 GB gắn tại `/var/data`
 cho file nhóm học (`GROUPS_FILE=/var/data/groups.json`), kiểm tra sức khỏe `/api/health`, build bằng `npm test` (deploy
 dừng nếu test lỗi), tự deploy khi push lên `main`, tên miền `inklingo.io.vn` và `www.inklingo.io.vn`.
+Bản đang chạy: `GET /api/health` trả `version` (7 ký tự đầu của commit, từ biến `RENDER_GIT_COMMIT`) và `startedAt`.
 Server chỉ chạy **1 instance** (phòng chơi realtime nằm trong bộ nhớ). DNS ở Tenten: bản ghi A cho `@` trỏ về IP Render
 cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
 
