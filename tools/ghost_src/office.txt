@@ -452,3 +452,23 @@
 <path d="M560 560 V590 C 560 630 670 650 800 650 C 930 650 1040 630 1040 590 V560"/>
 <path d="M790 650 L800 900 L810 650"/>
 <path d="M700 230 C 730 215 780 210 820 212"/>
+
+=== envelope
+<rect x="300" y="220" width="1000" height="600" rx="20"/>
+<path d="M300 240 L800 580 L1300 240"/>
+<path d="M300 800 L680 500 M1300 800 L920 500"/>
+<rect x="1100" y="290" width="140" height="160" rx="6"/>
+<path d="M1120 310 H1220 V430 H1120 Z" stroke-dasharray="10 10"/>
+<path d="M420 660 H640 M420 710 H600" stroke-width="0"/>
+
+=== rubber-stamp
+<ellipse cx="640" cy="200" rx="110" ry="50"/>
+<path d="M530 200 C 530 300 590 340 600 400 H680 C 690 340 750 300 750 200"/>
+<path d="M600 400 V500 M680 400 V500"/>
+<path d="M440 500 H840 V590 H440 Z"/>
+<path d="M460 590 H820 V630 H460 Z"/>
+<path d="M200 760 L1000 760 L1100 860 H100 Z"/>
+<rect x="1080" y="560" width="320" height="180" rx="16"/>
+<rect x="1110" y="590" width="260" height="120" rx="10"/>
+<path d="M340 800 H520 L540 840 H320 Z"/>
+<text x="560" y="830" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">PAID</text>

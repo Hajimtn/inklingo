@@ -421,3 +421,32 @@
 <path d="M470 480 C 600 500 800 500 950 480"/>
 <path d="M1100 560 H1300 L1280 860 H1120 Z"/>
 <path d="M1100 640 H1300"/>
+
+=== agenda
+<rect x="460" y="100" width="680" height="800" rx="16"/>
+<text x="540" y="230" font-family="Arial" font-size="88" font-weight="700" fill="#222" stroke="none">AGENDA</text>
+<path d="M540 270 H1060"/>
+<text x="540" y="360" font-family="Arial" font-size="44" fill="#222" stroke="none">9:00</text>
+<path d="M680 345 H1060"/>
+<text x="540" y="460" font-family="Arial" font-size="44" fill="#222" stroke="none">9:30</text>
+<path d="M680 445 H1000"/>
+<text x="540" y="560" font-family="Arial" font-size="44" fill="#222" stroke="none">10:15</text>
+<path d="M680 545 H1060"/>
+<text x="540" y="660" font-family="Arial" font-size="44" fill="#222" stroke="none">11:00</text>
+<path d="M680 645 H980"/>
+<text x="540" y="760" font-family="Arial" font-size="44" fill="#222" stroke="none">12:00</text>
+<path d="M680 745 H1040"/>
+<path d="M1180 260 L1260 780 L1240 830 L1220 780 L1140 270"/>
+
+=== round-table
+<ellipse cx="800" cy="560" rx="420" ry="150"/>
+<path d="M380 560 V600 C 380 680 570 740 800 740 C 1030 740 1220 680 1220 600 V560"/>
+<path d="M800 740 V860 M680 880 H920"/>
+<path d="M300 520 V380 C 300 350 320 340 350 340 H420 C 450 340 460 360 460 380 V500"/>
+<path d="M1300 520 V380 C 1300 350 1280 340 1250 340 H1180 C 1150 340 1140 360 1140 380 V500"/>
+<path d="M640 410 V300 C 640 280 660 270 680 270 H760 C 780 270 790 290 790 300 V400"/>
+<path d="M810 400 V300 C 810 280 830 270 850 270 H930 C 950 270 960 290 960 300 V410"/>
+<path d="M260 720 V600 C 260 580 280 570 300 570 M1340 720 V600 C 1340 580 1320 570 1300 570"/>
+<path d="M260 720 H380 V860 M1340 720 H1220 V860"/>
+<ellipse cx="640" cy="560" rx="70" ry="22"/>
+<ellipse cx="960" cy="560" rx="70" ry="22"/>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="460" y="100" width="680" height="800" rx="16"/>
+  <text x="540" y="230" font-family="Arial" font-size="88" font-weight="700" fill="#222" stroke="none">AGENDA</text>
+  <path d="M540 270 H1060"/>
+  <text x="540" y="360" font-family="Arial" font-size="44" fill="#222" stroke="none">9:00</text>
+  <path d="M680 345 H1060"/>
+  <text x="540" y="460" font-family="Arial" font-size="44" fill="#222" stroke="none">9:30</text>
+  <path d="M680 445 H1000"/>
+  <text x="540" y="560" font-family="Arial" font-size="44" fill="#222" stroke="none">10:15</text>
+  <path d="M680 545 H1060"/>
+  <text x="540" y="660" font-family="Arial" font-size="44" fill="#222" stroke="none">11:00</text>
+  <path d="M680 645 H980"/>
+  <text x="540" y="760" font-family="Arial" font-size="44" fill="#222" stroke="none">12:00</text>
+  <path d="M680 745 H1040"/>
+  <path d="M1180 260 L1260 780 L1240 830 L1220 780 L1140 270"/>
+</svg>

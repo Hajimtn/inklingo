@@ -232,7 +232,7 @@ test('study group over HTTP + mini-game over WebSocket: shared words, no answer 
   const raw = c.raw.find((r) => r.includes('"gq-question"'));
   assert.ok(!raw.includes('"en"') && !raw.includes('"wordId"') && !raw.includes('img/w/'), 'question must not reveal the answer');
   const img = await fetch(`http://localhost:${PORT}/${q.q.img}`);
-  assert.equal(img.headers.get('content-type'), 'image/jpeg');
+  assert.equal(img.headers.get('content-type'), 'image/webp');
   c.send({ ...auth, action: 'answer', index: 0, value: q.q.options[0] });
   const rev = await c.wait((m) => m.type === 'gq-reveal');
   assert.equal(rev.you.ok, rev.answer.en === q.q.options[0]);

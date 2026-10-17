@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="400" y="80" width="800" height="840" rx="16"/>
+  <path d="M480 180 L520 120 L500 180 H540 L480 260 L500 190 Z"/>
+  <text x="580" y="220" font-family="Arial" font-size="64" font-weight="700" fill="#222" stroke="none">ELECTRICITY</text>
+  <path d="M480 280 H1120"/>
+  <path d="M480 340 H800 M480 390 H720"/>
+  <path d="M480 480 V700 H1120"/>
+  <path d="M540 700 V620 H600 V700 M640 700 V560 H700 V700 M740 700 V600 H800 V700 M840 700 V520 H900 V700 M940 700 V580 H1000 V700"/>
+  <text x="480" y="820" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">TOTAL</text>
+  <text x="880" y="820" font-family="Arial" font-size="60" font-weight="700" fill="#222" stroke="none">$84</text>
+</svg>

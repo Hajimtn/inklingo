@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="480" cy="320" r="74"/>
+  <path d="M340 880 V580 C 340 480 390 430 480 430 C 570 430 620 480 620 580 V880"/>
+  <path d="M600 520 L720 480"/>
+  <path d="M1000 560 V880 M1000 700 L900 880 M1000 700 L1100 880"/>
+  <rect x="900" y="300" width="200" height="260" rx="24"/>
+  <circle cx="1000" cy="500" r="14"/>
+  <rect x="1140" y="140" width="220" height="90" rx="20"/>
+  <circle cx="1190" cy="185" r="16"/>
+  <text x="1220" y="205" font-family="Arial" font-size="52" font-weight="700" fill="#222" stroke="none">LIVE</text>
+  <path d="M1180 300 C 1180 280 1200 270 1210 290 C 1220 270 1240 280 1240 300 C 1240 330 1210 350 1210 350 C 1210 350 1180 330 1180 300 Z"/>
+  <path d="M1260 380 C 1260 360 1280 350 1290 370 C 1300 350 1320 360 1320 380 C 1320 410 1290 430 1290 430 C 1290 430 1260 410 1260 380 Z"/>
+  <path d="M760 360 C 790 330 830 330 860 360 M720 320 C 770 270 850 270 900 320" stroke-width="0"/>
+</svg>

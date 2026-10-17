@@ -78,7 +78,7 @@ test('quiz questions: every word once, 4 rounds, gap sentences contain a blank, 
     }
     if (q.type === 'gap') assert.ok(q.sentence.includes('_____') && !new RegExp(`\\b${q.en}\\b`, 'i').test(q.sentence), q.sentence);
     const pub = JSON.stringify(publicQuestion(q, 0, qs.length, 'api/qimg/X/1/0'));
-    assert.ok(!pub.includes(q.wordId + '.jpg') && !pub.includes('"wordId"'), 'public question must not name the file/word id');
+    assert.ok(!pub.includes(q.wordId + '.webp') && !pub.includes(q.wordId + '.jpg') && !pub.includes('"wordId"'), 'public question must not name the file/word id');
     if (q.type === 'listen') assert.equal(decodeSay(publicQuestion(q, 0, 1).say), q.en);
   }
   assert.deepEqual(buildQuestions(t.words, 'seed-1'), qs, 'same seed -> same questions for everyone');

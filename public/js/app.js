@@ -165,7 +165,17 @@ async function boot() {
   await route();
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
+    setTimeout(precacheTopic, 4000);
   }
+}
+
+/** Fetch the current topic's main photos in the background, so learning works offline later. */
+function precacheTopic() {
+  if (navigator.connection?.saveData) return;
+  const t = P.currentTopic();
+  if (!t) return;
+  const urls = t.words.map((w) => w.images[0]?.file).filter(Boolean).map((f) => new URL(f, location.href).href);
+  navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ type: 'precache', urls })).catch(() => {});
 }
 
 window.addEventListener('unhandledrejection', (e) => {

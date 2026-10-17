@@ -127,7 +127,7 @@ function serveQuizImage(res, [code, quizId, k]) {
   if (!q || !q.img) return json(res, 404, { error: 'not found' });
   const file = path.normalize(path.join(ROOT, q.img));
   if (!file.startsWith(ROOT + path.sep)) return json(res, 403, { error: 'forbidden' });
-  res.writeHead(200, { 'Content-Type': 'image/jpeg', 'Cache-Control': 'no-store' });
+  res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'image/jpeg', 'Cache-Control': 'no-store' });
   fs.createReadStream(file).on('error', () => res.end()).pipe(res);
 }
 
@@ -179,7 +179,7 @@ function onGroupQuiz(pid, msg) {
 
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
-  '.json': 'application/json; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+  '.json': 'application/json; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp',
   '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json',
 };
 

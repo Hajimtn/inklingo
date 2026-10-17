@@ -485,5 +485,15 @@
 "diversity": [6, 5],
 "goal": [6, 4],
 "creativity": [7, 4],
-"pie-chart": [4, 2]
+"pie-chart": [4, 2],
+"envelope": [13, 9],
+"gardener": [14, 15],
+"round-table": [10],
+"utility-bill": [13],
+"catalogue": [18, 22],
+"live-stream": [9, 12],
+"celebration": [15, 13],
+"rubber-stamp": [2],
+"agenda": [16],
+"bathroom-scale": [15, 18]
 }

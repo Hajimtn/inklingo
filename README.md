@@ -164,12 +164,14 @@ docs/COMPARISON.md       bảng đối chiếu Scribble It! ↔ Inklingo
    Từ khó tìm ảnh: `python3 tools/curate_images.py more <từ> "truy vấn" "Category:…"`. Với từ mà chính chủ đề bị bộ lọc
    chặn (vd. **poster**), `WORD_ALLOW` trong `curate_images.py` nới đúng từ khóa đó cho riêng từ ấy.
 3. Ghi lựa chọn vào `tools/image_choices.json` (ảnh chính + ảnh dự phòng).
-4. `python3 tools/curate_images.py finalize` – tải ảnh 640 px về `public/img/w/`, ghi `public/data/images.json`
+4. `python3 tools/curate_images.py finalize` – tải ảnh 640 px về `public/img/w/` dạng **WebP** (q78, nhẹ hơn JPEG ~30 %;
+   ảnh cũ chuyển bằng `python3 tools/to_webp.py`), ghi `public/data/images.json`
    (URL nguồn, tác giả, giấy phép, link giấy phép).
 5. `node tools/build_vocab.mjs` – build `vocab.json`; **từ nào chưa có ảnh thật đã xác minh sẽ không được đưa vào game**.
 
 Ảnh lỗi → thử bản gốc trên Wikimedia → ảnh dự phòng đã xác minh của cùng từ → ảnh bìa (ảnh thật) của chủ đề.
-Service worker cache ảnh (cache-first). Danh sách tác giả/giấy phép: màn hình **Cài đặt → Nguồn ảnh & giấy phép**.
+Service worker cache ảnh (cache-first) và **tải trước ảnh chính của cả chủ đề đang học** vài giây sau khi mở app (bỏ qua khi
+bật tiết kiệm dữ liệu), nên học offline được cả những từ chưa mở. Danh sách tác giả/giấy phép: màn hình **Cài đặt → Nguồn ảnh & giấy phép**.
 
 ## Trạng thái dữ liệu
 
@@ -177,13 +179,11 @@ Service worker cache ảnh (cache-first). Danh sách tác giả/giấy phép: m�
   Hotels & Restaurants · Shopping & Delivery · Housing & Maintenance · Health & Medical · Professions ·
   Meetings & Presentations · Manufacturing & Logistics · Banking & Finance · Marketing & Media · Workplace Concepts.
   20 từ gốc + 22 từ thông dụng bổ sung mỗi chủ đề (soạn ở `tools/new_words/*.txt`, thêm bằng `python3 tools/add_words.py`).
-- 486/504 từ có ảnh chụp thật đã duyệt bằng mắt (ảnh chính + ảnh dự phòng cho nhiều từ); mỗi chủ đề 38–42 từ trong game.
-- Bị loại theo §12.6 vì chưa tìm được ảnh chụp thật đúng nghĩa, rõ nguồn và giấy phép trên Wikimedia Commons
-  (kết quả chỉ có tranh vẽ, biểu đồ đồ họa, ảnh chân dung/người nổi tiếng, ảnh sai nghĩa):
-  Office: **envelope**, **rubber-stamp** · Health: **bathroom-scale** · Professions: **gardener**, **lawyer** ·
-  Meetings: **agenda**, **round-table**, **bar-chart**, **nameplate** · Finance: **utility-bill**, **salary**,
-  **financial-advisor** · Media: **catalogue**, **live-stream** · Concepts: **celebration**, **mentor**, **leadership**,
-  **internship**.
+- 496/504 từ có ảnh chụp thật đã duyệt bằng mắt (ảnh chính + ảnh dự phòng cho nhiều từ); mỗi chủ đề 39–42 từ trong game.
+- Bị loại theo §12.6 vì chưa tìm được ảnh chụp thật đúng nghĩa, rõ nguồn và giấy phép trên Wikimedia Commons sau 3 lượt tìm
+  (kết quả chỉ có tranh vẽ, biểu đồ đồ họa, chân dung người thật/người nổi tiếng, ảnh sai nghĩa):
+  Professions: **lawyer** · Meetings: **bar-chart**, **nameplate** · Finance: **salary**, **financial-advisor** ·
+  Concepts: **mentor**, **leadership**, **internship**.
   Bổ sung bằng cách thêm ảnh vào `tools/image_choices.json` rồi chạy lại bước 4–5.
 - Từ mới được nối vào cuối mỗi chủ đề: người đang học một chủ đề sẽ nhận tiếp các từ mới trước bài kiểm tra; chủ đề đã qua
   giữ nguyên trạng thái "đã qua" và không phát lại từ mới của nó.

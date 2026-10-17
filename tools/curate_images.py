@@ -332,6 +332,15 @@ def cmd_sheets():
             print(out)
 
 
+def _webp_module():
+    # loaded by path: `python3 -I` does not put tools/ on sys.path
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('to_webp', TOOLS / 'to_webp.py')
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def cmd_finalize():
     data = json.loads((CACHE / 'candidates.json').read_text())
     choices = json.loads((TOOLS / 'image_choices.json').read_text())
@@ -357,10 +366,14 @@ def cmd_finalize():
             full = dict(full)
             acceptable(full)  # fills licence fields for dual-licensed files
             k = len(entries)
-            name = f'{wid}.jpg' if k == 0 else f'{wid}-{k + 1}.jpg'
+            name = f'{wid}.webp' if k == 0 else f'{wid}-{k + 1}.webp'
             dest = OUT_IMG / name
             if not dest.exists():
-                download(full['thumb'], dest)
+                # download the JPEG thumbnail, store it as WebP (see tools/to_webp.py)
+                tmp = dest.with_suffix('.jpg')
+                download(full['thumb'], tmp)
+                _webp_module().to_webp(tmp)
+                tmp.unlink()
             entries.append({
                 'file': f'img/w/{name}', 'remote': full['thumb'], 'page': full['page'], 'title': full['title'][5:],
                 'author': full['author'] or full['credit'] or 'Unknown', 'license': full['license'], 'licenseUrl': full['licenseUrl'],
