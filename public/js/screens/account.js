@@ -5,12 +5,14 @@ import { h, clear, toast, confirmDialog, dialog } from '../ui/dom.js';
 import { icon, avatar as avatarEl, avatarColor, isDrawnAvatar } from '../ui/icons.js';
 import { drawAvatar, avatarKeyOf, uploadAvatar } from '../ui/avatar-draw.js';
 import { tr } from '../i18n.js';
+import { scoringGuide } from './scoring.js';
 import * as P from '../vocab/progress.js';
 import * as G from '../net/groups.js';
 
 const copy = (text, msg) => (navigator.clipboard?.writeText(text) || Promise.reject()).then(() => toast(msg, 'good')).catch(() => toast(text));
 
-export function renderAccount(root, rerenderHeader) {
+/** @param {string|null} scoring  open the scoring guide at this part ("group", "fast"…) and scroll to it */
+export function renderAccount(root, rerenderHeader, scoring = null) {
   const prof = P.active();
   const again = () => { rerenderHeader(); renderAccount(root, rerenderHeader); };
 
@@ -108,5 +110,7 @@ export function renderAccount(root, rerenderHeader) {
 
   clear(root).append(
     h('div.page-head', h('h1.page-title', tr('Tài khoản'))),
-    h('div.grid2', h('div.stack', profileCard, dataCard), h('div.stack', profilesCard, groupCard)));
+    h('div.grid2', h('div.stack', profileCard, dataCard), h('div.stack', profilesCard, groupCard)),
+    scoringGuide({ open: scoring }));
+  if (scoring) requestAnimationFrame(() => (document.getElementById('score-' + scoring) || document.getElementById('scoring'))?.scrollIntoView({ block: 'start' }));
 }

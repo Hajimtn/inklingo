@@ -19,6 +19,7 @@ const LATER_TYPES = ['audio', 'photo', 'meaning', 'seeHear'];
 // Fast mode: a shared time bar (1 = full) that drains a little faster as the round goes on;
 // every right answer refills part of it. Empty bar = round over.
 export const TIME = { drainPerSec: 1 / 12, speedUp: 1 / 50, refillFirst: 0.22, refillRetry: 0.08 };
+export const TOP_N = 20; // public leaderboard size per topic
 export const MAX_POINTS = 300; // per question: 100 + up to 100 for speed + up to 100 streak bonus
 
 /** Points for a right answer: only on the first try; faster answers and longer streaks earn more. */

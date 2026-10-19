@@ -75,7 +75,8 @@ export function renderReview(root, mode) {
   const weekCard = h('section.card.side-card', h('div.section-head', h('h2', tr('Tuần này')), h('span.small.muted', tr('từ nhớ đúng'))),
     board && board.length > 1
       ? h('ol.wr-board', [...board].sort((a, b) => b.n - a.n).map((m, i) => h('li' + (m.me ? '.me' : ''), h('span.rank', i + 1), avatar(m.name, m.avatar, 30), h('span.name', m.name), h('b', m.n))))
-      : h('div.wr-week', h('b', board ? board.find((m) => m.me)?.n ?? rs.week : rs.week), h('span', tr('từ'))));
+      : h('div.wr-week', h('b', board ? board.find((m) => m.me)?.n ?? rs.week : rs.week), h('span', tr('từ'))),
+    h('a.small.score-link', { href: '#/account/scoring/recall' }, icon('help', { size: 14 }), tr('Cách tính điểm')));
 
   clear(root).append(head, h('div.wr-home', hero, h('div.stack', ladderCard, rateCard, weekCard)));
 }

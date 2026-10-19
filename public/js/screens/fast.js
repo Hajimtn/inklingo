@@ -317,7 +317,7 @@ async function renderBoard(root, topicId) {
   clear(root).append(
     h('a.back-link', { href: '#/fast' }, icon('back', { size: 16 }), tr('Học nhanh')),
     h('div.page-head', h('h1.page-title.with-ic', topicIcon(t, 26), tr('Bảng xếp hạng: {t}', { t: t.title }))),
-    h('p.small.muted', tr('Điểm cao nhất ở chế độ Nhanh, {q} câu mỗi lượt.', { q: QUESTIONS })),
+    h('p.small.muted', tr('Điểm cao nhất ở chế độ Nhanh, {q} câu mỗi lượt.', { q: QUESTIONS }), ' ', h('a.small.score-link', { href: '#/account/scoring/fast' }, icon('help', { size: 14 }), tr('Cách tính điểm'))),
     h('section.card', body),
     h('div.row', h('a.btn.primary', { href: `#/fast/${t.id}/fast` }, icon('play', { size: 18 }), tr('Chơi chủ đề này'))));
   try {

@@ -17,17 +17,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { buildQuestions, QuizRun, QUIZ_WINDOW_MS, PASS_RATE, MAX_POINTS } from '../public/js/shared/quiz-core.js';
+import { GROUP_POINTS } from '../public/js/shared/group-points.js';
 
 export const MAX_MEMBERS = 12;
 export const WORDS_PER_DAY = 5;
-export const POINTS = {
-  learnDay: 10, // all of the day's words opened
-  streakStep: 2, // + per consecutive study day (max 5 steps)
-  streakMax: 5,
-  reviewCap: 20, // 1 point per word recalled correctly in Word Recall (checked the day after learning or later), per day
-  matchCap: 30, // drawing-match points / 10, per day
-  quizScale: 0.15, // quiz score (max 100 per question) * 0.15 -> 300 for a 20-question quiz
-};
+export const POINTS = GROUP_POINTS;
 
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const hash = (s) => crypto.createHash('sha256').update(String(s)).digest('hex');

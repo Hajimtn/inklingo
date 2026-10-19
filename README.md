@@ -72,6 +72,15 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   tải lại trang (giữ nguyên tiến độ và trang đang mở). Nghĩa/giải thích từ vựng vẫn bằng tiếng Việt. Kiểm tra thiếu bản dịch:
   `python3 tools/i18n_keys.py` (test `tests/i18n.test.js` cũng kiểm tra).
 
+## Cách tính điểm (trang Tài khoản)
+
+Tài khoản → **Cách tính điểm** (`public/js/screens/scoring.js`) giải thích mọi chỗ có điểm hoặc xếp hạng: vẽ & đoán, bảng
+xếp hạng nhóm (+ "Nhớ %"), mini-game nhóm, Học nhanh (+ bảng công khai), Word Recall & điểm phát âm, bài kiểm tra chủ đề,
+Thống kê. Các con số lấy thẳng từ luật (`game-core.js`, `group-points.js` – dùng chung với `server/groups.js`, `quiz-core.js`,
+`fast-core.js`, `progress.js`), nên đổi luật thì phần giải thích đổi theo. `#/account/scoring/<mục>` mở đúng mục
+(draw, group, quiz, fast, recall, test, stats); bảng xếp hạng nhóm, bảng "Tuần này" của Ôn tập và bảng Học nhanh có link
+"Cách tính điểm".
+
 ## Học thêm từ trong ngày
 
 Mỗi ngày (Thứ Hai–Thứ Sáu) app phát 5 từ mới. Ai muốn học nhiều hơn bấm **"Học thêm 5 từ"** (trang Học hôm nay, hoặc thẻ

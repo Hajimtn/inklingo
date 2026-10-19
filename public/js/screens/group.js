@@ -191,7 +191,7 @@ function draw(root, st) {
       try { draw(root, await G.kick(m.id, p)); } catch (e) { toast(e.message, 'bad'); }
     } }, icon('close', { size: 14 })) : null)));
   const seg = h('div.seg', [['week', tr('Tuần này')], ['total', tr('Tổng')]].map(([k, label]) => h('button', { type: 'button', class: board === k ? 'on' : '', onclick: () => { board = k; draw(root, st); } }, label)));
-  const lbCard = h('section.card.stack', h('div.row.between', h('h3.with-ic', icon('trophy', { size: 16 }), tr('Bảng xếp hạng')), seg), lbBody);
+  const lbCard = h('section.card.stack', h('div.row.between', h('h3.with-ic', icon('trophy', { size: 16 }), tr('Bảng xếp hạng')), seg), lbBody, h('a.small.score-link', { href: '#/account/scoring/group' }, icon('help', { size: 14 }), tr('Cách tính điểm')));
 
   // ---- invite & device
   const inviteCard = h('section.card.stack',

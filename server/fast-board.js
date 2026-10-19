@@ -8,10 +8,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { MAX_POINTS, QUESTIONS } from '../public/js/shared/fast-core.js';
+import { MAX_POINTS, QUESTIONS, TOP_N } from '../public/js/shared/fast-core.js';
 import { AVATAR_KEY_RE } from './avatars.js';
 
-export const TOP_N = 20;
+export { TOP_N };
 export const MIN_MS_PER_Q = 450;
 const TOKEN_TTL_MS = 60 * 60 * 1000;
 const MAX_TOKENS = 5000;

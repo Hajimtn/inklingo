@@ -111,7 +111,7 @@ async function route() {
     case 'review':
       return renderReview(view, arg);
     case 'account':
-      return renderAccount(view, header);
+      return renderAccount(view, header, arg === 'scoring' ? rest || 'draw' : null);
     case 'settings':
       return renderSettings(view, () => { header(); route(); });
     case 'credits':
