@@ -29,10 +29,15 @@ export function leaveFast() {
 
 const withPhoto = (ids) => ids.filter((id) => word(id)?.images?.length);
 
-/** Words of today's round: the new batch, then up to 10 learned words (due ones first). */
+/**
+ * Words of today's round: today's words not opened yet (all of today's words when every one has
+ * been opened, e.g. after the flashcards), then up to 10 learned words (due ones first).
+ */
 function todayWords() {
   const p = P.active();
-  const fresh = P.todayBatch(p).words.map((w) => w.id);
+  const batch = P.todayBatch(p).words.map((w) => w.id);
+  const unseen = batch.filter((id) => !p.viewed[id]);
+  const fresh = unseen.length ? unseen : batch;
   const due = P.dueWords(p).map((w) => w.id);
   const learned = P.learnedWords(p).map((w) => w.id);
   const known = [...new Set([...due, ...shuffle(learned)])].filter((id) => !fresh.includes(id)).slice(0, 10);
@@ -71,12 +76,20 @@ function renderHub(root) {
     return box;
   };
   const t = todayWords();
+  const more = P.moreWordsStatus(p);
   const daily = h('section.card.fast-today.stack',
     h('div.row.between', h('h2.with-ic', icon('calendar', { size: 20 }), tr('Từ hôm nay')), seg(() => dailyMode, (v) => (dailyMode = v))),
     h('p.muted', t.newIds.length
       ? tr('{n} từ mới + {k} từ đã học · {q} câu · tính vào tiến độ học', { n: t.newIds.length, k: t.knownIds.length, q: DAILY_QUESTIONS })
       : t.knownIds.length ? tr('Hôm nay không có từ mới · ôn {k} từ đã học', { k: t.knownIds.length }) : tr('Chưa có từ nào – học từ hôm nay hoặc chọn một chủ đề bên dưới')),
-    h('div.row', h('button.btn.primary', { disabled: !t.newIds.length && !t.knownIds.length, onclick: () => (location.hash = `#/fast/today/${dailyMode}`) }, icon('play', { size: 18 }), tr('Bắt đầu'))));
+    h('div.row',
+      h('button.btn.primary', { disabled: !t.newIds.length && !t.knownIds.length, onclick: () => (location.hash = `#/fast/today/${dailyMode}`) }, icon('play', { size: 18 }), tr('Bắt đầu')),
+      more.ok ? h('button.btn', { type: 'button', onclick: () => {
+        const words = P.learnMore();
+        if (!words.length) return;
+        toast(tr('Đã thêm {n} từ mới', { n: words.length }), 'good');
+        location.hash = `#/fast/today/${dailyMode}`;
+      } }, icon('plus', { size: 18 }), tr('Học thêm {n} từ', { n: more.n })) : null));
 
   const grid = h('div.fast-topics');
   const drawTopics = () => clear(grid).append(...topics().map((tp) => {

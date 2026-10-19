@@ -72,6 +72,14 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   tải lại trang (giữ nguyên tiến độ và trang đang mở). Nghĩa/giải thích từ vựng vẫn bằng tiếng Việt. Kiểm tra thiếu bản dịch:
   `python3 tools/i18n_keys.py` (test `tests/i18n.test.js` cũng kiểm tra).
 
+## Học thêm từ trong ngày
+
+Mỗi ngày (Thứ Hai–Thứ Sáu) app phát 5 từ mới. Ai muốn học nhiều hơn bấm **"Học thêm 5 từ"** (trang Học hôm nay, hoặc thẻ
+"Từ hôm nay" trong Học nhanh): 5 từ tiếp theo của chủ đề hiện tại được thêm vào từ hôm nay (`P.learnMore()`), tối đa
+`DAY_MAX` = 25 từ/ngày. Chỉ mở được khi đã xem hết từ hôm nay; cuối tuần cũng học thêm được. Không áp dụng cho nhóm học (lịch
+chung do server phát) và khi đã hết chủ đề (phải làm bài kiểm tra). Từ học thêm vào lịch Word Recall như từ thường: kiểm
+tra lần đầu vào ngày hôm sau.
+
 ## Học nhanh
 
 Nhận diện từ thật nhanh bằng ảnh thật + âm thanh (`#/fast`, luật ở `public/js/shared/fast-core.js`):
@@ -82,7 +90,7 @@ Nhận diện từ thật nhanh bằng ảnh thật + âm thanh (`#/fast`, luậ
   trọng số cao hơn nên quay lại sớm, từ đúng nhanh thì thưa dần. Phím 1–4 để chọn, Enter qua thẻ giới thiệu.
 - **Chậm / Nhanh:** Nhanh có thanh thời gian chung (cạn dần, nhanh hơn theo số câu; đúng thì nạp lại, hết là "Hết giờ"),
   chỉ chạy khi đang có câu hỏi. Điểm chỉ cho lần chọn đầu: 100 + tối đa 100 theo tốc độ + thưởng chuỗi (tối đa 300/câu).
-- **Từ hôm nay** (30 câu): 5 từ mới hôm nay + tới 10 từ đã học (đến hạn trước). Hết lượt thì từ mới được tính là đã học
+- **Từ hôm nay** (30 câu): từ hôm nay chưa mở (hoặc cả từ hôm nay nếu đã mở hết) + tới 10 từ đã học (đến hạn trước). Hết lượt thì từ mới được tính là đã học
   (như mở thẻ) và mỗi từ được ghi một lần "fast" vào thống kê. **Theo chủ đề** (40 câu, mọi chủ đề, không cần mở khóa): cả
   chủ đề như một trò chơi, không ghi tiến độ, chỉ giữ kỷ lục cá nhân (`profile.fast`).
 - **Bảng xếp hạng công khai** (chỉ chủ đề + chế độ Nhanh): `POST /api/fast/start {topic}` → token; hết lượt người chơi tự bấm

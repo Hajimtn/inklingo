@@ -217,6 +217,37 @@ export function todayBatch(p = active()) {
   return { words: batch, reason: null, date: d };
 }
 
+// Learning more than the daily five: on request, 5 more words of the current topic at a time,
+// up to DAY_MAX words a day. Today's words have to be opened first; study groups keep the shared
+// schedule (their words come from the server).
+export const DAY_MAX = 25;
+
+/** Whether 5 more words can be learned now: { ok, n } or { ok: false, reason }. */
+export function moreWordsStatus(p = active()) {
+  if (p.group) return { ok: false, reason: 'group' };
+  if (allTopicsDone(p)) return { ok: false, reason: 'done' };
+  const d = today();
+  todayBatch(p); // the regular batch of a weekday comes first
+  const batch = p.batches[d] || [];
+  if (batch.some((id) => !p.viewed[id])) return { ok: false, reason: 'unseen' };
+  if (batch.length >= DAY_MAX) return { ok: false, reason: 'limit' };
+  const fresh = currentTopic(p).words.filter((w) => !p.introduced[w.id]);
+  if (!fresh.length) return { ok: false, reason: p.needReview.length ? 'review-needed' : 'test' };
+  return { ok: true, n: Math.min(WORDS_PER_DAY, fresh.length, DAY_MAX - batch.length) };
+}
+
+/** Add the next words of the current topic to today's batch. Returns the new words ([] if not allowed). */
+export function learnMore(p = active()) {
+  const st = moreWordsStatus(p);
+  if (!st.ok) return [];
+  const d = today();
+  const more = currentTopic(p).words.filter((w) => !p.introduced[w.id]).slice(0, st.n);
+  p.batches[d] = [...(p.batches[d] || []), ...more.map((w) => w.id)];
+  for (const w of more) p.introduced[w.id] = d;
+  save();
+  return more;
+}
+
 export function markViewed(wordId, p = active()) {
   if (p.viewed[wordId]) return;
   p.viewed[wordId] = true;

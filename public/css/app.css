@@ -1066,3 +1066,8 @@ body.in-room .topbar-logo { display: block; }
   .fast-opts.words { grid-template-columns: 1fr; }
   .fast-opts.words .fast-opt { font-size: 19px; padding: 12px; }
 }
+
+/* Learn 5 more words today */
+.more-words { display: grid; gap: 6px; justify-items: start; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.card.empty .more-words { justify-items: center; border-top: 0; }
+.more-note { margin: 14px 0 0; }

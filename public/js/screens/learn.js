@@ -1,6 +1,6 @@
 // Dashboard (home), Daily Vocabulary (flashcards), single word page and the pre-match preview.
 
-import { h, clear, speak, dialog } from '../ui/dom.js';
+import { h, clear, speak, dialog, toast } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
 import { photo, photoFigure, topics, topicIcon, word } from '../vocab/data.js';
 import * as P from '../vocab/progress.js';
@@ -162,6 +162,28 @@ function flashcard(w, { index, total, prev, next, lastAction } = {}) {
         next ? h('button.btn.primary', { onclick: next }, tr('Từ tiếp theo'), icon('next', { size: 18 })) : lastAction || null) : null));
 }
 
+const MORE_NOTE = {
+  unseen: tr('Xem hết từ hôm nay rồi học thêm được 5 từ'),
+  limit: tr('Hôm nay đã học {n} từ – mai học tiếp nhé', { n: P.DAY_MAX }),
+  test: tr('Đã học hết chủ đề – làm bài kiểm tra để mở chủ đề tiếp'),
+  'review-needed': tr('Ôn lại từ chưa nhớ trước khi học thêm'),
+  group: tr('Nhóm học dùng lịch chung 5 từ mỗi ngày'),
+};
+
+/** "Learn 5 more words" for today, or why not. `after(words)` runs once the words are added. */
+export function moreWordsBox(after) {
+  const st = P.moreWordsStatus();
+  if (!st.ok) return MORE_NOTE[st.reason] ? h('p.small.muted.more-note', MORE_NOTE[st.reason]) : null;
+  return h('div.more-words',
+    h('button.btn.primary', { type: 'button', onclick: () => {
+      const more = P.learnMore();
+      if (!more.length) return;
+      toast(tr('Đã thêm {n} từ mới', { n: more.length }), 'good');
+      after(more);
+    } }, icon('plus', { size: 18 }), tr('Học thêm {n} từ', { n: st.n })),
+    h('small.muted', tr('Từ học thêm cũng được ôn lại bằng Word Recall từ ngày mai')));
+}
+
 export function renderDaily(root, focusId) {
   const prof = P.active();
   const batch = P.todayBatch();
@@ -175,11 +197,13 @@ export function renderDaily(root, focusId) {
   }
   const head = h('div.page-head', h('h1.page-title', title), h('span.tag.blue', topicIcon(t, 14), t.title));
   if (!words.length) {
-    clear(root).append(head, h('div.card.empty', icon('calendar', { size: 40 }), h('h2', tr('Chưa có từ nào')), h('p.muted', REASON[batch.reason] || ''), h('a.btn.primary', { href: '#/' }, tr('Về trang chủ'))));
+    clear(root).append(head, h('div.card.empty', icon('calendar', { size: 40 }), h('h2', tr('Chưa có từ nào')), h('p.muted', REASON[batch.reason] || ''),
+      moreWordsBox((more) => renderDaily(root, more[0].id)) || h('a.btn.primary', { href: '#/' }, tr('Về trang chủ'))));
     return;
   }
   let current = Math.max(0, words.findIndex((w) => w.id === focusId));
   const listEl = h('ul.vlist');
+  const moreEl = h('div');
   const count = h('span.small.muted');
   const card = h('section.card');
   const show = (i) => {
@@ -194,6 +218,8 @@ export function renderDaily(root, focusId) {
       row.tabIndex = 0;
       return row;
     }));
+    // Today's words can grow by 5 once every one has been opened (also on a weekend review day).
+    clear(moreEl).append(moreWordsBox((more) => renderDaily(root, more[0].id)) || '');
     clear(card).append(flashcard(w, {
       index: i, total: words.length,
       prev: i > 0 ? () => show(i - 1) : null,
@@ -208,7 +234,7 @@ export function renderDaily(root, focusId) {
     else if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
   };
   document.addEventListener('keydown', onKey);
-  clear(root).append(head, h('div.daily', h('section.card.side-card.daily-list', h('div.section-head', h('h2', tr('Danh sách')), count), listEl), card));
+  clear(root).append(head, h('div.daily', h('section.card.side-card.daily-list', h('div.section-head', h('h2', tr('Danh sách')), count), listEl, moreEl), card));
   show(current);
 }
 
@@ -233,7 +259,7 @@ export async function preMatchPreview() {
   if (!words.length || words.every((w) => prof.viewed[w.id])) return true;
   const body = h('div.stack',
     h('div.today-mini', words.map((w) => h('button.mini-word', { type: 'button', onclick: () => speak(w.en) }, photo(w), h('span', { lang: 'en' }, w.en), h('small', `${w.ipa}`), h('small', w.vi)))));
-  const ok = await dialog({ title: tr('5 từ mới hôm nay'), body, className: 'wide', buttons: [{ label: tr('Học kỹ hơn'), value: 'learn' }, { label: tr('Vào phòng'), value: true, primary: true }] });
+  const ok = await dialog({ title: tr('{n} từ mới hôm nay', { n: words.length }), body, className: 'wide', buttons: [{ label: tr('Học kỹ hơn'), value: 'learn' }, { label: tr('Vào phòng'), value: true, primary: true }] });
   if (ok === 'learn') {
     location.hash = '#/daily';
     return false;
