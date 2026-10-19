@@ -12,10 +12,12 @@ import { upgrade } from './ws.js';
 import { GameRoom } from '../public/js/shared/game-core.js';
 import { GroupStore, GroupError } from './groups.js';
 import { AvatarStore, AVATAR_KEY_RE } from './avatars.js';
+import { FastBoard, BoardError } from './fast-board.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const GROUPS_FILE = process.env.GROUPS_FILE || path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'data', 'groups.json');
 const AVATAR_DIR = process.env.AVATAR_DIR || path.join(path.dirname(GROUPS_FILE), 'avatars');
+const FAST_FILE = process.env.FAST_FILE || path.join(path.dirname(GROUPS_FILE), 'fast-board.json');
 const PORT = Number(process.env.PORT) || 8787;
 // Which build is running (Render sets RENDER_GIT_COMMIT): shown by /api/health.
 const VERSION = (process.env.RENDER_GIT_COMMIT || 'dev').slice(0, 7);
@@ -40,6 +42,11 @@ const easyIds = (vocab.easy?.words || []).map((w) => w.id);
 console.log(`[vocab] ${dictionary.size} words loaded (${easyIds.length} easy)`);
 
 const avatars = new AvatarStore(AVATAR_DIR);
+// Public Quick Learn leaderboard (fast mode, one board per topic).
+const fastBoard = new FastBoard({ file: FAST_FILE, topics: vocab.topics.map((t) => t.id) });
+
+/** The visitor's address: Render puts it first in x-forwarded-for (the socket is the proxy). */
+const clientIp = (req) => String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '';
 
 // ---------------------------------------------------------------- study groups
 
@@ -389,11 +396,25 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname === '/api/avatar' && req.method === 'POST') {
     try {
       const body = await readJson(req, 40_000);
-      json(res, 200, { key: avatars.save(body.pic, req.socket.remoteAddress) });
+      json(res, 200, { key: avatars.save(body.pic, clientIp(req)) });
     } catch (e) {
       json(res, e.status || 400, { error: e.message || 'Ảnh không hợp lệ' });
     }
     return;
+  }
+  if (url.pathname.startsWith('/api/fast/')) {
+    try {
+      const action = url.pathname.slice('/api/fast/'.length);
+      if (action === 'top' && req.method === 'GET') return json(res, 200, { top: fastBoard.top(url.searchParams.get('topic') || '') });
+      if (req.method !== 'POST') throw new BoardError('Không hỗ trợ', 405);
+      const body = await readJson(req);
+      if (action === 'start') return json(res, 200, fastBoard.start(String(body.topic || '')));
+      if (action === 'score') return json(res, 200, fastBoard.submit(body, clientIp(req)));
+      throw new BoardError('Không hỗ trợ', 404);
+    } catch (e) {
+      if (!(e instanceof BoardError) && !(e instanceof GroupError)) console.error(e);
+      return json(res, e.status || 500, { error: e instanceof BoardError || e instanceof GroupError ? e.message : 'Lỗi máy chủ' });
+    }
   }
   if (url.pathname.startsWith('/api/avatar/')) return avatars.serve(res, url.pathname.slice('/api/avatar/'.length));
   if (url.pathname.startsWith('/api/qimg/')) return serveQuizImage(res, url.pathname.slice('/api/qimg/'.length).split('/'));

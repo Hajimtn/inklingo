@@ -37,10 +37,11 @@ function blankProfile(name, avatar) {
     passed: {}, // topicId -> date
     needReview: [], // missed in the last failed topic test
     stats: {}, // wordId -> {seen, ok, bad, last, step, due, lastDay, nextType} (Word Recall schedule)
-    history: [], // {t, w, k: guess|draw|recall|practice|test|learn, ok, c?: challenge type, gap?: days}
+    history: [], // {t, w, k: guess|draw|recall|practice|test|learn|fast, ok, c?: challenge type, gap?: days}
     group: null, // {code, memberId, secret, name} when the profile belongs to a study group
     groupMirror: null, // last synced {phase, topicIdx, delivered, topicSize, syncedAt}
     groupOutbox: [], // progress reports not sent yet
+    fast: {}, // Quick Learn personal bests: "<mode>:<topicId|today>" -> {score, at}
   };
 }
 
@@ -65,6 +66,7 @@ function load() {
     p.group ||= null;
     p.groupMirror ||= null;
     p.groupOutbox ||= [];
+    p.fast ||= {};
   });
   s.settings = { simDate: null, ttsRate: 0.85, ...s.settings };
   return s;
@@ -295,6 +297,37 @@ export function recordRecall(wordId, ok, kind, p = active()) {
   log(p, wordId, kind, ok);
   save();
   if (p.group && (kind === 'review' || kind === 'guess')) hooks.recall?.(p, { ok, source: kind, cleared });
+}
+
+// ------------------------------------------------------------- Quick Learn
+
+/** Personal best for a Quick Learn board ("fast:office", "slow:today"…). */
+export const fastBest = (key, p = active()) => p.fast?.[key]?.score || 0;
+
+/**
+ * A finished Quick Learn round. `results` = [{id, isNew, asked, right, wrong}]. In the daily round
+ * the new words count as learned (like opening their card) and each word asked is logged as a
+ * recognition practice; topic rounds are a game and only keep the personal best.
+ * Returns true for a new personal best.
+ */
+export function recordFast(key, score, results, { daily = false } = {}, p = active()) {
+  p.fast ||= {};
+  const best = score > fastBest(key, p);
+  if (best) p.fast[key] = { score, at: Date.now() };
+  if (daily) {
+    for (const r of results) {
+      if (!r.asked || !word(r.id)) continue;
+      if (r.isNew && !p.viewed[r.id]) markViewed(r.id, p);
+      const s = stat(p, r.id);
+      s.seen++;
+      s.last = Date.now();
+      if (r.wrong) s.bad++;
+      else s.ok++;
+      log(p, r.id, 'fast', !r.wrong);
+    }
+  }
+  save();
+  return best;
 }
 
 /** Points the profile scored in a drawing match started from its group page. */

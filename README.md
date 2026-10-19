@@ -72,6 +72,25 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   tải lại trang (giữ nguyên tiến độ và trang đang mở). Nghĩa/giải thích từ vựng vẫn bằng tiếng Việt. Kiểm tra thiếu bản dịch:
   `python3 tools/i18n_keys.py` (test `tests/i18n.test.js` cũng kiểm tra).
 
+## Học nhanh
+
+Nhận diện từ thật nhanh bằng ảnh thật + âm thanh (`#/fast`, luật ở `public/js/shared/fast-core.js`):
+
+- **Một lượt:** từ mới được **giới thiệu từng từ** (ảnh, chữ, phát âm, nghĩa), hỏi ngay, rồi trộn với các từ đã gặp. Số đáp án
+  tăng 2 → 3 → 4 (sau câu 6 và 16). Dạng câu xoay vòng: nghe + thấy chữ → chọn ảnh (luôn là câu đầu của một từ), chỉ nghe →
+  chọn ảnh, xem ảnh → chọn từ, nghĩa tiếng Việt → chọn từ. **Chọn sai** chỉ làm mờ đáp án đó, chọn tiếp đến khi đúng; từ sai có
+  trọng số cao hơn nên quay lại sớm, từ đúng nhanh thì thưa dần. Phím 1–4 để chọn, Enter qua thẻ giới thiệu.
+- **Chậm / Nhanh:** Nhanh có thanh thời gian chung (cạn dần, nhanh hơn theo số câu; đúng thì nạp lại, hết là "Hết giờ"),
+  chỉ chạy khi đang có câu hỏi. Điểm chỉ cho lần chọn đầu: 100 + tối đa 100 theo tốc độ + thưởng chuỗi (tối đa 300/câu).
+- **Từ hôm nay** (30 câu): 5 từ mới hôm nay + tới 10 từ đã học (đến hạn trước). Hết lượt thì từ mới được tính là đã học
+  (như mở thẻ) và mỗi từ được ghi một lần "fast" vào thống kê. **Theo chủ đề** (40 câu, mọi chủ đề, không cần mở khóa): cả
+  chủ đề như một trò chơi, không ghi tiến độ, chỉ giữ kỷ lục cá nhân (`profile.fast`).
+- **Bảng xếp hạng công khai** (chỉ chủ đề + chế độ Nhanh): `POST /api/fast/start {topic}` → token; hết lượt người chơi tự bấm
+  gửi (`POST /api/fast/score`), tên sửa được. Server (`server/fast-board.js`) chỉ nhận một lần mỗi token, điểm ≤ 300 × số câu,
+  thời gian ≥ 450 ms × số câu, 40 lần gửi/giờ/IP (`x-forwarded-for`), tên được làm sạch và chặn từ tục. Top 20 mỗi chủ đề lưu
+  ở `FAST_FILE` (mặc định cạnh `GROUPS_FILE`, trên Render là `/var/data/fast-board.json`). `GET /api/fast/top?topic=…`.
+  Đây là chống gian lận cơ bản, không phải bảo mật tuyệt đối (điểm vẫn tính ở trình duyệt).
+
 ## Vẽ & đoán: chọn từ, Từ thông dụng
 
 - **Chọn 1 trong 3 thẻ:** đầu mỗi lượt người vẽ thấy 3 thẻ từ: 2 từ của phòng + 1 **từ dễ** (phòng "Từ thông dụng": cả 3

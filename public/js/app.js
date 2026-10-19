@@ -16,6 +16,7 @@ import { uploadAvatar } from './ui/avatar-draw.js';
 import { isDrawnAvatar } from './ui/icons.js';
 import * as prefs from './ui/prefs.js';
 import { renderCreate, renderJoin, startQuick, startGroupRoom, joinCode, leaveCurrentRoom } from './screens/play.js';
+import { renderFast, leaveFast } from './screens/fast.js';
 import { renderGroup, stopGroupPolling } from './screens/group.js';
 import { renderGroupQuiz, leaveGroupQuiz } from './game/quiz-view.js';
 import * as G from './net/groups.js';
@@ -27,6 +28,7 @@ let serverOk = false;
 const NAV = [
   ['', 'home', tr('Trang chủ')],
   ['daily', 'calendar', tr('Học hôm nay'), tr('Hôm nay')],
+  ['fast', 'flame', tr('Học nhanh')],
   ['topics', 'map', tr('Chủ đề')],
   ['review', 'repeat', tr('Ôn tập')],
   ['group', 'users', tr('Nhóm')],
@@ -37,7 +39,7 @@ const NAV2 = [
   ['settings', 'settings', tr('Cài đặt')],
   ['help', 'help', tr('Trợ giúp')],
 ];
-const TABS = ['', 'daily', 'topics', 'review', 'group']; // phone tab bar; the rest is in the profile menu
+const TABS = ['', 'daily', 'fast', 'review', 'group']; // phone tab bar; the rest is in the profile menu
 // Sub-pages highlight their parent entry.
 const NAV_PARENT = { quiz: 'topics', credits: 'settings', play: '', join: '', room: '', gquiz: 'group', word: 'daily' };
 
@@ -57,7 +59,7 @@ function header() {
         if (x.id !== p.id) { P.switchProfile(x.id); header(); route(); }
       } }, avatar(x.name, x.avatar, 24), h('span', x.name), x.id === p.id ? icon('check', { size: 16 }) : null)),
       h('hr'),
-      ...[['stats', 'chart', tr('Thống kê')], ...NAV2].map(([r, ic, label]) => h('a.menu-item', { href: '#/' + r, role: 'menuitem', onclick: close }, icon(ic, { size: 18 }), h('span', label))),
+      ...[['topics', 'map', tr('Chủ đề')], ['stats', 'chart', tr('Thống kê')], ...NAV2].map(([r, ic, label]) => h('a.menu-item', { href: '#/' + r, role: 'menuitem', onclick: close }, icon(ic, { size: 18 }), h('span', label))),
       h('div.menu-status', h('span.net-dot.' + (serverOk ? 'on' : 'off')), serverOk ? tr('Đã kết nối server') : tr('Offline – chỉ chơi cùng một máy')));
     menu.hidden = false;
     btn.setAttribute('aria-expanded', 'true');
@@ -85,11 +87,12 @@ async function route() {
   if (!['play', 'join', 'room'].includes(name)) leaveCurrentRoom();
   if (name !== 'group') stopGroupPolling();
   if (name !== 'gquiz') leaveGroupQuiz();
+  if (name !== 'fast') leaveFast();
   window.scrollTo(0, 0);
   if ($('#header-right').childElementCount) header();
   else renderNav();
   // A group member's daily words come from the server: refresh before showing learning screens.
-  if (['', 'daily', 'topics', 'review', 'stats'].includes(name) && G.link()) {
+  if (['', 'daily', 'fast', 'topics', 'review', 'stats'].includes(name) && G.link()) {
     const at = location.hash;
     await G.syncQuick();
     if (location.hash !== at) return; // the user navigated on meanwhile
@@ -101,6 +104,8 @@ async function route() {
       return renderDaily(view, arg);
     case 'topics':
       return renderTopics(view);
+    case 'fast':
+      return renderFast(view, arg, rest);
     case 'quiz':
       return renderQuiz(view, arg);
     case 'review':
