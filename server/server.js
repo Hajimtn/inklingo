@@ -101,6 +101,9 @@ function groupApi(action, body) {
     case 'kick':
       groups.kick(g, m.id, String(body.target || ''));
       break;
+    case 'rename':
+      groups.rename(g, m.id, body.name);
+      break;
     case 'leave':
       groups.leave(g, m.id);
       return { ok: true };

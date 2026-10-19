@@ -232,6 +232,11 @@ test('membership: max size, owner hand-over, kick, persistence and secret check'
   assert.throws(() => s1.join(a.code, { member: { name: 'Late' } }), /12/);
   const g = s1.get(a.code);
   assert.throws(() => s1.kick(g, others[0].id, others[1].id), /trưởng nhóm/);
+  assert.throws(() => s1.rename(g, others[0].id, 'Hacked'), /trưởng nhóm/, 'only the leader renames the group');
+  assert.throws(() => s1.rename(g, a.id, '   '), /tên nhóm/);
+  s1.rename(g, a.id, '  TOEIC   sáng\u0007 thứ 7 – nhóm rất là dài dài dài  ');
+  assert.equal(g.name, 'TOEIC sáng thứ 7 – nhóm rất là');
+  assert.equal(s1.view(g, a.id, s1.today(g)).name, g.name);
   s1.kick(g, a.id, others[1].id);
   assert.equal(Object.keys(g.members).length, 11);
   s1.leave(g, a.id);

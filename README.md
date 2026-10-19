@@ -160,7 +160,7 @@ Một nhóm (tối đa 12 người) học chung lộ trình chủ đề, có b�
 
 - **Tạo / vào nhóm:** tab **Nhóm** → đặt tên nhóm, hoặc nhập mã 6 ký tự / mở link `#/group/join/MÃ`. Không cần tài
   khoản: mỗi hồ sơ giữ một mã bí mật trên máy (server chỉ lưu bản băm). **Mã khôi phục** dùng để tiếp tục trên máy khác.
-  Trưởng nhóm mời được người khác ra; trưởng nhóm rời thì người vào sớm nhất thay.
+  Trưởng nhóm mời được người khác ra và sửa tên nhóm (nút bút chì cạnh tên, 1–30 ký tự, `POST /api/group/rename`); trưởng nhóm rời thì người vào sớm nhất thay.
 - **Cùng nhịp:** server phát cho cả nhóm cùng 5 từ mỗi ngày (Thứ Hai–Thứ Sáu, theo múi giờ của người tạo nhóm);
   cuối tuần ôn tập. Hồ sơ trong nhóm dùng lịch này cho mọi màn hình (Học hôm nay, Ôn tập, từ trong phòng vẽ).
 - **Bảng xếp hạng (Tuần này / Tổng):** học đủ 5 từ trong ngày +10 (+2 mỗi ngày liên tiếp, tối đa +10); Word Recall nhớ đúng +1/từ

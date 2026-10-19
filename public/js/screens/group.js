@@ -209,8 +209,23 @@ function draw(root, st) {
         renderGroup(root);
       } }, icon('logout', { size: 16 }), tr('Rời nhóm'))));
 
+  // The leader can rename the group (members see the new name at their next sync).
+  const renameBtn = isOwner ? h('button.btn.ghost.small', { type: 'button', title: tr('Sửa tên nhóm'), 'aria-label': tr('Sửa tên nhóm'), onclick: async () => {
+    const input = h('input.input', { value: st.name, maxLength: 30, 'aria-label': tr('Tên nhóm'),
+      onkeydown: (e) => { if (e.key === 'Enter') { e.preventDefault(); input.closest('.dialog')?.querySelector('.btn.primary')?.click(); } } });
+    setTimeout(() => { input.focus(); input.select(); }, 30);
+    const ok = await dialog({ title: tr('Sửa tên nhóm'), body: h('div.stack', input, h('small.muted', tr('Tối đa 30 ký tự. Cả nhóm sẽ thấy tên mới.'))),
+      buttons: [{ label: tr('Hủy'), value: false }, { label: tr('Lưu'), value: true, primary: true }] });
+    const name = input.value.trim();
+    if (!ok || !name || name === st.name) return;
+    try {
+      draw(root, await G.rename(name, p));
+      toast(tr('Đã đổi tên nhóm'), 'good');
+    } catch (e) { toast(e.message, 'bad'); }
+  } }, icon('pencil', { size: 16 })) : null;
+
   clear(root).append(
-    h('div.page-title', icon('users', { size: 28 }), st.name, h('span.tag.yellow', tr('{n} thành viên', { n: st.members.length }))),
+    h('div.page-title', icon('users', { size: 28 }), st.name, renameBtn, h('span.tag.yellow', tr('{n} thành viên', { n: st.members.length }))),
     h('div.group-grid',
       h('div.stack', topicCard, quizCard, resultCard, roomsCard),
       h('div.stack', lbCard, inviteCard)));

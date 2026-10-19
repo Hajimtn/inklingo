@@ -33,6 +33,11 @@ async function api(action, body) {
 
 function applied(p, state) {
   cache.set(p.id, state);
+  // Keep the name stored with the link current (the leader may have renamed the group).
+  if (p.group && state?.name && p.group.name !== state.name) {
+    p.group.name = state.name;
+    P.save();
+  }
   P.applyGroupState(p, state);
   return state;
 }
@@ -97,6 +102,7 @@ async function call(action, extra = {}, p = P.active()) {
 
 export const openQuiz = (p) => call('open-quiz', {}, p);
 export const kick = (target, p) => call('kick', { target }, p);
+export const rename = (name, p) => call('rename', { name }, p);
 export const updateProfile = (p = P.active()) => (p.group ? call('profile', { member: { name: p.name, avatar: p.avatar } }, p).catch(() => null) : null);
 
 export async function leave(p = P.active()) {

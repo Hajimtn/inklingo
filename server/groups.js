@@ -162,9 +162,15 @@ export class GroupStore {
 
   // ---------------------------------------------------------------- group lifecycle
 
-  create({ name, member, tz }) {
-    const gname = String(name || '').trim().slice(0, 30);
+  /** Group name: printable text, 1–30 characters. */
+  cleanGroupName(name) {
+    const gname = String(name || '').replace(/[\p{C}]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 30);
     if (!gname) throw new GroupError('Hãy đặt tên nhóm');
+    return gname;
+  }
+
+  create({ name, member, tz }) {
+    const gname = this.cleanGroupName(name);
     const code = this.newCode();
     const g = {
       code, name: gname, createdAt: this.now(), tz: Number.isFinite(+tz) ? Math.max(-840, Math.min(840, Math.round(+tz))) : 420,
@@ -197,6 +203,12 @@ export class GroupStore {
       g.ownerId = ids.sort((a, b) => g.members[a].joinedAt - g.members[b].joinedAt)[0];
     }
     if (this.groups.has(g.code)) this.maybeCloseQuiz(g);
+    this.saveSoon();
+  }
+
+  rename(g, byId, name) {
+    if (g.ownerId !== byId) throw new GroupError('Chỉ trưởng nhóm làm được', 403);
+    g.name = this.cleanGroupName(name);
     this.saveSoon();
   }
 
