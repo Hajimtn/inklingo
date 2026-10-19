@@ -1075,14 +1075,14 @@ body.in-room .topbar-logo { display: block; }
 /* Scoring guide (Account page) */
 .score-guide { margin-top: 18px; }
 .score-guide h2 { margin: 0; }
-.score-part { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
-.score-part summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 12px 14px; cursor: pointer; list-style: none; }
-.score-part summary::-webkit-details-marker { display: none; }
-.score-part summary::after { content: '+'; margin-left: auto; font-weight: 700; color: var(--muted); }
-.score-part[open] summary::after { content: '–'; }
-.score-part summary .ico { color: var(--accent); }
-.score-part ul { margin: 0; padding: 0 18px 4px 34px; display: grid; gap: 6px; line-height: 1.5; }
-.score-example { display: flex; gap: 6px; align-items: flex-start; margin: 8px 14px 12px; padding: 8px 10px; border-radius: 10px; background: var(--card); font-size: 14px; color: var(--ink2); }
-.score-example .ico { flex: none; margin-top: 3px; color: var(--accent); }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.score-part { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); padding: 12px 14px; display: grid; gap: 8px; align-content: start; scroll-margin-top: 16px; }
+.score-part.focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.score-part h3 { margin: 0; font-size: 16px; }
+.score-part h3 .ico { color: var(--accent); }
+.score-part dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px 12px; font-size: 14.5px; }
+.score-part dt { color: var(--ink2); }
+.score-part dd { margin: 0; font-weight: 600; }
+.score-part p { margin: 0; }
 .score-link { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); }
 .score-link:hover { color: var(--accent); }
