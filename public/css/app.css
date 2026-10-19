@@ -530,6 +530,7 @@ b.ok { color: var(--good); } b.bad { color: var(--bad); }
 .btn.wr-mic.on { background: var(--accent); color: #fbf3e4; border-color: var(--accent); animation: wr-pulse 1.1s ease-in-out infinite; }
 @keyframes wr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(201, 79, 36, .35); } 50% { box-shadow: 0 0 0 8px rgba(201, 79, 36, 0); } }
 .wr-mic-status { text-align: center; min-height: 22px; font-size: 15px; }
+.wr-hearing { color: var(--good, #2e7d4f); font-weight: 600; }
 .wr-pron { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); }
 .wr-pron-score { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-content: center; text-align: center; border: 4px solid currentColor; }
 .wr-pron-score b { font-size: 22px; line-height: 1; color: var(--ink); }

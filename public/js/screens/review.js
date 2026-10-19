@@ -173,11 +173,17 @@ function play(root, mode, words, counted) {
     if (canRecognize() && type !== 'listen') {
       let tries = 0;
       mic = h('button.btn.wr-mic', { type: 'button', 'aria-label': tr('Nói đáp án'), onclick: async () => {
-        if (finished || mic.classList.contains('on')) return stopListening();
+        if (finished) return;
+        if (mic.classList.contains('on')) return stopListening(true); // second tap: grade what was heard
         mic.classList.add('on');
-        status.replaceChildren(h('span.muted', tr('Đang nghe…')));
+        const typed = inp.value;
+        status.replaceChildren(h('span.muted', tr('Đang mở micro…')));
         try {
-          const alts = await listenOnce();
+          const alts = await listenOnce({
+            onState: (st) => !finished && status.replaceChildren(h('span' + (st === 'speech' ? '.wr-hearing' : '.muted'),
+              st === 'speech' ? tr('Đang nghe thấy bạn…') : tr('Mời nói – bấm Nói lần nữa khi xong'))),
+            onPartial: (text) => { if (!finished) inp.value = text; },
+          });
           if (finished) return;
           const r = judgeSpeech(alts, accepted);
           tries++;
@@ -185,7 +191,9 @@ function play(root, mode, words, counted) {
           // Do not show the letter check yet: it would reveal the answer.
           status.replaceChildren(h('span', tr('Máy nghe thành '), h('b', { lang: 'en' }, `“${r.heard}”`), tr(' – nói lại hoặc gõ')));
         } catch (err) {
-          if (!finished) status.replaceChildren(h('span.muted', speechError(err.code)));
+          if (finished) return;
+          inp.value = typed;
+          status.replaceChildren(h('span.muted', speechError(err.code)));
         } finally {
           mic.classList.remove('on');
         }
@@ -238,11 +246,16 @@ function pronunciation(r) {
 function practice(w) {
   const out = h('div');
   const btn = h('button.btn.small.wr-mic', { type: 'button', onclick: async () => {
-    if (btn.classList.contains('on')) return stopListening();
+    if (btn.classList.contains('on')) return stopListening(true);
     btn.classList.add('on');
-    out.replaceChildren(h('span.muted.small', tr('Đang nghe…')));
+    const live = (text) => out.replaceChildren(h('span.small' + (text ? '' : '.muted'), text || tr('Mời nói…')));
+    live('');
     try {
-      out.replaceChildren(pronunciation(judgeSpeech(await listenOnce(), [w.en, ...w.alt])));
+      const alts = await listenOnce({
+        onState: (st) => st === 'speech' && live(tr('Đang nghe thấy bạn…')),
+        onPartial: (text) => out.replaceChildren(h('b.small', { lang: 'en' }, text)),
+      });
+      out.replaceChildren(pronunciation(judgeSpeech(alts, [w.en, ...w.alt])));
     } catch (err) {
       out.replaceChildren(h('span.muted.small', speechError(err.code)));
     } finally {
