@@ -3,6 +3,7 @@
 import { h, clear, toast, speak, englishVoices } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
 import { allWords } from '../vocab/data.js';
+import { canRecognize, listenOnce, stopListening, speechError } from '../ui/speech.js';
 import { tr, LANGS } from '../i18n.js';
 import * as prefs from '../ui/prefs.js';
 import * as P from '../vocab/progress.js';
@@ -63,6 +64,8 @@ export function renderSettings(root, rerender) {
               row(tr('Tự đọc từ'), auto, tr('Đọc từ khi hiện đáp án')),
               h('div.row', h('button.btn.small', { onclick: () => speak('Hello, nice to meet you') }, icon('volume', { size: 16 }), tr('Nghe thử')))]
             : h('p.small.muted', tr('Trình duyệt này không hỗ trợ đọc văn bản'))),
+        h('section.card.stack', h('h2', tr('Nhận dạng giọng nói')),
+          canRecognize() ? micTest() : h('p.small.muted', tr('Trình duyệt này không hỗ trợ nhận dạng giọng nói'))),
         h('section.card.stack', h('h2', tr('Nguồn ảnh')),
           h('div.row', h('a.btn', { href: '#/credits' }, icon('camera', { size: 18 }), tr('Tác giả & giấy phép')))),
         h('details.card.set-dev',
@@ -91,4 +94,32 @@ export function renderCredits(root) {
           h('td', h('a', { href: im.page, target: '_blank', rel: 'noopener' }, im.title)),
           h('td', im.author),
           h('td', im.licenseUrl ? h('a', { href: im.licenseUrl, target: '_blank', rel: 'noopener' }, im.license) : im.license))))))));
+}
+
+/** Mic test: say a word, see what the recogniser heard and every event it sent (to find where it stops). */
+function micTest() {
+  const heard = h('div.mic-heard', { lang: 'en' });
+  const log = h('ol.mic-log');
+  const btn = h('button.btn.small.wr-mic', { type: 'button', onclick: async () => {
+    if (btn.classList.contains('on')) return stopListening(true);
+    btn.classList.add('on');
+    clear(log);
+    heard.textContent = tr('Mời nói…');
+    const t0 = performance.now();
+    try {
+      const alts = await listenOnce({
+        onPartial: (text) => { heard.textContent = text; },
+        onEvent: (name, detail) => log.append(h('li', h('code', `${((performance.now() - t0) / 1000).toFixed(1)}s ${name}`), detail ? ' ' + detail : '')),
+      });
+      heard.textContent = alts[0]?.text || '–';
+    } catch (err) {
+      heard.textContent = speechError(err.code) || '–';
+    } finally {
+      btn.classList.remove('on');
+    }
+  } }, icon('mic', { size: 16 }), tr('Thử micro'));
+  return [
+    h('p.small.muted', tr('Bấm Thử micro rồi nói một từ tiếng Anh, ví dụ “stapler”. Danh sách bên dưới cho biết trình duyệt đã làm gì.')),
+    h('div.row', btn), heard, log,
+  ];
 }

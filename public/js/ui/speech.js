@@ -24,10 +24,11 @@ let current = null;
  * Listen for one short utterance. Resolves to [{text, conf}] (best first), rejects with {code}.
  *   onPartial(text) – words recognised so far, while the person is still speaking
  *   onState(s)      – 'audio' (mic is open), 'speech' (a voice is heard)
+ *   onEvent(name, detail) – every raw recogniser event, for the mic test in Settings
  * A silent end after a voice was heard rejects with 'no-match' (heard sound, no words);
  * with no voice at all it rejects with 'no-speech'.
  */
-export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, onPartial, onState } = {}) {
+export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, onPartial, onState, onEvent } = {}) {
   stopListening();
   return new Promise((resolve, reject) => {
     const Rec = Recognition();
@@ -53,14 +54,21 @@ export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, o
     // Stop after `timeout`; if the recogniser then never reports back, give up a little later.
     const timer = setTimeout(() => { try { r.stop(); } catch { /* already stopped */ } }, timeout);
     const watchdog = setTimeout(() => {
+      ev('timeout', 'no reply from the recogniser');
       try { r.abort(); } catch { /* ignore */ }
       if (partial) finish(resolve, [{ text: partial, conf: 0 }]);
       else finish(reject, { code: voice ? 'no-match' : 'no-speech' });
     }, timeout + 4000);
-    r.onaudiostart = () => onState?.('audio');
-    r.onspeechstart = () => { voice = true; onState?.('speech'); };
+    const ev = (name, detail = '') => {
+      try { onEvent?.(name, detail); } catch { /* the log must not break listening */ }
+      console.debug('[speech]', name, detail);
+    };
+    for (const name of ['soundstart', 'speechend', 'soundend', 'audioend']) r.addEventListener(name, () => ev(name));
+    r.onaudiostart = () => { ev('audiostart'); onState?.('audio'); };
+    r.onspeechstart = () => { ev('speechstart'); voice = true; onState?.('speech'); };
     r.onresult = (e) => {
       const res = e.results[e.results.length - 1];
+      ev(res.isFinal ? 'result' : 'interim', Array.from(e.results, (x) => x[0].transcript).join(''));
       if (!res.isFinal) {
         partial = Array.from(e.results, (x) => x[0].transcript).join('').trim();
         if (partial) onPartial?.(partial);
@@ -70,19 +78,23 @@ export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, o
       for (let i = 0; i < res.length; i++) alts.push({ text: res[i].transcript.trim(), conf: res[i].confidence || 0 });
       finish(resolve, alts);
     };
-    r.onnomatch = () => { voice = true; };
+    r.onnomatch = () => { ev('nomatch'); voice = true; };
     r.onerror = (e) => {
+      ev('error', e.error + (e.message ? ' – ' + e.message : ''));
       if (e.error === 'aborted' && partial) return finish(resolve, [{ text: partial, conf: 0 }]);
       finish(reject, { code: e.error === 'no-speech' && voice ? 'no-match' : e.error });
     };
     r.onend = () => {
+      ev('end');
       if (partial) finish(resolve, [{ text: partial, conf: 0 }]);
       else finish(reject, { code: voice ? 'no-match' : 'no-speech' });
     };
     current.finishNow = () => { try { r.stop(); } catch { finish(reject, { code: 'aborted' }); } };
     try {
       r.start();
-    } catch {
+      ev('start', lang);
+    } catch (err) {
+      ev('error', 'start failed – ' + (err?.message || err));
       finish(reject, { code: 'aborted' });
     }
   });

@@ -978,3 +978,7 @@ body.in-room .topbar-logo { display: block; }
   .ctrl .val { width: 36px; }
   .tool-group { border-right: 0; padding-right: 0; }
 }
+.mic-heard { font-size: 20px; font-weight: 700; min-height: 28px; }
+.mic-log { margin: 0; padding-left: 0; list-style: none; font-size: 13px; color: var(--muted); display: grid; gap: 2px; }
+.mic-log:empty { display: none; }
+.mic-log code { color: var(--ink); }
