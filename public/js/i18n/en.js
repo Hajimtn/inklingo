@@ -441,6 +441,7 @@ export default {
   'Tiếp': 'Next',
   'Nói đáp án': 'Say the answer',
   'Đang nghe…': 'Listening…',
+  'Máy chủ nhận dạng không trả lời. Chrome đang tải gói nhận dạng về máy – thử lại sau vài phút': 'The speech service did not answer. Chrome is downloading the speech pack to this device – try again in a few minutes',
   'Nhận dạng giọng nói': 'Speech recognition',
   'Trình duyệt này không hỗ trợ nhận dạng giọng nói': 'This browser does not support speech recognition',
   'Thử micro': 'Test microphone',

@@ -1,5 +1,6 @@
 // Speech input via the browser's own recogniser (Web Speech API: Chrome, Edge, Safari; not Firefox).
-// Chrome sends the audio to its speech service; nothing is stored by Inklingo.
+// Chrome recognises on the device when its English pack is installed (the one Live Caption uses),
+// otherwise it sends the audio to its speech service. Nothing is stored by Inklingo.
 
 import { tr } from '../i18n.js';
 
@@ -14,11 +15,30 @@ const MESSAGES = {
   'no-speech': tr('Không nghe thấy tiếng – kiểm tra micro rồi nói to hơn'),
   'no-match': tr('Nghe thấy tiếng nhưng chưa nhận ra từ – nói chậm, rõ hơn'),
   network: tr('Cần kết nối mạng để nhận dạng giọng nói'),
+  installing: tr('Máy chủ nhận dạng không trả lời. Chrome đang tải gói nhận dạng về máy – thử lại sau vài phút'),
   aborted: '',
 };
 export const speechError = (code) => MESSAGES[code] ?? tr('Không nhận dạng được – thử lại');
 
 let current = null;
+let ticket = 0; // bumped by stopListening, so a listen still checking on-device support is dropped
+let localBroken = false;
+const localReady = {};
+const LOCAL_FAILS = new Set(['language-not-supported', 'service-not-allowed', 'start-failed']);
+
+/** On-device recognition for `lang`: 'available' | 'downloadable' | 'downloading' | 'unavailable' | null (no such API). */
+async function localStatus(lang) {
+  const Rec = Recognition();
+  if (!Rec?.available || !('processLocally' in Rec.prototype)) return null;
+  if (localReady[lang]) return 'available';
+  try {
+    const st = await Rec.available({ langs: [lang], processLocally: true });
+    if (st === 'available') localReady[lang] = true;
+    return st;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Listen for one short utterance. Resolves to [{text, conf}] (best first), rejects with {code}.
@@ -28,8 +48,38 @@ let current = null;
  * A silent end after a voice was heard rejects with 'no-match' (heard sound, no words);
  * with no voice at all it rejects with 'no-speech'.
  */
-export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, onPartial, onState, onEvent } = {}) {
+export async function listenOnce(opts = {}) {
   stopListening();
+  const mine = ++ticket;
+  const lang = opts.lang || 'en-US';
+  const note = (name, detail) => { try { opts.onEvent?.(name, detail); } catch { /* log only */ } };
+  const st = await localStatus(lang);
+  if (mine !== ticket) throw { code: 'aborted' };
+  if (st === 'available' && !localBroken) {
+    note('mode', 'on-device');
+    try {
+      return await listenWith({ ...opts, lang, local: true });
+    } catch (err) {
+      if (!LOCAL_FAILS.has(err.code)) throw err;
+      localBroken = true;
+      note('mode', `on-device failed (${err.code}), using cloud`);
+      if (mine !== ticket) throw { code: 'aborted' };
+    }
+  } else note('mode', st ? `cloud (on-device: ${st})` : 'cloud');
+  try {
+    return await listenWith({ ...opts, lang });
+  } catch (err) {
+    // The speech service took the audio and never answered: get the on-device pack for next time.
+    if (err.hung && err.code === 'no-match' && st === 'downloadable') {
+      note('install', lang);
+      Recognition().install({ langs: [lang], processLocally: true }).then((ok) => { if (ok) localReady[lang] = true; }, () => {});
+      throw { code: 'installing' };
+    }
+    throw err;
+  }
+}
+
+function listenWith({ lang, local = false, alternatives = 5, timeout = 8000, onPartial, onState, onEvent }) {
   return new Promise((resolve, reject) => {
     const Rec = Recognition();
     if (!Rec) return reject({ code: 'unsupported' });
@@ -37,6 +87,7 @@ export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, o
     const r = new Rec();
     current = r;
     r.lang = lang;
+    if (local) r.processLocally = true;
     r.continuous = false;
     r.interimResults = true;
     r.maxAlternatives = alternatives;
@@ -57,7 +108,7 @@ export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, o
       ev('timeout', 'no reply from the recogniser');
       try { r.abort(); } catch { /* ignore */ }
       if (partial) finish(resolve, [{ text: partial, conf: 0 }]);
-      else finish(reject, { code: voice ? 'no-match' : 'no-speech' });
+      else finish(reject, { code: voice ? 'no-match' : 'no-speech', hung: true });
     }, timeout + 4000);
     const ev = (name, detail = '') => {
       try { onEvent?.(name, detail); } catch { /* the log must not break listening */ }
@@ -95,13 +146,14 @@ export function listenOnce({ lang = 'en-US', alternatives = 5, timeout = 8000, o
       ev('start', lang);
     } catch (err) {
       ev('error', 'start failed – ' + (err?.message || err));
-      finish(reject, { code: 'aborted' });
+      finish(reject, { code: 'start-failed' });
     }
   });
 }
 
 /** Cancel listening. With `keep`, stop and grade what was heard so far instead. */
 export function stopListening(keep = false) {
+  if (!keep) ticket++;
   if (!current) return;
   if (keep) return current.finishNow();
   try { current.abort(); } catch { /* ignore */ }
