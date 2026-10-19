@@ -1,0 +1,74 @@
+## animals
+cheetah | báo săn | /ˈtʃiː.t̬ə/ | n
+lamb | cừu non | /læm/ | n
+calf | bê con | /kæf/ | n
+seagull | chim hải âu | /ˈsiː.ɡʌl/ | n
+pelican | bồ nông | /ˈpel.ɪ.kən/ | n
+beetle | bọ cánh cứng | /ˈbiː.t̬əl/ | n
+moth | bướm đêm | /mɑːθ/ | n
+firefly | đom đóm | /ˈfaɪr.flaɪ/ | n
+chimpanzee | tinh tinh | /ˌtʃɪm.pænˈziː/ | n
+porcupine | nhím lông dài | /ˈpɔːr.kjə.paɪn/ | n
+salmon | cá hồi | /ˈsæm.ən/ | n
+bull | bò đực | /bʊl/ | n
+## food
+jelly | thạch | /ˈdʒel.i/ | n
+pudding | bánh pudding | /ˈpʊd.ɪŋ/ | n
+marshmallow | kẹo dẻo marshmallow | /ˈmɑːrʃˌmel.oʊ/ | n
+chewing gum | kẹo cao su | /ˈtʃuː.ɪŋ ˌɡʌm/ | n
+cotton candy | kẹo bông | /ˌkɑː.tən ˈkæn.di/ | n
+fried rice | cơm rang | /ˌfraɪd ˈraɪs/ | n
+cracker | bánh quy giòn | /ˈkræk.ɚ/ | n
+tofu | đậu phụ | /ˈtoʊ.fuː/ | n
+sticky rice | xôi | /ˌstɪk.i ˈraɪs/ | n
+pickle | dưa muối | /ˈpɪk.əl/ | n
+olive | quả ô liu | /ˈɑː.lɪv/ | n
+radish | củ cải | /ˈræd.ɪʃ/ | n
+ginger | gừng | /ˈdʒɪn.dʒɚ/ | n
+potato chips | khoai tây lát chiên | /pəˈteɪ.t̬oʊ ˌtʃɪps/ | n
+ketchup | tương cà | /ˈketʃ.ʌp/ | n
+## body
+chin | cái cằm | /tʃɪn/ | n
+cheek | má | /tʃiːk/ | n
+fist | nắm đấm | /fɪst/ | n
+wrist | cổ tay | /rɪst/ | n
+ankle | mắt cá chân | /ˈæŋ.kəl/ | n
+## nature
+snowball | quả bóng tuyết | /ˈsnoʊ.bɑːl/ | n
+earthquake | động đất | /ˈɝːθ.kweɪk/ | n
+flood | lũ lụt | /flʌd/ | n
+cliff | vách đá | /klɪf/ | n
+valley | thung lũng | /ˈvæl.i/ | n
+bush | bụi cây | /bʊʃ/ | n
+petal | cánh hoa | /ˈpet̬.əl/ | n
+thorn | cái gai | /θɔːrn/ | n
+beehive | tổ ong | /ˈbiː.haɪv/ | n
+honeycomb | sáp ong | /ˈhʌn.i.koʊm/ | n
+## places
+maze | mê cung | /meɪz/ | n
+prison | nhà tù | /ˈprɪz.ən/ | n
+mosque | nhà thờ Hồi giáo | /mɑːsk/ | n
+harbor | bến cảng | /ˈhɑːr.bɚ/ | n
+## sports
+hockey | khúc côn cầu | /ˈhɑː.ki/ | n
+boxing | đấm bốc | /ˈbɑːk.sɪŋ/ | n
+cycling | đạp xe | /ˈsaɪ.klɪŋ/ | n
+goalkeeper | thủ môn | /ˈɡoʊlˌkiː.pɚ/ | n
+referee | trọng tài | /ˌref.əˈriː/ | n
+weightlifting | cử tạ | /ˈweɪtˌlɪf.tɪŋ/ | n
+gymnastics | thể dục dụng cụ | /dʒɪmˈnæs.tɪks/ | n
+frisbee | đĩa ném | /ˈfrɪz.bi/ | n
+trampoline | bạt nhún | /ˌtræm.pəˈliːn/ | n
+## music
+cello | đàn cello | /ˈtʃel.oʊ/ | n
+tambourine | trống lắc tay | /ˌtæm.bəˈriːn/ | n
+## toys
+slingshot | súng cao su | /ˈslɪŋ.ʃɑːt/ | n
+toy train | tàu hỏa đồ chơi | /ˌtɔɪ ˈtreɪn/ | n
+board game | trò chơi cờ bàn | /ˈbɔːrd ˌɡeɪm/ | n
+## things
+bookmark | thẻ đánh dấu sách | /ˈbʊk.mɑːrk/ | n
+toothpick | tăm | /ˈtuːθ.pɪk/ | n
+tweezers | cái nhíp | /ˈtwiː.zɚz/ | n
+nail clippers | bấm móng tay | /ˈneɪl ˌklɪp.ɚz/ | n
+sunscreen | kem chống nắng | /ˈsʌn.skriːn/ | n

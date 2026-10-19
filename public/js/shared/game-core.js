@@ -4,10 +4,16 @@
 // The room owns: turn order, the secret word, the timer, answer validation and scoring.
 // Messages are delivered through the injected send(playerId, message) function. The secret
 // word is only ever sent to the current drawer; guessers receive a mask (letter count).
+//
+// Each turn starts with the drawer choosing one of CHOICES word cards: two from the room's pool
+// and one easy everyday word (all three easy in an easy-only room). Online, the first card is
+// taken if nobody chooses within CHOOSE_MS.
 
 export const LIMITS = { rounds: [1, 6], drawTime: [30, 180], maxPlayers: [2, 12] };
 export const DEFAULT_SETTINGS = { rounds: 2, drawTime: 80, maxPlayers: 8 };
 export const PRE_MS = 3500;
+export const CHOOSE_MS = 10000;
+export const CHOICES = 3;
 export const REVEAL_MS = 15000;
 export const DRAWER_GRACE_MS = 10000; // a drawer who reloads the page keeps the turn
 export const QUORUM_GRACE_MS = 15000; // game ends only if < 2 players stay disconnected
@@ -71,10 +77,11 @@ export class GameRoom {
    * @param {string} o.code
    * @param {Map<string,{id:string,en:string,answers:string[]}>} o.dictionary  every known word
    * @param {string[]} o.wordIds   ordered pool for this room (today's words first)
+   * @param {string[]} [o.easyIds] easy everyday words offered as one of the cards
    * @param {(pid:string,msg:object)=>void} o.send
    * @param {boolean} [o.local]    same-device mode: the drawer starts the timer manually
    */
-  constructor({ code, dictionary, wordIds, settings, send, isPublic = false, local = false, now = () => Date.now(), timers }) {
+  constructor({ code, dictionary, wordIds, easyIds = [], settings, send, isPublic = false, local = false, now = () => Date.now(), timers }) {
     this.code = code;
     this.dict = dictionary;
     this.send = send;
@@ -96,6 +103,9 @@ export class GameRoom {
     this.grace = {};
     this.lastRanking = null;
     this.createdAt = now();
+    this.easyIds = easyIds.filter((id) => dictionary.has(id));
+    this.easySet = new Set(this.easyIds);
+    this.easyQueue = [];
     this.setWordPool(wordIds || []);
   }
 
@@ -103,7 +113,9 @@ export class GameRoom {
 
   setWordPool(ids) {
     this.pool = [...new Set(ids)].filter((id) => this.dict.has(id));
-    this.queue = this.pool.slice();
+    this.easyOnly = this.pool.length > 0 && this.pool.every((id) => this.easySet.has(id));
+    // A learning pool keeps its order (today's words first); the easy list is in file order, so mix it.
+    this.queue = this.easyOnly ? shuffle(this.pool) : this.pool.slice();
   }
 
   updateSettings(s) {
@@ -136,18 +148,18 @@ export class GameRoom {
   publicRoom() {
     return {
       code: this.code, state: this.state, settings: { ...this.settings }, hostId: this.hostId,
-      round: this.round, players: this.publicPlayers(), poolSize: this.pool.length, isPublic: this.isPublic, local: this.local, groupCode: this.groupCode || null,
+      round: this.round, players: this.publicPlayers(), poolSize: this.pool.length, easyOnly: this.easyOnly, isPublic: this.isPublic, local: this.local, groupCode: this.groupCode || null,
     };
   }
 
   publicTurn() {
     const t = this.turn;
     if (!t) return null;
-    const w = this.dict.get(t.wordId);
+    const w = t.wordId ? this.dict.get(t.wordId) : null;
     const out = {
       index: t.index, drawerId: t.drawerId, phase: t.phase, round: this.round, rounds: this.settings.rounds,
-      mask: maskWord(w.en, t.revealed), drawTime: this.settings.drawTime, endAt: t.endAt, startAt: t.startAt, now: this.now(),
-      assist: t.assist,
+      mask: w ? maskWord(w.en, t.revealed) : '', drawTime: this.settings.drawTime, endAt: t.endAt, startAt: t.startAt, now: this.now(),
+      assist: t.assist, chooseEndAt: t.chooseEndAt,
     };
     if (t.phase === 'reveal') Object.assign(out, t.result);
     return out;
@@ -280,6 +292,9 @@ export class GameRoom {
       case 'guess': return this._guess(p, String(msg.text || ''));
       case 'draw': return this._draw(pid, msg.ev);
       case 'assist': return this._assist(pid, msg.level);
+      case 'choose':
+        if (this.turn?.phase === 'choose' && this.turn.drawerId === pid) this._choose(msg.wordId);
+        break;
       case 'begin': // same-device mode: drawer has seen the word and starts the clock
         if (this.local && this.turn?.phase === 'pre' && this.turn.drawerId === pid) this._beginDraw();
         break;
@@ -314,7 +329,7 @@ export class GameRoom {
     this.round = 1;
     this.turnPos = -1;
     this.turnCount = 0;
-    this.queue = this.pool.slice();
+    this.queue = this.easyOnly ? shuffle(this.pool) : this.pool.slice();
     this.broadcast({ type: 'room', room: this.publicRoom() });
     this._nextTurn();
   }
@@ -337,6 +352,51 @@ export class GameRoom {
     return this.queue.shift();
   }
 
+  _pickEasy() {
+    if (!this.easyQueue.length) this.easyQueue = shuffle(this.easyIds);
+    return this.easyQueue.shift();
+  }
+
+  /** The word cards for a new turn: pool words first (the default pick), then easy words. */
+  _choices() {
+    const ids = [];
+    const fromPool = this.easyOnly || !this.easyIds.length ? CHOICES : CHOICES - 1;
+    for (let tries = 0; ids.length < Math.min(fromPool, this.pool.length) && tries < 10; tries++) {
+      const id = this._pickWord();
+      if (!ids.includes(id)) ids.push(id);
+      else this.queue.push(id);
+    }
+    for (let tries = 0; ids.length < CHOICES && this.easyIds.length && tries < 10; tries++) {
+      const id = this._pickEasy();
+      if (!ids.includes(id)) ids.push(id);
+    }
+    return ids;
+  }
+
+  _sendChoices() {
+    const t = this.turn;
+    this.send(t.drawerId, {
+      type: 'choices', turnIndex: t.index, endAt: t.chooseEndAt,
+      options: t.options.map((id) => ({ id, en: this.dict.get(id).en, easy: this.easySet.has(id) })),
+    });
+  }
+
+  _choose(wordId) {
+    const t = this.turn;
+    if (!t || t.phase !== 'choose') return;
+    const id = t.options.includes(wordId) ? wordId : t.options[0];
+    // Pool words that were not chosen come back later in the game.
+    for (const o of t.options) if (o !== id && !this.easySet.has(o) && this.pool.includes(o)) this.queue.push(o);
+    t.wordId = id;
+    t.chooseEndAt = 0;
+    t.phase = 'pre';
+    this._clearTimer();
+    this._sendSecret();
+    // Same-device: the drawer starts the clock with 'begin'. Online the drawer has seen the word.
+    if (this.local) this.broadcast({ type: 'turn', turn: this.publicTurn() });
+    else this._beginDraw();
+  }
+
   _nextTurn() {
     this._clearTimer();
     let pos = this.turnPos + 1;
@@ -352,18 +412,20 @@ export class GameRoom {
     const drawerId = this.order[pos];
     for (const p of this.players.values()) p.ready = false;
     this.turn = {
-      index: ++this.turnCount, drawerId, wordId: this._pickWord(), phase: 'pre',
+      index: ++this.turnCount, drawerId, wordId: null, options: this._choices(), phase: 'choose',
+      chooseEndAt: this.local ? 0 : this.now() + CHOOSE_MS,
       startAt: 0, endAt: 0, guessed: new Map(), base: new Map(), tries: new Map(), events: [], assist: 0, result: null,
       revealed: [], hintTimers: [],
     };
     this.broadcast({ type: 'turn', turn: this.publicTurn() });
-    this._sendSecret();
+    this._sendChoices();
     this._syncPlayers();
-    if (!this.local) this._after(PRE_MS, () => this._beginDraw());
+    if (!this.local) this._after(CHOOSE_MS, () => this._choose(null));
   }
 
   _sendSecret() {
     const t = this.turn;
+    if (t.phase === 'choose') return this._sendChoices();
     const w = this.dict.get(t.wordId);
     this.send(t.drawerId, { type: 'secret', turnIndex: t.index, wordId: w.id, word: w.en });
   }
@@ -489,6 +551,12 @@ export class GameRoom {
   _endTurn(reason) {
     const t = this.turn;
     if (!t || t.phase === 'reveal') return;
+    if (!t.wordId) {
+      // The drawer left (or skipped) before choosing: nothing was drawn, so no reveal.
+      this._clearTimer();
+      for (const o of t.options) if (!this.easySet.has(o) && this.pool.includes(o)) this.queue.unshift(o);
+      return this._nextTurn();
+    }
     this._clearTimer();
     this._clearHints();
     const drawer = this.players.get(t.drawerId);
@@ -521,7 +589,7 @@ export class GameRoom {
   _endGame(note) {
     this._clearTimer();
     this._clearHints();
-    if (this.turn && this.turn.phase !== 'reveal') {
+    if (this.turn && this.turn.wordId && this.turn.phase !== 'reveal') {
       // Reveal the word of an interrupted turn so it can still be learned.
       const w = this.dict.get(this.turn.wordId);
       this.broadcast({ type: 'system', text: `Từ của lượt dang dở: ${w.en}` });

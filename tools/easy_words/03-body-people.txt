@@ -1,0 +1,83 @@
+## body
+head | cái đầu | /hed/ | n
+face | khuôn mặt | /feɪs/ | n
+eye | con mắt | /aɪ/ | n
+ear | cái tai | /ɪr/ | n
+nose | cái mũi | /noʊz/ | n
+mouth | cái miệng | /maʊθ/ | n
+lips | đôi môi | /lɪps/ | n
+tooth | cái răng | /tuːθ/ | n
+tongue | cái lưỡi | /tʌŋ/ | n
+hair | tóc | /her/ | n
+beard | râu quai nón | /bɪrd/ | n
+mustache | ria mép | /ˈmʌs.tæʃ/ | n
+eyebrow | lông mày | /ˈaɪ.braʊ/ | n
+neck | cái cổ | /nek/ | n
+shoulder | vai | /ˈʃoʊl.dɚ/ | n
+arm | cánh tay | /ɑːrm/ | n
+elbow | khuỷu tay | /ˈel.boʊ/ | n
+hand | bàn tay | /hænd/ | n
+finger | ngón tay | /ˈfɪŋ.ɡɚ/ | n
+thumb | ngón cái | /θʌm/ | n
+nail | móng tay | /neɪl/ | n
+leg | cái chân | /leɡ/ | n
+knee | đầu gối | /niː/ | n
+foot | bàn chân | /fʊt/ | n
+toe | ngón chân | /toʊ/ | n
+heel | gót chân | /hiːl/ | n
+back | cái lưng | /bæk/ | n
+belly | cái bụng | /ˈbel.i/ | n
+belly button | rốn | /ˈbel.i ˌbʌt.ən/ | n
+heart | trái tim | /hɑːrt/ | n
+brain | bộ não | /breɪn/ | n
+skeleton | bộ xương | /ˈskel.ə.t̬ən/ | n
+skull | đầu lâu | /skʌl/ | n
+muscle | cơ bắp | /ˈmʌs.əl/ | n
+footprint | dấu chân | /ˈfʊt.prɪnt/ | n
+fingerprint | dấu vân tay | /ˈfɪŋ.ɡɚ.prɪnt/ | n
+smile | nụ cười | /smaɪl/ | n
+tear | giọt nước mắt | /tɪr/ | n
+## people
+baby | em bé | /ˈbeɪ.bi/ | n
+boy | cậu bé | /bɔɪ/ | n
+girl | cô bé | /ɡɝːl/ | n
+man | người đàn ông | /mæn/ | n
+woman | người phụ nữ | /ˈwʊm.ən/ | n
+family | gia đình | /ˈfæm.əl.i/ | n
+mother | mẹ | /ˈmʌð.ɚ/ | n
+father | bố | /ˈfɑː.ðɚ/ | n
+grandma | bà | /ˈɡræn.mɑː/ | n
+grandpa | ông | /ˈɡræn.pɑː/ | n
+twins | cặp song sinh | /twɪnz/ | n
+king | nhà vua | /kɪŋ/ | n
+queen | nữ hoàng | /kwiːn/ | n
+prince | hoàng tử | /prɪns/ | n
+princess | công chúa | /ˈprɪn.ses/ | n
+doctor | bác sĩ | /ˈdɑːk.tɚ/ | n
+student | học sinh | /ˈstuː.dənt/ | n
+conical hat | nón lá | /ˈkɑː.nɪ.kəl ˌhæt/ | n
+soldier | người lính | /ˈsoʊl.dʒɚ/ | n
+astronaut | phi hành gia | /ˈæs.trə.nɑːt/ | n
+pirate | cướp biển | /ˈpaɪ.rət/ | n
+cowboy | cao bồi | /ˈkaʊ.bɔɪ/ | n
+clown | chú hề | /klaʊn/ | n
+magician | ảo thuật gia | /məˈdʒɪʃ.ən/ | n
+ninja | ninja | /ˈnɪn.dʒə/ | n
+knight | hiệp sĩ | /naɪt/ | n
+witch | phù thủy | /wɪtʃ/ | n
+wizard | pháp sư | /ˈwɪz.ɚd/ | n
+fairy | nàng tiên | /ˈfer.i/ | n
+mermaid | nàng tiên cá | /ˈmɝː.meɪd/ | n
+angel | thiên thần | /ˈeɪn.dʒəl/ | n
+superhero | siêu anh hùng | /ˈsuː.pɚˌhɪr.oʊ/ | n
+ghost | con ma | /ɡoʊst/ | n
+zombie | xác sống | /ˈzɑːm.bi/ | n
+vampire | ma cà rồng | /ˈvæm.paɪr/ | n
+monster | quái vật | /ˈmɑːn.stɚ/ | n
+alien | người ngoài hành tinh | /ˈeɪ.li.ən/ | n
+giant | người khổng lồ | /ˈdʒaɪ.ənt/ | n
+snowman | người tuyết | /ˈsnoʊ.mæn/ | n
+scarecrow | bù nhìn | /ˈsker.kroʊ/ | n
+Santa Claus | ông già Noel | /ˈsæn.t̬ə ˌklɑːz/ | n
+robot | người máy | /ˈroʊ.bɑːt/ | n
+mummy | xác ướp | /ˈmʌm.i/ | n

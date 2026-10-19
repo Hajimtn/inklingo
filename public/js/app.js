@@ -129,7 +129,7 @@ async function route() {
       if (arg === 'quick') return startQuick(view);
       if (arg === 'group') return startGroupRoom(view);
       if (arg === 'join') return renderJoin(view, serverOk);
-      return renderCreate(view, serverOk);
+      return renderCreate(view, serverOk, arg === 'easy' ? 'easy' : 'mine');
     default:
       location.hash = '#/';
   }

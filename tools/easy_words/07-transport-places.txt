@@ -1,0 +1,89 @@
+## transport
+car | xe ô tô | /kɑːr/ | n
+bus | xe buýt | /bʌs/ | n
+bicycle | xe đạp | /ˈbaɪ.sɪ.kəl/ | n
+motorbike | xe máy | /ˈmoʊ.t̬ɚ.baɪk/ | n
+scooter | xe tay ga | /ˈskuː.t̬ɚ/ | n
+train | tàu hỏa | /treɪn/ | n
+airplane | máy bay | /ˈer.pleɪn/ | n
+helicopter | trực thăng | /ˈhel.ɪˌkɑːp.tɚ/ | n
+boat | con thuyền | /boʊt/ | n
+ship | con tàu | /ʃɪp/ | n
+sailboat | thuyền buồm | /ˈseɪl.boʊt/ | n
+canoe | xuồng | /kəˈnuː/ | n
+submarine | tàu ngầm | /ˈsʌb.mə.riːn/ | n
+hot air balloon | khinh khí cầu | /ˌhɑːt ˈer bəˌluːn/ | n
+police car | xe cảnh sát | /pəˈliːs ˌkɑːr/ | n
+fire truck | xe cứu hỏa | /ˈfaɪr ˌtrʌk/ | n
+school bus | xe buýt trường học | /ˈskuːl ˌbʌs/ | n
+tractor | máy cày | /ˈtræk.tɚ/ | n
+tank | xe tăng | /tæŋk/ | n
+jeep | xe jeep | /dʒiːp/ | n
+race car | xe đua | /ˈreɪs ˌkɑːr/ | n
+skateboard | ván trượt | /ˈskeɪt.bɔːrd/ | n
+roller skates | giày patin | /ˈroʊ.lɚ ˌskeɪts/ | n
+tricycle | xe ba bánh | /ˈtraɪ.sɪ.kəl/ | n
+cyclo | xích lô | /ˈsaɪ.kloʊ/ | n
+wheel | bánh xe | /wiːl/ | n
+tire | lốp xe | /taɪr/ | n
+traffic light | đèn giao thông | /ˈtræf.ɪk ˌlaɪt/ | n
+road | con đường | /roʊd/ | n
+bridge | cây cầu | /brɪdʒ/ | n
+tunnel | đường hầm | /ˈtʌn.əl/ | n
+railway | đường ray | /ˈreɪl.weɪ/ | n
+anchor | mỏ neo | /ˈæŋ.kɚ/ | n
+parachute | dù nhảy | /ˈper.ə.ʃuːt/ | n
+steering wheel | vô lăng | /ˈstɪr.ɪŋ ˌwiːl/ | n
+stop sign | biển dừng | /ˈstɑːp ˌsaɪn/ | n
+crosswalk | vạch qua đường | /ˈkrɑːs.wɑːk/ | n
+gas pump | cây xăng | /ˈɡæs ˌpʌmp/ | n
+rowboat | thuyền chèo | /ˈroʊ.boʊt/ | n
+paddle | mái chèo | /ˈpæd.əl/ | n
+raft | cái bè | /ræft/ | n
+kayak | thuyền kayak | /ˈkaɪ.æk/ | n
+## places
+school | trường học | /skuːl/ | n
+hospital | bệnh viện | /ˈhɑː.spɪ.t̬əl/ | n
+church | nhà thờ | /tʃɝːtʃ/ | n
+temple | ngôi chùa | /ˈtem.pəl/ | n
+pagoda | chùa tháp | /pəˈɡoʊ.də/ | n
+castle | lâu đài | /ˈkæs.əl/ | n
+palace | cung điện | /ˈpæl.ɪs/ | n
+tower | tòa tháp | /taʊr/ | n
+lighthouse | ngọn hải đăng | /ˈlaɪt.haʊs/ | n
+windmill | cối xay gió | /ˈwɪnd.mɪl/ | n
+pyramid | kim tự tháp | /ˈpɪr.ə.mɪd/ | n
+igloo | lều tuyết | /ˈɪɡ.luː/ | n
+hut | túp lều | /hʌt/ | n
+farm | trang trại | /fɑːrm/ | n
+barn | nhà kho trang trại | /bɑːrn/ | n
+zoo | sở thú | /zuː/ | n
+park | công viên | /pɑːrk/ | n
+playground | sân chơi | /ˈpleɪ.ɡraʊnd/ | n
+market | chợ | /ˈmɑːr.kɪt/ | n
+restaurant | nhà hàng | /ˈres.tə.rɑːnt/ | n
+hotel | khách sạn | /hoʊˈtel/ | n
+library | thư viện | /ˈlaɪ.brer.i/ | n
+museum | bảo tàng | /mjuːˈziː.əm/ | n
+airport | sân bay | /ˈer.pɔːrt/ | n
+city | thành phố | /ˈsɪt̬.i/ | n
+village | ngôi làng | /ˈvɪl.ɪdʒ/ | n
+skyscraper | nhà chọc trời | /ˈskaɪˌskreɪ.pɚ/ | n
+apartment | căn hộ | /əˈpɑːrt.mənt/ | n
+classroom | lớp học | /ˈklæs.ruːm/ | n
+bedroom | phòng ngủ | /ˈbed.ruːm/ | n
+living room | phòng khách | /ˈlɪv.ɪŋ ˌruːm/ | n
+post office | bưu điện | /ˈpoʊst ˌɑː.fɪs/ | n
+police station | đồn cảnh sát | /pəˈliːs ˌsteɪ.ʃən/ | n
+fire station | trạm cứu hỏa | /ˈfaɪr ˌsteɪ.ʃən/ | n
+stadium | sân vận động | /ˈsteɪ.di.əm/ | n
+circus | rạp xiếc | /ˈsɝː.kəs/ | n
+aquarium | thủy cung | /əˈkwer.i.əm/ | n
+camp | trại | /kæmp/ | n
+campfire | lửa trại | /ˈkæmp.faɪr/ | n
+fountain | đài phun nước | /ˈfaʊn.tən/ | n
+statue | bức tượng | /ˈstætʃ.uː/ | n
+Eiffel Tower | tháp Eiffel | /ˌaɪ.fəl ˈtaʊr/ | n
+Statue of Liberty | tượng Nữ thần Tự do | /ˌstætʃ.uː əv ˈlɪb.ɚ.t̬i/ | n
+pool | bể bơi | /puːl/ | n
+well | cái giếng | /wel/ | n

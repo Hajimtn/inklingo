@@ -1,0 +1,123 @@
+## actions
+run | chạy | /rʌn/ | v
+walk | đi bộ | /wɑːk/ | v
+jump | nhảy | /dʒʌmp/ | v
+swim | bơi | /swɪm/ | v
+sleep | ngủ | /sliːp/ | v
+eat | ăn | /iːt/ | v
+drink | uống | /drɪŋk/ | v
+cry | khóc | /kraɪ/ | v
+laugh | cười lớn | /læf/ | v
+sing | hát | /sɪŋ/ | v
+read | đọc | /riːd/ | v
+write | viết | /raɪt/ | v
+draw | vẽ | /drɑː/ | v
+cook | nấu ăn | /kʊk/ | v
+climb | leo trèo | /klaɪm/ | v
+throw | ném | /θroʊ/ | v
+catch | bắt (bóng) | /kætʃ/ | v
+kick | đá | /kɪk/ | v
+push | đẩy | /pʊʃ/ | v
+pull | kéo | /pʊl/ | v
+sit | ngồi | /sɪt/ | v
+stand | đứng | /stænd/ | v
+fall | ngã | /fɑːl/ | v
+dig | đào | /dɪɡ/ | v
+ride | cưỡi | /raɪd/ | v
+drive | lái xe | /draɪv/ | v
+wash | rửa | /wɑːʃ/ | v
+brush | chải | /brʌʃ/ | v
+cut | cắt | /kʌt/ | v
+hug | ôm | /hʌɡ/ | v
+kiss | hôn | /kɪs/ | v
+clap | vỗ tay | /klæp/ | v
+point | chỉ tay | /pɔɪnt/ | v
+listen | lắng nghe | /ˈlɪs.ən/ | v
+look | nhìn | /lʊk/ | v
+smell | ngửi | /smel/ | v
+shout | hét | /ʃaʊt/ | v
+whisper | thì thầm | /ˈwɪs.pɚ/ | v
+yawn | ngáp | /jɑːn/ | v
+dream | mơ | /driːm/ | v
+fight | đánh nhau | /faɪt/ | v
+hide | trốn | /haɪd/ | v
+skate | trượt patin | /skeɪt/ | v
+ski | trượt tuyết | /skiː/ | v
+surf | lướt sóng | /sɝːf/ | v
+dive | lặn | /daɪv/ | v
+row | chèo thuyền | /roʊ/ | v
+build | xây | /bɪld/ | v
+carry | mang, xách | /ˈker.i/ | v
+blow | thổi | /bloʊ/ | v
+pray | cầu nguyện | /preɪ/ | v
+knock | gõ cửa | /nɑːk/ | v
+melt | tan chảy | /melt/ | v
+sweep | quét nhà | /swiːp/ | v
+juggle | tung hứng | /ˈdʒʌɡ.əl/ | v
+tickle | cù | /ˈtɪk.əl/ | v
+wink | nháy mắt | /wɪŋk/ | v
+bake | nướng bánh | /beɪk/ | v
+pour | rót | /pɔːr/ | v
+lift | nâng | /lɪft/ | v
+## shapes
+circle | hình tròn | /ˈsɝː.kəl/ | n
+square | hình vuông | /skwer/ | n
+triangle | hình tam giác | /ˈtraɪ.æŋ.ɡəl/ | n
+rectangle | hình chữ nhật | /ˈrek.tæŋ.ɡəl/ | n
+oval | hình bầu dục | /ˈoʊ.vəl/ | n
+cube | khối lập phương | /kjuːb/ | n
+cone | hình nón | /koʊn/ | n
+line | đường thẳng | /laɪn/ | n
+dot | dấu chấm | /dɑːt/ | n
+spiral | hình xoắn ốc | /ˈspaɪ.rəl/ | n
+zigzag | đường zíc zắc | /ˈzɪɡ.zæɡ/ | n
+cross | dấu cộng, chữ thập | /krɑːs/ | n
+question mark | dấu chấm hỏi | /ˈkwes.tʃən ˌmɑːrk/ | n
+exclamation mark | dấu chấm than | /ˌek.skləˈmeɪ.ʃən ˌmɑːrk/ | n
+## describing
+big | to | /bɪɡ/ | adj
+small | nhỏ | /smɔːl/ | adj
+tall | cao | /tɑːl/ | adj
+short | thấp, ngắn | /ʃɔːrt/ | adj
+long | dài | /lɑːŋ/ | adj
+fat | béo | /fæt/ | adj
+thin | gầy | /θɪn/ | adj
+hot | nóng | /hɑːt/ | adj
+cold | lạnh | /koʊld/ | adj
+happy | vui | /ˈhæp.i/ | adj
+sad | buồn | /sæd/ | adj
+angry | tức giận | /ˈæŋ.ɡri/ | adj
+scared | sợ hãi | /skerd/ | adj
+tired | mệt | /taɪrd/ | adj
+sick | ốm | /sɪk/ | adj
+hungry | đói | /ˈhʌŋ.ɡri/ | adj
+old | già, cũ | /oʊld/ | adj
+fast | nhanh | /fæst/ | adj
+slow | chậm | /sloʊ/ | adj
+wet | ướt | /wet/ | adj
+dirty | bẩn | /ˈdɝː.t̬i/ | adj
+broken | bị vỡ | /ˈbroʊ.kən/ | adj
+empty | trống rỗng | /ˈemp.ti/ | adj
+## colors
+red | màu đỏ | /red/ | adj
+blue | màu xanh dương | /bluː/ | adj
+green | màu xanh lá | /ɡriːn/ | adj
+yellow | màu vàng | /ˈjel.oʊ/ | adj
+black | màu đen | /blæk/ | adj
+white | màu trắng | /waɪt/ | adj
+pink | màu hồng | /pɪŋk/ | adj
+purple | màu tím | /ˈpɝː.pəl/ | adj
+brown | màu nâu | /braʊn/ | adj
+gray | màu xám | /ɡreɪ/ | adj
+## numbers
+zero | số không | /ˈzɪr.oʊ/ | n
+one | số một | /wʌn/ | n
+two | số hai | /tuː/ | n
+three | số ba | /θriː/ | n
+four | số bốn | /fɔːr/ | n
+five | số năm | /faɪv/ | n
+six | số sáu | /sɪks/ | n
+seven | số bảy | /ˈsev.ən/ | n
+eight | số tám | /eɪt/ | n
+nine | số chín | /naɪn/ | n
+ten | số mười | /ten/ | n

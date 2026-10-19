@@ -23,9 +23,9 @@ export function onlineSession() {
 
 // Personal messages are delivered once to their addressee; broadcasts arrive once per player,
 // so for the shared screen we keep only the copy addressed to the first seat.
-const PERSONAL = new Set(['secret', 'you-guessed', 'notice', 'assist', 'error', 'welcome']);
+const PERSONAL = new Set(['secret', 'choices', 'you-guessed', 'notice', 'assist', 'error', 'welcome']);
 
-export function localSession({ dictionary, wordIds, settings, seats }) {
+export function localSession({ dictionary, wordIds, easyIds = [], settings, seats }) {
   const fns = new Set();
   const primary = seats[0].id;
   let room;
@@ -36,7 +36,7 @@ export function localSession({ dictionary, wordIds, settings, seats }) {
       queueMicrotask(() => fns.forEach((f) => f(copy)));
     }
   };
-  room = new GameRoom({ code: 'LOCAL', dictionary, wordIds, settings, send: deliver, local: true });
+  room = new GameRoom({ code: 'LOCAL', dictionary, wordIds, easyIds, settings, send: deliver, local: true });
   for (const s of seats) room.join(s.id, { name: s.name, avatar: s.avatar });
   return {
     mode: 'local',

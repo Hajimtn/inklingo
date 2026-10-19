@@ -4,7 +4,7 @@ import { h, clear, toast } from '../ui/dom.js';
 import { icon, avatar } from '../ui/icons.js';
 
 const back = () => h('a.back-link', { href: '#/' }, icon('back', { size: 16 }), tr('Trang chủ'));
-import { dictionary } from '../vocab/data.js';
+import { dictionary, easyIds, easyTopic } from '../vocab/data.js';
 import * as P from '../vocab/progress.js';
 import { onlineSession, localSession } from '../net/sessions.js';
 import { RoomView } from '../game/room-view.js';
@@ -81,10 +81,22 @@ export function renderJoin(root, serverOk) {
   setTimeout(() => inp.focus(), 50);
 }
 
-export function renderCreate(root, serverOk) {
+/**
+ * @param {'mine'|'easy'} source  the room's words: what this profile is learning, or only the
+ *   easy everyday words. Either way every turn also offers one easy word card.
+ */
+export function renderCreate(root, serverOk, source = 'mine') {
   let mode = serverOk ? 'online' : 'local';
   const body = h('div');
   const seg = h('div.seg');
+  const srcSeg = h('div.seg');
+  const drawSource = () => clear(srcSeg).append(
+    h('button', { type: 'button', class: source === 'mine' ? 'on' : '', onclick: () => { source = 'mine'; drawSource(); } }, icon('book', { size: 18 }), tr('Từ đang học')),
+    h('button', { type: 'button', class: source === 'easy' ? 'on' : '', onclick: () => { source = 'easy'; drawSource(); } }, icon('star', { size: 18 }), tr('Từ thông dụng')));
+  drawSource();
+  const easy = () => source === 'easy';
+  // Easy rooms skip the "today's new words" preview: none of their words are learned.
+  const ready = () => (easy() ? true : preMatchPreview());
   const draw = () => {
     clear(seg).append(
       h('button', { type: 'button', class: mode === 'online' ? 'on' : '', disabled: !serverOk, onclick: () => { mode = 'online'; draw(); } }, icon('globe', { size: 18 }), 'Online'),
@@ -93,10 +105,10 @@ export function renderCreate(root, serverOk) {
   };
   const onlineForm = () => h('div.stack',
     h('button.btn.primary.big', { onclick: async () => {
-      if (!(await preMatchPreview())) return;
+      if (!(await ready())) return;
       const s = onlineSession();
       mount(root, s);
-      s.send({ type: 'create', ...me(), wordIds: P.matchWordIds(), settings: DEFAULT_SETTINGS });
+      s.send({ type: 'create', ...me(), wordIds: easy() ? [] : P.matchWordIds(), easy: easy(), settings: DEFAULT_SETTINGS });
     } }, icon('door', { size: 20 }), tr('Tạo phòng online')));
 
   const localForm = () => {
@@ -135,10 +147,10 @@ export function renderCreate(root, serverOk) {
           if (s.profileId) used.add(s.profileId);
           if (!s.name.trim()) { toast(tr('Hãy nhập tên cho mọi người chơi'), 'bad'); return; }
         }
-        if (!(await preMatchPreview())) return;
+        if (!(await ready())) return;
         const seatDefs = seats.map((s, i) => ({ id: 'seat' + i, name: s.name.trim(), avatar: s.avatar, profileId: s.profileId || null }));
         const startLocal = () => {
-          const session = localSession({ dictionary: dictionary(), wordIds: P.matchWordIds(), settings: { rounds, drawTime, maxPlayers: 8 }, seats: seatDefs });
+          const session = localSession({ dictionary: dictionary(), wordIds: easy() ? easyIds() : P.matchWordIds(), easyIds: easyIds(), settings: { rounds, drawTime, maxPlayers: 8 }, seats: seatDefs });
           const view = mount(root, session, { seatProfiles: Object.fromEntries(seatDefs.map((s) => [s.id, s.profileId])), onReplay: startLocal });
           view.ensureView();
           session.send({ type: 'start' }, seatDefs[0].id);
@@ -147,6 +159,9 @@ export function renderCreate(root, serverOk) {
       } }, icon('play', { size: 20 }), tr('Bắt đầu chơi')));
   };
   clear(root).append(back(), h('div.page-title', icon('door', { size: 28 }), tr('Tạo phòng')),
-    h('section.card.stack', { style: { maxWidth: '760px' } }, seg, body));
+    h('section.card.stack', { style: { maxWidth: '760px' } },
+      h('div.stack.create-source', h('b', tr('Từ để vẽ')), srcSeg,
+        h('p.small.muted', tr('Mỗi lượt người vẽ chọn 1 trong 3 thẻ. Phòng “Từ đang học” có 2 từ đang học + 1 từ dễ; phòng “Từ thông dụng” chỉ có từ dễ ({n} từ, không tính vào tiến độ).', { n: easyTopic().words.length }))),
+      seg, body));
   draw();
 }

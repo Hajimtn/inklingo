@@ -72,6 +72,18 @@ cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
   tải lại trang (giữ nguyên tiến độ và trang đang mở). Nghĩa/giải thích từ vựng vẫn bằng tiếng Việt. Kiểm tra thiếu bản dịch:
   `python3 tools/i18n_keys.py` (test `tests/i18n.test.js` cũng kiểm tra).
 
+## Vẽ & đoán: chọn từ, Từ thông dụng
+
+- **Chọn 1 trong 3 thẻ:** đầu mỗi lượt người vẽ thấy 3 thẻ từ: 2 từ của phòng + 1 **từ dễ** (phòng "Từ thông dụng": cả 3
+  là từ dễ). Online có 10 s (`CHOOSE_MS`), hết giờ tự lấy thẻ đầu (từ của phòng). Thẻ chỉ gửi cho người vẽ; người khác thấy
+  "… đang chọn từ". Từ của phòng không được chọn quay lại hàng chờ. Người vẽ rời phòng trước khi chọn thì sang lượt mới, không
+  có màn đáp án. Cùng một thiết bị: chọn thẻ sau khi bấm "xem từ", không giới hạn giờ.
+- **Từ thông dụng:** 1000 từ dễ vẽ được, ai cũng biết (động vật, đồ ăn, nhà cửa…), nguồn `tools/easy_words/*.txt`
+  (`en | vi | ipa | pos`, `## nhóm`), danh sách duyệt ở `docs/easy-words.md`. `build_vocab.mjs` ghi vào `vocab.json` ở khóa
+  `easy` (id `e-…`, không trùng từ TOEIC), **không** nằm trong `topics`: không ảnh, không mẫu nét, không trợ lý vẽ, không bài
+  học/kiểm tra/Word Recall và không ghi tiến độ. Luôn mở: thẻ đầu trang Chủ đề → "Chơi vẽ" (`#/play/easy`), hoặc chọn "Từ thông
+  dụng" khi tạo phòng (online gửi `{ type: 'create', easy: true }`).
+
 ## Vẽ & đoán: gợi ý
 
 - **Gợi ý chữ cái cho người đoán:** khi chưa ai đoán đúng ở 50 %, 70 % và 85 % thời gian vẽ, server mở thêm 1 chữ cái của từ

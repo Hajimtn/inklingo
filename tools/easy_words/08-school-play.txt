@@ -1,0 +1,103 @@
+## school
+book | quyển sách | /bʊk/ | n
+pen | bút bi | /pen/ | n
+pencil | bút chì | /ˈpen.səl/ | n
+eraser | cục tẩy | /ɪˈreɪ.sɚ/ | n
+ruler | thước kẻ | /ˈruː.lɚ/ | n
+crayon | bút sáp màu | /ˈkreɪ.ɑːn/ | n
+marker | bút dạ | /ˈmɑːr.kɚ/ | n
+paintbrush | cọ vẽ | /ˈpeɪnt.brʌʃ/ | n
+paint | sơn, màu vẽ | /peɪnt/ | n
+palette | bảng pha màu | /ˈpæl.ət/ | n
+glue | keo dán | /ɡluː/ | n
+tape | băng dính | /teɪp/ | n
+paper | tờ giấy | /ˈpeɪ.pɚ/ | n
+pencil case | hộp bút | /ˈpen.səl ˌkeɪs/ | n
+sharpener | gọt bút chì | /ˈʃɑːr.pən.ɚ/ | n
+chalk | phấn | /tʃɑːk/ | n
+blackboard | bảng đen | /ˈblæk.bɔːrd/ | n
+globe | quả địa cầu | /ɡloʊb/ | n
+compass | la bàn | /ˈkʌm.pəs/ | n
+magnifying glass | kính lúp | /ˈmæɡ.nə.faɪ.ɪŋ ˌɡlæs/ | n
+microscope | kính hiển vi | /ˈmaɪ.krə.skoʊp/ | n
+magnet | nam châm | /ˈmæɡ.nət/ | n
+test tube | ống nghiệm | /ˈtest ˌtuːb/ | n
+dictionary | từ điển | /ˈdɪk.ʃən.er.i/ | n
+letter | lá thư | /ˈlet̬.ɚ/ | n
+stamp | con tem | /stæmp/ | n
+postcard | bưu thiếp | /ˈpoʊst.kɑːrd/ | n
+diploma | bằng tốt nghiệp | /dɪˈploʊ.mə/ | n
+graduation cap | mũ tốt nghiệp | /ˌɡrædʒ.uˈeɪ.ʃən ˌkæp/ | n
+## sports
+ball | quả bóng | /bɑːl/ | n
+football | bóng đá | /ˈfʊt.bɑːl/ | n
+basketball | bóng rổ | /ˈbæs.kət.bɑːl/ | n
+volleyball | bóng chuyền | /ˈvɑː.li.bɑːl/ | n
+baseball | bóng chày | /ˈbeɪs.bɑːl/ | n
+tennis | quần vợt | /ˈten.ɪs/ | n
+badminton | cầu lông | /ˈbæd.mɪn.tən/ | n
+shuttlecock | quả cầu lông | /ˈʃʌt̬.əl.kɑːk/ | n
+table tennis | bóng bàn | /ˈteɪ.bəl ˌten.ɪs/ | n
+golf | đánh gôn | /ɡɑːlf/ | n
+bowling | bowling | /ˈboʊ.lɪŋ/ | n
+racket | cái vợt | /ˈræk.ɪt/ | n
+baseball bat | gậy bóng chày | /ˈbeɪs.bɑːl ˌbæt/ | n
+goal net | khung thành | /ˈɡoʊl ˌnet/ | n
+whistle | cái còi | /ˈwɪs.əl/ | n
+medal | huy chương | /ˈmed.əl/ | n
+trophy | cúp | /ˈtroʊ.fi/ | n
+boxing gloves | găng đấm bốc | /ˈbɑːk.sɪŋ ˌɡlʌvz/ | n
+skis | ván trượt tuyết | /skiːz/ | n
+surfboard | ván lướt sóng | /ˈsɝːf.bɔːrd/ | n
+fishing rod | cần câu | /ˈfɪʃ.ɪŋ ˌrɑːd/ | n
+jump rope | dây nhảy | /ˈdʒʌmp ˌroʊp/ | n
+hula hoop | vòng lắc | /ˈhuː.lə ˌhuːp/ | n
+swimming | bơi lội | /ˈswɪm.ɪŋ/ | n
+karate | võ karate | /kəˈrɑː.t̬i/ | n
+archery | bắn cung | /ˈɑːr.tʃɚ.i/ | n
+bow and arrow | cung tên | /ˌboʊ ən ˈer.oʊ/ | n
+target | bia bắn | /ˈtɑːr.ɡɪt/ | n
+finish line | vạch đích | /ˈfɪn.ɪʃ ˌlaɪn/ | n
+## toys
+toy | đồ chơi | /tɔɪ/ | n
+doll | búp bê | /dɑːl/ | n
+teddy bear | gấu bông | /ˈted.i ˌber/ | n
+kite | con diều | /kaɪt/ | n
+balloon | bóng bay | /bəˈluːn/ | n
+yo-yo | con yo-yo | /ˈjoʊ.joʊ/ | n
+spinning top | con quay | /ˌspɪn.ɪŋ ˈtɑːp/ | n
+puzzle | trò ghép hình | /ˈpʌz.əl/ | n
+dice | xúc xắc | /daɪs/ | n
+playing cards | bộ bài | /ˈpleɪ.ɪŋ ˌkɑːrdz/ | n
+chess | cờ vua | /tʃes/ | n
+marbles | bi ve | /ˈmɑːr.bəlz/ | n
+toy car | ô tô đồ chơi | /ˌtɔɪ ˈkɑːr/ | n
+building blocks | khối xếp hình | /ˈbɪl.dɪŋ ˌblɑːks/ | n
+rocking horse | ngựa gỗ bập bênh | /ˈrɑː.kɪŋ ˌhɔːrs/ | n
+sandcastle | lâu đài cát | /ˈsændˌkæs.əl/ | n
+bubble wand | que thổi bong bóng | /ˈbʌb.əl ˌwɑːnd/ | n
+water gun | súng nước | /ˈwɑː.t̬ɚ ˌɡʌn/ | n
+paper plane | máy bay giấy | /ˈpeɪ.pɚ ˌpleɪn/ | n
+paper boat | thuyền giấy | /ˈpeɪ.pɚ ˌboʊt/ | n
+snow globe | quả cầu tuyết | /ˈsnoʊ ˌɡloʊb/ | n
+puppet | con rối | /ˈpʌp.ɪt/ | n
+pinwheel | chong chóng | /ˈpɪn.wiːl/ | n
+video game | trò chơi điện tử | /ˈvɪd.i.oʊ ˌɡeɪm/ | n
+game controller | tay cầm chơi game | /ˈɡeɪm kənˌtroʊ.lɚ/ | n
+## music
+guitar | đàn ghi-ta | /ɡɪˈtɑːr/ | n
+piano | đàn piano | /piˈæn.oʊ/ | n
+violin | đàn vi-ô-lông | /ˌvaɪəˈlɪn/ | n
+drum | cái trống | /drʌm/ | n
+trumpet | kèn trumpet | /ˈtrʌm.pɪt/ | n
+flute | sáo | /fluːt/ | n
+saxophone | kèn saxophone | /ˈsæk.sə.foʊn/ | n
+harp | đàn hạc | /hɑːrp/ | n
+accordion | đàn accordion | /əˈkɔːr.di.ən/ | n
+xylophone | đàn mộc cầm | /ˈzaɪ.lə.foʊn/ | n
+harmonica | kèn harmonica | /hɑːrˈmɑː.nɪ.kə/ | n
+bell | cái chuông | /bel/ | n
+music note | nốt nhạc | /ˈmjuː.zɪk ˌnoʊt/ | n
+singer | ca sĩ | /ˈsɪŋ.ɚ/ | n
+concert | buổi hòa nhạc | /ˈkɑːn.sɚt/ | n
+dance | điệu nhảy | /dæns/ | n

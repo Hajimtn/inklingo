@@ -31,10 +31,13 @@ function loadDictionary() {
   for (const topic of vocab.topics) {
     for (const w of topic.words) dict.set(w.id, { id: w.id, en: w.en, answers: [w.en, ...(w.alt || [])], topic: topic.id });
   }
+  for (const w of vocab.easy?.words || []) dict.set(w.id, { id: w.id, en: w.en, answers: [w.en, ...(w.alt || [])], topic: 'easy' });
   return dict;
 }
 let dictionary = loadDictionary();
-console.log(`[vocab] ${dictionary.size} words loaded`);
+// Easy everyday words: one of the three word cards in every room, or the whole pool of an easy room.
+const easyIds = (vocab.easy?.words || []).map((w) => w.id);
+console.log(`[vocab] ${dictionary.size} words loaded (${easyIds.length} easy)`);
 
 const avatars = new AvatarStore(AVATAR_DIR);
 
@@ -232,7 +235,7 @@ function sendTo(pid, msg) {
 
 function createRoom({ settings, wordIds, isPublic }) {
   const code = newCode();
-  const room = new GameRoom({ code, dictionary, wordIds, settings, isPublic, send: sendTo });
+  const room = new GameRoom({ code, dictionary, wordIds, easyIds, settings, isPublic, send: sendTo });
   rooms.set(code, room);
   console.log(`[room] ${code} created (${isPublic ? 'public' : 'private'}, ${room.pool.length} words)`);
   return room;
@@ -319,7 +322,7 @@ function onMessage(conn, raw) {
           groupCode = groups.auth(msg.group.code, msg.group.memberId, msg.group.secret).g.code;
         } catch { /* not a member: plain private room */ }
       }
-      const room = createRoom({ settings: msg.settings, wordIds: validWordIds(msg.wordIds), isPublic: false });
+      const room = createRoom({ settings: msg.settings, wordIds: msg.easy ? easyIds : validWordIds(msg.wordIds), isPublic: false });
       room.groupCode = groupCode;
       joinRoom(pid, room, profile);
       return;

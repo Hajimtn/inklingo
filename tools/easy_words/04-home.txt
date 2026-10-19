@@ -1,0 +1,107 @@
+## home
+house | ngôi nhà | /haʊs/ | n
+door | cánh cửa | /dɔːr/ | n
+window | cửa sổ | /ˈwɪn.doʊ/ | n
+wall | bức tường | /wɑːl/ | n
+floor | sàn nhà | /flɔːr/ | n
+stairs | cầu thang | /sterz/ | n
+bed | cái giường | /bed/ | n
+chair | cái ghế | /tʃer/ | n
+table | cái bàn | /ˈteɪ.bəl/ | n
+desk | bàn làm việc | /desk/ | n
+couch | ghế sofa dài | /kaʊtʃ/ | n
+armchair | ghế bành | /ˈɑːrm.tʃer/ | n
+rocking chair | ghế bập bênh | /ˈrɑː.kɪŋ ˌtʃer/ | n
+stool | ghế đẩu | /stuːl/ | n
+lamp | cái đèn | /læmp/ | n
+blanket | cái chăn | /ˈblæŋ.kɪt/ | n
+mattress | nệm | /ˈmæt.rəs/ | n
+mirror | cái gương | /ˈmɪr.ɚ/ | n
+clock | đồng hồ | /klɑːk/ | n
+alarm clock | đồng hồ báo thức | /əˈlɑːrm ˌklɑːk/ | n
+picture frame | khung ảnh | /ˈpɪk.tʃɚ ˌfreɪm/ | n
+painting | bức tranh | /ˈpeɪn.t̬ɪŋ/ | n
+vase | lọ hoa | /veɪs/ | n
+rug | tấm thảm nhỏ | /rʌɡ/ | n
+fan | cái quạt | /fæn/ | n
+key | chìa khóa | /kiː/ | n
+lock | ổ khóa | /lɑːk/ | n
+doormat | thảm chùi chân | /ˈdɔːr.mæt/ | n
+doorknob | tay nắm cửa | /ˈdɔːr.nɑːb/ | n
+light switch | công tắc đèn | /ˈlaɪt ˌswɪtʃ/ | n
+plug | phích cắm | /plʌɡ/ | n
+battery | cục pin | /ˈbæt̬.ɚ.i/ | n
+bathtub | bồn tắm | /ˈbæθ.tʌb/ | n
+shower | vòi hoa sen | /ʃaʊr/ | n
+toilet | bồn cầu | /ˈtɔɪ.lət/ | n
+toilet paper | giấy vệ sinh | /ˈtɔɪ.lət ˌpeɪ.pɚ/ | n
+sink | bồn rửa | /sɪŋk/ | n
+soap | xà phòng | /soʊp/ | n
+shampoo | dầu gội | /ʃæmˈpuː/ | n
+toothpaste | kem đánh răng | /ˈtuːθ.peɪst/ | n
+comb | cái lược | /koʊm/ | n
+hairbrush | lược chải tóc | /ˈher.brʌʃ/ | n
+razor | dao cạo | /ˈreɪ.zɚ/ | n
+sponge | miếng bọt biển | /spʌndʒ/ | n
+bubble | bong bóng | /ˈbʌb.əl/ | n
+rubber duck | vịt cao su | /ˌrʌb.ɚ ˈdʌk/ | n
+basket | cái giỏ | /ˈbæs.kɪt/ | n
+box | cái hộp | /bɑːks/ | n
+bag | cái túi | /bæɡ/ | n
+umbrella | cái ô | /ʌmˈbrel.ə/ | n
+trash can | thùng rác | /ˈtræʃ ˌkæn/ | n
+dustpan | cái hót rác | /ˈdʌst.pæn/ | n
+iron | bàn là | /ˈaɪ.ɚn/ | n
+hanger | móc áo | /ˈhæŋ.ɚ/ | n
+laundry basket | giỏ quần áo bẩn | /ˈlɑːn.dri ˌbæs.kɪt/ | n
+clothespin | kẹp phơi quần áo | /ˈkloʊðz.pɪn/ | n
+fireplace | lò sưởi | /ˈfaɪr.pleɪs/ | n
+window blinds | rèm cửa sổ | /ˈwɪn.doʊ ˌblaɪndz/ | n
+crib | nôi em bé | /krɪb/ | n
+hammock | cái võng | /ˈhæm.ək/ | n
+mosquito net | cái màn | /məˈskiː.t̬oʊ ˌnet/ | n
+gate | cái cổng | /ɡeɪt/ | n
+garden | khu vườn | /ˈɡɑːr.dən/ | n
+swing | xích đu | /swɪŋ/ | n
+slide | cầu trượt | /slaɪd/ | n
+seesaw | bập bênh | /ˈsiː.sɑː/ | n
+sandbox | hố cát chơi | /ˈsænd.bɑːks/ | n
+treehouse | nhà trên cây | /ˈtriː.haʊs/ | n
+birdhouse | nhà chim | /ˈbɝːd.haʊs/ | n
+## kitchen
+kitchen | nhà bếp | /ˈkɪtʃ.ən/ | n
+fridge | tủ lạnh | /frɪdʒ/ | n
+oven | lò nướng | /ˈʌv.ən/ | n
+stove | bếp nấu | /stoʊv/ | n
+pot | cái nồi | /pɑːt/ | n
+pan | cái chảo | /pæn/ | n
+frying pan | chảo rán | /ˈfraɪ.ɪŋ ˌpæn/ | n
+spoon | cái thìa | /spuːn/ | n
+fork | cái nĩa | /fɔːrk/ | n
+knife | con dao | /naɪf/ | n
+cup | cái cốc | /kʌp/ | n
+glass | cái ly | /ɡlæs/ | n
+bottle | cái chai | /ˈbɑː.t̬əl/ | n
+jar | cái lọ | /dʒɑːr/ | n
+can | lon | /kæn/ | n
+can opener | cái mở hộp | /ˈkæn ˌoʊ.pən.ɚ/ | n
+toaster | máy nướng bánh mì | /ˈtoʊ.stɚ/ | n
+blender | máy xay sinh tố | /ˈblen.dɚ/ | n
+rice cooker | nồi cơm điện | /ˈraɪs ˌkʊk.ɚ/ | n
+cutting board | cái thớt | /ˈkʌt̬.ɪŋ ˌbɔːrd/ | n
+rolling pin | cây cán bột | /ˈroʊ.lɪŋ ˌpɪn/ | n
+whisk | cây đánh trứng | /wɪsk/ | n
+ladle | cái muôi | /ˈleɪ.dəl/ | n
+spatula | cái xẻng lật | /ˈspætʃ.ə.lə/ | n
+grater | cái nạo | /ˈɡreɪ.t̬ɚ/ | n
+peeler | dao gọt vỏ | /ˈpiː.lɚ/ | n
+sieve | cái rây | /sɪv/ | n
+straw | ống hút | /strɑː/ | n
+oven mitt | găng tay lò nướng | /ˈʌv.ən ˌmɪt/ | n
+salt shaker | lọ rắc muối | /ˈsɑːlt ˌʃeɪ.kɚ/ | n
+egg carton | khay trứng | /ˈeɡ ˌkɑːr.tən/ | n
+dish | cái đĩa | /dɪʃ/ | n
+ice cube | viên đá | /ˈaɪs ˌkjuːb/ | n
+teacup | tách trà | /ˈtiː.kʌp/ | n
+baby bottle | bình sữa | /ˈbeɪ.bi ˌbɑː.t̬əl/ | n
+thermos | bình giữ nhiệt | /ˈθɝː.məs/ | n

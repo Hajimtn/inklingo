@@ -1,0 +1,109 @@
+## food
+apple | quả táo | /ˈæp.əl/ | n
+banana | quả chuối | /bəˈnæn.ə/ | n
+orange | quả cam | /ˈɔːr.ɪndʒ/ | n
+lemon | quả chanh vàng | /ˈlem.ən/ | n
+lime | chanh xanh | /laɪm/ | n
+grape | quả nho | /ɡreɪp/ | n
+strawberry | dâu tây | /ˈstrɑː.ber.i/ | n
+cherry | quả anh đào | /ˈtʃer.i/ | n
+watermelon | dưa hấu | /ˈwɑː.t̬ɚˌmel.ən/ | n
+melon | quả dưa | /ˈmel.ən/ | n
+pineapple | quả dứa | /ˈpaɪnˌæp.əl/ | n
+mango | quả xoài | /ˈmæŋ.ɡoʊ/ | n
+peach | quả đào | /piːtʃ/ | n
+pear | quả lê | /per/ | n
+plum | quả mận | /plʌm/ | n
+coconut | quả dừa | /ˈkoʊ.kə.nʌt/ | n
+kiwi | quả kiwi | /ˈkiː.wiː/ | n
+papaya | đu đủ | /pəˈpaɪ.ə/ | n
+avocado | quả bơ | /ˌæv.əˈkɑː.doʊ/ | n
+blueberry | việt quất | /ˈbluːˌber.i/ | n
+durian | sầu riêng | /ˈdʊr.i.ən/ | n
+dragon fruit | thanh long | /ˈdræɡ.ən ˌfruːt/ | n
+lychee | quả vải | /ˈliː.tʃiː/ | n
+pomegranate | quả lựu | /ˈpɑːm.ə.ɡræn.ɪt/ | n
+tomato | cà chua | /təˈmeɪ.t̬oʊ/ | n
+potato | khoai tây | /pəˈteɪ.t̬oʊ/ | n
+sweet potato | khoai lang | /ˌswiːt pəˈteɪ.t̬oʊ/ | n
+carrot | cà rốt | /ˈker.ət/ | n
+onion | củ hành | /ˈʌn.jən/ | n
+garlic | tỏi | /ˈɡɑːr.lɪk/ | n
+cabbage | bắp cải | /ˈkæb.ɪdʒ/ | n
+lettuce | rau xà lách | /ˈlet̬.ɪs/ | n
+cucumber | dưa chuột | /ˈkjuː.kʌm.bɚ/ | n
+corn | ngô | /kɔːrn/ | n
+pumpkin | bí ngô | /ˈpʌmp.kɪn/ | n
+broccoli | bông cải xanh | /ˈbrɑː.kəl.i/ | n
+mushroom | nấm | /ˈmʌʃ.ruːm/ | n
+pepper | ớt chuông | /ˈpep.ɚ/ | n
+chili | quả ớt | /ˈtʃɪl.i/ | n
+eggplant | cà tím | /ˈeɡ.plænt/ | n
+peas | đậu Hà Lan | /piːz/ | n
+bean | hạt đậu | /biːn/ | n
+peanut | đậu phộng | /ˈpiː.nʌt/ | n
+bread | bánh mì | /bred/ | n
+sandwich | bánh mì kẹp | /ˈsæn.wɪtʃ/ | n
+hamburger | bánh hamburger | /ˈhæmˌbɝː.ɡɚ/ | n
+hot dog | xúc xích kẹp bánh mì | /ˈhɑːt ˌdɑːɡ/ | n
+pizza | bánh pizza | /ˈpiːt.sə/ | n
+french fries | khoai tây chiên | /ˌfrentʃ ˈfraɪz/ | n
+noodles | mì sợi | /ˈnuː.dəlz/ | n
+rice | cơm, gạo | /raɪs/ | n
+spaghetti | mì Ý | /spəˈɡet̬.i/ | n
+cheese | phô mai | /tʃiːz/ | n
+butter | bơ (sữa) | /ˈbʌt̬.ɚ/ | n
+milk | sữa | /mɪlk/ | n
+yogurt | sữa chua | /ˈjoʊ.ɡɚt/ | n
+ice cream | kem | /ˈaɪs ˌkriːm/ | n
+cake | bánh ngọt | /keɪk/ | n
+birthday cake | bánh sinh nhật | /ˈbɝːθ.deɪ ˌkeɪk/ | n
+cookie | bánh quy | /ˈkʊk.i/ | n
+donut | bánh donut | /ˈdoʊ.nʌt/ | n
+cupcake | bánh cupcake | /ˈkʌp.keɪk/ | n
+pie | bánh nướng nhân | /paɪ/ | n
+pancake | bánh kếp | /ˈpæn.keɪk/ | n
+waffle | bánh tổ ong | /ˈwɑː.fəl/ | n
+candy | kẹo | /ˈkæn.di/ | n
+lollipop | kẹo mút | /ˈlɑː.li.pɑːp/ | n
+chocolate | sô-cô-la | /ˈtʃɑːk.lət/ | n
+popcorn | bỏng ngô | /ˈpɑːp.kɔːrn/ | n
+honey | mật ong | /ˈhʌn.i/ | n
+jam | mứt | /dʒæm/ | n
+sugar | đường | /ˈʃʊɡ.ɚ/ | n
+salt | muối | /sɑːlt/ | n
+meat | thịt | /miːt/ | n
+steak | bít tết | /steɪk/ | n
+sausage | xúc xích | /ˈsɑː.sɪdʒ/ | n
+bacon | thịt xông khói | /ˈbeɪ.kən/ | n
+ham | giăm bông | /hæm/ | n
+fried egg | trứng ốp la | /ˌfraɪd ˈeɡ/ | n
+chicken leg | đùi gà | /ˈtʃɪk.ɪn ˌleɡ/ | n
+sushi | sushi | /ˈsuː.ʃi/ | n
+taco | bánh taco | /ˈtɑː.koʊ/ | n
+burrito | bánh burrito | /bəˈriː.t̬oʊ/ | n
+dumpling | bánh bao, sủi cảo | /ˈdʌm.plɪŋ/ | n
+spring roll | nem cuốn | /ˌsprɪŋ ˈroʊl/ | n
+pho | phở | /fɝː/ | n
+banh mi | bánh mì Việt Nam | /ˈbɑːn ˌmiː/ | n
+rice ball | cơm nắm | /ˈraɪs ˌbɑːl/ | n
+croissant | bánh sừng bò | /kwɑːˈsɑ̃ː/ | n
+bagel | bánh vòng | /ˈbeɪ.ɡəl/ | n
+pretzel | bánh quy xoắn | /ˈpret.səl/ | n
+muffin | bánh muffin | /ˈmʌf.ɪn/ | n
+cereal | ngũ cốc ăn sáng | /ˈsɪr.i.əl/ | n
+omelette | trứng tráng | /ˈɑːm.lət/ | n
+nuts | các loại hạt | /nʌts/ | n
+popsicle | kem que | /ˈpɑːp.sɪ.kəl/ | n
+juice | nước ép | /dʒuːs/ | n
+water | nước | /ˈwɑː.t̬ɚ/ | n
+coffee | cà phê | /ˈkɑː.fi/ | n
+tea | trà | /tiː/ | n
+lemonade | nước chanh | /ˌlem.əˈneɪd/ | n
+soda | nước ngọt có ga | /ˈsoʊ.də/ | n
+smoothie | sinh tố | /ˈsmuː.ði/ | n
+milkshake | sữa lắc | /ˈmɪlk.ʃeɪk/ | n
+bubble tea | trà sữa trân châu | /ˈbʌb.əl ˌtiː/ | n
+hot chocolate | sô-cô-la nóng | /ˌhɑːt ˈtʃɑːk.lət/ | n
+lunch box | hộp cơm | /ˈlʌntʃ ˌbɑːks/ | n
+picnic | dã ngoại | /ˈpɪk.nɪk/ | n

@@ -1,7 +1,7 @@
 // Unit tests for the shared game rules (run: npm test)
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GameRoom, normalizeAnswer, maskWord, hintCount, guesserPoints, drawerPoints, comboBonus, PRE_MS, REVEAL_MS, DRAWER_GRACE_MS } from '../public/js/shared/game-core.js';
+import { GameRoom, normalizeAnswer, maskWord, hintCount, guesserPoints, drawerPoints, comboBonus, CHOOSE_MS, REVEAL_MS, DRAWER_GRACE_MS } from '../public/js/shared/game-core.js';
 
 function fakeClock() {
   let now = 1_000_000;
@@ -61,11 +61,16 @@ test('secret word goes only to the drawer; guessers get a mask', () => {
   room.start('p1');
   const drawer = room.turn.drawerId;
   for (const pid of ['p1', 'p2', 'p3']) {
-    const leaked = JSON.stringify(msgs(pid).filter((m) => m.type !== 'secret')).includes('"word"');
+    const leaked = JSON.stringify(msgs(pid).filter((m) => m.type !== 'choices')).includes('"en"');
+    assert.equal(leaked, false, 'no word broadcast while the drawer chooses');
+    assert.equal(msgs(pid, 'choices').length, pid === drawer ? 1 : 0);
+  }
+  clock.advance(CHOOSE_MS);
+  for (const pid of ['p1', 'p2', 'p3']) {
+    const leaked = JSON.stringify(msgs(pid).filter((m) => m.type !== 'secret' && m.type !== 'choices')).includes('"word"');
     assert.equal(leaked, false, 'no word field broadcast before reveal');
     assert.equal(msgs(pid, 'secret').length, pid === drawer ? 1 : 0);
   }
-  clock.advance(PRE_MS);
   assert.equal(room.turn.phase, 'draw');
   const turnMsg = msgs('p2', 'turn').at(-1).turn;
   assert.equal(turnMsg.mask, '_____');
@@ -75,7 +80,7 @@ test('secret word goes only to the drawer; guessers get a mask', () => {
 test('guessing: wrong, duplicate, correct, drawer cannot leak, all guessed ends turn', () => {
   const { room, clock, msgs } = setup();
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   const [g1, g2] = ['p1', 'p2', 'p3'].filter((p) => p !== drawer);
   room.handle(drawer, { type: 'guess', text: 'it is an apple' });
@@ -101,7 +106,7 @@ test('guessing: wrong, duplicate, correct, drawer cannot leak, all guessed ends 
 test('assist level lowers the drawer cap', () => {
   const { room, clock } = setup(2);
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   const guesser = drawer === 'p1' ? 'p2' : 'p1';
   room.handle(drawer, { type: 'assist', level: 5 });
@@ -118,7 +123,7 @@ test('combo bonus for consecutive correct guesses', () => {
   room.start('p1');
   const streaks = [];
   for (let i = 0; i < 4; i++) {
-    clock.advance(PRE_MS);
+    clock.advance(CHOOSE_MS);
     const d = room.turn.drawerId;
     const g = d === 'p1' ? 'p2' : 'p1';
     room.handle(g, { type: 'guess', text: dict.get(room.turn.wordId).en });
@@ -143,7 +148,7 @@ test('letter hints: one more letter at 50/70/85% of the time while nobody has gu
   room.start('p1');
   const guesser = ['p1', 'p2', 'p3'].find((id) => id !== room.turn.drawerId);
   const mask = () => inbox.get(guesser).filter((m) => m.type === 'turn').at(-1).turn.mask;
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   assert.equal(mask(), '_______');
   clock.advance(29_000);
   assert.equal(mask(), '_______', 'no hint before half time');
@@ -161,7 +166,7 @@ test('letter hints: one more letter at 50/70/85% of the time while nobody has gu
 test('timer ends the turn and reveal auto-advances', () => {
   const { room, clock } = setup(2);
   room.start('p1');
-  clock.advance(PRE_MS + 60000);
+  clock.advance(CHOOSE_MS + 60000);
   assert.equal(room.turn.phase, 'reveal');
   assert.equal(room.turn.result.reason, 'time');
   clock.advance(REVEAL_MS);
@@ -171,7 +176,7 @@ test('timer ends the turn and reveal auto-advances', () => {
 test('drawer reconnecting within grace keeps the turn; staying away ends it', () => {
   const { room, clock, msgs } = setup(3);
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   room.handle(drawer, { type: 'draw', ev: { k: 'op', op: { t: 'stroke', tool: 'brush', color: '#000', size: 5, alpha: 1, pts: [1, 1, 5, 5] } } });
   room.disconnect(drawer);
@@ -192,7 +197,7 @@ test('drawer reconnecting within grace keeps the turn; staying away ends it', ()
 test('late joiner receives the drawing log and is added to the turn order', () => {
   const { room, clock, msgs } = setup(2);
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   room.handle(drawer, { type: 'draw', ev: { k: 'op', op: { t: 'fill', x: 3, y: 3, color: '#f00', alpha: 1 } } });
   room.handle(drawer, { type: 'draw', ev: { k: 'undo' } });
@@ -207,7 +212,7 @@ test('late joiner receives the drawing log and is added to the turn order', () =
 test('only the drawer may draw; others are ignored', () => {
   const { room, clock, msgs } = setup(2);
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   const other = drawer === 'p1' ? 'p2' : 'p1';
   room.handle(other, { type: 'draw', ev: { k: 'op', op: { t: 'clear' } } });
@@ -218,7 +223,7 @@ test('only the drawer may draw; others are ignored', () => {
 test('quorum grace: a guesser reloading does not end the game', () => {
   const { room, clock } = setup(2);
   room.start('p1');
-  clock.advance(PRE_MS);
+  clock.advance(CHOOSE_MS);
   const drawer = room.turn.drawerId;
   const other = drawer === 'p1' ? 'p2' : 'p1';
   room.disconnect(other);
@@ -235,8 +240,83 @@ test('quorum grace: a guesser reloading does not end the game', () => {
 test('same-device mode waits for the drawer to start the clock', () => {
   const { room, clock } = setup(2, { local: true });
   room.start('p1');
-  clock.advance(PRE_MS * 3);
+  clock.advance(CHOOSE_MS * 3);
+  assert.equal(room.turn.phase, 'choose', 'no timer while the device is handed over');
+  room.handle(room.turn.drawerId, { type: 'choose', wordId: 'bus' });
+  assert.equal(room.turn.phase, 'pre');
+  assert.equal(room.turn.wordId, 'bus');
+  clock.advance(CHOOSE_MS * 3);
   assert.equal(room.turn.phase, 'pre');
   room.handle(room.turn.drawerId, { type: 'begin' });
   assert.equal(room.turn.phase, 'draw');
+});
+
+const easyDict = new Map([...dict,
+  ['e-cat', { id: 'e-cat', en: 'cat', answers: ['cat'] }],
+  ['e-sun', { id: 'e-sun', en: 'sun', answers: ['sun'] }],
+  ['e-tree', { id: 'e-tree', en: 'tree', answers: ['tree'] }],
+]);
+const EASY = ['e-cat', 'e-sun', 'e-tree'];
+
+function easyRoom(wordIds) {
+  const clock = fakeClock();
+  const inbox = new Map();
+  const room = new GameRoom({ code: 'E', dictionary: easyDict, wordIds, easyIds: EASY, settings: { rounds: 1, drawTime: 60 }, send: (pid, m) => { if (!inbox.has(pid)) inbox.set(pid, []); inbox.get(pid).push(m); }, now: clock.now, timers: clock.timers });
+  for (const id of ['p1', 'p2', 'p3']) room.join(id, { name: id });
+  return { room, clock, msgs: (pid, type) => (inbox.get(pid) || []).filter((m) => !type || m.type === type) };
+}
+
+test('word cards: two room words and one easy word; the drawer picks one', () => {
+  const { room, msgs } = easyRoom(['apple', 'ice-cream', 'bus']);
+  room.start('p1');
+  const drawer = room.turn.drawerId;
+  assert.equal(room.turn.phase, 'choose');
+  const opts = msgs(drawer, 'choices').at(-1).options;
+  assert.equal(opts.length, 3);
+  assert.deepEqual(opts.map((o) => o.easy), [false, false, true]);
+  assert.equal(new Set(opts.map((o) => o.id)).size, 3);
+  room.handle(drawer, { type: 'choose', wordId: 'e-zzz' }); // not offered: takes the first card
+  assert.equal(room.turn.wordId, opts[0].id);
+  assert.equal(room.turn.phase, 'draw');
+  assert.equal(msgs(drawer, 'secret').at(-1).wordId, opts[0].id);
+  assert.ok(room.queue.includes(opts[1].id), 'the room word not chosen comes back later');
+});
+
+test('word cards: choosing the easy card, auto-pick after the time, easy-only rooms', () => {
+  let r = easyRoom(['apple', 'ice-cream', 'bus']);
+  r.room.start('p1');
+  const d = r.room.turn.drawerId;
+  const easy = r.msgs(d, 'choices').at(-1).options.find((o) => o.easy);
+  const other = ['p1', 'p2', 'p3'].find((id) => id !== d);
+  r.room.handle(other, { type: 'choose', wordId: easy.id }); // only the drawer chooses
+  assert.equal(r.room.turn.phase, 'choose');
+  r.room.handle(d, { type: 'choose', wordId: easy.id });
+  r.room.handle(other, { type: 'guess', text: easy.en });
+  assert.equal(r.msgs(other, 'you-guessed').at(-1).wordId, easy.id);
+
+  r = easyRoom(['apple', 'bus']);
+  r.room.start('p1');
+  r.clock.advance(CHOOSE_MS - 1);
+  assert.equal(r.room.turn.phase, 'choose');
+  r.clock.advance(1);
+  assert.equal(r.room.turn.phase, 'draw');
+  assert.ok(['apple', 'bus'].includes(r.room.turn.wordId), 'auto-pick takes a room word');
+
+  r = easyRoom(EASY);
+  assert.equal(r.room.publicRoom().easyOnly, true);
+  r.room.start('p1');
+  const opts = r.msgs(r.room.turn.drawerId, 'choices').at(-1).options;
+  assert.deepEqual(opts.map((o) => o.id).sort(), [...EASY].sort());
+});
+
+test('a drawer who leaves before choosing passes the turn without a reveal', () => {
+  const { room, msgs } = easyRoom(['apple', 'ice-cream', 'bus']);
+  room.start('p1');
+  const first = room.turn;
+  const guesser = ['p1', 'p2', 'p3'].find((id) => id !== first.drawerId);
+  room.remove(first.drawerId);
+  assert.equal(msgs(guesser, 'turn-end').length, 0);
+  assert.equal(room.turn.index, 2);
+  assert.equal(room.turn.phase, 'choose');
+  assert.notEqual(room.turn.drawerId, first.drawerId);
 });

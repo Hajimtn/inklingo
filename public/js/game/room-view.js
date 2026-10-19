@@ -7,7 +7,7 @@ import { DrawingEngine } from '../drawing/engine.js';
 import { Toolbar } from '../drawing/toolbar.js';
 import { Assistant } from './assistant.js';
 import { LIMITS, ASSIST_NAMES } from '../shared/game-core.js';
-import { word as vocabWord, photoFigure } from '../vocab/data.js';
+import { word as vocabWord, photoFigure, isEasy } from '../vocab/data.js';
 import * as progress from '../vocab/progress.js';
 import { saveDrawing } from '../store/drawings.js';
 
@@ -34,6 +34,7 @@ export class RoomView {
     this.players = [];
     this.turn = null;
     this.secret = null;
+    this.choices = null; // the drawer's word cards for this turn
     this.guessedWord = null; // the word, once *I* guessed it (online)
     this.localPhase = null; // local: handoff | draw | handoff-guess | guess
     this.guesserSeat = null;
@@ -134,6 +135,10 @@ export class RoomView {
       }
       case 'secret':
         this.secret = m;
+        if (this.view === 'game') this.applyTurn(false);
+        break;
+      case 'choices':
+        this.choices = m;
         if (this.view === 'game') this.applyTurn(false);
         break;
       case 'draw':
@@ -314,6 +319,7 @@ export class RoomView {
     if (!this.engine) return;
     this.engine.reset();
     this.secret = this.secret && this.secret.turnIndex === this.turn.index ? this.secret : null;
+    this.choices = this.choices && this.choices.turnIndex === this.turn.index ? this.choices : null;
     this.guessedWord = null;
     this.reveal?.remove();
     this.reveal = null;
@@ -353,12 +359,15 @@ export class RoomView {
     const t = this.turn;
     const drawerView = this.amDrawer();
     const w = this.secret && t && this.secret.turnIndex === t.index ? vocabWord(this.secret.wordId) : null;
+    const choosing = t?.phase === 'choose';
 
     // top bar
     clear(this.roundEl).append(t ? h('div', tr('Vòng {i}/{n}', { i: t.round, n: t.rounds })) : h('div', tr('Chuẩn bị')), h('div.small.with-ic', t ? [icon('pencil', { size: 14 }), tr('{name} đang vẽ', { name: this.name(t.drawerId) })] : ''));
     clear(this.wordEl);
     if (t) {
-      if (drawerView && this.secret) {
+      if (choosing) {
+        this.wordEl.append(h('div.label', tr('Đoán từ')), h('div.word', '…'), h('div.len', tr('{name} đang chọn từ', { name: this.name(t.drawerId) })));
+      } else if (drawerView && this.secret) {
         this.wordEl.append(h('div.label', tr('Từ bạn cần vẽ')), h('div.word.secret', this.secret.word.toUpperCase()), w ? h('div.len', w.vi) : null);
       } else if (this.guessedWord && t.phase !== 'reveal') {
         this.wordEl.append(h('div.label', tr('Bạn đã đoán đúng')), h('div.word.secret', this.guessedWord.toUpperCase()));
@@ -374,7 +383,8 @@ export class RoomView {
     const canDraw = drawerView && t && t.phase === 'draw';
     this.engine.setEnabled(canDraw);
     this.toolbar.setEnabled(canDraw);
-    this.syncAssistant(w, !drawerView);
+    // Easy everyday words have no photo or drawing guide: the assistant stays closed for them.
+    this.syncAssistant(w && !w.easy ? w : null, !drawerView);
 
     // guess input
     const canGuess = t && t.phase === 'draw' && !drawerView && !this.guessedWord && (!this.local || this.localPhase === 'guess');
@@ -406,10 +416,11 @@ export class RoomView {
     if (this.local && t.phase !== 'reveal') {
       const drawer = this.players.find((p) => p.id === t.drawerId);
       if (this.localPhase === 'handoff') {
-        if (t.phase === 'pre' && !this.peek) {
+        if ((t.phase === 'pre' || t.phase === 'choose') && !this.peek) {
           return show(h('div.big', avatar(drawer?.name, drawer?.avatar, 72)), h('h2', tr('Lượt của {name}', { name: drawer?.name })), h('p.muted', tr('Người khác đừng nhìn màn hình')),
             h('button.btn.primary.big', { onclick: () => { this.peek = true; this.renderStageMsg(); } }, tr('Tôi là {name} – xem từ', { name: drawer?.name })));
         }
+        if (t.phase === 'choose' && this.peek && this.choices) return show(this.cardPicker());
         if (t.phase === 'pre' && this.peek && this.secret) {
           const w = vocabWord(this.secret.wordId);
           return show(h('div.label.small.muted', tr('TỪ BÍ MẬT')), h('h2', { style: { fontSize: '40px' } }, this.secret.word.toUpperCase()), h('p', w ? `${w.ipa} · ${w.vi}` : ''),
@@ -426,6 +437,11 @@ export class RoomView {
       }
       return;
     }
+    if (t.phase === 'choose') {
+      if (this.amDrawer() && this.choices) show(this.cardPicker());
+      else show(h('div.big', icon('cards', { size: 56 })), h('h2', tr('{name} đang chọn từ…', { name: this.name(t.drawerId) })));
+      return;
+    }
     if (t.phase === 'pre') {
       if (this.amDrawer() && this.secret) {
         const w = vocabWord(this.secret.wordId);
@@ -434,6 +450,24 @@ export class RoomView {
         show(h('div.big', icon('pencil', { size: 56 })), h('h2', tr('{name} chuẩn bị vẽ…', { name: this.name(t.drawerId) })));
       }
     }
+  }
+
+  /** The drawer's word cards: two words of the room and one easy everyday word. */
+  cardPicker() {
+    const t = this.turn;
+    const left = h('span.choose-left');
+    this.chooseLeft = left;
+    return [
+      h('div.small.muted', tr('CHỌN TỪ ĐỂ VẼ')),
+      h('div.word-cards', this.choices.options.map((o) => {
+        const w = vocabWord(o.id);
+        return h('button.word-card' + (o.easy ? '.easy' : ''), { type: 'button', onclick: () => this.s.send({ type: 'choose', wordId: o.id }, t.drawerId) },
+          h('span.tag' + (o.easy ? '.green' : '.blue'), o.easy ? tr('Từ dễ') : tr('Từ đang học')),
+          h('b', { lang: 'en' }, o.en),
+          w ? h('small', w.vi) : null);
+      })),
+      this.local ? null : left,
+    ];
   }
 
   renderActions() {
@@ -461,7 +495,9 @@ export class RoomView {
       left = (t.endAt - this.s.now()) / 1000;
       frac = left / t.drawTime;
     }
-    this.timerNum.textContent = t.phase === 'draw' ? Math.max(0, Math.ceil(left)) : t.phase === 'pre' ? '…' : '–';
+    const chooseLeft = t.phase === 'choose' && t.chooseEndAt ? Math.max(0, Math.ceil((t.chooseEndAt - this.s.now()) / 1000)) : null;
+    if (this.chooseLeft) this.chooseLeft.textContent = chooseLeft != null ? tr('Tự chọn thẻ đầu sau {n}s', { n: chooseLeft }) : '';
+    this.timerNum.textContent = t.phase === 'draw' ? Math.max(0, Math.ceil(left)) : chooseLeft != null ? chooseLeft : t.phase === 'pre' || t.phase === 'choose' ? '…' : '–';
     const C = 2 * Math.PI * 24;
     this.timerFg.style.strokeDashoffset = String(C * (1 - Math.max(0, Math.min(1, frac))));
     this.timerBox.classList.toggle('warn', t.phase === 'draw' && left <= 30 && left > 10);
@@ -495,7 +531,9 @@ export class RoomView {
 
   recordLearning(t) {
     const res = t;
+    const learn = !isEasy(res.wordId); // easy everyday words are not part of the learning path
     if (this.local) {
+      if (!learn) return;
       const map = this.opts.seatProfiles || {};
       for (const [seat, pid] of Object.entries(map)) {
         if (!pid) continue;
@@ -506,8 +544,8 @@ export class RoomView {
       }
     } else {
       const me = this.s.me();
-      if (me === res.drawerId) progress.recordDrawn(res.wordId);
-      else progress.recordRecall(res.wordId, res.guessedIds.includes(me), 'guess');
+      if (learn && me === res.drawerId) progress.recordDrawn(res.wordId);
+      else if (learn) progress.recordRecall(res.wordId, res.guessedIds.includes(me), 'guess');
       // Rooms opened from the group page add to that group's leaderboard.
       if (this.room?.groupCode && progress.active().group?.code === this.room.groupCode) progress.recordMatchPoints(res.deltas?.[me] || 0);
     }
@@ -539,7 +577,8 @@ export class RoomView {
       h('div.reveal-head', h('div.reason', REASONS[t.reason] || ''), h('h2', { style: { fontSize: '40px', margin: '4px 0' } }, w ? w.en : t.word),
         w ? h('div.row', { style: { justifyContent: 'center' } }, h('span.ipa', w.ipa), h('button.btn.small', { onclick: () => speak(w.en), 'aria-label': tr('Nghe phát âm') }, icon('volume', { size: 16 }), 'Nghe'), h('span.meaning', { style: { margin: 0 } }, w.vi)) : null),
       h('div.reveal',
-        h('div', w ? photoFigure(w) : null, w ? h('div.example', h('div', w.ex[0]), h('div.vi', w.ex[1])) : null),
+        h('div', w?.images?.length ? photoFigure(w) : null, w?.ex ? h('div.example', h('div', w.ex[0]), h('div.vi', w.ex[1])) : null,
+          w?.easy ? h('div.notice', icon('star', { size: 18 }), h('span', tr('Từ thông dụng – không tính vào tiến độ học'))) : null),
         h('div',
           h('h3', tr('Bức tranh vừa vẽ')),
           h('div.drawing-frame', blank ? h('div.muted', { style: { padding: '30px', textAlign: 'center' } }, tr('(Bảng vẽ trống)')) : h('img', { src: drawingUrl, alt: tr('Tranh của ') + this.name(t.drawerId) })),

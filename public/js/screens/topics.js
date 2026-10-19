@@ -2,7 +2,7 @@
 
 import { h, clear, speak, autoSpeak } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
-import { topics, topicById, photo, photoFigure, topicIcon } from '../vocab/data.js';
+import { topics, topicById, photo, photoFigure, topicIcon, easyTopic } from '../vocab/data.js';
 import { speakBtn } from './learn.js';
 
 const back = (href, label) => h('a.back-link', { href }, icon('back', { size: 16 }), label);
@@ -23,7 +23,7 @@ export function renderTopics(root) {
   const prof = P.active();
   clear(root).append(
     h('div.page-title', icon('map', { size: 28 }), tr('Chủ đề')),
-    h('div.topics', topics().map((t, i) => {
+    h('div.topics', easyCard(), topics().map((t, i) => {
       const st = P.topicStatus(i);
       const [label, color] = STATUS[st];
       const n = P.introducedIn(t).length;
@@ -42,6 +42,18 @@ export function renderTopics(root) {
           st === 'group-quiz' ? h('a.btn.green.small', { href: '#/group' }, icon('trophy', { size: 16 }), tr('Mini-game nhóm')) : null,
           st === 'passed' ? h('a.btn.small', { href: '#/quiz/' + t.id }, icon('repeat', { size: 16 }), tr('Thi lại')) : null));
     })));
+}
+
+/** Easy everyday words: always open, only for drawing (no lesson, test or review). */
+function easyCard() {
+  const e = easyTopic();
+  const sample = shuffle(e.words).slice(0, 6);
+  return h('article.card.topic-card.easy-topic',
+    h('div.cover.easy-cover', h('div.easy-words', sample.map((w) => h('span', { lang: 'en' }, w.en))), h('span.num', icon('star', { size: 18 }))),
+    h('div.body',
+      h('div.row.between', h('b.with-ic', topicIcon(e, 18), tr('Từ thông dụng')), h('span.tag.green', tr('Luôn mở'))),
+      h('div.small.muted', tr('{n} từ dễ ai cũng biết · chỉ dùng khi chơi vẽ, không tính vào tiến độ', { n: e.words.length })),
+      h('a.btn.green.small', { href: '#/play/easy' }, icon('pencil', { size: 16 }), tr('Chơi vẽ'))));
 }
 
 function shuffle(a) {

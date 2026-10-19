@@ -1,0 +1,76 @@
+## things
+phone | điện thoại | /foʊn/ | n
+computer | máy tính | /kəmˈpjuː.t̬ɚ/ | n
+camera | máy ảnh | /ˈkæm.rə/ | n
+tablet | máy tính bảng | /ˈtæb.lət/ | n
+charger | sạc điện thoại | /ˈtʃɑːr.dʒɚ/ | n
+speaker | cái loa | /ˈspiː.kɚ/ | n
+earphones | tai nghe nhét tai | /ˈɪr.foʊnz/ | n
+remote control | điều khiển từ xa | /rɪˌmoʊt kənˈtroʊl/ | n
+flashlight | đèn pin | /ˈflæʃ.laɪt/ | n
+lantern | cái đèn lồng | /ˈlæn.tɚn/ | n
+match | que diêm | /mætʃ/ | n
+lighter | bật lửa | /ˈlaɪ.t̬ɚ/ | n
+rope | sợi dây thừng | /roʊp/ | n
+chain | dây xích | /tʃeɪn/ | n
+needle | cây kim | /ˈniː.dəl/ | n
+thread | sợi chỉ | /θred/ | n
+safety pin | kim băng | /ˈseɪf.ti ˌpɪn/ | n
+saw | cái cưa | /sɑː/ | n
+axe | cái rìu | /æks/ | n
+shovel | cái xẻng | /ˈʃʌv.əl/ | n
+rake | cái cào | /reɪk/ | n
+watering can | bình tưới | /ˈwɑː.t̬ɚ.ɪŋ ˌkæn/ | n
+flower pot | chậu hoa | /ˈflaʊr ˌpɑːt/ | n
+screw | đinh vít | /skruː/ | n
+pliers | cái kìm | /ˈplaɪ.ɚz/ | n
+tape measure | thước dây | /ˈteɪp ˌmeʒ.ɚ/ | n
+paint can | thùng sơn | /ˈpeɪnt ˌkæn/ | n
+brick | viên gạch | /brɪk/ | n
+sack | bao tải | /sæk/ | n
+gift | món quà | /ɡɪft/ | n
+ribbon | dải ruy băng | /ˈrɪb.ən/ | n
+flag | lá cờ | /flæɡ/ | n
+sign | tấm biển | /saɪn/ | n
+arrow | mũi tên | /ˈer.oʊ/ | n
+treasure chest | rương kho báu | /ˈtreʒ.ɚ ˌtʃest/ | n
+treasure map | bản đồ kho báu | /ˈtreʒ.ɚ ˌmæp/ | n
+diamond | kim cương | /ˈdaɪ.mənd/ | n
+gold | vàng | /ɡoʊld/ | n
+magic wand | đũa phép | /ˌmædʒ.ɪk ˈwɑːnd/ | n
+crystal ball | quả cầu pha lê | /ˌkrɪs.təl ˈbɑːl/ | n
+sword | thanh kiếm | /sɔːrd/ | n
+shield | cái khiên | /ʃiːld/ | n
+cannon | khẩu pháo | /ˈkæn.ən/ | n
+bomb | quả bom | /bɑːm/ | n
+trap | cái bẫy | /træp/ | n
+hourglass | đồng hồ cát | /ˈaʊr.ɡlæs/ | n
+broomstick | cán chổi | /ˈbruːm.stɪk/ | n
+feather duster | chổi lông gà | /ˈfeð.ɚ ˌdʌs.tɚ/ | n
+tissue | khăn giấy | /ˈtɪʃ.uː/ | n
+plaster | băng cá nhân | /ˈplæs.tɚ/ | n
+pill | viên thuốc | /pɪl/ | n
+key chain | móc chìa khóa | /ˈkiː ˌtʃeɪn/ | n
+photo | bức ảnh | /ˈfoʊ.t̬oʊ/ | n
+money | tiền | /ˈmʌn.i/ | n
+## holidays
+Christmas tree | cây thông Noel | /ˈkrɪs.məs ˌtriː/ | n
+fireworks | pháo hoa | /ˈfaɪr.wɝːks/ | n
+firecracker | pháo | /ˈfaɪrˌkræk.ɚ/ | n
+red envelope | bao lì xì | /ˌred ˈen.və.loʊp/ | n
+mooncake | bánh trung thu | /ˈmuːn.keɪk/ | n
+star lantern | đèn ông sao | /ˈstɑːr ˌlæn.tɚn/ | n
+lion dance | múa lân | /ˈlaɪ.ən ˌdæns/ | n
+peach blossom | hoa đào | /ˈpiːtʃ ˌblɑː.səm/ | n
+apricot blossom | hoa mai | /ˈeɪ.prɪ.kɑːt ˌblɑː.səm/ | n
+Easter egg | trứng Phục sinh | /ˈiː.stɚ ˌeɡ/ | n
+jack-o'-lantern | đèn bí ngô | /ˈdʒæk.əˌlæn.tɚn/ | n
+party hat | mũ dự tiệc | /ˈpɑːr.t̬i ˌhæt/ | n
+wedding | đám cưới | /ˈwed.ɪŋ/ | n
+wedding ring | nhẫn cưới | /ˈwed.ɪŋ ˌrɪŋ/ | n
+reindeer | tuần lộc | /ˈreɪn.dɪr/ | n
+sleigh | xe trượt tuyết | /sleɪ/ | n
+stocking | tất Noel | /ˈstɑː.kɪŋ/ | n
+gingerbread man | bánh gừng hình người | /ˈdʒɪn.dʒɚ.bred ˌmæn/ | n
+candy cane | kẹo gậy | /ˈkæn.di ˌkeɪn/ | n
+confetti | hoa giấy | /kənˈfet̬.i/ | n

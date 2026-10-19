@@ -63,6 +63,27 @@ class Client {
   close() { this.ws.close(); }
 }
 
+test('easy-only room: every word card is an easy everyday word', WS, async () => {
+  const easy = new Set(vocab.easy.words.map((w) => w.id));
+  assert.equal(easy.size, 1000);
+  assert.equal(words.some((w) => easy.has(w.id)), false, 'easy words never enter the TOEIC topics');
+  const [a, b] = await Promise.all([new Client('Ann').open(), new Client('Ben').open()]);
+  a.send({ type: 'create', easy: true, wordIds: ['stapler'], settings: { rounds: 1, drawTime: 60 } });
+  const welcome = await a.wait((m) => m.type === 'welcome');
+  assert.equal(welcome.room.easyOnly, true);
+  assert.equal(welcome.room.poolSize, 1000);
+  b.send({ type: 'join', code: welcome.room.code });
+  await a.wait((m) => m.type === 'players' && m.players.length === 2);
+  a.send({ type: 'start' });
+  const turn = (await a.wait((m) => m.type === 'turn')).turn;
+  const drawer = turn.drawerId === a.pid ? a : b;
+  const { options } = await drawer.wait((m) => m.type === 'choices');
+  assert.equal(options.length, 3);
+  assert.ok(options.every((o) => o.easy && easy.has(o.id)));
+  a.close();
+  b.close();
+});
+
 test('full online turn over WebSocket: secrecy, realtime drawing, scoring', WS, async () => {
   const [a, b, c] = await Promise.all([new Client('Alice').open(), new Client('Bob').open(), new Client('Cara').open()]);
   a.send({ type: 'create', wordIds: words.slice(0, 3).map((w) => w.id), settings: { rounds: 1, drawTime: 60 } });
@@ -77,8 +98,13 @@ test('full online turn over WebSocket: secrecy, realtime drawing, scoring', WS, 
   const clients = { [a.pid]: a, [b.pid]: b, [c.pid]: c };
   const drawer = clients[turn.drawerId];
   const guessers = Object.values(clients).filter((x) => x !== drawer);
+  const choices = await drawer.wait((m) => m.type === 'choices');
+  assert.equal(choices.options.length, 3);
+  assert.equal(choices.options.filter((o) => o.easy).length, 1, 'one easy everyday word among the cards');
+  drawer.send({ type: 'choose', wordId: choices.options[1].id });
   const secret = await drawer.wait((m) => m.type === 'secret');
-  const word = words.find((w) => w.id === secret.wordId);
+  assert.equal(secret.wordId, choices.options[1].id);
+  const word = words.find((w) => w.id === secret.wordId) || { id: secret.wordId, en: secret.word };
   assert.ok(word);
   await drawer.wait((m) => m.type === 'turn' && m.turn.phase === 'draw', 6000);
 
@@ -86,7 +112,8 @@ test('full online turn over WebSocket: secrecy, realtime drawing, scoring', WS, 
   for (const g of guessers) {
     const all = g.raw.join('\n').toLowerCase();
     assert.equal(all.includes(`"${word.id}"`), false, 'word id leaked to guesser');
-    assert.equal(g.msgs.some((m) => m.type === 'secret'), false);
+    assert.equal(g.msgs.some((m) => m.type === 'secret' || m.type === 'choices'), false);
+    for (const o of choices.options) assert.equal(all.includes(`"${o.id}"`), false, 'word cards leaked to guesser');
   }
 
   // Realtime drawing relay

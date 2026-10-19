@@ -1,0 +1,81 @@
+## nature
+sun | mặt trời | /sʌn/ | n
+moon | mặt trăng | /muːn/ | n
+star | ngôi sao | /stɑːr/ | n
+sky | bầu trời | /skaɪ/ | n
+cloud | đám mây | /klaʊd/ | n
+rain | mưa | /reɪn/ | n
+snow | tuyết | /snoʊ/ | n
+snowflake | bông tuyết | /ˈsnoʊ.fleɪk/ | n
+wind | gió | /wɪnd/ | n
+storm | bão | /stɔːrm/ | n
+lightning | tia chớp | /ˈlaɪt.nɪŋ/ | n
+rainbow | cầu vồng | /ˈreɪn.boʊ/ | n
+tornado | lốc xoáy | /tɔːrˈneɪ.doʊ/ | n
+fog | sương mù | /fɑːɡ/ | n
+ice | băng | /aɪs/ | n
+icicle | cột băng | /ˈaɪ.sɪ.kəl/ | n
+fire | lửa | /faɪr/ | n
+smoke | khói | /smoʊk/ | n
+tree | cái cây | /triː/ | n
+palm tree | cây dừa | /ˈpɑːm ˌtriː/ | n
+pine tree | cây thông | /ˈpaɪn ˌtriː/ | n
+bamboo | cây tre | /bæmˈbuː/ | n
+leaf | chiếc lá | /liːf/ | n
+branch | cành cây | /bræntʃ/ | n
+root | rễ cây | /ruːt/ | n
+log | khúc gỗ | /lɑːɡ/ | n
+stump | gốc cây | /stʌmp/ | n
+flower | bông hoa | /flaʊr/ | n
+rose | hoa hồng | /roʊz/ | n
+sunflower | hoa hướng dương | /ˈsʌnˌflaʊr/ | n
+tulip | hoa tulip | /ˈtuː.lɪp/ | n
+lotus | hoa sen | /ˈloʊ.t̬əs/ | n
+daisy | hoa cúc | /ˈdeɪ.zi/ | n
+cactus | cây xương rồng | /ˈkæk.təs/ | n
+grass | cỏ | /ɡræs/ | n
+seed | hạt giống | /siːd/ | n
+plant | cây trồng | /plænt/ | n
+pot plant | chậu cây | /ˈpɑːt ˌplænt/ | n
+acorn | quả sồi | /ˈeɪ.kɔːrn/ | n
+pinecone | quả thông | /ˈpaɪn.koʊn/ | n
+clover | cỏ ba lá | /ˈkloʊ.vɚ/ | n
+mountain | ngọn núi | /ˈmaʊn.tən/ | n
+volcano | núi lửa | /vɑːlˈkeɪ.noʊ/ | n
+hill | ngọn đồi | /hɪl/ | n
+river | dòng sông | /ˈrɪv.ɚ/ | n
+lake | hồ | /leɪk/ | n
+sea | biển | /siː/ | n
+wave | con sóng | /weɪv/ | n
+beach | bãi biển | /biːtʃ/ | n
+island | hòn đảo | /ˈaɪ.lənd/ | n
+waterfall | thác nước | /ˈwɑː.t̬ɚ.fɑːl/ | n
+desert | sa mạc | /ˈdez.ɚt/ | n
+forest | khu rừng | /ˈfɔːr.ɪst/ | n
+jungle | rừng rậm | /ˈdʒʌŋ.ɡəl/ | n
+cave | hang động | /keɪv/ | n
+rock | hòn đá | /rɑːk/ | n
+sand | cát | /sænd/ | n
+shell | vỏ sò | /ʃel/ | n
+pond | cái ao | /pɑːnd/ | n
+field | cánh đồng | /fiːld/ | n
+rice field | ruộng lúa | /ˈraɪs ˌfiːld/ | n
+puddle | vũng nước | /ˈpʌd.əl/ | n
+mud | bùn | /mʌd/ | n
+earth | trái đất | /ɝːθ/ | n
+planet | hành tinh | /ˈplæn.ɪt/ | n
+sunrise | bình minh | /ˈsʌn.raɪz/ | n
+sunset | hoàng hôn | /ˈsʌn.set/ | n
+night | ban đêm | /naɪt/ | n
+shadow | cái bóng | /ˈʃæd.oʊ/ | n
+crescent moon | trăng lưỡi liềm | /ˈkres.ənt ˌmuːn/ | n
+shooting star | sao băng | /ˌʃuː.t̬ɪŋ ˈstɑːr/ | n
+comet | sao chổi | /ˈkɑː.mɪt/ | n
+rocket | tên lửa | /ˈrɑː.kɪt/ | n
+UFO | đĩa bay | /ˌjuː.efˈoʊ/ | n
+satellite | vệ tinh | /ˈsæt̬.əl.aɪt/ | n
+telescope | kính thiên văn | /ˈtel.ə.skoʊp/ | n
+Saturn | sao Thổ | /ˈsæt̬.ɚn/ | n
+iceberg | tảng băng trôi | /ˈaɪs.bɝːɡ/ | n
+coral | san hô | /ˈkɔːr.əl/ | n
+seaweed | rong biển | /ˈsiː.wiːd/ | n

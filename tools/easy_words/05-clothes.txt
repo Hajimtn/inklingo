@@ -1,0 +1,61 @@
+## clothes
+shirt | áo sơ mi | /ʃɝːt/ | n
+T-shirt | áo phông | /ˈtiː.ʃɝːt/ | n
+pants | quần dài | /pænts/ | n
+jeans | quần bò | /dʒiːnz/ | n
+shorts | quần đùi | /ʃɔːrts/ | n
+skirt | chân váy | /skɝːt/ | n
+dress | váy liền | /dres/ | n
+jacket | áo khoác | /ˈdʒæk.ɪt/ | n
+coat | áo choàng dài | /koʊt/ | n
+sweater | áo len | /ˈswet̬.ɚ/ | n
+hoodie | áo nỉ có mũ | /ˈhʊd.i/ | n
+raincoat | áo mưa | /ˈreɪn.koʊt/ | n
+pajamas | đồ ngủ | /pəˈdʒɑː.məz/ | n
+swimsuit | đồ bơi | /ˈswɪm.suːt/ | n
+socks | tất | /sɑːks/ | n
+shoes | đôi giày | /ʃuːz/ | n
+boots | đôi ủng | /buːts/ | n
+sandals | dép quai hậu | /ˈsæn.dəlz/ | n
+slippers | dép đi trong nhà | /ˈslɪp.ɚz/ | n
+flip-flops | dép tông | /ˈflɪp.flɑːps/ | n
+sneakers | giày thể thao | /ˈsniː.kɚz/ | n
+high heels | giày cao gót | /ˌhaɪ ˈhiːlz/ | n
+hat | cái mũ | /hæt/ | n
+cap | mũ lưỡi trai | /kæp/ | n
+helmet | mũ bảo hiểm | /ˈhel.mət/ | n
+crown | vương miện | /kraʊn/ | n
+scarf | khăn quàng | /skɑːrf/ | n
+gloves | đôi găng tay | /ɡlʌvz/ | n
+mittens | găng tay hở ngón | /ˈmɪt.ənz/ | n
+belt | thắt lưng | /belt/ | n
+tie | cà vạt | /taɪ/ | n
+bow tie | nơ con bướm | /ˌboʊ ˈtaɪ/ | n
+button | cúc áo | /ˈbʌt.ən/ | n
+zipper | khóa kéo | /ˈzɪp.ɚ/ | n
+pocket | túi áo | /ˈpɑː.kɪt/ | n
+glasses | kính mắt | /ˈɡlæs.ɪz/ | n
+watch | đồng hồ đeo tay | /wɑːtʃ/ | n
+ring | chiếc nhẫn | /rɪŋ/ | n
+necklace | vòng cổ | /ˈnek.ləs/ | n
+earrings | đôi bông tai | /ˈɪr.ɪŋz/ | n
+bracelet | vòng tay | /ˈbreɪs.lət/ | n
+bow | cái nơ | /boʊ/ | n
+purse | ví nữ | /pɝːs/ | n
+school bag | cặp sách | /ˈskuːl ˌbæɡ/ | n
+wig | tóc giả | /wɪɡ/ | n
+mask | mặt nạ | /mæsk/ | n
+vest | áo gi lê | /vest/ | n
+ao dai | áo dài | /ˈaʊ ˌzaɪ/ | n
+kimono | áo kimono | /kɪˈmoʊ.noʊ/ | n
+cape | áo choàng | /keɪp/ | n
+diaper | bỉm | /ˈdaɪ.pɚ/ | n
+bib | yếm ăn | /bɪb/ | n
+baseball cap | mũ bóng chày | /ˈbeɪs.bɑːl ˌkæp/ | n
+top hat | mũ chóp cao | /ˌtɑːp ˈhæt/ | n
+beanie | mũ len | /ˈbiː.ni/ | n
+headband | băng đô | /ˈhed.bænd/ | n
+hairclip | kẹp tóc | /ˈher.klɪp/ | n
+lipstick | son môi | /ˈlɪp.stɪk/ | n
+perfume | nước hoa | /pɚˈfjuːm/ | n
+nail polish | sơn móng tay | /ˈneɪl ˌpɑː.lɪʃ/ | n

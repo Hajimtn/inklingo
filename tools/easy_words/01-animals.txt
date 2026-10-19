@@ -1,0 +1,125 @@
+#! Easy words: en | vi | ipa | pos   (## starts a category)
+## animals
+cat | con mèo | /kæt/ | n
+dog | con chó | /dɑːɡ/ | n
+puppy | chó con | /ˈpʌp.i/ | n
+kitten | mèo con | /ˈkɪt.ən/ | n
+cow | con bò | /kaʊ/ | n
+pig | con lợn | /pɪɡ/ | n
+horse | con ngựa | /hɔːrs/ | n
+sheep | con cừu | /ʃiːp/ | n
+goat | con dê | /ɡoʊt/ | n
+chicken | con gà | /ˈtʃɪk.ɪn/ | n
+rooster | gà trống | /ˈruː.stɚ/ | n
+chick | gà con | /tʃɪk/ | n
+duck | con vịt | /dʌk/ | n
+goose | con ngỗng | /ɡuːs/ | n
+rabbit | con thỏ | /ˈræb.ɪt/ | n
+mouse | con chuột | /maʊs/ | n
+rat | chuột cống | /ræt/ | n
+hamster | chuột hamster | /ˈhæm.stɚ/ | n
+bird | con chim | /bɝːd/ | n
+parrot | con vẹt | /ˈper.ət/ | n
+owl | con cú | /aʊl/ | n
+eagle | đại bàng | /ˈiː.ɡəl/ | n
+pigeon | chim bồ câu | /ˈpɪdʒ.ən/ | n
+penguin | chim cánh cụt | /ˈpeŋ.ɡwɪn/ | n
+swan | thiên nga | /swɑːn/ | n
+peacock | con công | /ˈpiː.kɑːk/ | n
+flamingo | hồng hạc | /fləˈmɪŋ.ɡoʊ/ | n
+ostrich | đà điểu | /ˈɑː.strɪtʃ/ | n
+crow | con quạ | /kroʊ/ | n
+lion | sư tử | /ˈlaɪ.ən/ | n
+tiger | con hổ | /ˈtaɪ.ɡɚ/ | n
+elephant | con voi | /ˈel.ə.fənt/ | n
+giraffe | hươu cao cổ | /dʒɪˈræf/ | n
+zebra | ngựa vằn | /ˈziː.brə/ | n
+monkey | con khỉ | /ˈmʌŋ.ki/ | n
+gorilla | khỉ đột | /ɡəˈrɪl.ə/ | n
+bear | con gấu | /ber/ | n
+panda | gấu trúc | /ˈpæn.də/ | n
+koala | gấu túi | /koʊˈɑː.lə/ | n
+kangaroo | chuột túi | /ˌkæŋ.ɡəˈruː/ | n
+camel | lạc đà | /ˈkæm.əl/ | n
+deer | con hươu | /dɪr/ | n
+fox | con cáo | /fɑːks/ | n
+wolf | chó sói | /wʊlf/ | n
+squirrel | con sóc | /ˈskwɝː.əl/ | n
+hedgehog | con nhím | /ˈhedʒ.hɑːɡ/ | n
+bat | con dơi | /bæt/ | n
+hippo | hà mã | /ˈhɪp.oʊ/ | n
+rhino | tê giác | /ˈraɪ.noʊ/ | n
+crocodile | cá sấu | /ˈkrɑː.kə.daɪl/ | n
+snake | con rắn | /sneɪk/ | n
+lizard | thằn lằn | /ˈlɪz.ɚd/ | n
+turtle | con rùa | /ˈtɝː.t̬əl/ | n
+frog | con ếch | /frɑːɡ/ | n
+fish | con cá | /fɪʃ/ | n
+shark | cá mập | /ʃɑːrk/ | n
+whale | cá voi | /weɪl/ | n
+dolphin | cá heo | /ˈdɑːl.fɪn/ | n
+octopus | bạch tuộc | /ˈɑːk.tə.pəs/ | n
+crab | con cua | /kræb/ | n
+shrimp | con tôm | /ʃrɪmp/ | n
+lobster | tôm hùm | /ˈlɑːb.stɚ/ | n
+jellyfish | con sứa | /ˈdʒel.i.fɪʃ/ | n
+starfish | sao biển | /ˈstɑːr.fɪʃ/ | n
+seal | hải cẩu | /siːl/ | n
+snail | ốc sên | /sneɪl/ | n
+worm | con giun | /wɝːm/ | n
+butterfly | con bướm | /ˈbʌt̬.ɚ.flaɪ/ | n
+bee | con ong | /biː/ | n
+ant | con kiến | /ænt/ | n
+spider | con nhện | /ˈspaɪ.dɚ/ | n
+mosquito | con muỗi | /məˈskiː.t̬oʊ/ | n
+fly | con ruồi | /flaɪ/ | n
+ladybug | bọ rùa | /ˈleɪ.di.bʌɡ/ | n
+dragonfly | chuồn chuồn | /ˈdræɡ.ən.flaɪ/ | n
+caterpillar | sâu bướm | /ˈkæt̬.ɚ.pɪl.ɚ/ | n
+grasshopper | châu chấu | /ˈɡræsˌhɑː.pɚ/ | n
+cockroach | con gián | /ˈkɑːk.roʊtʃ/ | n
+scorpion | bọ cạp | /ˈskɔːr.pi.ən/ | n
+donkey | con lừa | /ˈdɑːŋ.ki/ | n
+buffalo | con trâu | /ˈbʌf.ə.loʊ/ | n
+leopard | con báo | /ˈlep.ɚd/ | n
+polar bear | gấu Bắc Cực | /ˌpoʊ.lɚ ˈber/ | n
+dinosaur | khủng long | /ˈdaɪ.nə.sɔːr/ | n
+unicorn | kỳ lân | /ˈjuː.nə.kɔːrn/ | n
+dragon | con rồng | /ˈdræɡ.ən/ | n
+goldfish | cá vàng | /ˈɡoʊld.fɪʃ/ | n
+seahorse | cá ngựa | /ˈsiː.hɔːrs/ | n
+moose | nai sừng tấm | /muːs/ | n
+raccoon | gấu mèo | /rækˈuːn/ | n
+skunk | chồn hôi | /skʌŋk/ | n
+beaver | hải ly | /ˈbiː.vɚ/ | n
+sloth | con lười | /slɑːθ/ | n
+llama | lạc đà không bướu | /ˈlɑː.mə/ | n
+turkey | gà tây | /ˈtɝː.ki/ | n
+woodpecker | chim gõ kiến | /ˈwʊdˌpek.ɚ/ | n
+hummingbird | chim ruồi | /ˈhʌm.ɪŋ.bɝːd/ | n
+toucan | chim toucan | /ˈtuː.kæn/ | n
+chameleon | tắc kè hoa | /kəˈmiː.li.ən/ | n
+gecko | thạch sùng | /ˈɡek.oʊ/ | n
+squid | con mực | /skwɪd/ | n
+clam | con nghêu | /klæm/ | n
+oyster | con hàu | /ˈɔɪ.stɚ/ | n
+eel | con lươn | /iːl/ | n
+walrus | hải mã | /ˈwɔːl.rəs/ | n
+otter | rái cá | /ˈɑː.t̬ɚ/ | n
+mole | chuột chũi | /moʊl/ | n
+bunny | thỏ con | /ˈbʌn.i/ | n
+pony | ngựa con | /ˈpoʊ.ni/ | n
+tadpole | nòng nọc | /ˈtæd.poʊl/ | n
+nest | tổ chim | /nest/ | n
+feather | lông vũ | /ˈfeð.ɚ/ | n
+egg | quả trứng | /eɡ/ | n
+paw | bàn chân thú | /pɑː/ | n
+tail | cái đuôi | /teɪl/ | n
+wing | cánh | /wɪŋ/ | n
+beak | mỏ chim | /biːk/ | n
+horn | sừng | /hɔːrn/ | n
+spider web | mạng nhện | /ˈspaɪ.dɚ ˌweb/ | n
+bone | khúc xương | /boʊn/ | n
+cage | cái lồng | /keɪdʒ/ | n
+fishbowl | bể cá tròn | /ˈfɪʃ.boʊl/ | n
+doghouse | chuồng chó | /ˈdɑːɡ.haʊs/ | n

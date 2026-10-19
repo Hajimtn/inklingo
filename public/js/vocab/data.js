@@ -6,6 +6,7 @@ import { icon, hasIcon } from '../ui/icons.js';
 import { tr } from '../i18n.js';
 let vocab = null;
 const byId = new Map();
+const easyById = new Map();
 
 export async function loadVocab() {
   if (vocab) return vocab;
@@ -21,13 +22,23 @@ export async function loadVocab() {
       byId.set(w.id, w);
     });
   });
+  // Easy everyday words: word cards when drawing only (no photo, never part of the learning path).
+  vocab.easy ||= { id: 'easy', title: 'Everyday Words', vi: 'Từ thông dụng', icon: 'star', words: [] };
+  for (const w of vocab.easy.words) {
+    w.topic = 'easy';
+    easyById.set(w.id, w);
+  }
   return vocab;
 }
 
 export const topics = () => vocab.topics;
 export const topicById = (id) => vocab.topics.find((t) => t.id === id);
-export const word = (id) => byId.get(id);
+export const word = (id) => byId.get(id) || easyById.get(id);
+/** Every TOEIC word (the learning path). Easy everyday words are separate: easyTopic(). */
 export const allWords = () => [...byId.values()];
+export const easyTopic = () => vocab.easy;
+export const easyIds = () => [...easyById.keys()];
+export const isEasy = (id) => easyById.has(id);
 
 /** The topic's line icon (topic.icon is an icon name from ui/icons.js). */
 export const topicIcon = (t, size = 20) => icon(t && hasIcon(t.icon) ? t.icon : 'book', { size, className: 'topic-ico' });
@@ -35,7 +46,7 @@ export const topicIcon = (t, size = 20) => icon(t && hasIcon(t.icon) ? t.icon : 
 /** Dictionary in the shape GameRoom expects (used by same-device mode). */
 export function dictionary() {
   const m = new Map();
-  for (const w of byId.values()) m.set(w.id, { id: w.id, en: w.en, answers: [w.en, ...(w.alt || [])] });
+  for (const w of [...byId.values(), ...easyById.values()]) m.set(w.id, { id: w.id, en: w.en, answers: [w.en, ...(w.alt || [])] });
   return m;
 }
 
