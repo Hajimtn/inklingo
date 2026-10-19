@@ -175,9 +175,6 @@ export class RoomView {
         this.applyTurn(false);
         this.showReveal();
         break;
-      case 'ready':
-        if (this.readyLabel) this.readyLabel.textContent = tr('{c}/{n} người sẵn sàng', { c: m.count, n: m.total });
-        break;
       case 'game-end':
         this.room = m.room;
         this.turn = null;
@@ -299,8 +296,9 @@ export class RoomView {
         h('div.timer-box', this.netBadge, this.timerBox)),
       h('div.game-grid',
         h('aside.card.side-panel.players-panel', h('h3.with-ic', icon('users', { size: 16 }), tr('Người chơi')), this.playerList, this.assistRoot),
-        h('section.stage', this.wrap, tbRoot, this.actions),
-        h('aside.card.chat-panel', h('h3.with-ic', icon('chat', { size: 16 }), tr('Đoán từ')), this.chatLog, this.localGuessers, this.guessForm)));
+        this.stageEl = h('section.stage', this.wrap, tbRoot, this.actions),
+        // The answer box sits right under the heading (no scrolling to reach it); newest messages first.
+        h('aside.card.chat-panel', h('h3.with-ic', icon('chat', { size: 16 }), tr('Đoán từ')), this.guessForm, this.localGuessers, this.chatLog)));
 
     this.engine = new DrawingEngine({ canvas: board, wrap: this.wrap, cursor });
     this.toolbar = new Toolbar(tbRoot, this.engine, { statusHost: this.wrap });
@@ -383,6 +381,7 @@ export class RoomView {
     const canDraw = drawerView && t && t.phase === 'draw';
     this.engine.setEnabled(canDraw);
     this.toolbar.setEnabled(canDraw);
+    this.stageEl.classList.toggle('not-drawing', !drawerView); // small screens hide the tools for guessers
     // Easy everyday words have no photo or drawing guide: the assistant stays closed for them.
     this.syncAssistant(w && !w.easy ? w : null, !drawerView);
 
@@ -510,9 +509,9 @@ export class RoomView {
 
   chat(el) {
     if (!this.chatLog) return;
-    this.chatLog.append(el);
-    while (this.chatLog.children.length > 150) this.chatLog.firstChild.remove();
-    this.chatLog.scrollTop = this.chatLog.scrollHeight;
+    this.chatLog.prepend(el);
+    while (this.chatLog.children.length > 150) this.chatLog.lastChild.remove();
+    this.chatLog.scrollTop = 0;
   }
 
   submitGuess() {
@@ -565,14 +564,12 @@ export class RoomView {
     }
     if (w) setTimeout(() => autoSpeak(w.en), 250);
     const deltas = Object.entries(t.deltas).sort((a, b) => b[1] - a[1]);
-    this.readyLabel = h('span.small.muted');
     this.revealCountdown = h('span.small.muted');
+    // One press (by anyone) starts the next turn for the whole room.
     const cont = h('button.btn.primary.big', { onclick: () => {
       cont.disabled = true;
-      cont.textContent = tr('Đang chờ người khác…');
-      if (this.local) for (const p of this.players) this.s.send({ type: 'ready' }, p.id);
-      else this.s.send({ type: 'ready' });
-    } }, tr('Tiếp tục'), icon('next', { size: 20 }));
+      this.s.send({ type: 'ready' }, this.local ? t.drawerId : undefined);
+    } }, tr('Lượt tiếp'), icon('next', { size: 20 }));
     const box = h('div.dialog.wide', { role: 'dialog', 'aria-label': tr('Kết quả lượt') },
       h('div.reveal-head', h('div.reason', REASONS[t.reason] || ''), h('h2', { style: { fontSize: '40px', margin: '4px 0' } }, w ? w.en : t.word),
         w ? h('div.row', { style: { justifyContent: 'center' } }, h('span.ipa', w.ipa), h('button.btn.small', { onclick: () => speak(w.en), 'aria-label': tr('Nghe phát âm') }, icon('volume', { size: 16 }), 'Nghe'), h('span.meaning', { style: { margin: 0 } }, w.vi)) : null),
@@ -586,7 +583,7 @@ export class RoomView {
           h('h3', { style: { marginTop: '12px' } }, tr('Điểm lượt này')),
           h('ul.deltas', deltas.map(([id, pts]) => h('li', h('span.with-ic', avatar(this.name(id), this.players.find((p) => p.id === id)?.avatar, 22), this.name(id) + (id === t.drawerId ? ' ' + tr('(vẽ)') : '')), h('span.plus', pts > 0 ? `+${pts}` : '0')))),
           t.assist ? h('div.small.muted', tr('Trợ lý cấp {lv} · tối đa {p}%', { lv: t.assist, p: Math.round(t.assistMult * 100) })) : null)),
-      h('div.dialog-actions', { style: { alignItems: 'center' } }, this.readyLabel, this.revealCountdown, cont));
+      h('div.dialog-actions', { style: { alignItems: 'center' } }, this.revealCountdown, cont));
     this.reveal = h('div.dialog-layer.room-dialog', box);
     document.body.append(this.reveal);
   }

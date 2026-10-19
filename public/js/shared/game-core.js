@@ -301,11 +301,11 @@ export class GameRoom {
       case 'skip':
         if (this.turn && this.turn.drawerId === pid && this.turn.phase !== 'reveal') this._endTurn('skipped');
         break;
-      case 'ready':
+      case 'ready': // anyone pressing Continue on the turn result starts the next turn for everyone
         if (this.turn?.phase === 'reveal') {
           p.ready = true;
-          this.broadcast({ type: 'ready', count: this.connected().filter((x) => x.ready).length, total: this.connected().length });
-          this._checkAllReady();
+          this.broadcast({ type: 'system', text: `${p.name} chuyển sang lượt tiếp.` }, pid);
+          this._nextTurn();
         }
         break;
       case 'leave': return this.remove(pid);

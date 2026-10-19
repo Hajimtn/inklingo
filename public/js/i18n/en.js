@@ -195,6 +195,7 @@ export default {
   'Còn {time}': '{time} left',
   'Tự động tiếp tục sau {n}s': 'Continues automatically in {n}s',
   'Đang chờ người khác…': 'Waiting for the others…',
+  'Lượt tiếp': 'Next turn',
   'Tiếp tục': 'Continue',
   'Kết quả lượt': 'Turn result',
   'Nghe phát âm': 'Hear the pronunciation',

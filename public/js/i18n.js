@@ -37,6 +37,7 @@ const EN_PATTERNS = [
   [/^(.+) đã mất kết nối\.$/, '$1 lost the connection.'],
   [/^(.+) đã rời phòng\.$/, '$1 left the room.'],
   [/^(.+) là chủ phòng mới\.$/, '$1 is the new host.'],
+  [/^(.+) chuyển sang lượt tiếp\.$/, '$1 moved on to the next turn.'],
   [/^Bạn đã gửi “(.+)” rồi\.$/, 'You already sent “$1”.'],
   [/^Từ của lượt dang dở: (.+)$/, 'Word of the unfinished turn: $1'],
   [/^Không tìm thấy phòng ?(.*)\.$/, 'Room $1 not found.'],

@@ -173,6 +173,20 @@ test('timer ends the turn and reveal auto-advances', () => {
   assert.equal(room.turn.index, 2);
 });
 
+test('one Continue on the turn result starts the next turn for everyone', () => {
+  const { room, clock, msgs } = setup(3);
+  room.start('p1');
+  clock.advance(CHOOSE_MS + 60000);
+  assert.equal(room.turn.phase, 'reveal');
+  const other = ['p1', 'p2', 'p3'].find((id) => id !== room.turn.drawerId);
+  room.handle(other, { type: 'ready' });
+  assert.equal(room.turn.index, 2);
+  assert.equal(room.turn.phase, 'choose');
+  room.handle('p1', { type: 'ready' }); // a late press does nothing to the new turn
+  assert.equal(room.turn.index, 2);
+  assert.ok(['p1', 'p2', 'p3'].filter((id) => id !== other).every((id) => msgs(id, 'system').some((m) => m.text.includes('chuyển sang lượt tiếp'))));
+});
+
 test('drawer reconnecting within grace keeps the turn; staying away ends it', () => {
   const { room, clock, msgs } = setup(3);
   room.start('p1');
