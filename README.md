@@ -8,7 +8,7 @@ Phát triển tiếp từ bản demo `scribble_words_v2.html` (bản gốc giữ
 
 ## Chạy game
 
-Yêu cầu: Node.js ≥ 20, nên dùng 22 (không cần cài thêm thư viện nào; test WebSocket cần Node 22, bản cũ hơn sẽ bỏ qua các test đó).
+Yêu cầu: Node.js ≥ 20, nên dùng 22. `npm start` và `npm test` không cần thư viện nào; test WebSocket cần Node 22, bản cũ hơn sẽ bỏ qua các test đó. `npm install` chỉ để có `wrangler`, công cụ deploy lên Cloudflare.
 
 ```bash
 npm start
@@ -26,14 +26,38 @@ npm test
 Kiểm thử engine vẽ trong trình duyệt: mở `http://localhost:8787/dev/draw-test.html`, chạy trong console
 `(await import('/dev/engine-tests.js')).run(T)`.
 
-## Deploy (Render)
+## Deploy (Cloudflare Workers, gói Free)
 
-`render.yaml` mô tả dịch vụ: Node 22 (test tích hợp dùng `WebSocket` có sẵn từ Node 22), gói Starter (chạy liên tục), vùng Singapore, ổ đĩa 1 GB gắn tại `/var/data`
-cho file nhóm học (`GROUPS_FILE=/var/data/groups.json`), kiểm tra sức khỏe `/api/health`, build bằng `npm test` (deploy
-dừng nếu test lỗi), tự deploy khi push lên `main`, tên miền `inklingo.io.vn` và `www.inklingo.io.vn`.
-Bản đang chạy: `GET /api/health` trả `version` (7 ký tự đầu của commit, từ biến `RENDER_GIT_COMMIT`) và `startedAt`.
-Server chỉ chạy **1 instance** (phòng chơi realtime nằm trong bộ nhớ). DNS ở Tenten: bản ghi A cho `@` trỏ về IP Render
-cung cấp và CNAME `www` trỏ về `<dịch vụ>.onrender.com`.
+Web chạy trên **Cloudflare Workers gói Free, không mất phí** (trước đây là Render gói Starter).
+- File tĩnh trong `public/` do **Workers Static Assets** phục vụ: miễn phí, không giới hạn lượt tải.
+- Chỉ `/api/*` và `/ws` đi qua `worker/index.js`, tới **một Durable Object** (`Hub`). Object này giữ toàn bộ
+  `server/hub.js`: phòng chơi realtime, nhóm học, bảng xếp hạng Học nhanh, ảnh đại diện.
+- Dữ liệu lưu trong bộ nhớ key-value SQLite của Durable Object (`ctx.storage.kv`, xem `server/store.js`).
+- Cấu hình nằm trong `wrangler.jsonc`.
+
+**Hạn mức gói Free** (reset lúc 00:00 UTC = 7:00 sáng giờ Việt Nam). Vượt hạn mức thì request bị lỗi tới lúc reset,
+**không bị tính tiền**:
+- 100 000 request/ngày cho Durable Object. Tin nhắn WebSocket gửi lên server tính 1/20 request.
+- 13 000 GB-s/ngày. Một object thức suốt 24 giờ chỉ dùng khoảng 11 000 GB-s, nên không bao giờ vượt.
+- 5 GB dữ liệu, 2 MB cho mỗi giá trị. Toàn bộ nhóm học nằm trong một giá trị `groups.json`.
+
+Deploy (cần đăng nhập Cloudflare một lần bằng `npx wrangler login`):
+
+```bash
+npm run deploy
+```
+
+Lệnh này chạy `npm test` trước, test lỗi thì dừng. Sau đó `wrangler deploy --var VERSION:<commit>`;
+`GET /api/health` trả `version` và `startedAt`.
+
+Thử bản Cloudflare trên máy: `npm run cf:dev` (http://localhost:8790). Chạy lại test tích hợp trên bản này:
+`npx wrangler dev --port 8790 --var SW_DEV:1`, rồi `TEST_PORT=8790 node --test tests/server.test.js`.
+
+Tên miền `inklingo.io.vn` vẫn mua ở Tenten, nhưng nameserver trỏ về Cloudflare. Worker gắn vào tên miền qua
+`routes` (`custom_domain`) trong `wrangler.jsonc`.
+
+`npm start` vẫn chạy cùng hub đó trên Node thường (`server/server.js`, dữ liệu là file trong `server/data/`). Lệnh này
+dùng để phát triển và chạy test.
 
 ## Giao diện
 
@@ -105,7 +129,9 @@ Nhận diện từ thật nhanh bằng ảnh thật + âm thanh (`#/fast`, luậ
 - **Bảng xếp hạng công khai** (chỉ chủ đề + chế độ Nhanh): `POST /api/fast/start {topic}` → token; hết lượt người chơi tự bấm
   gửi (`POST /api/fast/score`), tên sửa được. Server (`server/fast-board.js`) chỉ nhận một lần mỗi token, điểm ≤ 300 × số câu,
   thời gian ≥ 450 ms × số câu, 40 lần gửi/giờ/IP (`x-forwarded-for`), tên được làm sạch và chặn từ tục. Top 20 mỗi chủ đề lưu
-  ở `FAST_FILE` (mặc định cạnh `GROUPS_FILE`, trên Render là `/var/data/fast-board.json`). `GET /api/fast/top?topic=…`.
+  trong store dưới khóa `fast-board.json` (Node: file cạnh `GROUPS_FILE`; Cloudflare: storage của Durable Object).
+  `GET /api/fast/top?topic=…`. Token được ký HMAC, mang theo chủ đề và giờ bắt đầu, nên vẫn hợp lệ dù server đã quên hết
+  bộ nhớ trong lúc chơi. Token đã dùng được lưu tới khi hết hạn (1 giờ).
   Đây là chống gian lận cơ bản, không phải bảo mật tuyệt đối (điểm vẫn tính ở trình duyệt).
 
 ## Vẽ & đoán: chọn từ, Từ thông dụng
@@ -181,9 +207,13 @@ Một nhóm (tối đa 12 người) học chung lộ trình chủ đề, có b�
 ## Cấu trúc
 
 ```
-server/server.js         HTTP tĩnh + phòng chơi realtime (WebSocket /ws), server quyết định lượt, giờ, đáp án, điểm
-server/ws.js             WebSocket RFC 6455 tự viết (không phụ thuộc thư viện)
-server/groups.js         nhóm học: lịch chung, điểm, mini-game (lưu file JSON)
+server/hub.js            lõi server dùng chung: phòng chơi realtime (WebSocket /ws), API nhóm/Học nhanh/ảnh đại diện;
+                         server quyết định lượt, giờ, đáp án, điểm
+server/store.js          kho key-value đồng bộ: file (Node) hoặc storage của Durable Object (Cloudflare)
+server/server.js         chạy hub trên Node: file tĩnh + WebSocket (phát triển, test)
+worker/index.js          chạy hub trên Cloudflare: Worker + Durable Object `Hub` (bản đang chạy thật)
+server/ws.js             WebSocket RFC 6455 tự viết cho bản Node (không phụ thuộc thư viện)
+server/groups.js         nhóm học: lịch chung, điểm, mini-game (lưu trong store)
 public/js/shared/        game-core.js – luật chơi dùng chung cho server và chế độ cùng thiết bị; quiz-core.js – câu hỏi & lượt chơi mini-game
 public/js/drawing/       engine.js (bản vẽ vector + raster), flood.js, toolbar.js, colorpicker.js
 public/js/game/          room-view.js (sảnh, gameplay, kết quả), assistant.js, ghost.js, quiz-view.js (mini-game nhóm)

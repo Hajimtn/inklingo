@@ -10,11 +10,9 @@
 //  * leaderboard points: learning the day's words (+streak), correct review cards, drawing
 //    matches started from the group page, and – the biggest share – the mini-game score
 //
-// Data is kept in one JSON file (written atomically). Members authenticate with a random secret
-// stored on their device; only its SHA-256 hash is saved.
+// Data is kept as one JSON value in a key-value store (see store.js). Members authenticate with a
+// random secret stored on their device; only its SHA-256 hash is saved.
 
-import fs from 'node:fs';
-import path from 'node:path';
 import crypto from 'node:crypto';
 import { buildQuestions, QuizRun, QUIZ_WINDOW_MS, PASS_RATE, MAX_POINTS } from '../public/js/shared/quiz-core.js';
 import { GROUP_POINTS } from '../public/js/shared/group-points.js';
@@ -23,6 +21,7 @@ export const MAX_MEMBERS = 12;
 export const WORDS_PER_DAY = 5;
 export const POINTS = GROUP_POINTS;
 
+const STORE_KEY = 'groups.json';
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const hash = (s) => crypto.createHash('sha256').update(String(s)).digest('hex');
 const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -53,15 +52,15 @@ export class GroupError extends Error {
 export class GroupStore {
   /**
    * @param {object} o
-   *  file      – JSON file path (null = memory only, for tests)
+   *  store     – key-value store (store.js) holding the "groups.json" value (null = memory only)
    *  topics    – [{id, title, words:[{id,en,alt,vi,pos,ex,images}]}] in learning order
    *  now       – clock (injectable for tests)
    *  devDates  – accept a client-supplied date (testing the weekly schedule); off in production
    *  send      – (memberKey, msg) delivers a realtime message to a connected member
    *  setTimer / clearTimer – injectable timers for the quiz runs
    */
-  constructor({ file = null, topics, now = Date.now, devDates = false, send = () => {}, setTimer = setTimeout, clearTimer = clearTimeout }) {
-    Object.assign(this, { file, topics, now, devDates, send, setTimer, clearTimer });
+  constructor({ store = null, topics, now = Date.now, devDates = false, send = () => {}, setTimer = setTimeout, clearTimer = clearTimeout }) {
+    Object.assign(this, { store, topics, now, devDates, send, setTimer, clearTimer });
     this.groups = new Map();
     this.runs = new Map(); // `${code}:${memberId}` -> QuizRun (each member is in at most one run)
     this.lobbies = new Map(); // code -> {members: [ids], since}
@@ -72,27 +71,25 @@ export class GroupStore {
   // ---------------------------------------------------------------- persistence
 
   load() {
-    if (!this.file || !fs.existsSync(this.file)) return;
+    const raw = this.store?.get(STORE_KEY);
+    if (!raw) return;
     try {
-      const data = JSON.parse(fs.readFileSync(this.file, 'utf8'));
+      const data = JSON.parse(raw);
       for (const g of data.groups || []) this.groups.set(g.code, g);
     } catch (e) {
-      console.error('[groups] could not read', this.file, e.message);
+      console.error('[groups] could not read saved groups', e.message);
     }
   }
 
   save() {
     clearTimeout(this.saveTimer);
     this.saveTimer = null;
-    if (!this.file) return;
-    fs.mkdirSync(path.dirname(this.file), { recursive: true });
-    const tmp = this.file + '.tmp';
-    fs.writeFileSync(tmp, JSON.stringify({ version: 1, groups: [...this.groups.values()] }));
-    fs.renameSync(tmp, this.file);
+    if (!this.store) return;
+    this.store.put(STORE_KEY, JSON.stringify({ version: 1, groups: [...this.groups.values()] }));
   }
 
   saveSoon() {
-    if (!this.file || this.saveTimer) return;
+    if (!this.store || this.saveTimer) return;
     this.saveTimer = setTimeout(() => this.save(), 400);
   }
 

@@ -5,12 +5,13 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { FastBoard, cleanName, TOP_N, MIN_MS_PER_Q } from '../server/fast-board.js';
+import { fileStore } from '../server/store.js';
 import { MAX_POINTS } from '../public/js/shared/fast-core.js';
 
 function board() {
   let now = 1_000_000;
-  const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'fast-')), 'board.json');
-  const b = new FastBoard({ file, topics: ['office', 'travel'], now: () => now });
+  const file = fileStore(fs.mkdtempSync(path.join(os.tmpdir(), 'fast-')));
+  const b = new FastBoard({ store: file, topics: ['office', 'travel'], now: () => now });
   return { b, file, advance: (ms) => (now += ms) };
 }
 
@@ -44,7 +45,7 @@ test('ranking keeps the best TOP_N per topic and survives a restart', () => {
   const { token } = b.start('travel');
   advance(30_000);
   assert.equal(b.submit({ token, name: 'Low', score: 10, answered: 40, correct: 1 }).rank, 0, 'not in the top');
-  const again = new FastBoard({ file, topics: ['office', 'travel'] });
+  const again = new FastBoard({ store: file, topics: ['office', 'travel'] });
   assert.deepEqual(again.top('travel'), top);
 });
 

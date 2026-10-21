@@ -9,7 +9,9 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PORT = 18000 + Math.floor(Math.random() * 1000);
+// TEST_PORT=8790 runs the same checks against an already running server instead (for example the
+// Cloudflare version: npx wrangler dev --port 8790 --var SW_DEV:1).
+const PORT = Number(process.env.TEST_PORT) || 18000 + Math.floor(Math.random() * 1000);
 const vocab = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/vocab.json'), 'utf8'));
 const words = vocab.topics.flatMap((t) => t.words);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -19,6 +21,7 @@ const WS = typeof WebSocket === 'function' ? {} : { skip: 'no global WebSocket i
 
 let server;
 test.before(async () => {
+  if (process.env.TEST_PORT) return;
   // Dev dates let the test walk through a topic's weekly schedule; groups go to a temp file.
   const GROUPS_FILE = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'sw-srv-')), 'groups.json');
   server = spawn(process.execPath, ['server/server.js'], { cwd: ROOT, env: { ...process.env, PORT: String(PORT), SW_DEV: '1', GROUPS_FILE }, stdio: 'pipe' });
@@ -223,7 +226,8 @@ test('static files and health endpoint', async () => {
   const page = await fetch(`http://localhost:${PORT}/`);
   assert.match(await page.text(), /Inklingo/);
   const trav = await fetch(`http://localhost:${PORT}/..%2f..%2fpackage.json`);
-  assert.notEqual(trav.status, 200);
+  // Node answers 404; Cloudflare answers unknown paths with the app page. Neither shows the file.
+  assert.ok(trav.status !== 200 || !(await trav.text()).includes('"scripts"'), 'no path traversal');
 });
 
 const api = async (action, body) => {

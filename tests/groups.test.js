@@ -6,6 +6,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { GroupStore, weekKey, POINTS } from '../server/groups.js';
+import { fileStore } from '../server/store.js';
 import { buildQuestions, gapSentence, decodeSay, publicQuestion, QUIZ_WINDOW_MS, MAX_POINTS } from '../public/js/shared/quiz-core.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -226,7 +227,7 @@ test('48 h window: absent members count as 0 and must re-study the whole topic',
 
 test('membership: max size, owner hand-over, kick, persistence and secret check', () => {
   const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'sw-groups-')), 'groups.json');
-  const s1 = new GroupStore({ file, topics: vocab.topics, now: () => T0 });
+  const s1 = new GroupStore({ store: fileStore(path.dirname(file)), topics: vocab.topics, now: () => T0 });
   const a = s1.create({ name: 'G', member: { name: 'Owner', avatar: 'c0' }, tz: 420 });
   const others = Array.from({ length: 11 }, (_, i) => s1.join(a.code, { member: { name: 'P' + i } }));
   assert.throws(() => s1.join(a.code, { member: { name: 'Late' } }), /12/);
@@ -242,7 +243,7 @@ test('membership: max size, owner hand-over, kick, persistence and secret check'
   s1.leave(g, a.id);
   assert.equal(g.ownerId, others[0].id, 'oldest member becomes owner');
   s1.save();
-  const s2 = new GroupStore({ file, topics: vocab.topics, now: () => T0 });
+  const s2 = new GroupStore({ store: fileStore(path.dirname(file)), topics: vocab.topics, now: () => T0 });
   assert.ok(s2.auth(a.code, others[0].id, others[0].secret));
   assert.throws(() => s2.auth(a.code, others[0].id, 'wrong-secret'), /xác thực/);
   assert.ok(!fs.readFileSync(file, 'utf8').includes(others[0].secret), 'only a hash of the secret is stored');

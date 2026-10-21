@@ -10,3 +10,6 @@ tools/*.log
 # Runtime data of the server (study groups)
 server/data/
 *.tmp
+
+# Cloudflare local dev state
+.wrangler/
