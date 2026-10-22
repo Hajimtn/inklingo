@@ -17,5 +17,13 @@
   },
   // The free plan only has SQLite-backed Durable Objects.
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Hub"] }],
+  // The domain is bought at Tenten; its nameservers point to Cloudflare, which creates the DNS
+  // records for these on deploy.
+  // inklingo.inklingo.workers.dev keeps working too.
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "inklingo.io.vn", "custom_domain": true },
+    { "pattern": "www.inklingo.io.vn", "custom_domain": true }
+  ],
   "observability": { "enabled": true }
 }
